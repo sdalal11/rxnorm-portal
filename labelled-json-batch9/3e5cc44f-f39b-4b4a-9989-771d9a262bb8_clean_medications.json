@@ -1,0 +1,57 @@
+{
+  "file": "3e5cc44f-f39b-4b4a-9989-771d9a262bb8_clean.html",
+  "medications": [
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17408,
+      "end_offset": 17414
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17488,
+      "end_offset": 17494
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17636,
+      "end_offset": 17642
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17729,
+      "end_offset": 17735
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "file": "2a649564-eb85-4a0f-8846-04a5cc936c69_clean.html",
+  "medications": [
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 6031,
+      "end_offset": 6039
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 15063,
+      "end_offset": 15071
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 6903,
+      "end_offset": 6910
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 15956,
+      "end_offset": 15963
+    }
+  ]
+}

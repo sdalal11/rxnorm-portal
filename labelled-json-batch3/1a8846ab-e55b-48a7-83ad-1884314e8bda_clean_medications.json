@@ -1,0 +1,44 @@
+{
+  "file": "1a8846ab-e55b-48a7-83ad-1884314e8bda_clean.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 5938,
+      "end_offset": 5948
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 15803,
+      "end_offset": 15811
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18602,
+      "end_offset": 18610
+    }
+  ]
+}

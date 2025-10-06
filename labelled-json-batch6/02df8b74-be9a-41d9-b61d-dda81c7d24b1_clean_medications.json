@@ -1,0 +1,18 @@
+{
+  "file": "02df8b74-be9a-41d9-b61d-dda81c7d24b1_clean.html",
+  "medications": [
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "sorine",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13915,
+      "end_offset": 13921
+    }
+  ]
+}

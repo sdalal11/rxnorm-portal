@@ -1,0 +1,83 @@
+{
+  "file": "2c9b9a0e-fbfd-4ec5-82db-1c04d6ea442a_clean.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 4338,
+      "end_offset": 4351
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9044,
+      "end_offset": 9057
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19429,
+      "end_offset": 19442
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20200,
+      "end_offset": 20213
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 27037,
+      "end_offset": 27050
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 15046,
+      "end_offset": 15055
+    }
+  ]
+}

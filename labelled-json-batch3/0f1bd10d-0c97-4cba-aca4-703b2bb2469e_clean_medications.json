@@ -1,0 +1,31 @@
+{
+  "file": "0f1bd10d-0c97-4cba-aca4-703b2bb2469e_clean.html",
+  "medications": [
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 108029,
+      "end_offset": 108036
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 108593,
+      "end_offset": 108600
+    }
+  ]
+}

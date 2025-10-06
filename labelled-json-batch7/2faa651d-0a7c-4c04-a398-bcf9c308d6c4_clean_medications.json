@@ -1,0 +1,96 @@
+{
+  "file": "2faa651d-0a7c-4c04-a398-bcf9c308d6c4_clean.html",
+  "medications": [
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 26678,
+      "end_offset": 26688
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 44135,
+      "end_offset": 44145
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 44416,
+      "end_offset": 44426
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 55142,
+      "end_offset": 55152
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 72599,
+      "end_offset": 72609
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 72880,
+      "end_offset": 72890
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "TIOTROPIUM",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 81393,
+      "end_offset": 81403
+    }
+  ]
+}

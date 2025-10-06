@@ -1,0 +1,38 @@
+generic,RxCUI,RxCUI term type (single or multi ingredient),most common brand name,other brand names
+amiodarone,703,IN,Cordarone,Pacerone
+anastrozole,84857,IN,Arimidex,
+apixaban,1364430,IN,Eliquis,
+atenolol,1202,IN,Tenormin,
+bisoprolol,19484,IN,Zebeta,
+budesonide / formoterol / glycopyrronium,2387330,MIN,Breztri,
+buprenorphine / naloxone,352364,MIN,Suboxone,
+carbidopa / levodopa,103990,MIN,Sinemet,"Rytary, Duopa"
+carvedilol,20352,IN,Coreg,
+dabigatran etexilate,1037042,IN,Pradaxa,
+dapagliflozin,1488564,IN,Farxiga,
+disulfiram,3554,IN,Antabuse,
+donepezil,135447,IN,Aricept,Adlarity
+donepezil / memantine,1430990,MIN,Namzaric,
+empagliflozin,1545653,IN,Jardiance,
+eplerenone,298869,IN,Inspra,
+flecainide,4441,IN,Tambocor,
+finerenone,2562811,IN,Kerendia,
+fluticasone / umeclidinium / vilanterol,1945038,MIN,Trelegy,
+formoterol / glycopyrronium,1790638,MIN,Bevespi,
+furosemide,4603,IN,Lasix ,Furoscix
+galantamine,4637,IN,Razadyne,Reminyl
+leuprolide,42375,IN,Lupron,
+memantine,6719,IN,Namenda,
+metoprolol,6918,IN,Toprol-XL,"Lopressor, Kapspargo"
+naloxone,7242,IN,Narcan,
+nebivolol,31555,IN,Bystolic,
+olodaterol / tiotropium,1658460,MIN,Stiolto,
+rivaroxaban,1114195,IN,Xarelto,
+rivastigmine,183379,IN,Exelon,
+sacubitril / valsartan,1656339,MIN,Entresto,
+sotalol,9947,IN,Betapace,"Sorine, Sotylize"
+spironolactone,9997,IN,aldactone,Carospir
+tamoxifen,10324,IN,Soltamox,
+tiotropium,69120,IN,Spiriva,
+umeclidinium / vilanterol,1487518,MIN,Anoro,
+warfarin,11289,IN,Coumadin,Jantoven

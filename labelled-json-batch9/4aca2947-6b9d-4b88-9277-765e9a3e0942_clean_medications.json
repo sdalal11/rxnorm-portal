@@ -1,0 +1,18 @@
+{
+  "file": "4aca2947-6b9d-4b88-9277-765e9a3e0942_clean.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 5194,
+      "end_offset": 5207
+    }
+  ]
+}

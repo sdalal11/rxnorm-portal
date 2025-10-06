@@ -1,0 +1,18 @@
+{
+  "file": "2f8fd6af-8e98-4178-89eb-4139a16f57e5_clean.html",
+  "medications": [
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 15561,
+      "end_offset": 15570
+    }
+  ]
+}

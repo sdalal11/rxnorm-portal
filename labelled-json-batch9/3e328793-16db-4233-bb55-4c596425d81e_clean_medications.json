@@ -1,0 +1,70 @@
+{
+  "file": "3e328793-16db-4233-bb55-4c596425d81e_clean.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "ANASTROZOLE",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 54788,
+      "end_offset": 54799
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "ANASTROZOLE",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 62543,
+      "end_offset": 62554
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "CARVEDILOL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 54985,
+      "end_offset": 54995
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 59458,
+      "end_offset": 59468
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "CARVEDILOL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 62847,
+      "end_offset": 62857
+    }
+  ]
+}

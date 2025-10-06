@@ -1,0 +1,96 @@
+{
+  "file": "0f827935-c2f8-4986-8e6f-5b5345ea7e67_clean.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "apixaban",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17843,
+      "end_offset": 17851
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17943,
+      "end_offset": 17953
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 18612,
+      "end_offset": 18622
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18630,
+      "end_offset": 18637
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17853,
+      "end_offset": 17860
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Toprol-XL",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 17968,
+      "end_offset": 17977
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Betapace",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 19113,
+      "end_offset": 19121
+    }
+  ]
+}
