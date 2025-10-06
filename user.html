@@ -1581,10 +1581,18 @@
                     !(ann.text === text && ann.status === status)
                 );
                 
-                // Refresh the document display
-                refreshDocumentDisplay();
+                // Remove the highlight from the document without refreshing entire document
+                removeHighlightFromDocument(text, status);
+                
+                // Update UI elements
                 updateAnnotationCount();
                 updateAnnotationsList();
+                
+                // Save changes to storage
+                saveAnnotationsToStorage();
+                
+                console.log('Removed annotation:', text, 'with status:', status);
+                console.log('Remaining annotations:', documentAnnotations.length);
             }
         }
 
@@ -1974,19 +1982,18 @@
                     // Remove from annotations array
                     documentAnnotations = documentAnnotations.filter(ann => ann.id !== annotationId);
                     
-                    // Remove the highlight from the document
+                    // Remove the highlight from the document immediately
                     removeHighlightFromDocument(annotation.text, annotation.status);
                     
-                    // Update the display
+                    // Update the UI elements
                     updateAnnotationCount();
                     updateAnnotationsList();
                     
-                    // Save changes
+                    // Save changes to storage
                     saveAnnotationsToStorage();
                     
                     console.log('Removed annotation:', annotation);
                     console.log('Remaining annotations:', documentAnnotations.length);
-
                 }
             }
         }
@@ -1995,11 +2002,17 @@
             const className = status === 'active' ? 'highlight-active' : 'highlight-inactive';
             const highlights = document.querySelectorAll(`.${className}`);
             
-            for (let highlight of highlights) {
-                if (highlight.textContent === text) {
+            // Convert NodeList to Array to avoid issues with live collection
+            const highlightArray = Array.from(highlights);
+            
+            for (let highlight of highlightArray) {
+                if (highlight.textContent.trim() === text.trim()) {
                     // Replace the highlight span with plain text
                     const textNode = document.createTextNode(highlight.textContent);
-                    highlight.parentNode.replaceChild(textNode, highlight);
+                    if (highlight.parentNode) {
+                        highlight.parentNode.replaceChild(textNode, highlight);
+                        console.log('Removed highlight for:', text);
+                    }
                     break;
                 }
             }
