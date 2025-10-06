@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rxnorm-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python api_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.18
+      - key: PORT
+        fromService:
+          type: web
+          name: rxnorm-api
+          property: port
