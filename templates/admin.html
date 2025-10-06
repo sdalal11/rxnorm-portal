@@ -495,6 +495,9 @@
     </div>
     
     <script>
+        // API Configuration
+        const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
+        
         // Admin credentials
         const VALID_USERS = [
             { username: 'admin', password: 'admin123' },
@@ -809,8 +812,8 @@
                 const formData = new FormData();
                 formData.append('file', file);
                 
-                // Call your local API server
-                const response = await fetch('http://localhost:8000/process-document', {
+                // Call the deployed API server
+                const response = await fetch(`${API_BASE_URL}/process-document`, {
                     method: 'POST',
                     body: formData
                 });
