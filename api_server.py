@@ -31,8 +31,15 @@ def health_check():
 
 # Replace the process_document function with this updated version:
 
-@app.route('/process-document', methods=['POST'])
+@app.route('/process-document', methods=['POST', 'OPTIONS'])
 def process_document():
+    # Handle CORS preflight request
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
     try:
         print("Processing document request received...")  # Debug log
         
