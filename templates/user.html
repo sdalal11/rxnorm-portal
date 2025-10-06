@@ -582,29 +582,83 @@
 
         .annotations-panel {
             position: fixed;
-            top: 10%;
-            right: 20px;
-            width: 300px;
-            max-height: 70%;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100vh;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            display: none;
-            z-index: 1050; /* Higher than document viewer */
+            border-left: 2px solid #e9ecef;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden by default, shown when viewing documents */
+            z-index: 1050;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .annotations-panel.collapsed {
+            transform: translateX(300px); /* Slide out, leaving 50px visible */
+        }
+        
+        .annotations-panel.show {
+            display: block;
         }
 
         .annotations-header {
             padding: 1rem;
-            border-bottom: 1px solid #eee;
-            background: #f8f9fa;
-            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #e9ecef;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .annotations-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .collapse-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+        
+        .collapse-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .annotations-list {
-            max-height: 400px;
+            height: calc(100vh - 140px); /* Full height minus header and stats */
             overflow-y: auto;
             padding: 1rem;
+            background: #fafbfc;
+        }
+        
+        .annotations-stats {
+            padding: 0.75rem 1rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .annotation-count {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
         }
 
         .annotation-item {
@@ -679,11 +733,22 @@
             .annotations-panel {
                 position: fixed;
                 top: auto;
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                width: auto;
-                max-height: 50%;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                height: 50vh;
+                border-left: none;
+                border-top: 2px solid #e9ecef;
+                transform: none;
+            }
+            
+            .annotations-panel.collapsed {
+                transform: translateY(calc(50vh - 60px)); /* Show only header on mobile */
+            }
+            
+            .document-viewer.with-annotations {
+                width: 100%; /* Full width on mobile */
             }
         }
     </style>
@@ -872,11 +937,22 @@
     <!-- Annotations Panel -->
     <div class="annotations-panel" id="annotationsPanel">
         <div class="annotations-header">
-            <h4 style="margin: 0;">Document Annotations</h4>
-            <button onclick="toggleAnnotationsPanel()" style="float: right; background: none; border: none; font-size: 1.2rem; cursor: pointer;">×</button>
+            <div>
+                <h4>Document Annotations</h4>
+            </div>
+            <button class="collapse-btn" onclick="toggleAnnotationsCollapse()" id="collapseBtn">
+                ⟨
+            </button>
+        </div>
+        <div class="annotations-stats" id="annotationsStats">
+            <span>Total: <span class="annotation-count" id="annotationCount">0</span></span>
+            <span style="margin-left: 1rem;">Active: <span id="activeCount">0</span></span>
+            <span style="margin-left: 1rem;">Inactive: <span id="inactiveCount">0</span></span>
         </div>
         <div class="annotations-list" id="annotationsList">
-            <!-- Annotations will be listed here -->
+            <p style="text-align: center; color: #666; padding: 2rem;">
+                📄 Open a document to view annotations
+            </p>
         </div>
     </div>
     
@@ -1152,6 +1228,9 @@
             document.getElementById('documentViewer').style.display = 'block';
             document.getElementById('viewerTitle').textContent = doc.name;
             
+            // Show annotations panel automatically
+            showAnnotationsPanel();
+            
             try {
                 // Load document content
                 const content = await loadDocumentContent(doc);
@@ -1162,6 +1241,7 @@
                     loadDocumentAnnotations(doc.id);
                     updateAnnotationCount();
                     updateAnnotationsList();
+                    updateAnnotationStats();
                 }, 100);
                 
             } catch (error) {
@@ -1650,6 +1730,25 @@
             if (countElement) {
                 countElement.textContent = count;
             }
+            
+            // Also update the detailed stats
+            updateAnnotationStats();
+        }
+        
+        function updateAnnotationStats() {
+            if (!Array.isArray(documentAnnotations)) {
+                documentAnnotations = [];
+            }
+            
+            const totalCount = documentAnnotations.length;
+            const activeCount = documentAnnotations.filter(ann => ann.status === 'active').length;
+            const inactiveCount = documentAnnotations.filter(ann => ann.status === 'inactive').length;
+            
+            document.getElementById('annotationCount').textContent = totalCount;
+            document.getElementById('activeCount').textContent = activeCount;
+            document.getElementById('inactiveCount').textContent = inactiveCount;
+            
+            console.log(`📊 Stats updated: Total: ${totalCount}, Active: ${activeCount}, Inactive: ${inactiveCount}`);
         }
 
         // function updateAnnotationsList() {
@@ -1783,6 +1882,9 @@
             });
             
             list.innerHTML = html;
+            
+            // Update stats after updating the list
+            updateAnnotationStats();
         }
 
         // Add this new function after the updateAnnotationsList function:
@@ -2134,14 +2236,46 @@
             }
         }
 
-        function toggleAnnotationsPanel() {
+        function toggleAnnotationsCollapse() {
             const panel = document.getElementById('annotationsPanel');
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
+            const collapseBtn = document.getElementById('collapseBtn');
+            const viewer = document.getElementById('documentViewer');
+            
+            if (panel.classList.contains('collapsed')) {
+                // Expand
+                panel.classList.remove('collapsed');
+                collapseBtn.textContent = '⟨';
+                collapseBtn.title = 'Collapse annotations';
+                if (viewer.style.display === 'block') {
+                    viewer.classList.add('with-annotations');
+                }
             } else {
-                panel.style.display = 'block';
-                updateAnnotationsList();
+                // Collapse
+                panel.classList.add('collapsed');
+                collapseBtn.textContent = '⟩';
+                collapseBtn.title = 'Expand annotations';
+                viewer.classList.remove('with-annotations');
             }
+        }
+        
+        function showAnnotationsPanel() {
+            const panel = document.getElementById('annotationsPanel');
+            const viewer = document.getElementById('documentViewer');
+            
+            panel.classList.add('show');
+            if (viewer.style.display === 'block' && !panel.classList.contains('collapsed')) {
+                viewer.classList.add('with-annotations');
+            }
+            updateAnnotationsList();
+            updateAnnotationStats();
+        }
+        
+        function hideAnnotationsPanel() {
+            const panel = document.getElementById('annotationsPanel');
+            const viewer = document.getElementById('documentViewer');
+            
+            panel.classList.remove('show');
+            viewer.classList.remove('with-annotations');
         }
 
 
@@ -2339,14 +2473,21 @@
 
         function closeViewer() {
             document.getElementById('documentViewer').style.display = 'none';
-            document.getElementById('annotationsPanel').style.display = 'none';
+            hideAnnotationsPanel();
             currentDocument = null;
             documentAnnotations = [];
 
-            const countElement = document.getElementById('annotationCount');
-            if (countElement) {
-                countElement.textContent = '0';
-            }
+            // Reset annotation counts
+            document.getElementById('annotationCount').textContent = '0';
+            document.getElementById('activeCount').textContent = '0';
+            document.getElementById('inactiveCount').textContent = '0';
+            
+            // Show default message
+            document.getElementById('annotationsList').innerHTML = `
+                <p style="text-align: center; color: #666; padding: 2rem;">
+                    📄 Open a document to view annotations
+                </p>
+            `;
         }
 
         // Initialize annotation mode
