@@ -251,13 +251,18 @@ if __name__ == '__main__':
     print("=" * 50)
     print("🚀 Starting RxNorm Document Processing API")
     print("=" * 50)
-    print("📍 Server URL: http://localhost:8000")
-    print("🔍 Health check: http://localhost:8000/health")
-    print("📄 Process endpoint: http://localhost:8000/process-document")
-    print("💡 Root info: http://localhost:8000/")
+    
+    # Get port from environment variable (Render requirement)
+    port = int(os.environ.get('PORT', 8000))
+    host = '0.0.0.0'  # Required for Render
+    
+    print(f"📍 Server URL: http://{host}:{port}")
+    print(f"🔍 Health check: http://{host}:{port}/health")
+    print(f"📄 Process endpoint: http://{host}:{port}/process-document")
+    print(f"💡 Root info: http://{host}:{port}/")
     print("=" * 50)
     print("🔥 Server is ready to process documents!")
     print("Press CTRL+C to stop the server")
     print("=" * 50)
     
-    app.run(host='localhost', port=8000, debug=False)
+    app.run(host=host, port=port, debug=False)

@@ -11,22 +11,7 @@
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-                        <div class="upload-section">
-                    <h4>Azure Storage Status</h4>
-                    <p>
-                        <span class="status-indicator" id="azureStatus"></span>
-                        <span id="azureStatusText">Not Connected</span>
-                    </p>
-                </div>
-                
-                <div class="upload-section">
-                    <h4>RxNorm AI API Status</h4>
-                    <p>
-                        <span class="status-indicator" id="apiStatus"></span>
-                        <span id="apiStatusText">Checking...</span>
-                    </p>
-                    <p><small>API provides automatic medication detection with RxNorm codes</small></p>
-                </div>play: flex;
+            display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -818,14 +803,14 @@
 
         async function processFileWithMainPy(file) {
             try {
-                console.log(`🤖 Processing ${file.name} with RxNorm API (Render)...`);
+                console.log(`Processing ${file.name} with main.py API...`);
                 
                 // Create FormData to send the file to main.py API
                 const formData = new FormData();
                 formData.append('file', file);
                 
-                // Call your deployed Render API
-                const response = await fetch('https://rxnorm-portal.onrender.com/process-document', {
+                // Call your local API server
+                const response = await fetch('http://localhost:8000/process-document', {
                     method: 'POST',
                     body: formData
                 });
@@ -837,10 +822,10 @@
                 }
                 
                 const result = await response.json();
-                console.log('✅ RxNorm API processing result:', result);
+                console.log('main.py API processing result:', result);
                 
                 if (result.success && result.annotations) {
-                    console.log(`🎯 Successfully extracted ${result.annotations.length} medications from ${file.name}`);
+                    console.log(`Successfully extracted ${result.annotations.length} medications from ${file.name}`);
                     return result.annotations;
                 } else {
                     console.warn('No annotations returned from API');
@@ -848,7 +833,7 @@
                 }
                 
             } catch (error) {
-                console.error('❌ Error processing file with RxNorm API:', error);
+                console.error('Error processing file with main.py API:', error);
                 
                 // Show a user-friendly message but continue with upload
                 console.warn(`Note: Automatic medication extraction failed for ${file.name}. The file will be uploaded without pre-annotations. Error: ${error.message}`);
@@ -984,9 +969,6 @@
             updateAzureStatus(true);
             azureConfig.isConnected = true;
             
-            // Check API status
-            checkApiStatus();
-            
             // Load documents data
             const savedDocs = localStorage.getItem('documentsData');
             if (savedDocs) {
@@ -997,38 +979,6 @@
         }
         
         // Check authentication on page load
-        // API Status Check
-        async function checkApiStatus() {
-            const statusIndicator = document.getElementById('apiStatus');
-            const statusText = document.getElementById('apiStatusText');
-            
-            try {
-                statusText.textContent = 'Checking...';
-                statusIndicator.style.background = '#ffc107'; // Yellow for checking
-                
-                const response = await fetch('https://rxnorm-portal.onrender.com/', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    statusText.textContent = '✅ API Online - AI medication detection available';
-                    statusIndicator.style.background = '#28a745'; // Green for success
-                    console.log('🎯 RxNorm API Status:', result);
-                } else {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-            } catch (error) {
-                console.warn('⚠️ API Status Check Failed:', error);
-                statusText.textContent = '⚠️ API Unavailable - Documents will upload without AI processing';
-                statusIndicator.style.background = '#dc3545'; // Red for error
-            }
-        }
-
         window.addEventListener('load', function() {
             if (sessionStorage.getItem('authenticated') === 'true') {
                 document.getElementById('loginForm').style.display = 'none';
