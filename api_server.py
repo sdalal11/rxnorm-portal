@@ -251,6 +251,13 @@ def parse_main_py_text_output(output):
             annotations.append({
                 'text': line,
                 'status': 'active',
+                'confidence': 0.7,
+                'source': 'main.py',
+                'rxnorm_code': None
+            })
+    
+    return annotations
+
 # Global configuration storage (in production, use a database)
 global_config = {}
 
@@ -299,13 +306,6 @@ def azure_config():
                 }), 404
         except Exception as e:
             return jsonify({'error': str(e)}), 500
-
-                'confidence': 0.7,
-                'source': 'main.py',
-                'rxnorm_code': None
-            })
-    
-    return annotations
 
 if __name__ == '__main__':
     print("=" * 50)
