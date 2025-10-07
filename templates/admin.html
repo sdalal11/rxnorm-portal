@@ -651,7 +651,11 @@
                 sasToken: azureConfig.sasToken
             };
             localStorage.setItem('azureConfigPublic', JSON.stringify(publicConfig));
+            
+            // Also store in a global configuration that all users can access
+            localStorage.setItem('globalAzureConfig', JSON.stringify(publicConfig));
             console.log('Azure config shared for user portal:', publicConfig);
+            console.log('Global Azure config stored for all users');
 }
         
 

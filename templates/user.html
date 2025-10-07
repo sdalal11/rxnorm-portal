@@ -1060,8 +1060,62 @@
             document.getElementById('userPortal').style.display = 'block';
             document.getElementById('userName').textContent = currentUser.name;
             
+            // Ensure Azure configuration is available for new users
+            ensureAzureConfigForUser();
+            
             loadDocuments();
             updateStats();
+        }
+        
+        // Ensure Azure configuration is available for the user
+        function ensureAzureConfigForUser() {
+            // Check if user already has Azure config
+            const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            
+            if (!userConfig) {
+                // If no config found, show a notification to the user
+                console.log('No Azure configuration found for user. Documents may not be accessible.');
+                
+                // Show a banner notification to inform user about the issue
+                showConfigurationNotification();
+            } else {
+                console.log('Azure configuration found for user');
+                hideConfigurationNotification();
+            }
+        }
+        
+        function showConfigurationNotification() {
+            // Create or show notification banner
+            let notification = document.getElementById('configNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'configNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #f39c12;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    z-index: 1000;
+                    font-weight: bold;
+                `;
+                notification.innerHTML = `
+                    ⚠️ Document access may be limited. Administrator needs to configure document sharing. 
+                    <button onclick="hideConfigurationNotification()" style="margin-left: 10px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>
+                `;
+                document.body.prepend(notification);
+            }
+            notification.style.display = 'block';
+        }
+        
+        function hideConfigurationNotification() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.display = 'none';
+            }
         }
         
         function logout() {
@@ -1085,10 +1139,12 @@
             // Load documents from admin's localStorage (simulating shared storage)
             const adminDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
             
-            // Filter only public documents
-            allDocuments = adminDocuments.filter(doc => doc.publicAccess === true);
+            // Load ALL documents for authenticated users (not just public ones)
+            // In production, this would be controlled by proper backend permissions
+            allDocuments = adminDocuments;
             filteredDocuments = [...allDocuments];
             
+            console.log(`Loaded ${allDocuments.length} documents for user: ${currentUser.name}`);
             displayDocuments();
         }
         
@@ -1451,7 +1507,7 @@
             if (fileExtension === 'html' || fileExtension === 'htm') {
                 try {
                     // Get Azure config from localStorage
-                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     
                     if (!adminConfigData) {
                         throw new Error('Azure configuration not found. Please contact administrator to configure Azure access.');
@@ -1596,7 +1652,7 @@
             if (!currentUser) return;
             
             try {
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found');
                 }
@@ -2170,7 +2226,7 @@
         async function saveAnnotationsToAzure() {
             if (!currentDocument || !currentUser) return;
             
-            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
             if (!adminConfigData) {
                 throw new Error('Azure configuration not found');
             }
@@ -2442,7 +2498,7 @@
                 saveButton.disabled = true;
                 
                 // Get Azure config (try both public and admin configs)
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found. Please contact administrator.');
                 }
@@ -2553,7 +2609,7 @@
             
             try {
                 // Get Azure config
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) return;
                 
                 const azureConfig = JSON.parse(adminConfigData);
