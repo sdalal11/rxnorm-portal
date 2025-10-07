@@ -1248,8 +1248,28 @@
                 const azureConfig = JSON.parse(azureConfigData);
                 console.log('Using Azure config:', azureConfig);
                 
-                // List blobs in the Azure container
-                const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${azureConfig.sasToken}`;
+                // Clean the SAS token
+                let sasToken = azureConfig.sasToken;
+                if (sasToken.startsWith('?')) {
+                    sasToken = sasToken.substring(1); // Remove leading ?
+                }
+                
+                // Parse existing SAS parameters
+                const sasParams = new URLSearchParams(sasToken);
+                
+                // Ensure we have the correct permissions for container listing
+                if (!sasParams.has('sr')) {
+                    sasParams.set('sr', 'c'); // Container resource
+                }
+                
+                // Ensure we have list permission
+                const sp = sasParams.get('sp') || '';
+                if (!sp.includes('l')) {
+                    sasParams.set('sp', sp + 'l'); // Add list permission
+                }
+                
+                // Construct the final URL
+                const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${sasParams.toString()}`;
                 console.log('Fetching from Azure URL:', listUrl);
                 
                 const response = await fetch(listUrl);
