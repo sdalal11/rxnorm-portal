@@ -968,12 +968,21 @@
         let filteredDocuments = [];
         
         // Authentication functions
-        function showAuthTab(tabName) {
+        function showAuthTab(tabName, event = null) {
             // Update tab buttons
             document.querySelectorAll('.auth-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Fallback: find the tab by tabName
+                const targetTab = document.querySelector(`[onclick="showAuthTab('${tabName}')"]`);
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+            }
             
             // Show correct form
             document.querySelectorAll('.auth-form').forEach(form => {
@@ -1152,6 +1161,7 @@
             const notification = document.getElementById('configNotification');
             if (notification) {
                 notification.innerHTML = `🔄 Checking for configuration...`;
+                notification.style.background = '#17a2b8'; // Blue for loading
             }
             
             await ensureAzureConfigForUser();
@@ -1159,7 +1169,9 @@
             // Reload documents if config was found
             const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
             if (userConfig) {
-                loadDocuments();
+                console.log('Config found, reloading documents...');
+                await loadDocuments();
+                updateStats();
             }
         }
         
@@ -1208,16 +1220,81 @@
         let currentView = 'grid'; // 'grid' or 'folder'
         let currentFolder = ''; // Current folder path
         
-        function loadDocuments() {
-            // Load documents from admin's localStorage (simulating shared storage)
-            const adminDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+        async function loadDocuments() {
+            try {
+                // First try to load from localStorage (for admin or users on same browser)
+                const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                
+                if (localDocuments.length > 0) {
+                    allDocuments = localDocuments;
+                    filteredDocuments = [...allDocuments];
+                    console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name}`);
+                    displayDocuments();
+                    return;
+                }
+                
+                // If no local documents, try to fetch from Azure
+                console.log('No local documents found, attempting to fetch from Azure...');
+                
+                const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+                if (!azureConfigData) {
+                    console.log('No Azure configuration available for document loading');
+                    allDocuments = [];
+                    filteredDocuments = [];
+                    displayDocuments();
+                    return;
+                }
+                
+                const azureConfig = JSON.parse(azureConfigData);
+                
+                // List blobs in the Azure container
+                const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${azureConfig.sasToken}`;
+                
+                const response = await fetch(listUrl);
+                if (response.ok) {
+                    const xmlText = await response.text();
+                    
+                    // Parse the XML response to extract blob names
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                    const blobs = xmlDoc.getElementsByTagName('Blob');
+                    
+                    const documents = [];
+                    for (let i = 0; i < blobs.length; i++) {
+                        const blob = blobs[i];
+                        const name = blob.getElementsByTagName('Name')[0]?.textContent;
+                        const lastModified = blob.getElementsByTagName('Last-Modified')[0]?.textContent;
+                        const size = blob.getElementsByTagName('Content-Length')[0]?.textContent;
+                        
+                        if (name && name.endsWith('.html')) {
+                            documents.push({
+                                id: Date.now() + i,
+                                name: name,
+                                category: 'Medical Record',
+                                description: 'Document from Azure Storage',
+                                publicAccess: true,
+                                uploadDate: lastModified || new Date().toISOString(),
+                                size: parseInt(size) || 0,
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`
+                            });
+                        }
+                    }
+                    
+                    allDocuments = documents;
+                    filteredDocuments = [...allDocuments];
+                    console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
+                } else {
+                    console.log('Failed to fetch document list from Azure:', response.status);
+                    allDocuments = [];
+                    filteredDocuments = [];
+                }
+                
+            } catch (error) {
+                console.log('Error loading documents:', error);
+                allDocuments = [];
+                filteredDocuments = [];
+            }
             
-            // Load ALL documents for authenticated users (not just public ones)
-            // In production, this would be controlled by proper backend permissions
-            allDocuments = adminDocuments;
-            filteredDocuments = [...allDocuments];
-            
-            console.log(`Loaded ${allDocuments.length} documents for user: ${currentUser.name}`);
             displayDocuments();
         }
         
