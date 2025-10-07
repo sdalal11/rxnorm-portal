@@ -657,6 +657,7 @@
             
             // Send configuration to API server for global access
             try {
+                console.log('Uploading Azure config to API server...', publicConfig);
                 const response = await fetch('https://rxnorm-portal-nscs.onrender.com/config/azure', {
                     method: 'POST',
                     headers: {
@@ -665,14 +666,28 @@
                     body: JSON.stringify(publicConfig)
                 });
                 
+                console.log('API server response status:', response.status);
+                
                 if (response.ok) {
                     const result = await response.json();
-                    console.log('Azure config uploaded to API server:', result);
+                    console.log('✅ Azure config uploaded to API server successfully:', result);
+                    
+                    // Show success message to admin
+                    const statusElement = document.getElementById('azureTestResult');
+                    if (statusElement) {
+                        statusElement.innerHTML = '✅ Connected to Azure and shared with users!';
+                        statusElement.style.background = '#d4edda';
+                        statusElement.style.color = '#155724';
+                        statusElement.style.border = '1px solid #c3e6cb';
+                    }
                 } else {
-                    console.log('Failed to upload Azure config to API server');
+                    const errorText = await response.text();
+                    console.log('❌ Failed to upload Azure config to API server:', response.status, errorText);
+                    alert('Warning: Azure connected locally but failed to share with other users. Error: ' + response.status);
                 }
             } catch (error) {
-                console.log('Error uploading Azure config to API server:', error);
+                console.log('❌ Error uploading Azure config to API server:', error);
+                alert('Warning: Azure connected locally but failed to share with other users. Network error: ' + error.message);
             }
             
             console.log('Azure config shared for user portal:', publicConfig);
