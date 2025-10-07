@@ -251,6 +251,55 @@ def parse_main_py_text_output(output):
             annotations.append({
                 'text': line,
                 'status': 'active',
+# Global configuration storage (in production, use a database)
+global_config = {}
+
+@app.route('/config/azure', methods=['POST', 'GET', 'OPTIONS'])
+def azure_config():
+    """Manage Azure configuration for document sharing"""
+    # Handle CORS preflight request
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    if request.method == 'POST':
+        # Store Azure configuration (called by admin)
+        try:
+            config_data = request.get_json()
+            global_config['azure'] = {
+                'storageAccount': config_data.get('storageAccount'),
+                'containerName': config_data.get('containerName'),
+                'sasToken': config_data.get('sasToken'),  # In production, encrypt this
+                'timestamp': subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
+            }
+            
+            return jsonify({
+                'success': True,
+                'message': 'Azure configuration stored successfully'
+            })
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    elif request.method == 'GET':
+        # Retrieve Azure configuration (called by users)
+        try:
+            azure_config = global_config.get('azure', {})
+            if azure_config:
+                return jsonify({
+                    'success': True,
+                    'config': azure_config
+                })
+            else:
+                return jsonify({
+                    'success': False,
+                    'message': 'No Azure configuration found'
+                }), 404
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
                 'confidence': 0.7,
                 'source': 'main.py',
                 'rxnorm_code': None
