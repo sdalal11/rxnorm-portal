@@ -482,6 +482,7 @@
                 <div style="margin-bottom: 1rem;">
                     <button class="btn" onclick="refreshDocuments()">Refresh from Azure</button>
                     <button class="btn" onclick="syncWithAzure()">Sync with Azure Storage</button>
+                    <button class="btn" style="background-color: #dc3545; margin-left: 1rem;" onclick="deleteAllDocuments()">Delete All Documents</button>
                 </div>
                 
                 <div class="documents-list">
@@ -889,6 +890,34 @@
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
                 loadDocuments();
                 updateStats();
+            }
+        }
+        
+        function deleteAllDocuments() {
+            if (documentsData.length === 0) {
+                alert('No documents to delete.');
+                return;
+            }
+            
+            const documentCount = documentsData.length;
+            const confirmMessage = `⚠️ WARNING: This will permanently delete all ${documentCount} documents from the system.\n\nThis action cannot be undone. Are you absolutely sure?`;
+            
+            if (confirm(confirmMessage)) {
+                // Second confirmation for safety
+                const secondConfirm = confirm(`Last chance! Delete ALL ${documentCount} documents?\n\nClick OK to permanently delete everything.`);
+                
+                if (secondConfirm) {
+                    // Clear all documents
+                    documentsData = [];
+                    localStorage.setItem('documentsData', JSON.stringify(documentsData));
+                    
+                    // Update UI
+                    loadDocuments();
+                    updateStats();
+                    
+                    // Show success message
+                    alert(`✅ Successfully deleted all ${documentCount} documents.\n\nThe document list has been cleared.`);
+                }
             }
         }
         
