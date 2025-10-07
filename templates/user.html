@@ -379,6 +379,79 @@
                 min-width: auto;
             }
         }
+        
+        /* Folder View Styles */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .breadcrumb-item {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: #6c757d;
+        }
+        
+        .folder-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.2);
+            border-color: #6f42c1;
+        }
+        
+        .folder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .folder-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .folder-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        
+        .folder-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #6f42c1;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
 
         .document-viewer {
             display: none;
@@ -816,7 +889,14 @@
                 </div>
                 <button class="search-btn" onclick="filterDocuments()">Search</button>
                 <button class="search-btn btn-secondary" onclick="clearFilters()">Clear</button>
+                <button class="search-btn" onclick="toggleView()" id="viewToggleBtn">📁 Folder View</button>
             </div>
+        </div>
+        
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb" class="breadcrumb" style="display: none;">
+            <span onclick="navigateToFolder('')" class="breadcrumb-item">📁 Documents</span>
+            <span id="breadcrumbPath"></span>
         </div>
         
         <!-- Documents Grid -->
@@ -980,8 +1060,62 @@
             document.getElementById('userPortal').style.display = 'block';
             document.getElementById('userName').textContent = currentUser.name;
             
+            // Ensure Azure configuration is available for new users
+            ensureAzureConfigForUser();
+            
             loadDocuments();
             updateStats();
+        }
+        
+        // Ensure Azure configuration is available for the user
+        function ensureAzureConfigForUser() {
+            // Check if user already has Azure config
+            const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            
+            if (!userConfig) {
+                // If no config found, show a notification to the user
+                console.log('No Azure configuration found for user. Documents may not be accessible.');
+                
+                // Show a banner notification to inform user about the issue
+                showConfigurationNotification();
+            } else {
+                console.log('Azure configuration found for user');
+                hideConfigurationNotification();
+            }
+        }
+        
+        function showConfigurationNotification() {
+            // Create or show notification banner
+            let notification = document.getElementById('configNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'configNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #f39c12;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    z-index: 1000;
+                    font-weight: bold;
+                `;
+                notification.innerHTML = `
+                    ⚠️ Document access may be limited. Administrator needs to configure document sharing. 
+                    <button onclick="hideConfigurationNotification()" style="margin-left: 10px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>
+                `;
+                document.body.prepend(notification);
+            }
+            notification.style.display = 'block';
+        }
+        
+        function hideConfigurationNotification() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.display = 'none';
+            }
         }
         
         function logout() {
@@ -998,18 +1132,200 @@
         }
         
         // Document functions
+        let currentView = 'grid'; // 'grid' or 'folder'
+        let currentFolder = ''; // Current folder path
+        
         function loadDocuments() {
             // Load documents from admin's localStorage (simulating shared storage)
             const adminDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
             
-            // Filter only public documents
-            allDocuments = adminDocuments.filter(doc => doc.publicAccess === true);
+            // Load ALL documents for authenticated users (not just public ones)
+            // In production, this would be controlled by proper backend permissions
+            allDocuments = adminDocuments;
             filteredDocuments = [...allDocuments];
             
+            console.log(`Loaded ${allDocuments.length} documents for user: ${currentUser.name}`);
             displayDocuments();
         }
         
+        function toggleView() {
+            const toggleBtn = document.getElementById('viewToggleBtn');
+            const breadcrumb = document.getElementById('breadcrumb');
+            
+            if (currentView === 'grid') {
+                currentView = 'folder';
+                toggleBtn.textContent = '📄 List View';
+                breadcrumb.style.display = 'block';
+                navigateToFolder('');
+            } else {
+                currentView = 'grid';
+                toggleBtn.textContent = '📁 Folder View';
+                breadcrumb.style.display = 'none';
+                displayDocuments();
+            }
+        }
+        
+        function navigateToFolder(folderPath) {
+            currentFolder = folderPath;
+            updateBreadcrumb();
+            
+            if (currentView === 'folder') {
+                displayFolderView();
+            }
+        }
+        
+        function updateBreadcrumb() {
+            const breadcrumbPath = document.getElementById('breadcrumbPath');
+            
+            if (currentFolder === '') {
+                breadcrumbPath.innerHTML = '';
+                return;
+            }
+            
+            const pathParts = currentFolder.split('/').filter(part => part);
+            let html = '';
+            let currentPath = '';
+            
+            pathParts.forEach((part, index) => {
+                currentPath += (currentPath ? '/' : '') + part;
+                html += `<span class="breadcrumb-separator">></span>`;
+                html += `<span onclick="navigateToFolder('${currentPath}')" class="breadcrumb-item">📁 ${part}</span>`;
+            });
+            
+            breadcrumbPath.innerHTML = html;
+        }
+        
+        function displayFolderView() {
+            const documentsGrid = document.getElementById('documentsGrid');
+            
+            // Get unique folders and files for current path
+            const foldersAndFiles = getFoldersAndFiles(currentFolder);
+            
+            if (foldersAndFiles.folders.length === 0 && foldersAndFiles.files.length === 0) {
+                documentsGrid.innerHTML = `
+                    <div class="no-documents">
+                        <h3>Empty Folder</h3>
+                        <p>This folder contains no documents or subfolders.</p>
+                        <button class="btn btn-primary" onclick="navigateToFolder('')">Back to Root</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            
+            // Display folders first
+            foldersAndFiles.folders.forEach(folder => {
+                const folderName = folder.name;
+                const folderPath = currentFolder ? `${currentFolder}/${folderName}` : folderName;
+                const fileCount = folder.fileCount;
+                
+                html += `
+                    <div class="folder-card" onclick="navigateToFolder('${folderPath}')">
+                        <div class="folder-badge">${fileCount} files</div>
+                        <div class="folder-icon">📁</div>
+                        <div class="folder-title">${folderName}</div>
+                        <div class="folder-meta">
+                            Category: ${folder.category}<br>
+                            ${fileCount} file(s)
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Display files in current folder
+            foldersAndFiles.files.forEach(doc => {
+                const icon = getDocumentIcon(doc.name);
+                const badgeClass = `badge-${doc.category}`;
+                
+                html += `
+                    <div class="document-card" onclick="viewDocument('${doc.id}')">
+                        <div class="document-icon">${icon}</div>
+                        <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
+                        <div class="document-title">${doc.name}</div>
+                        <div class="document-meta">
+                            Uploaded: ${doc.uploadDate}<br>
+                            Size: ${doc.size}
+                        </div>
+                        ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
+                        <div class="document-actions">
+                            <button class="btn-small btn-view" onclick="event.stopPropagation(); viewDocument('${doc.id}')">View</button>
+                            <button class="btn-small btn-download" onclick="event.stopPropagation(); downloadDocument('${doc.id}')">Download</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            documentsGrid.innerHTML = html;
+        }
+        
+        function getFoldersAndFiles(currentPath) {
+            const folders = new Map();
+            const files = [];
+            
+            filteredDocuments.forEach(doc => {
+                if (!doc.originalPath || !doc.isFromFolder) {
+                    // Individual files (not from folder uploads) - show in root
+                    if (currentPath === '') {
+                        files.push(doc);
+                    }
+                    return;
+                }
+                
+                // Parse the folder structure from originalPath
+                const relativePath = doc.originalPath;
+                const pathParts = relativePath.split('/').filter(part => part);
+                
+                if (pathParts.length === 0) return;
+                
+                // Check if this file belongs to the current path
+                const currentPathParts = currentPath ? currentPath.split('/').filter(part => part) : [];
+                
+                // Check if the file is in a subfolder of current path
+                if (pathParts.length > currentPathParts.length) {
+                    let isInCurrentPath = true;
+                    for (let i = 0; i < currentPathParts.length; i++) {
+                        if (pathParts[i] !== currentPathParts[i]) {
+                            isInCurrentPath = false;
+                            break;
+                        }
+                    }
+                    
+                    if (isInCurrentPath) {
+                        if (pathParts.length === currentPathParts.length + 1) {
+                            // File is directly in current folder
+                            files.push(doc);
+                        } else {
+                            // File is in a subfolder
+                            const subfolderName = pathParts[currentPathParts.length];
+                            const subfolderPath = [...currentPathParts, subfolderName].join('/');
+                            
+                            if (!folders.has(subfolderName)) {
+                                folders.set(subfolderName, {
+                                    name: subfolderName,
+                                    path: subfolderPath,
+                                    fileCount: 0,
+                                    category: doc.category
+                                });
+                            }
+                            folders.get(subfolderName).fileCount++;
+                        }
+                    }
+                }
+            });
+            
+            return {
+                folders: Array.from(folders.values()),
+                files: files
+            };
+        }
+        
         function displayDocuments() {
+            if (currentView === 'folder') {
+                displayFolderView();
+                return;
+            }
+            
             const documentsGrid = document.getElementById('documentsGrid');
             
             if (filteredDocuments.length === 0) {
@@ -1027,14 +1343,18 @@
                 const icon = getDocumentIcon(doc.name);
                 const badgeClass = `badge-${doc.category}`;
                 
+                // Add folder indicator for files from folder uploads
+                const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
+                
                 html += `
                     <div class="document-card" onclick="viewDocument('${doc.id}')">
                         <div class="document-icon">${icon}</div>
                         <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
-                        <div class="document-title">${doc.name}</div>
+                        <div class="document-title">${folderIndicator}${doc.name}</div>
                         <div class="document-meta">
                             Uploaded: ${doc.uploadDate}<br>
                             Size: ${doc.size}
+                            ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                         </div>
                         ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
                         <div class="document-actions">
@@ -1187,7 +1507,7 @@
             if (fileExtension === 'html' || fileExtension === 'htm') {
                 try {
                     // Get Azure config from localStorage
-                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     
                     if (!adminConfigData) {
                         throw new Error('Azure configuration not found. Please contact administrator to configure Azure access.');
@@ -1332,7 +1652,7 @@
             if (!currentUser) return;
             
             try {
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found');
                 }
@@ -1906,7 +2226,7 @@
         async function saveAnnotationsToAzure() {
             if (!currentDocument || !currentUser) return;
             
-            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
             if (!adminConfigData) {
                 throw new Error('Azure configuration not found');
             }
@@ -2178,7 +2498,7 @@
                 saveButton.disabled = true;
                 
                 // Get Azure config (try both public and admin configs)
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found. Please contact administrator.');
                 }
@@ -2289,7 +2609,7 @@
             
             try {
                 // Get Azure config
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) return;
                 
                 const azureConfig = JSON.parse(adminConfigData);
