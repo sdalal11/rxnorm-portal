@@ -432,6 +432,14 @@
                         </div>
                         
                         <div class="form-group">
+                            <label for="folderInput">Or Upload Entire Folder:</label>
+                            <input type="file" id="folderInput" webkitdirectory directory multiple>
+                            <small style="color: #666; display: block; margin-top: 0.25rem;">
+                                📁 This will upload all files in the selected folder and subfolders
+                            </small>
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="documentCategory">Category:</label>
                             <select id="documentCategory">
                                 <option value="general">General</option>
@@ -671,17 +679,99 @@
             }
             
             const fileInput = document.getElementById('fileInput');
+            const folderInput = document.getElementById('folderInput');
             const category = document.getElementById('documentCategory').value;
             const description = document.getElementById('documentDescription').value;
             const publicAccess = document.getElementById('publicAccess').checked;
             
-            if (fileInput.files.length === 0) {
-                alert('Please select files to upload.');
+            let filesToUpload = [];
+            
+            // Check if files were selected via file input
+            if (fileInput.files.length > 0) {
+                filesToUpload = Array.from(fileInput.files);
+            }
+            // Check if folder was selected
+            else if (folderInput.files.length > 0) {
+                filesToUpload = Array.from(folderInput.files);
+                console.log(`📁 Folder upload detected: ${filesToUpload.length} files found`);
+            }
+            
+            if (filesToUpload.length === 0) {
+                alert('Please select files or a folder to upload.');
                 return;
             }
             
-            uploadToAzure(fileInput.files, category, description, publicAccess);
+            uploadToAzure(filesToUpload, category, description, publicAccess);
         });
+        
+        // Clear the other input when one is selected
+        document.getElementById('fileInput').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                document.getElementById('folderInput').value = '';
+                updateUploadPreview();
+            }
+        });
+        
+        document.getElementById('folderInput').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                document.getElementById('fileInput').value = '';
+                updateUploadPreview();
+            }
+        });
+        
+        function updateUploadPreview() {
+            const fileInput = document.getElementById('fileInput');
+            const folderInput = document.getElementById('folderInput');
+            
+            let selectedFiles = [];
+            let uploadType = '';
+            
+            if (fileInput.files.length > 0) {
+                selectedFiles = Array.from(fileInput.files);
+                uploadType = 'Individual Files';
+            } else if (folderInput.files.length > 0) {
+                selectedFiles = Array.from(folderInput.files);
+                uploadType = 'Folder Upload';
+            }
+            
+            if (selectedFiles.length > 0) {
+                // Show upload preview
+                const previewHtml = `
+                    <div style="background: #e7f3ff; padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                        <strong>📂 ${uploadType}</strong><br>
+                        📄 ${selectedFiles.length} file(s) selected<br>
+                        📊 Total size: ${formatTotalSize(selectedFiles)}<br>
+                        <details style="margin-top: 0.5rem;">
+                            <summary style="cursor: pointer; color: #007bff;">View file list</summary>
+                            <div style="max-height: 150px; overflow-y: auto; margin-top: 0.5rem; font-size: 0.875rem;">
+                                ${selectedFiles.map(file => `
+                                    <div style="padding: 2px 0;">
+                                        📄 ${file.webkitRelativePath || file.name} (${formatFileSize(file.size)})
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </details>
+                    </div>
+                `;
+                
+                // Remove existing preview
+                const existingPreview = document.getElementById('uploadPreview');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+                
+                // Add new preview
+                const previewDiv = document.createElement('div');
+                previewDiv.id = 'uploadPreview';
+                previewDiv.innerHTML = previewHtml;
+                document.getElementById('uploadForm').appendChild(previewDiv);
+            }
+        }
+        
+        function formatTotalSize(files) {
+            const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
+            return formatFileSize(totalBytes);
+        }
 
         
         // Upload files directly to Azure using REST API (no SDK needed)
@@ -694,14 +784,28 @@
 
             try {
                 let uploadedCount = 0;
+                const filesArray = Array.from(files);
                 
-                for (let file of files) {
+                // Check if this is a folder upload
+                const isFolderUpload = filesArray.some(file => file.webkitRelativePath);
+                
+                for (let file of filesArray) {
                     // Create unique blob name with timestamp
                     const timestamp = Date.now();
-                    const blobName = `${category}/${timestamp}_${file.name}`;
+                    let blobName;
+                    
+                    if (isFolderUpload && file.webkitRelativePath) {
+                        // Preserve folder structure for folder uploads
+                        const folderPath = file.webkitRelativePath.replace(/^[^\/]+\//, ''); // Remove root folder name
+                        blobName = `${category}/${timestamp}_folder/${folderPath}`;
+                    } else {
+                        // Regular file upload
+                        blobName = `${category}/${timestamp}_${file.name}`;
+                    }
                     
                     // Update status for current file
-                    document.getElementById('uploadStatus').textContent = `Uploading ${file.name}...`;
+                    const displayName = file.webkitRelativePath || file.name;
+                    document.getElementById('uploadStatus').textContent = `Uploading ${displayName}...`;
                     
                     // Construct the full blob URL with SAS token
                     const blobUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
@@ -719,23 +823,23 @@
                     
                     if (!response.ok) {
                         const errorText = await response.text();
-                        throw new Error(`Upload failed (${response.status}): ${errorText}`);
+                        throw new Error(`Upload failed for ${displayName} (${response.status}): ${errorText}`);
                     }
                     
                     // Process the file with main.py if it's an HTML file
                     let preAnnotations = null;
                     if (file.name.toLowerCase().endsWith('.html') || file.name.toLowerCase().endsWith('.htm')) {
                         try {
-                            document.getElementById('uploadStatus').textContent = `Processing ${file.name} for medication extraction...`;
+                            document.getElementById('uploadStatus').textContent = `Processing ${displayName} for medication extraction...`;
                             preAnnotations = await processFileWithMainPy(file);
                             
                             if (preAnnotations && preAnnotations.length > 0) {
-                                console.log(`✅ Extracted ${preAnnotations.length} medications from ${file.name}:`, preAnnotations);
+                                console.log(`✅ Extracted ${preAnnotations.length} medications from ${displayName}:`, preAnnotations);
                             } else {
-                                console.log(`ℹ️ No medications found in ${file.name}`);
+                                console.log(`ℹ️ No medications found in ${displayName}`);
                             }
                         } catch (error) {
-                            console.warn(`⚠️ Failed to process ${file.name} with main.py:`, error);
+                            console.warn(`⚠️ Failed to process ${displayName} with main.py:`, error);
                             // Continue without pre-annotations if processing fails
                             preAnnotations = [];
                         }
@@ -744,7 +848,8 @@
                     // Add to documents list AFTER successful upload
                     const newDoc = {
                         id: timestamp + uploadedCount,
-                        name: file.name,
+                        name: displayName,
+                        originalPath: file.webkitRelativePath || file.name,
                         category: category,
                         description: description,
                         uploadDate: new Date().toISOString().split('T')[0],
@@ -753,15 +858,16 @@
                         azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}`,
                         blobName: blobName,
                         preAnnotations: preAnnotations || [], // Store the pre-annotations
-                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0 // Flag for quick checking
+                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0, // Flag for quick checking
+                        isFromFolder: isFolderUpload
                     };
                     documentsData.push(newDoc);
                     
                     uploadedCount++;
-                    const progress = (uploadedCount / files.length) * 100;
+                    const progress = (uploadedCount / filesArray.length) * 100;
                     document.getElementById('progressBar').style.width = progress + '%';
                     document.getElementById('progressBar').textContent = Math.round(progress) + '%';
-                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${files.length} files`;
+                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${filesArray.length} files`;
                 }
                 
                 // Save updated documents list
@@ -772,18 +878,27 @@
                 
                 // Show detailed success message
                 const totalPreAnnotations = documentsData
-                    .slice(-files.length) // Get only the newly uploaded files
+                    .slice(-filesArray.length) // Get only the newly uploaded files
                     .reduce((sum, doc) => sum + (doc.preAnnotations ? doc.preAnnotations.length : 0), 0);
                 
+                const uploadTypeText = isFolderUpload ? '📁 Folder' : '📄 Files';
                 document.getElementById('uploadSuccess').innerHTML = `
                     <strong>Upload completed successfully!</strong><br>
-                    📁 ${files.length} file(s) uploaded<br>
+                    ${uploadTypeText} ${filesArray.length} file(s) uploaded<br>
                     🤖 ${totalPreAnnotations} medication(s) automatically detected<br>
                     ✨ Files are ready for annotation
                 `;
                 
+                // Clear both inputs
                 document.getElementById('fileInput').value = '';
+                document.getElementById('folderInput').value = '';
                 document.getElementById('documentDescription').value = '';
+                
+                // Remove upload preview
+                const existingPreview = document.getElementById('uploadPreview');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
                 
                 updateStats();
                 
@@ -861,13 +976,26 @@
                     ? '<span style="background: #28a745; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem;">Public</span>'
                     : '<span style="background: #dc3545; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem;">Admin Only</span>';
                 
+                const folderBadge = doc.isFromFolder 
+                    ? '<span style="background: #6f42c1; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">📁 Folder</span>'
+                    : '';
+                
+                const annotationsBadge = doc.hasPreAnnotations 
+                    ? `<span style="background: #17a2b8; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">🤖 ${doc.preAnnotations.length} meds</span>`
+                    : '';
+                
+                const displayPath = doc.originalPath && doc.originalPath !== doc.name 
+                    ? `<br><small style="color: #666;">📂 ${doc.originalPath}</small>` 
+                    : '';
+                
                 html += `
                     <div class="document-item">
                         <div class="document-info">
-                            <div class="document-name">${doc.name} ${accessBadge}</div>
+                            <div class="document-name">${doc.name} ${accessBadge}${folderBadge}${annotationsBadge}</div>
                             <div class="document-meta">
                                 Category: ${doc.category} | Uploaded: ${doc.uploadDate} | Size: ${doc.size}
                                 ${doc.description ? `<br>Description: ${doc.description}` : ''}
+                                ${displayPath}
                             </div>
                         </div>
                         <div class="document-actions">
