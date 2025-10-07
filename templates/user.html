@@ -1083,18 +1083,32 @@
                         }
                     });
                     
+                    console.log('API Response status:', response.status);
+                    
                     if (response.ok) {
                         const data = await response.json();
+                        console.log('API Response data:', data);
+                        
                         if (data.success && data.config) {
                             // Store the fetched config locally
                             localStorage.setItem('globalAzureConfig', JSON.stringify(data.config));
                             console.log('Azure configuration fetched successfully from API');
                             hideConfigurationNotification();
+                            
+                            // Show success message
+                            showSuccessNotification('✅ Configuration loaded successfully! Documents should now be accessible.');
                             return;
+                        } else {
+                            console.log('API returned no configuration');
+                            showErrorNotification('❌ No configuration found on server. Admin needs to configure Azure first.');
                         }
+                    } else {
+                        console.log('API request failed with status:', response.status);
+                        showErrorNotification('❌ Failed to fetch configuration from server.');
                     }
                 } catch (error) {
                     console.log('Failed to fetch Azure config from API:', error);
+                    showErrorNotification('❌ Network error while fetching configuration.');
                 }
                 
                 // If we still don't have config, show notification
@@ -1146,6 +1160,27 @@
             const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
             if (userConfig) {
                 loadDocuments();
+            }
+        }
+        
+        function showSuccessNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#28a745';
+                notification.innerHTML = message + ` <button onclick="hideConfigurationNotification()" style="margin-left: 10px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    hideConfigurationNotification();
+                }, 3000);
+            }
+        }
+        
+        function showErrorNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#dc3545';
+                notification.innerHTML = message + ` <button onclick="retryConfigurationFetch()" style="margin-left: 10px; background: rgba(255,255,255,0.3); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button> <button onclick="hideConfigurationNotification()" style="margin-left: 5px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
             }
         }
         
