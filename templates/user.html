@@ -1296,15 +1296,21 @@
                         console.log(`Blob ${i}:`, { name, lastModified, size });
                         
                         if (name && name.endsWith('.html')) {
+                            // Determine if this is from a folder structure based on the blob name
+                            const isFromFolder = name.includes('/');
+                            const originalPath = isFromFolder ? name : '';
+                            
                             documents.push({
                                 id: Date.now() + i,
-                                name: name,
+                                name: name.split('/').pop(), // Get just the filename
                                 category: 'Medical Record',
                                 description: 'Document from Azure Storage',
                                 publicAccess: true,
                                 uploadDate: lastModified || new Date().toISOString(),
                                 size: parseInt(size) || 0,
-                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`
+                                originalPath: originalPath,
+                                isFromFolder: isFromFolder,
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${sasParams.toString()}`
                             });
                         }
                     }
@@ -1313,6 +1319,9 @@
                     allDocuments = documents;
                     filteredDocuments = [...allDocuments];
                     console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
+                    
+                    // Debug: Show what documents we have
+                    console.log('All documents:', allDocuments);
                 } else {
                     const errorText = await response.text();
                     console.log('Failed to fetch document list from Azure:', response.status, errorText);
@@ -1327,6 +1336,7 @@
             }
             
             displayDocuments();
+            updateStats(); // Update stats after loading documents
         }
         
         function toggleView() {
@@ -1601,6 +1611,7 @@
         }
         
         function updateStats() {
+            console.log('Updating stats with', allDocuments.length, 'documents');
             document.getElementById('totalDocsCount').textContent = allDocuments.length;
             
             const categories = [...new Set(allDocuments.map(doc => doc.category))];
@@ -1609,10 +1620,17 @@
             // Recent uploads (last 30 days)
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            const recentDocs = allDocuments.filter(doc => 
-                new Date(doc.uploadDate) > thirtyDaysAgo
-            );
+            const recentDocs = allDocuments.filter(doc => {
+                const uploadDate = new Date(doc.uploadDate);
+                return uploadDate > thirtyDaysAgo;
+            });
             document.getElementById('recentCount').textContent = recentDocs.length;
+            
+            console.log('Stats updated:', {
+                total: allDocuments.length,
+                categories: categories.length,
+                recent: recentDocs.length
+            });
         }
         
         // Search on Enter key
