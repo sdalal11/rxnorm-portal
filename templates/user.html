@@ -1246,18 +1246,25 @@
                 }
                 
                 const azureConfig = JSON.parse(azureConfigData);
+                console.log('Using Azure config:', azureConfig);
                 
                 // List blobs in the Azure container
                 const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${azureConfig.sasToken}`;
+                console.log('Fetching from Azure URL:', listUrl);
                 
                 const response = await fetch(listUrl);
+                console.log('Azure response status:', response.status);
+                
                 if (response.ok) {
                     const xmlText = await response.text();
+                    console.log('Azure XML response length:', xmlText.length);
+                    console.log('Azure XML response (first 500 chars):', xmlText.substring(0, 500));
                     
                     // Parse the XML response to extract blob names
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                     const blobs = xmlDoc.getElementsByTagName('Blob');
+                    console.log('Found blobs:', blobs.length);
                     
                     const documents = [];
                     for (let i = 0; i < blobs.length; i++) {
@@ -1265,6 +1272,8 @@
                         const name = blob.getElementsByTagName('Name')[0]?.textContent;
                         const lastModified = blob.getElementsByTagName('Last-Modified')[0]?.textContent;
                         const size = blob.getElementsByTagName('Content-Length')[0]?.textContent;
+                        
+                        console.log(`Blob ${i}:`, { name, lastModified, size });
                         
                         if (name && name.endsWith('.html')) {
                             documents.push({
@@ -1280,11 +1289,13 @@
                         }
                     }
                     
+                    console.log(`Created ${documents.length} document objects from Azure blobs`);
                     allDocuments = documents;
                     filteredDocuments = [...allDocuments];
                     console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
                 } else {
-                    console.log('Failed to fetch document list from Azure:', response.status);
+                    const errorText = await response.text();
+                    console.log('Failed to fetch document list from Azure:', response.status, errorText);
                     allDocuments = [];
                     filteredDocuments = [];
                 }
