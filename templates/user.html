@@ -1349,15 +1349,31 @@
                         console.log(`Blob ${i}:`, { name, lastModified, size });
                         
                         if (name && name.endsWith('.html')) {
+                            // Parse folder structure from blob name
+                            const pathParts = name.split('/');
+                            const filename = pathParts[pathParts.length - 1];
+                            const category = pathParts[0] || 'general';
+                            const folderName = pathParts.length > 2 ? pathParts[1] : null;
+                            const isFromFolder = pathParts.length > 2;
+                            
+                            // Create proper originalPath for folder structure
+                            const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
+                            
                             documents.push({
                                 id: Date.now() + i,
-                                name: name,
-                                category: 'Medical Record',
+                                name: filename,
+                                originalPath: originalPath,
+                                folderName: folderName,
+                                category: category,
                                 description: 'Document from Azure Storage',
                                 publicAccess: true,
-                                uploadDate: lastModified || new Date().toISOString(),
-                                size: parseInt(size) || 0,
-                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`
+                                uploadDate: lastModified ? new Date(lastModified).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+                                size: formatFileSize(parseInt(size) || 0),
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`,
+                                blobName: name,
+                                isFromFolder: isFromFolder,
+                                hasPreAnnotations: false,
+                                preAnnotations: []
                             });
                         }
                     }
@@ -1380,6 +1396,14 @@
             }
             
             displayDocuments();
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
         
         function toggleView() {
