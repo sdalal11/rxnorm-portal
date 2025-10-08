@@ -1234,6 +1234,10 @@
             updateAzureStatus(true);
             azureConfig.isConnected = true;
             
+            // Share Azure config with users immediately on admin panel load
+            console.log('🔄 Sharing Azure config with users on admin panel initialization...');
+            shareAzureConfigForUsers();
+            
             // Load documents data
             const savedDocs = localStorage.getItem('documentsData');
             if (savedDocs) {
