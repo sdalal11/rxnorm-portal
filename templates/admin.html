@@ -843,8 +843,8 @@
                     let blobName;
                     
                     if (isFolderUpload && file.webkitRelativePath) {
-                        // Preserve the original folder structure including the root folder name
-                        blobName = `${category}/${rootFolderName}/${file.webkitRelativePath.replace(/^[^\/]+\//, '')}`;
+                        // Preserve the complete folder structure exactly as uploaded
+                        blobName = `${category}/${file.webkitRelativePath}`;
                     } else {
                         // Regular file upload
                         blobName = `${category}/${timestamp}_${file.name}`;
