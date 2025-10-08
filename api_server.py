@@ -20,10 +20,14 @@ def home():
     """Root endpoint"""
     return jsonify({
         'message': 'RxNorm Document Processing API',
-        'version': '1.0',
+        'version': '1.1',
         'endpoints': {
             'health': '/health',
-            'process': '/process-document'
+            'process': '/process-document',
+            'azure_config': '/config/azure',
+            'user_register': '/users/register',
+            'user_login': '/users/login',
+            'user_list': '/users/list'
         }
     })
 
@@ -260,6 +264,136 @@ def parse_main_py_text_output(output):
 
 # Global configuration storage (in production, use a database)
 global_config = {}
+global_users = {}  # Store registered users
+
+# User management endpoints
+@app.route('/users/register', methods=['POST', 'OPTIONS'])
+def register_user():
+    """Register a new user"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        user_data = request.get_json()
+        username = user_data.get('username', '').strip().lower()
+        email = user_data.get('email', '').strip().lower()
+        password = user_data.get('password', '')
+        name = user_data.get('name', '').strip()
+        
+        if not all([username, email, password, name]):
+            return jsonify({'error': 'All fields are required'}), 400
+        
+        # Check if user already exists
+        if username in global_users:
+            return jsonify({'error': 'Username already exists'}), 409
+        
+        # Check if email already exists
+        for user_id, user_info in global_users.items():
+            if user_info.get('email') == email:
+                return jsonify({'error': 'Email already registered'}), 409
+        
+        # Store user (in production, hash the password!)
+        global_users[username] = {
+            'username': username,
+            'email': email,
+            'password': password,  # In production: hash this!
+            'name': name,
+            'registered_at': subprocess.run(['date'], capture_output=True, text=True).stdout.strip(),
+            'last_login': None
+        }
+        
+        print(f"📝 User registered: {username} ({email})")
+        print(f"📊 Total users: {len(global_users)}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'User registered successfully',
+            'user': {
+                'username': username,
+                'email': email,
+                'name': name
+            }
+        })
+        
+    except Exception as e:
+        print(f"❌ Registration error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/login', methods=['POST', 'OPTIONS'])
+def login_user():
+    """Authenticate user login"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        login_data = request.get_json()
+        username = login_data.get('username', '').strip().lower()
+        password = login_data.get('password', '')
+        
+        if not username or not password:
+            return jsonify({'error': 'Username and password are required'}), 400
+        
+        # Check if user exists and password matches
+        user = global_users.get(username)
+        if not user or user.get('password') != password:
+            return jsonify({'error': 'Invalid username or password'}), 401
+        
+        # Update last login
+        global_users[username]['last_login'] = subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
+        
+        print(f"✅ User logged in: {username}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Login successful',
+            'user': {
+                'username': user['username'],
+                'email': user['email'],
+                'name': user['name']
+            }
+        })
+        
+    except Exception as e:
+        print(f"❌ Login error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/list', methods=['GET', 'OPTIONS'])
+def list_users():
+    """Get list of all registered users (for admin)"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        user_list = []
+        for username, user_info in global_users.items():
+            user_list.append({
+                'username': user_info['username'],
+                'email': user_info['email'],
+                'name': user_info['name'],
+                'registered_at': user_info['registered_at'],
+                'last_login': user_info['last_login']
+            })
+        
+        return jsonify({
+            'success': True,
+            'users': user_list,
+            'total': len(user_list)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/config/azure', methods=['POST', 'GET', 'OPTIONS'])
 def azure_config():

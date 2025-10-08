@@ -961,8 +961,10 @@
     </div>
     
     <script>
+        // API Configuration
+        const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
+        
         // User data storage
-        let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
         let currentUser = null;
         let allDocuments = [];
         let filteredDocuments = [];
@@ -996,26 +998,58 @@
         }
         
         // Login form handler
-        document.getElementById('userLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            const user = registeredUsers.find(u => u.email === email && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-                showUserPortal();
-            } else {
-                document.getElementById('authError').textContent = 'Invalid email or password.';
+            try {
+                // Show loading
+                document.getElementById('authError').style.display = 'none';
+                
+                // Call centralized API for login
+                const response = await fetch(`${API_BASE_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email.split('@')[0], // Use email prefix as username
+                        password: password
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    // Login successful
+                    currentUser = {
+                        username: result.user.username,
+                        email: result.user.email,
+                        name: result.user.name,
+                        role: 'user'
+                    };
+                    
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    console.log('✅ User logged in successfully:', currentUser.name);
+                    
+                    showUserPortal();
+                } else {
+                    // Login failed
+                    document.getElementById('authError').textContent = result.error || 'Login failed. Please try again.';
+                    document.getElementById('authError').style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('authError').textContent = 'Network error. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
             }
         });
         
         // Register form handler
-        document.getElementById('userRegisterForm').addEventListener('submit', function(e) {
+        document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const name = document.getElementById('registerName').value;
@@ -1024,44 +1058,63 @@
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
             const role = document.getElementById('userRole').value;
             
-            // Validation
+            // Client-side validation
             if (password !== confirmPassword) {
                 document.getElementById('authError').textContent = 'Passwords do not match.';
                 document.getElementById('authError').style.display = 'block';
                 return;
             }
             
-            if (registeredUsers.find(u => u.email === email)) {
-                document.getElementById('authError').textContent = 'Email already registered.';
+            try {
+                // Show loading
+                document.getElementById('authError').style.display = 'none';
+                
+                // Call centralized API for registration
+                const response = await fetch(`${API_BASE_URL}/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email.split('@')[0], // Use email prefix as username
+                        email: email,
+                        password: password,
+                        name: name
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    // Registration successful
+                    console.log('✅ User registered successfully:', result.user.name);
+                    
+                    // Show success message and switch to login
+                    document.getElementById('authSuccess').textContent = 'Registration successful! You can now log in with your credentials.';
+                    document.getElementById('authSuccess').style.display = 'block';
+                    document.getElementById('authError').style.display = 'none';
+                    
+                    // Clear form
+                    document.getElementById('userRegisterForm').reset();
+                    
+                    // Switch to login tab after 2 seconds
+                    setTimeout(() => {
+                        showAuthTab('login');
+                        document.getElementById('loginEmail').value = email;
+                        document.getElementById('authSuccess').style.display = 'none';
+                    }, 2500);
+                    
+                } else {
+                    // Registration failed
+                    document.getElementById('authError').textContent = result.error || 'Registration failed. Please try again.';
+                    document.getElementById('authError').style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                document.getElementById('authError').textContent = 'Network error. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
-                return;
             }
-            
-            // Create new user
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                password: password, // In production, this should be hashed
-                role: role,
-                registeredDate: new Date().toISOString()
-            };
-            
-            registeredUsers.push(newUser);
-            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-            
-            // Show success message and switch to login
-            document.getElementById('authSuccess').style.display = 'block';
-            document.getElementById('authError').style.display = 'none';
-            
-            // Clear form
-            document.getElementById('userRegisterForm').reset();
-            
-            // Switch to login tab after 2 seconds
-            setTimeout(() => {
-                showAuthTab('login');
-                document.getElementById('loginEmail').value = email;
-            }, 2000);
         });
         
         function showUserPortal() {
@@ -1296,21 +1349,15 @@
                         console.log(`Blob ${i}:`, { name, lastModified, size });
                         
                         if (name && name.endsWith('.html')) {
-                            // Determine if this is from a folder structure based on the blob name
-                            const isFromFolder = name.includes('/');
-                            const originalPath = isFromFolder ? name : '';
-                            
                             documents.push({
                                 id: Date.now() + i,
-                                name: name.split('/').pop(), // Get just the filename
+                                name: name,
                                 category: 'Medical Record',
                                 description: 'Document from Azure Storage',
                                 publicAccess: true,
                                 uploadDate: lastModified || new Date().toISOString(),
                                 size: parseInt(size) || 0,
-                                originalPath: originalPath,
-                                isFromFolder: isFromFolder,
-                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${sasParams.toString()}`
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`
                             });
                         }
                     }
@@ -1319,9 +1366,6 @@
                     allDocuments = documents;
                     filteredDocuments = [...allDocuments];
                     console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
-                    
-                    // Debug: Show what documents we have
-                    console.log('All documents:', allDocuments);
                 } else {
                     const errorText = await response.text();
                     console.log('Failed to fetch document list from Azure:', response.status, errorText);
@@ -1336,7 +1380,6 @@
             }
             
             displayDocuments();
-            updateStats(); // Update stats after loading documents
         }
         
         function toggleView() {
@@ -1611,7 +1654,6 @@
         }
         
         function updateStats() {
-            console.log('Updating stats with', allDocuments.length, 'documents');
             document.getElementById('totalDocsCount').textContent = allDocuments.length;
             
             const categories = [...new Set(allDocuments.map(doc => doc.category))];
@@ -1620,17 +1662,10 @@
             // Recent uploads (last 30 days)
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            const recentDocs = allDocuments.filter(doc => {
-                const uploadDate = new Date(doc.uploadDate);
-                return uploadDate > thirtyDaysAgo;
-            });
+            const recentDocs = allDocuments.filter(doc => 
+                new Date(doc.uploadDate) > thirtyDaysAgo
+            );
             document.getElementById('recentCount').textContent = recentDocs.length;
-            
-            console.log('Stats updated:', {
-                total: allDocuments.length,
-                categories: categories.length,
-                recent: recentDocs.length
-            });
         }
         
         // Search on Enter key
