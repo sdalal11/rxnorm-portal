@@ -1275,23 +1275,28 @@
         
         async function loadDocuments() {
             try {
+                console.log('🔍 Starting document loading process...');
+                
                 // First try to load from localStorage (for admin or users on same browser)
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                console.log(`📂 Found ${localDocuments.length} documents in localStorage`);
                 
                 if (localDocuments.length > 0) {
                     allDocuments = localDocuments;
                     filteredDocuments = [...allDocuments];
-                    console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name}`);
+                    console.log(`✅ Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name}`);
                     displayDocuments();
                     return;
                 }
 
                 // If no local documents, try to fetch from Azure
-                console.log('No local documents found, attempting to fetch from Azure...');
+                console.log('🌐 No local documents found, attempting to fetch from Azure...');
                 
                 const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+                console.log('🔧 Azure config found:', !!azureConfigData);
+                
                 if (!azureConfigData) {
-                    console.log('No Azure configuration available for document loading');
+                    console.log('❌ No Azure configuration available for document loading');
                     allDocuments = [];
                     filteredDocuments = [];
                     displayDocuments();
@@ -1299,26 +1304,31 @@
                 }
 
                 const azureConfig = JSON.parse(azureConfigData);
-                console.log('Using Azure config:', azureConfig);
+                console.log('🔧 Using Azure config for account:', azureConfig.storageAccount);
 
                 // Step 1: Try to load documents metadata (with pre-annotations) from Azure
                 let documentsMetadata = [];
                 try {
                     const metadataUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/documents-metadata.json${azureConfig.sasToken}`;
-                    console.log('📥 Loading documents metadata from Azure:', metadataUrl);
+                    console.log('📥 Loading documents metadata from:', metadataUrl);
                     
                     const metadataResponse = await fetch(metadataUrl, {
                         headers: { 'Cache-Control': 'no-cache' }
                     });
                     
+                    console.log('📥 Metadata response status:', metadataResponse.status);
+                    
                     if (metadataResponse.ok) {
                         documentsMetadata = await metadataResponse.json();
                         console.log(`✅ Loaded metadata for ${documentsMetadata.length} documents with pre-annotations`);
+                        documentsMetadata.forEach((doc, i) => {
+                            console.log(`📄 Doc ${i + 1}: ${doc.name} (${doc.preAnnotations?.length || 0} pre-annotations)`);
+                        });
                     } else {
-                        console.log('ℹ️ No metadata file found, will load documents without pre-annotations');
+                        console.log('ℹ️ No metadata file found (status: ' + metadataResponse.status + '), will load documents without pre-annotations');
                     }
                 } catch (error) {
-                    console.warn('⚠️ Failed to load metadata:', error);
+                    console.warn('⚠️ Failed to load metadata:', error.message);
                 }
 
                 // Step 2: Load current blob list from Azure
@@ -1344,22 +1354,31 @@
                 
                 // Construct the final URL
                 const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${sasParams.toString()}`;
-                console.log('Fetching blob list from Azure URL:', listUrl);
+                console.log('🔗 Fetching blob list from:', listUrl);
                 
                 const response = await fetch(listUrl);
-                console.log('Azure response status:', response.status);
+                console.log('📡 Azure blob list response status:', response.status);
                 
                 if (response.ok) {
                     const xmlText = await response.text();
-                    console.log('Azure XML response length:', xmlText.length);
+                    console.log('📄 Azure XML response length:', xmlText.length, 'characters');
                     
                     // Parse the XML response to extract blob names
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                     const blobs = xmlDoc.getElementsByTagName('Blob');
-                    console.log('Found blobs:', blobs.length);
+                    console.log(`📁 Found ${blobs.length} total blobs in container`);
+                    
+                    // Log first few blob names for debugging
+                    for (let i = 0; i < Math.min(5, blobs.length); i++) {
+                        const blob = blobs[i];
+                        const name = blob.getElementsByTagName('Name')[0]?.textContent;
+                        console.log(`🔍 Blob ${i + 1}: ${name}`);
+                    }
                     
                     const documents = [];
+                    let htmlFileCount = 0;
+                    
                     for (let i = 0; i < blobs.length; i++) {
                         const blob = blobs[i];
                         const name = blob.getElementsByTagName('Name')[0]?.textContent;
@@ -1367,6 +1386,9 @@
                         const size = blob.getElementsByTagName('Content-Length')[0]?.textContent;
                         
                         if (name && name.endsWith('.html')) {
+                            htmlFileCount++;
+                            console.log(`📋 Processing HTML file ${htmlFileCount}: ${name}`);
+                            
                             // Parse folder structure from blob name
                             const pathParts = name.split('/');
                             const filename = pathParts[pathParts.length - 1];
@@ -1406,19 +1428,20 @@
                         }
                     }
                     
-                    console.log(`Created ${documents.length} document objects from Azure blobs`);
+                    console.log(`📈 Created ${documents.length} document objects from ${htmlFileCount} HTML files`);
                     allDocuments = documents;
                     filteredDocuments = [...allDocuments];
                     
                     const totalPreAnnotations = documents.reduce((sum, doc) => sum + (doc.preAnnotations?.length || 0), 0);
-                    console.log(`✅ Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name} (${totalPreAnnotations} total pre-annotations)`);
+                    console.log(`✅ Final result: ${allDocuments.length} documents loaded for user: ${currentUser.name} (${totalPreAnnotations} total pre-annotations)`);
                 } else {
                     const errorText = await response.text();
-                    console.log('Failed to fetch document list from Azure:', response.status, errorText);
+                    console.log('❌ Failed to fetch document list from Azure:', response.status, errorText);
                     allDocuments = [];
                     filteredDocuments = [];
-                }            } catch (error) {
-                console.log('Error loading documents:', error);
+                }
+            } catch (error) {
+                console.log('❌ Error loading documents:', error);
                 allDocuments = [];
                 filteredDocuments = [];
             }
