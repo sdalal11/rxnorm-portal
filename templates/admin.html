@@ -925,6 +925,14 @@
                 // Save updated documents list
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
                 
+                // Also save to Azure for user portal access
+                try {
+                    await saveDocumentsMetadataToAzure();
+                    console.log('✅ Document metadata saved to Azure');
+                } catch (error) {
+                    console.warn('⚠️ Failed to save metadata to Azure:', error);
+                }
+                
                 document.getElementById('uploadProgress').style.display = 'none';
                 document.getElementById('uploadSuccess').style.display = 'block';
                 
@@ -1068,6 +1076,10 @@
             if (confirm('Are you sure you want to delete this document from Azure?')) {
                 documentsData = documentsData.filter(doc => doc.id != docId);
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
+                
+                // Update Azure metadata
+                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
+                
                 loadDocuments();
                 updateStats();
             }
@@ -1091,6 +1103,9 @@
                     documentsData = [];
                     localStorage.setItem('documentsData', JSON.stringify(documentsData));
                     
+                    // Update Azure metadata
+                    saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
+                    
                     // Update UI
                     loadDocuments();
                     updateStats();
@@ -1106,6 +1121,10 @@
             if (doc) {
                 doc.publicAccess = !doc.publicAccess;
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
+                
+                // Update Azure metadata
+                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
+                
                 loadDocuments();
             }
         }
@@ -1156,10 +1175,44 @@
             if (confirm('This will clear all simulated documents. Are you sure?')) {
                 documentsData = [];
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
+                
+                // Update Azure metadata
+                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
+                
                 loadDocuments();
                 updateStats();
                 alert('Cleared! Now you can upload real files to Azure.');
             }
+        }
+        
+        // Save documents metadata to Azure for user portal access
+        async function saveDocumentsMetadataToAzure() {
+            if (!azureConfig.isConnected) {
+                throw new Error('Azure not connected');
+            }
+            
+            const metadataBlob = new Blob([JSON.stringify(documentsData, null, 2)], {
+                type: 'application/json'
+            });
+            
+            const blobName = 'documents-metadata.json';
+            const uploadUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
+            
+            const response = await fetch(uploadUrl, {
+                method: 'PUT',
+                headers: {
+                    'x-ms-blob-type': 'BlockBlob',
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache'
+                },
+                body: metadataBlob
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Failed to upload metadata: ${response.status} ${response.statusText}`);
+            }
+            
+            console.log('📝 Documents metadata saved to Azure:', blobName);
         }
         
         // Initialize admin panel with pre-configured Azure settings

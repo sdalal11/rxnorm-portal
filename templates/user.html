@@ -1285,7 +1285,7 @@
                     displayDocuments();
                     return;
                 }
-                
+
                 // If no local documents, try to fetch from Azure
                 console.log('No local documents found, attempting to fetch from Azure...');
                 
@@ -1297,10 +1297,31 @@
                     displayDocuments();
                     return;
                 }
-                
+
                 const azureConfig = JSON.parse(azureConfigData);
                 console.log('Using Azure config:', azureConfig);
-                
+
+                // Step 1: Try to load documents metadata (with pre-annotations) from Azure
+                let documentsMetadata = [];
+                try {
+                    const metadataUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/documents-metadata.json${azureConfig.sasToken}`;
+                    console.log('📥 Loading documents metadata from Azure:', metadataUrl);
+                    
+                    const metadataResponse = await fetch(metadataUrl, {
+                        headers: { 'Cache-Control': 'no-cache' }
+                    });
+                    
+                    if (metadataResponse.ok) {
+                        documentsMetadata = await metadataResponse.json();
+                        console.log(`✅ Loaded metadata for ${documentsMetadata.length} documents with pre-annotations`);
+                    } else {
+                        console.log('ℹ️ No metadata file found, will load documents without pre-annotations');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Failed to load metadata:', error);
+                }
+
+                // Step 2: Load current blob list from Azure
                 // Clean the SAS token
                 let sasToken = azureConfig.sasToken;
                 if (sasToken.startsWith('?')) {
@@ -1323,7 +1344,7 @@
                 
                 // Construct the final URL
                 const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${sasParams.toString()}`;
-                console.log('Fetching from Azure URL:', listUrl);
+                console.log('Fetching blob list from Azure URL:', listUrl);
                 
                 const response = await fetch(listUrl);
                 console.log('Azure response status:', response.status);
@@ -1331,7 +1352,6 @@
                 if (response.ok) {
                     const xmlText = await response.text();
                     console.log('Azure XML response length:', xmlText.length);
-                    console.log('Azure XML response (first 500 chars):', xmlText.substring(0, 500));
                     
                     // Parse the XML response to extract blob names
                     const parser = new DOMParser();
@@ -1346,8 +1366,6 @@
                         const lastModified = blob.getElementsByTagName('Last-Modified')[0]?.textContent;
                         const size = blob.getElementsByTagName('Content-Length')[0]?.textContent;
                         
-                        console.log(`Blob ${i}:`, { name, lastModified, size });
-                        
                         if (name && name.endsWith('.html')) {
                             // Parse folder structure from blob name
                             const pathParts = name.split('/');
@@ -1359,37 +1377,47 @@
                             // Create proper originalPath for folder structure
                             const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
                             
-                            documents.push({
-                                id: Date.now() + i,
+                            // Step 3: Merge with metadata if available
+                            const existingDoc = documentsMetadata.find(doc => doc.blobName === name || doc.name === filename);
+                            
+                            const document = {
+                                id: existingDoc?.id || (Date.now() + i),
                                 name: filename,
                                 originalPath: originalPath,
                                 folderName: folderName,
                                 category: category,
-                                description: 'Document from Azure Storage',
-                                publicAccess: true,
+                                description: existingDoc?.description || 'Document from Azure Storage',
+                                publicAccess: existingDoc?.publicAccess !== undefined ? existingDoc.publicAccess : true,
                                 uploadDate: lastModified ? new Date(lastModified).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
                                 size: formatFileSize(parseInt(size) || 0),
                                 azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`,
                                 blobName: name,
                                 isFromFolder: isFromFolder,
-                                hasPreAnnotations: false,
-                                preAnnotations: []
-                            });
+                                // Preserve pre-annotations from metadata
+                                hasPreAnnotations: existingDoc?.hasPreAnnotations || false,
+                                preAnnotations: existingDoc?.preAnnotations || []
+                            };
+                            
+                            if (document.hasPreAnnotations && document.preAnnotations.length > 0) {
+                                console.log(`🤖 Document "${filename}" has ${document.preAnnotations.length} pre-annotations`);
+                            }
+                            
+                            documents.push(document);
                         }
                     }
                     
                     console.log(`Created ${documents.length} document objects from Azure blobs`);
                     allDocuments = documents;
                     filteredDocuments = [...allDocuments];
-                    console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
+                    
+                    const totalPreAnnotations = documents.reduce((sum, doc) => sum + (doc.preAnnotations?.length || 0), 0);
+                    console.log(`✅ Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name} (${totalPreAnnotations} total pre-annotations)`);
                 } else {
                     const errorText = await response.text();
                     console.log('Failed to fetch document list from Azure:', response.status, errorText);
                     allDocuments = [];
                     filteredDocuments = [];
-                }
-                
-            } catch (error) {
+                }            } catch (error) {
                 console.log('Error loading documents:', error);
                 allDocuments = [];
                 filteredDocuments = [];
