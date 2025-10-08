@@ -266,6 +266,36 @@ def parse_main_py_text_output(output):
 global_config = {}
 global_users = {}  # Store registered users
 
+# File-based persistence for user data
+USERS_FILE = 'users_data.json'
+
+def load_users():
+    """Load users from persistent storage"""
+    global global_users
+    try:
+        if os.path.exists(USERS_FILE):
+            with open(USERS_FILE, 'r') as f:
+                global_users = json.load(f)
+            print(f"✅ Loaded {len(global_users)} users from {USERS_FILE}")
+        else:
+            global_users = {}
+            print(f"📁 No existing users file found, starting fresh")
+    except Exception as e:
+        print(f"⚠️ Error loading users: {e}")
+        global_users = {}
+
+def save_users():
+    """Save users to persistent storage"""
+    try:
+        with open(USERS_FILE, 'w') as f:
+            json.dump(global_users, f, indent=2)
+        print(f"💾 Saved {len(global_users)} users to {USERS_FILE}")
+    except Exception as e:
+        print(f"⚠️ Error saving users: {e}")
+
+# Load users on startup
+load_users()
+
 # User management endpoints
 @app.route('/users/register', methods=['POST', 'OPTIONS'])
 def register_user():
@@ -305,6 +335,9 @@ def register_user():
             'registered_at': subprocess.run(['date'], capture_output=True, text=True).stdout.strip(),
             'last_login': None
         }
+        
+        # Save users to persistent storage
+        save_users()
         
         print(f"📝 User registered: {username} ({email})")
         print(f"📊 Total users: {len(global_users)}")
@@ -348,6 +381,9 @@ def login_user():
         
         # Update last login
         global_users[username]['last_login'] = subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
+        
+        # Save users to persistent storage
+        save_users()
         
         print(f"✅ User logged in: {username}")
         
