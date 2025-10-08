@@ -534,15 +534,12 @@
 
         .viewer-body {
             flex: 1;
-            display: flex;
-            overflow: hidden;
+            padding: 1.5rem;
+            overflow-y: auto;
             position: relative;
         }
 
         .document-content {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
             line-height: 1.6;
             font-size: 1rem;
             color: #333;
@@ -550,125 +547,6 @@
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
-        }
-
-        .annotations-sidebar {
-            width: 350px;
-            background: #f8f9fa;
-            border-left: 1px solid #dee2e6;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .annotations-header {
-            padding: 1rem;
-            border-bottom: 1px solid #dee2e6;
-            background: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .annotations-title {
-            font-weight: bold;
-            color: #333;
-            margin: 0;
-        }
-
-        .annotations-count {
-            background: #007bff;
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .annotations-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-
-        .annotation-item {
-            background: white;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-            padding: 0.75rem;
-            transition: all 0.2s;
-        }
-
-        .annotation-item:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-color: #007bff;
-        }
-
-        .annotation-text {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
-
-        .annotation-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .annotation-status {
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.7rem;
-        }
-
-        .status-active {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-inactive {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .status-pre-annotation {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .annotation-actions {
-            margin-top: 0.5rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-btn {
-            padding: 0.25rem 0.5rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .btn-toggle-active {
-            background: #28a745;
-            color: white;
-        }
-
-        .btn-toggle-inactive {
-            background: #dc3545;
-            color: white;
         }
 
         .document-body-content {
@@ -1047,8 +925,11 @@
                     <button class="annotation-btn btn-clear" onclick="clearSelection()">
                         Clear Selection
                     </button>
+                    <button class="annotation-btn" onclick="toggleAnnotationsPanel()" style="background: #17a2b8; color: white;">
+                        Show Annotations (<span id="annotationCount">0</span>)
+                    </button>
                     <button class="annotation-btn" onclick="saveAnnotations()" style="background: #28a745; color: white;">
-                        Save (<span id="annotationCount">0</span>)
+                        Save
                     </button>
                     <button class="annotation-btn btn-close" onclick="closeViewer()">
                         Close
@@ -1058,17 +939,6 @@
             <div class="viewer-body">
                 <div class="document-content" id="documentContent">
                     <!-- Document content will be loaded here -->
-                </div>
-                <div class="annotations-sidebar" id="annotationsSidebar">
-                    <div class="annotations-header">
-                        <h3 class="annotations-title">Annotations</h3>
-                        <span class="annotations-count" id="sidebarAnnotationCount">0</span>
-                    </div>
-                    <div class="annotations-content" id="annotationsContent">
-                        <div style="text-align: center; color: #666; padding: 2rem;">
-                            No annotations yet. Select text to create annotations.
-                        </div>
-                    </div>
                 </div>
                 <div class="selection-popup" id="selectionPopup">
                     <button class="btn-active" onclick="annotateSelection('active')">Active</button>
@@ -2473,23 +2343,12 @@
         //     list.innerHTML = html;
         // }
 
-        // Updated function to populate the sidebar annotations panel
+        // Replace the updateAnnotationsList function with this enhanced version that passes the full text:
         function updateAnnotationsList() {
-            const sidebarContent = document.getElementById('annotationsContent');
-            const countElement = document.getElementById('sidebarAnnotationCount');
-            const toolbarCountElement = document.getElementById('annotationCount');
-            
-            // Update counts
-            const totalCount = documentAnnotations.length;
-            countElement.textContent = totalCount;
-            toolbarCountElement.textContent = totalCount;
+            const list = document.getElementById('annotationsList');
             
             if (documentAnnotations.length === 0) {
-                sidebarContent.innerHTML = `
-                    <div style="text-align: center; color: #666; padding: 2rem;">
-                        No annotations yet. Select text to create annotations.
-                    </div>
-                `;
+                list.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No annotations yet</p>';
                 return;
             }
             
@@ -2502,56 +2361,57 @@
                 
                 // Escape quotes for onclick attribute
                 const escapedText = annotation.text.replace(/'/g, "\\'").replace(/"/g, '\\"');
-                const displayText = annotation.text.length > 40 ? 
-                    annotation.text.substring(0, 40) + '...' : 
+                const displayText = annotation.text.length > 50 ? 
+                    annotation.text.substring(0, 50) + '...' : 
                     annotation.text;
                 
                 html += `
-                    <div class="annotation-item" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer;">
+                    <div class="annotation-item" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
                         <div class="annotation-text" title="${annotation.text}">
-                            "${displayText}"
+                            <strong>"${displayText}"</strong>
                         </div>
-                        <div class="annotation-meta">
-                            <span>${sourceIcon} ${sourceText}${confidenceText}</span>
-                            <span class="annotation-status ${statusClass}">${annotation.status.toUpperCase()}</span>
+                        <div class="annotation-status ${statusClass}">${annotation.status.toUpperCase()}</div>
+                        <div style="font-size: 0.75rem; color: #999; margin-top: 0.25rem;">
+                            ${sourceIcon} ${sourceText}${confidenceText}
+                            <br>${new Date(annotation.timestamp).toLocaleString()}
+                            ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
                         </div>
-                        <div style="font-size: 0.7rem; color: #999; margin-top: 0.25rem;">
-                            ${new Date(annotation.timestamp).toLocaleDateString()}
-                            ${annotation.rxnorm_code ? ` • RxNorm: ${annotation.rxnorm_code}` : ''}
-                        </div>
-                        <div class="annotation-actions">
-                            ${annotation.isPreAnnotation ? `
+                        ${annotation.isPreAnnotation ? 
+                            `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
                                 <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'active')" 
-                                        class="action-btn ${annotation.status === 'active' ? 'btn-toggle-active' : 'btn-toggle-inactive'}"
-                                        title="Mark as Active">
+                                        style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'active' ? '#28a745' : '#6c757d'}; 
+                                            color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
                                     ${annotation.status === 'active' ? '✓ Active' : 'Set Active'}
                                 </button>
                                 <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'inactive')" 
-                                        class="action-btn ${annotation.status === 'inactive' ? 'btn-toggle-inactive' : 'btn-toggle-active'}"
-                                        title="Mark as Inactive">
+                                        style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'inactive' ? '#dc3545' : '#6c757d'}; 
+                                            color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
                                     ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
                                 </button>
                                 <button onclick="event.stopPropagation(); convertToUserAnnotation('${annotation.id}')" 
-                                        class="action-btn" style="background: #007bff; color: white;" title="Confirm AI Detection">
-                                    Confirm
+                                        style="padding: 0.25rem 0.5rem; background: #007bff; color: white; border: none; 
+                                            border-radius: 3px; font-size: 0.7rem; width: 100%; margin-top: 0.25rem;">
+                                    Confirm AI Detection
                                 </button>
-                            ` : `
+                            </div>` : 
+                            `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
                                 <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'inactive' : 'active'}')" 
-                                        class="action-btn ${annotation.status === 'active' ? 'btn-toggle-inactive' : 'btn-toggle-active'}" 
-                                        title="Toggle Status">
-                                    → ${annotation.status === 'active' ? 'Inactive' : 'Active'}
+                                        style="padding: 0.25rem 0.5rem; background: #6c757d; color: white; border: none; 
+                                            border-radius: 3px; font-size: 0.7rem; flex: 1;">
+                                    Change to ${annotation.status === 'active' ? 'Inactive' : 'Active'}
                                 </button>
                                 <button onclick="event.stopPropagation(); removeAnnotationById('${annotation.id}')" 
-                                        class="action-btn" style="background: #dc3545; color: white;" title="Remove Annotation">
+                                        style="padding: 0.25rem 0.5rem; background: #dc3545; color: white; border: none; 
+                                            border-radius: 3px; font-size: 0.7rem;">
                                     Remove
                                 </button>
-                            `}
-                        </div>
+                            </div>`
+                        }
                     </div>
                 `;
             });
             
-            sidebarContent.innerHTML = html;
+            list.innerHTML = html;
         }
 
         // Add this new function after the updateAnnotationsList function:
