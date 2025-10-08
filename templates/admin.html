@@ -827,15 +827,24 @@
                 // Check if this is a folder upload
                 const isFolderUpload = filesArray.some(file => file.webkitRelativePath);
                 
+                // Extract the root folder name for folder uploads
+                let rootFolderName = '';
+                if (isFolderUpload) {
+                    const firstFile = filesArray.find(file => file.webkitRelativePath);
+                    if (firstFile && firstFile.webkitRelativePath) {
+                        rootFolderName = firstFile.webkitRelativePath.split('/')[0];
+                        console.log(`📁 Detected folder upload: "${rootFolderName}" with ${filesArray.length} files`);
+                    }
+                }
+                
                 for (let file of filesArray) {
                     // Create unique blob name with timestamp
                     const timestamp = Date.now();
                     let blobName;
                     
                     if (isFolderUpload && file.webkitRelativePath) {
-                        // Preserve folder structure for folder uploads
-                        const folderPath = file.webkitRelativePath.replace(/^[^\/]+\//, ''); // Remove root folder name
-                        blobName = `${category}/${timestamp}_folder/${folderPath}`;
+                        // Preserve the original folder structure including the root folder name
+                        blobName = `${category}/${rootFolderName}/${file.webkitRelativePath.replace(/^[^\/]+\//, '')}`;
                     } else {
                         // Regular file upload
                         blobName = `${category}/${timestamp}_${file.name}`;
@@ -888,6 +897,7 @@
                         id: timestamp + uploadedCount,
                         name: displayName,
                         originalPath: file.webkitRelativePath || file.name,
+                        folderName: isFolderUpload ? rootFolderName : null, // Add folder name for organization
                         category: category,
                         description: description,
                         uploadDate: new Date().toISOString().split('T')[0],
@@ -919,10 +929,10 @@
                     .slice(-filesArray.length) // Get only the newly uploaded files
                     .reduce((sum, doc) => sum + (doc.preAnnotations ? doc.preAnnotations.length : 0), 0);
                 
-                const uploadTypeText = isFolderUpload ? '📁 Folder' : '📄 Files';
+                const uploadTypeText = isFolderUpload ? `📁 Folder "${rootFolderName}"` : '📄 Files';
                 document.getElementById('uploadSuccess').innerHTML = `
                     <strong>Upload completed successfully!</strong><br>
-                    ${uploadTypeText} ${filesArray.length} file(s) uploaded<br>
+                    ${uploadTypeText} - ${filesArray.length} file(s) uploaded<br>
                     🤖 ${totalPreAnnotations} medication(s) automatically detected<br>
                     ✨ Files are ready for annotation
                 `;
@@ -1015,7 +1025,7 @@
                     : '<span style="background: #dc3545; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem;">Admin Only</span>';
                 
                 const folderBadge = doc.isFromFolder 
-                    ? '<span style="background: #6f42c1; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">📁 Folder</span>'
+                    ? `<span style="background: #6f42c1; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">📁 ${doc.folderName || 'Folder'}</span>`
                     : '';
                 
                 const annotationsBadge = doc.hasPreAnnotations 
