@@ -1,0 +1,18 @@
+{
+  "file": "b6c21cb7-fc2a-4747-bdda-3f8b60fa9cb9.html",
+  "medications": [
+    {
+      "rx_cui": "1487518",
+      "normalized_name": "umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Anoro",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 23222,
+      "end_offset": 23227
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "file": "7c15237c-e656-4f1f-ba70-168ae6bb6e0f.html",
+  "medications": [
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 49796,
+      "end_offset": 49804
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 56492,
+      "end_offset": 56500
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 73533,
+      "end_offset": 73541
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 182309,
+      "end_offset": 182317
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 50837,
+      "end_offset": 50846
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 54838,
+      "end_offset": 54848
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 55866,
+      "end_offset": 55876
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 78616,
+      "end_offset": 78626
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 84629,
+      "end_offset": 84639
+    }
+  ]
+}

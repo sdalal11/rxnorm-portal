@@ -1,0 +1,109 @@
+{
+  "file": "078633b2-1c8e-4f31-93c7-f70a519933a8.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvediloL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16124,
+      "end_offset": 16134
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17312,
+      "end_offset": 17322
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "spironolactone",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17178,
+      "end_offset": 17192
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16136,
+      "end_offset": 16141
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "FARXIGA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16086,
+      "end_offset": 16093
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LASIX",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 17324,
+      "end_offset": 17329
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ENTRESTO",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 17095,
+      "end_offset": 17103
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ALDACTONE",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 17194,
+      "end_offset": 17203
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "file": "d190ad40-2730-478b-a318-26bcbeb14932.html",
+  "medications": [
+    {
+      "rx_cui": "703",
+      "normalized_name": "amiodarone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Amiodarone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7407,
+      "end_offset": 7417
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7811,
+      "end_offset": 7818
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Coreg",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7014,
+      "end_offset": 7019
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lasix",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7278,
+      "end_offset": 7283
+    }
+  ]
+}

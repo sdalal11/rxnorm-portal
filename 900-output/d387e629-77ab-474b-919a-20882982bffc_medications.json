@@ -1,0 +1,31 @@
+{
+  "file": "d387e629-77ab-474b-919a-20882982bffc.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8508,
+      "end_offset": 8518
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10562,
+      "end_offset": 10572
+    }
+  ]
+}

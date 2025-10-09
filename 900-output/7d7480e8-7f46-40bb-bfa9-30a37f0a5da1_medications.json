@@ -1,0 +1,122 @@
+{
+  "file": "7d7480e8-7f46-40bb-bfa9-30a37f0a5da1.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10049,
+      "end_offset": 10062
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17520,
+      "end_offset": 17533
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Empagliflozin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18329,
+      "end_offset": 18342
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 11389,
+      "end_offset": 11399
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17235,
+      "end_offset": 17245
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18002,
+      "end_offset": 18012
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Spironolactone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10902,
+      "end_offset": 10916
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Spironolactone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17276,
+      "end_offset": 17290
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Spironolactone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18050,
+      "end_offset": 18064
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "file": "a8018dfe-900a-41a4-ae88-5468649e5231.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16142,
+      "end_offset": 16153
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 39266,
+      "end_offset": 39277
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 40328,
+      "end_offset": 40339
+    }
+  ]
+}

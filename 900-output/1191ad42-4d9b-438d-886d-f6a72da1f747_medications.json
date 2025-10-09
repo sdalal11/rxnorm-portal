@@ -1,0 +1,122 @@
+{
+  "file": "1191ad42-4d9b-438d-886d-f6a72da1f747.html",
+  "medications": [
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9696,
+      "end_offset": 9703
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16235,
+      "end_offset": 16242
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17396,
+      "end_offset": 17403
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18011,
+      "end_offset": 18018
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8880,
+      "end_offset": 8888
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16361,
+      "end_offset": 16369
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16565,
+      "end_offset": 16573
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17658,
+      "end_offset": 17666
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18301,
+      "end_offset": 18309
+    }
+  ]
+}

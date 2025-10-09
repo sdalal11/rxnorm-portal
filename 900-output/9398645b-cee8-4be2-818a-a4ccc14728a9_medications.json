@@ -1,0 +1,57 @@
+{
+  "file": "9398645b-cee8-4be2-818a-a4ccc14728a9.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19716,
+      "end_offset": 19726
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 35349,
+      "end_offset": 35359
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "lopressor",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 30097,
+      "end_offset": 30106
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lopressor",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 30132,
+      "end_offset": 30141
+    }
+  ]
+}

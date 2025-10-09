@@ -1,0 +1,57 @@
+{
+  "file": "49779ffa-b05c-49a5-a355-6e8bf9740a59.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7469,
+      "end_offset": 7479
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8123,
+      "end_offset": 8130
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8423,
+      "end_offset": 8430
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13201,
+      "end_offset": 13210
+    }
+  ]
+}

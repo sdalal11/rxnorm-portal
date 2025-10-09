@@ -1,0 +1,57 @@
+{
+  "file": "a8790c39-1481-4a46-b886-c461d23c911c.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 22331,
+      "end_offset": 22341
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "spironolactone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 22881,
+      "end_offset": 22895
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 22343,
+      "end_offset": 22348
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ALDACTONE",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22897,
+      "end_offset": 22906
+    }
+  ]
+}

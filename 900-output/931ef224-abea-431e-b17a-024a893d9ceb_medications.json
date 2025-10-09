@@ -1,0 +1,109 @@
+{
+  "file": "931ef224-abea-431e-b17a-024a893d9ceb.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17395,
+      "end_offset": 17406
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18565,
+      "end_offset": 18576
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18647,
+      "end_offset": 18658
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 19754,
+      "end_offset": 19765
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24745,
+      "end_offset": 24756
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 25056,
+      "end_offset": 25067
+    },
+    {
+      "rx_cui": "10324",
+      "normalized_name": "tamoxifen",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "tamoxifen",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 26744,
+      "end_offset": 26753
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "coreg",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 24849,
+      "end_offset": 24854
+    }
+  ]
+}

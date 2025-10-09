@@ -1,0 +1,44 @@
+{
+  "file": "58335083-18c9-4446-a48c-f4f92d87df8c.html",
+  "medications": [
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9387,
+      "end_offset": 9394
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 15380,
+      "end_offset": 15387
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16479,
+      "end_offset": 16486
+    }
+  ]
+}

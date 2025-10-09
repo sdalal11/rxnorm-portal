@@ -1,0 +1,57 @@
+{
+  "file": "a765ed17-062d-40c0-9214-ec43b470eed7.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10054,
+      "end_offset": 10064
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10427,
+      "end_offset": 10435
+    },
+    {
+      "rx_cui": "352364",
+      "normalized_name": "buprenorphine / naloxone",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Suboxone",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 44008,
+      "end_offset": 44016
+    },
+    {
+      "rx_cui": "352364",
+      "normalized_name": "buprenorphine / naloxone",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Suboxone",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 44739,
+      "end_offset": 44747
+    }
+  ]
+}

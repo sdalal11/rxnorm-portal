@@ -1,0 +1,44 @@
+{
+  "file": "c8518c7f-c6e6-406d-8669-5494129b566c.html",
+  "medications": [
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8837,
+      "end_offset": 8845
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 26614,
+      "end_offset": 26622
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 27119,
+      "end_offset": 27127
+    }
+  ]
+}

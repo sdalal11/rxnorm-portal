@@ -1,0 +1,109 @@
+{
+  "file": "d22e6b55-e195-409e-bd8d-964c49673df7.html",
+  "medications": [
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "ATENOLOL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18090,
+      "end_offset": 18098
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18342,
+      "end_offset": 18351
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 23800,
+      "end_offset": 23809
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24263,
+      "end_offset": 24272
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24417,
+      "end_offset": 24426
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18677,
+      "end_offset": 18687
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "SINEMET",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18237,
+      "end_offset": 18244
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ARICEPT",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18353,
+      "end_offset": 18360
+    }
+  ]
+}

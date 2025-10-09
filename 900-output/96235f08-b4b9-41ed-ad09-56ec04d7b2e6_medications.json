@@ -1,0 +1,31 @@
+{
+  "file": "96235f08-b4b9-41ed-ad09-56ec04d7b2e6.html",
+  "medications": [
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Aricept",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8169,
+      "end_offset": 8176
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Aricept",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 32616,
+      "end_offset": 32623
+    }
+  ]
+}

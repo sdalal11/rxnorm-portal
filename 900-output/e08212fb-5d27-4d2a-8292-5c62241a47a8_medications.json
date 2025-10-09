@@ -1,0 +1,44 @@
+{
+  "file": "e08212fb-5d27-4d2a-8292-5c62241a47a8.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9126,
+      "end_offset": 9136
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10056,
+      "end_offset": 10063
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10510,
+      "end_offset": 10519
+    }
+  ]
+}

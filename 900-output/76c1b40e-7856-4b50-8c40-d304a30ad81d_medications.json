@@ -1,0 +1,18 @@
+{
+  "file": "76c1b40e-7856-4b50-8c40-d304a30ad81d.html",
+  "medications": [
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13630,
+      "end_offset": 13637
+    }
+  ]
+}

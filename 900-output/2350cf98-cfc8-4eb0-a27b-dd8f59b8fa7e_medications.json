@@ -1,0 +1,122 @@
+{
+  "file": "2350cf98-cfc8-4eb0-a27b-dd8f59b8fa7e.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 11028,
+      "end_offset": 11039
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19898,
+      "end_offset": 19909
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 23531,
+      "end_offset": 23542
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 25752,
+      "end_offset": 25763
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 52884,
+      "end_offset": 52895
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Arimidex",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11041,
+      "end_offset": 11049
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Arimidex",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 23544,
+      "end_offset": 23552
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Arimidex",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 25765,
+      "end_offset": 25773
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Arimidex",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 52897,
+      "end_offset": 52905
+    }
+  ]
+}

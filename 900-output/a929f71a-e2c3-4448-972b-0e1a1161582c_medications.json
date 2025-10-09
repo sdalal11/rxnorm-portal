@@ -1,0 +1,83 @@
+{
+  "file": "a929f71a-e2c3-4448-972b-0e1a1161582c.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9071,
+      "end_offset": 9078
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17683,
+      "end_offset": 17690
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21650,
+      "end_offset": 21657
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 37126,
+      "end_offset": 37133
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 37881,
+      "end_offset": 37888
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 52224,
+      "end_offset": 52231
+    }
+  ]
+}

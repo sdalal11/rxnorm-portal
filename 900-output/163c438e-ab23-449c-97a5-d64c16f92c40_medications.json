@@ -1,0 +1,83 @@
+{
+  "file": "163c438e-ab23-449c-97a5-d64c16f92c40.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 14584,
+      "end_offset": 14594
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21949,
+      "end_offset": 21959
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21096,
+      "end_offset": 21106
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LASIX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 14596,
+      "end_offset": 14601
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LASIX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21961,
+      "end_offset": 21966
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LOPRESSOR",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21117,
+      "end_offset": 21126
+    }
+  ]
+}

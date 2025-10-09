@@ -1,0 +1,109 @@
+{
+  "file": "c12ac2dc-ed88-4481-83df-70075042cf93.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "apixaban",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 12416,
+      "end_offset": 12424
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 12476,
+      "end_offset": 12486
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 12617,
+      "end_offset": 12627
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 12649,
+      "end_offset": 12659
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ELIQUIS",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12426,
+      "end_offset": 12433
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12447,
+      "end_offset": 12454
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12488,
+      "end_offset": 12493
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LASIX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12629,
+      "end_offset": 12634
+    }
+  ]
+}

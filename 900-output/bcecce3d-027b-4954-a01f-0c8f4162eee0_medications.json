@@ -1,0 +1,83 @@
+{
+  "file": "bcecce3d-027b-4954-a01f-0c8f4162eee0.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7953,
+      "end_offset": 7962
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13482,
+      "end_offset": 13491
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 14928,
+      "end_offset": 14937
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22263,
+      "end_offset": 22272
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22636,
+      "end_offset": 22645
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 26528,
+      "end_offset": 26537
+    }
+  ]
+}

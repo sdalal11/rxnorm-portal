@@ -1,0 +1,70 @@
+{
+  "file": "e8ec3370-7935-436b-a645-c4da90b30659.html",
+  "medications": [
+    {
+      "rx_cui": "703",
+      "normalized_name": "amiodarone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "amiodarone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8836,
+      "end_offset": 8846
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "apixaban",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9155,
+      "end_offset": 9163
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 11041,
+      "end_offset": 11051
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10312,
+      "end_offset": 10319
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Narcan",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11361,
+      "end_offset": 11367
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "file": "c05ac9c9-35ca-440f-ab50-87bce9cfa33c.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16824,
+      "end_offset": 16834
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17303,
+      "end_offset": 17311
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 28723,
+      "end_offset": 28731
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "file": "59d62b2b-bf36-4a26-bd59-8ba1f45cc52e.html",
+  "medications": [
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8316,
+      "end_offset": 8325
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8162,
+      "end_offset": 8172
+    }
+  ]
+}

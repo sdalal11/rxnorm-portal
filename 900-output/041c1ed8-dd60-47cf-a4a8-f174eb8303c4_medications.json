@@ -1,0 +1,122 @@
+{
+  "file": "041c1ed8-dd60-47cf-a4a8-f174eb8303c4.html",
+  "medications": [
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24598,
+      "end_offset": 24608
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8053,
+      "end_offset": 8059
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 21355,
+      "end_offset": 21361
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 21446,
+      "end_offset": 21452
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22188,
+      "end_offset": 22194
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22237,
+      "end_offset": 22243
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 22365,
+      "end_offset": 22371
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lupron",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 22581,
+      "end_offset": 22587
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LUPRON",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 24610,
+      "end_offset": 24616
+    }
+  ]
+}

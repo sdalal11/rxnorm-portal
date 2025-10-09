@@ -1,0 +1,31 @@
+{
+  "file": "c69ebddf-31e9-4225-99ca-ce3ce128a0ee.html",
+  "medications": [
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "SPIRIVA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18845,
+      "end_offset": 18852
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "SPIRIVA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 25636,
+      "end_offset": 25643
+    }
+  ]
+}

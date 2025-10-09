@@ -1,0 +1,57 @@
+{
+  "file": "833cdc2f-0951-4127-b273-e91504791d3c.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 115765,
+      "end_offset": 115775
+    },
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 148841,
+      "end_offset": 148848
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 149904,
+      "end_offset": 149911
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 141856,
+      "end_offset": 141863
+    }
+  ]
+}

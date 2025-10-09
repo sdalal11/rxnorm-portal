@@ -1,0 +1,18 @@
+{
+  "file": "548c6090-5642-4574-b238-a5171f0733da.html",
+  "medications": [
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Atenolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8498,
+      "end_offset": 8506
+    }
+  ]
+}

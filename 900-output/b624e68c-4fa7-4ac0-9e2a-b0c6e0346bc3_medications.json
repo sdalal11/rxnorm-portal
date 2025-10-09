@@ -1,0 +1,109 @@
+{
+  "file": "b624e68c-4fa7-4ac0-9e2a-b0c6e0346bc3.html",
+  "medications": [
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20092,
+      "end_offset": 20102
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 23745,
+      "end_offset": 23755
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24804,
+      "end_offset": 24814
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 25106,
+      "end_offset": 25116
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 25937,
+      "end_offset": 25947
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "rivaroxaban",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20562,
+      "end_offset": 20573
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "TAMBOCOR",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20104,
+      "end_offset": 20112
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20575,
+      "end_offset": 20582
+    }
+  ]
+}

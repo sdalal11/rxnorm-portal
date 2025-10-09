@@ -1,0 +1,5 @@
+# Google Cloud DLP API requirements
+google-cloud-dlp>=3.12.0
+google-auth>=2.17.0
+google-auth-oauthlib>=0.8.0
+google-auth-httplib2>=0.1.0

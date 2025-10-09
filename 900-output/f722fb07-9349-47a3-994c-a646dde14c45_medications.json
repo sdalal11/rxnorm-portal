@@ -1,0 +1,44 @@
+{
+  "file": "f722fb07-9349-47a3-994c-a646dde14c45.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 7991,
+      "end_offset": 8001
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 7845,
+      "end_offset": 7855
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7429,
+      "end_offset": 7436
+    }
+  ]
+}

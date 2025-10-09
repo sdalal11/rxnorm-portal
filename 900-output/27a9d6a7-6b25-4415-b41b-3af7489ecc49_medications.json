@@ -1,0 +1,96 @@
+{
+  "file": "27a9d6a7-6b25-4415-b41b-3af7489ecc49.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18630,
+      "end_offset": 18641
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20133,
+      "end_offset": 20144
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20424,
+      "end_offset": 20435
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 22648,
+      "end_offset": 22659
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20670,
+      "end_offset": 20680
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ARIMIDEX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20437,
+      "end_offset": 20445
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20682,
+      "end_offset": 20687
+    }
+  ]
+}

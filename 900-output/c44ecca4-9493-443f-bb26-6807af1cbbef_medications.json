@@ -1,0 +1,44 @@
+{
+  "file": "c44ecca4-9493-443f-bb26-6807af1cbbef.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "apixaban",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13944,
+      "end_offset": 13952
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ELIQUIS",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13954,
+      "end_offset": 13961
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "SINEMET",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13253,
+      "end_offset": 13260
+    }
+  ]
+}

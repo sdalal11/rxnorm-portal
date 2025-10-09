@@ -1,0 +1,57 @@
+{
+  "file": "7d7d2f41-fcf5-4a68-ac4f-a368e113983c.html",
+  "medications": [
+    {
+      "rx_cui": "19484",
+      "normalized_name": "bisoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "bisoprolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 12255,
+      "end_offset": 12265
+    },
+    {
+      "rx_cui": "4441",
+      "normalized_name": "flecainide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "flecainide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13527,
+      "end_offset": 13537
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Lasix",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 14173,
+      "end_offset": 14178
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 13236,
+      "end_offset": 13244
+    }
+  ]
+}

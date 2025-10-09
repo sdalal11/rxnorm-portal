@@ -1,0 +1,44 @@
+{
+  "file": "5a887321-fab4-4f09-9f0e-93aa97f91045.html",
+  "medications": [
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 14169,
+      "end_offset": 14176
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12492,
+      "end_offset": 12498
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 13771,
+      "end_offset": 13777
+    }
+  ]
+}

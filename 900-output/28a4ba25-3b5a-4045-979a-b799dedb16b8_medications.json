@@ -1,0 +1,57 @@
+{
+  "file": "28a4ba25-3b5a-4045-979a-b799dedb16b8.html",
+  "medications": [
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenoloL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18525,
+      "end_offset": 18533
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenoloL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 25176,
+      "end_offset": 25184
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "TENORMIN",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18535,
+      "end_offset": 18543
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "TENORMIN",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 25186,
+      "end_offset": 25194
+    }
+  ]
+}

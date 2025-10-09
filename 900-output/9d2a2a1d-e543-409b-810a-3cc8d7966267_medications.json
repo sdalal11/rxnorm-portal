@@ -1,0 +1,109 @@
+{
+  "file": "9d2a2a1d-e543-409b-810a-3cc8d7966267.html",
+  "medications": [
+    {
+      "rx_cui": "703",
+      "normalized_name": "amiodarone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "amiodarone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 56557,
+      "end_offset": 56567
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 52313,
+      "end_offset": 52323
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 53333,
+      "end_offset": 53343
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 54417,
+      "end_offset": 54427
+    },
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 89700,
+      "end_offset": 89707
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 86630,
+      "end_offset": 86638
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 87658,
+      "end_offset": 87666
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 88697,
+      "end_offset": 88705
+    }
+  ]
+}

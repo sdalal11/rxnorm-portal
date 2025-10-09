@@ -1,0 +1,109 @@
+{
+  "file": "8de8f082-f4c1-42f8-b643-ba6b52e3db04.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9556,
+      "end_offset": 9566
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24259,
+      "end_offset": 24269
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 37178,
+      "end_offset": 37188
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 43045,
+      "end_offset": 43055
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 11513,
+      "end_offset": 11523
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "FUROSEMIDE",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 35996,
+      "end_offset": 36006
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 38970,
+      "end_offset": 38980
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "METOPROLOL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 35970,
+      "end_offset": 35980
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "file": "70849abe-2026-4e0b-bae4-575b29255c89.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 12519,
+      "end_offset": 12529
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 27423,
+      "end_offset": 27433
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Spironolactone",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 12818,
+      "end_offset": 12832
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 11924,
+      "end_offset": 11931
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 26476,
+      "end_offset": 26483
+    },
+    {
+      "rx_cui": "1037042",
+      "normalized_name": "dabigatran etexilate",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Pradaxa",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 26438,
+      "end_offset": 26445
+    }
+  ]
+}

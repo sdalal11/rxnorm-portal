@@ -1,0 +1,1513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:in="urn:lantana-com:inline-variable-data" xmlns:sdtc="urn:hl7-org:sdtc"><head>
+<meta charset="utf-8"><!-- Do NOT edit this HTML directly: it was generated via an XSLT transformation from a CDA Release 2 XML document. --><title>Data Portability</title><style type="text/css">
+body {
+  color: #003366;
+  background-color: #FFFFFF;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #003366;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #ffd700;
+}
+
+td {
+  padding: 0.1cm 0.2cm;
+  vertical-align: top;
+  background-color: #ffffcc;
+}
+
+.h1center {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.header_table{
+  border: 1pt inset #00008b;
+}
+
+.td_label{
+  font-weight: bold;
+  color: white;
+}
+
+.content_span{
+ font-family: Verdana, Tahoma, sans-serif;
+ display: inline;
+ white-space: pre-line;
+}
+
+.td_header_role_name{
+  width: 20%;
+  background-color: #3399ff;
+}
+
+.td_header_role_value{
+  width: 80%;
+  background-color: #ccccff;
+}
+
+.Bold{
+  font-weight: bold;
+}
+
+.Italics{
+  font-style: italic;
+}
+
+.Underline{
+  text-decoration:underline;
+}
+
+.internal_format
+{
+	list-style: none;
+	list-style-position:outside;
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+          </style></head><body><h1 class="h1center">Data Portability</h1><table class="header_table"><tr><td class="td_header_role_name"><span class="td_label">Patient</span></td><td class="td_header_role_value">Marguerite Jenkins</td></tr><tr><td class="td_header_role_name"><span class="td_label">Date of birth</span></td><td class="td_header_role_value">August 12, 1942 </td></tr><tr><td class="td_header_role_name"><span class="td_label">Current Gender</span></td><td class="td_header_role_value">Female</td></tr><tr><td class="td_header_role_name"><span class="td_label">Race(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>No Information</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Ethnicity</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>No Information</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Language(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>English</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Primary Home Address:<br/>4000 TREE TOP CIRCLE<br/>SPRING HILL, FL 34606, USA<br/>Effective Date: December 16, 2023 <br/><br/> Postal Address:<br/>4000 TREE TOP CIRCLE<br/>SPRING HILL, FL 34606, USA<br/>Effective Date: December 16, 2023 <br/><br/>Primary Home Phone:  +1-(352) 688-2668<br/>Mobile Phone:  +1-(352) 688-2668<br/></td></tr><tr><td class="td_header_role_name"><span class="td_label">Patient IDs</span></td><td class="td_header_role_value">a-30220.E-83003 2.16.840.1.113883.3.564<br/>000000000 2.16.840.1.113883.4.1<br/></td></tr></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document Id</span></td><td class="td_header_role_value"> 7f2ce9ca-e791-44a7-b3c5-dfba7bcb1b42</td></tr><tr><td class="td_header_role_name"><span class="td_label">Document Created:</span></td><td class="td_header_role_value">September 30, 2024, 13:50:43, EST </td></tr></tbody></table><table class="header_table"><tbody/></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Author</span></td><td class="td_header_role_value">Document Generation Engine</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document maintained by</span></td><td class="td_header_role_value">athenahealth</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><h2><a name="toc">Table of Contents</a></h2><ul><li><a href="#id1">Assessment</a></li><li><a href="#id2">Plan of Treatment</a></li><li><a href="#id3">Reason for Referral</a></li><li><a href="#id4">Results</a></li><li><a href="#id5">Problems</a></li><li><a href="#id6">Procedures</a></li><li><a href="#id7">Medical Equipment</a></li><li><a href="#id8">Allergies</a></li><li><a href="#id9">Medications</a></li><li><a href="#id10">Vitals</a></li><li><a href="#id11">Social History</a></li><li><a href="#id12">Functional Status</a></li><li><a href="#id13">Mental Status</a></li><li><a href="#id14">Family History</a></li><li><a href="#id15">Medical History</a></li><li><a href="#id16">Immunizations</a></li><li><a href="#id17">Past Encounters</a></li><li><a href="#id18">Goals Section</a></li><li><a href="#id19">Health Concerns Section</a></li><li><a href="#id20">Advance Directives</a></li><li><a href="#id21">Payers</a></li><li><a href="#id22">Notes</a></li><li><a href="#id23">OBGyn Episode</a></li></ul><hr align="left" color="teal" size="2"/><h3><a name="id1" href="#toc">Assessment</a></h3><div>
+                        <p>No assessment recorded.</p>
+                    </div><h3><a name="id2" href="#toc">Plan of Treatment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reminders</th>
+                                    <th/>
+                                    <th>Order Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Provider</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Appointments</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Lab</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Referral</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">wound care referral</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/16/2023
+  </td>
+                                    <td class="Botrule">
+    
+      12/16/2023
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">amcgurl</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">12/17/2023 09:12:53</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Procedures</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Surgeries</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Imaging</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Medication Orders</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">cephalexin 500 mg capsule</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/16/2023
+  </td>
+                                    <td class="Botrule">
+    
+      12/16/2023
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Walgreens Drug Store #04289, 4255 Commercial Way, Spring Hill, FL, 346062326, Ph (352) 597-7504</td>
+                                    <td class="Botrule">12/16/2023 12:50:49</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">mupirocin 2 % topical ointment</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/16/2023
+  </td>
+                                    <td class="Botrule">
+    
+      12/16/2023
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Walgreens Drug Store #04289, 4255 Commercial Way, Spring Hill, FL, 346062326, Ph (352) 597-7504</td>
+                                    <td class="Botrule">12/16/2023 12:50:48</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Patient Targets</span>
+                        <span class="content_span">No targets recorded.</span>
+                        <br/>
+                        <span class="content_span">Patient Instructions</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Encounter Id</th>
+                                    <th>Patient Instructions</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule">957268</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Keep area clean and dry. Return to clinic as needed. Follow up with wound care specialist for further management of pressure wounds.</span>
+                                    </td>
+                                    <td class="Botrule">tstanley36</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">12/16/2023 16:25:48</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id3" href="#toc">Reason for Referral</a></h3><div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        Referring Physician: Tabitha Stanley, Urgent Care, (352) 606-2710
+                                        <br/>
+                                        Encounter Date: 12/16/2023
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id4" href="#toc">Results</a></h3><div>
+                        <p>
+                            <span class="content_span">None recorded.</span>
+                        </p>
+                    </div><h3><a name="id5" href="#toc">Problems</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Problem SNOMED Code</th>
+                                    <th>Status</th>
+                                    <th>Onset Date</th>
+                                    <th>Resolution Date</th>
+                                    <th>Notes</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Seizure</span>
+                                    </td>
+                                    <td class="Botrule">91175000</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:10:48</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Dementia</span>
+                                    </td>
+                                    <td class="Botrule">52448006</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:10:59</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Hypertensive disorder</span>
+                                    </td>
+                                    <td class="Botrule">38341003</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:11:05</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Neuropathy</span>
+                                    </td>
+                                    <td class="Botrule">386033004</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:11:20</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Parkinsonism</span>
+                                    </td>
+                                    <td class="Botrule">32798002</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:11:32</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Anxiety</span>
+                                    </td>
+                                    <td class="Botrule">48694002</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:11:49</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Depressive disorder</span>
+                                    </td>
+                                    <td class="Botrule">35489007</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:11:59</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Hypercholesterolemia</span>
+                                    </td>
+                                    <td class="Botrule">13644009</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Ashley Mcgurl, CMA
+            
+              
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:12:09</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Problem Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id6" href="#toc">Procedures</a></h3><div>
+                        <span class="content_span">Surgical History</span>
+                        <p>None recorded.</p>
+                        <br/>
+                        <span class="content_span">Imaging Results</span>
+                        <p>None recorded.</p>
+                        <br/>
+                        <span class="content_span">Procedure Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id7" href="#toc">Medical Equipment</a></h3><div>
+      None Reported.
+      </div><h3><a name="id8" href="#toc">Allergies</a></h3><div>
+    
+      
+        No information
+      
+    
+  </div><h3><a name="id9" href="#toc">Medications</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sig</th>
+                                    <th>Start Date</th>
+                                    <th>Stop Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    quetiapine 25 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY AT BEDTIME</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    furosemide 40 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1/2 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    silver sulfadiazine 1 % topical cream
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">APPLY TOPICALLY TO WOUND TWICE DAILY UNTIL HEALED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    propafenone 150 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY 8 HOURS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    primidone 50 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1/2 TABLET BY MOUTH EVERY DAY AT NIGHT</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    doxycycline hyclate 100 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    azithromycin 250 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 2 TABLETS BY MOUTH FOR 1 DAY THEN TAKE 1 TABLET BY MOUTH EVERY DAY FOR 5 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    donepezil 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY NIGHT AT BEDTIME</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    prednisone 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE ONE TABLET ONCE A DAY FOR 3 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    olanzapine 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1/2 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    atenolol 25 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    olanzapine 2.5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH AT BEDTIME</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    hydrocodone 10 mg-acetaminophen 325 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    aspirin 81 mg tablet,delayed release
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    tramadol 50 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 2 TABLETS BY MOUTH THREE TIMES DAILY AS NEEDED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    amoxicillin 875 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY FOR 10 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    potassium chloride ER 20 mEq tablet,extended release(part/cryst)
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lorazepam 0.5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY FOR 5 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    temazepam 30 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH EVERY DAY AT BEDTIME AS NEEDED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    cephalexin 500 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH EVERY 8 HOURS FOR 10 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    metoprolol tartrate 50 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY WITH FOOD</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    oxybutynin chloride ER 5 mg tablet,extended release 24 hr
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    gabapentin 300 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH EVERY DAY FOR 3 DAYS THEN TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    montelukast 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    mupirocin 2 % topical ointment
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">APPLY SMALL AMOUNT TOPICALLY TO THE AFFECTED AREA 2 TO 3 TIMES PER DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    furosemide 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lovastatin 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY WITH THE EVENING MEAL</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    methylprednisolone 4 mg tablets in a dose pack
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">FOLLOW PACKAGE DIRECTIONS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    sodium polystyrene sulfonate oral powder
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 30 GM BY MOUTH ONCE TODAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    carbidopa 25 mg-levodopa 100 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH THREE TIMES DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    cefdinir 300 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    atenolol 50 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    loratadine 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    propafenone ER 225 mg capsule,extended release 12 hr
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    duloxetine 30 mg capsule,delayed release
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE ONE CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    duloxetine 60 mg capsule,delayed release
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    pregabalin 50 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    pregabalin 100 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH TWICE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    pregabalin 150 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 CAPSULE BY MOUTH THREE TIMES DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/16/2023</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    FeroSul 325 mg (65 mg iron) tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Eliquis 2.5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH TWICE DAILY.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id10" href="#toc">Vitals</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Heart rate</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Body temperature</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">162.56 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">22.3 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">58967.01 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">60 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">97.1 [degF]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">86 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">40 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Ashley Mcgurl, CMA
+                        
+                      </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 12:22:31</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id11" href="#toc">Social History</a></h3><div>
+      
+        None recorded.
+      
+    </div><h3><a name="id12" href="#toc">Functional Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id13" href="#toc">Mental Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id14" href="#toc">Family History</a></h3><div>
+    Nothing Reported.
+    </div><h3><a name="id15" href="#toc">Medical History</a></h3><div>
+                              
+        No medical history recorded.
+      
+      
+        
+                        <p/>
+                        <span class="content_span">Gynecological History</span>
+                                
+          No gynecological history recorded.
+        
+        
+                        <p/>
+                        <span class="content_span">Obstetrics History</span>
+                        <p>
+                            <span class="Bold">GPAL: </span>
+                            G 0 P 0 0 0 0
+                        </p>
+                    </div><h3><a name="id16" href="#toc">Immunizations</a></h3><div>
+    
+      None recorded.
+      </div><h3><a name="id17" href="#toc">Past Encounters</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter ID</th>
+                                    <th>Performer</th>
+                                    <th>Location</th>
+                                    <th>Encounter Start Date</th>
+                                    <th>Encounter Closed Date</th>
+                                    <th>Diagnosis/Indication</th>
+                                    <th>Diagnosis SNOMED-CT Code</th>
+                                    <th>Diagnosis ICD10 Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">957268</span>
+                                    </td>
+                                    <td class="Botrule">TABITHA STANLEY, PA </td>
+                                    <td class="Botrule">
+                                        BUC_BRAVERA  URGENT CARE
+                              
+                                        <p>2703 FOREST RD</p>
+                                        <p>SPRING HILL, FL 34606-3377</p>
+                                    </td>
+                                    <td class="Botrule">12/16/2023 11:47:54</td>
+                                    <td class="Botrule">12/16/2023 13:03:27</td>
+                                    <td class="Botrule">Pressure injury of buttock</td>
+                                    <td class="Botrule">225563000</td>
+                                    <td class="Botrule">
+                                        L89.309
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id18" href="#toc">Goals Section</a></h3><div>
+    
+      None Recorded
+    
+    </div><h3><a name="id19" href="#toc">Health Concerns Section</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Related Observation</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concern</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id20" href="#toc">Advance Directives</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Directive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id21" href="#toc">Payers</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Sequence</th>
+                                    <th>Insurance Name</th>
+                                    <th>Policy Number</th>
+                                    <th>Policy Holder</th>
+                                    <th>Covered Member ID</th>
+                                    <th>Holder Member ID</th>
+                                    <th>Guarantor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">OPTIMUM HEALTHCARE PLATINUM PLAN (MEDICARE REPLACEMENT HMO)</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Marguerite  Jenkins</td>
+                                    <td class="Botrule">T0002247901</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Marguerite  Jenkins</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id22" href="#toc">Notes</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note Type</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/16/2023</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes1" class="Botrule">HPI Notes: 81 year old female with PMH of parskinsonism, dementia, chronic back pain presents with tender rash/ sore on buttock onset 2 months ago. Pt reports bleeding this morning. P has difficulty ambulating and is usually sedentary so she sits most of the day.</td>
+                                    <td class="Botrule">
+                                        TABITHA STANLEY, PA
+              
+                
+                                        <p> 409 Bayshore Blvd,   Tampa,  </p>
+                                        <p> FL,   33606-2707, US </p>
+                                    </td>
+                                    <td class="Botrule">FL - Brooksville, Spring Hill, Crystal R </td>
+                                    <td class="Botrule">12/16/2023 16:26:25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id23" href="#toc">OBGyn Episode</a></h3><div>
+                        <p>No OBEpisode recorded.</p>
+                    </div><br/><br/></body></html>

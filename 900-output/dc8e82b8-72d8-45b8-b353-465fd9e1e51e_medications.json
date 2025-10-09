@@ -1,0 +1,44 @@
+{
+  "file": "dc8e82b8-72d8-45b8-b353-465fd9e1e51e.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 138800,
+      "end_offset": 138807
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "coumadin",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 139452,
+      "end_offset": 139460
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jantoven",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 118514,
+      "end_offset": 118522
+    }
+  ]
+}

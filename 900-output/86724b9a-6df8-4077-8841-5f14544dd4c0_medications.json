@@ -1,0 +1,31 @@
+{
+  "file": "86724b9a-6df8-4077-8841-5f14544dd4c0.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10183,
+      "end_offset": 10193
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24979,
+      "end_offset": 24989
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "file": "cf467f51-3f5a-472a-b3b9-f86212bc37cd.html",
+  "medications": [
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9014,
+      "end_offset": 9024
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13855,
+      "end_offset": 13865
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21369,
+      "end_offset": 21379
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21631,
+      "end_offset": 21641
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Leuprolide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 28522,
+      "end_offset": 28532
+    }
+  ]
+}

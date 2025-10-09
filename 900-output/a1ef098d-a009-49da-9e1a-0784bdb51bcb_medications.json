@@ -1,0 +1,18 @@
+{
+  "file": "a1ef098d-a009-49da-9e1a-0784bdb51bcb.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 6666,
+      "end_offset": 6673
+    }
+  ]
+}

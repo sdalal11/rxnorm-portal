@@ -1,0 +1,31 @@
+{
+  "file": "e33deb93-56c1-46ac-bcb7-40125cdcd38c.html",
+  "medications": [
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "trelegy",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 19663,
+      "end_offset": 19670
+    },
+    {
+      "rx_cui": "1487518",
+      "normalized_name": "umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "anoro",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 19610,
+      "end_offset": 19615
+    }
+  ]
+}

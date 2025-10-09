@@ -1,0 +1,83 @@
+{
+  "file": "9e799fb3-fa02-4eab-a0d0-7f99a0d9f66b.html",
+  "medications": [
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7924,
+      "end_offset": 7931
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10082,
+      "end_offset": 10089
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11408,
+      "end_offset": 11415
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12131,
+      "end_offset": 12138
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21408,
+      "end_offset": 21415
+    },
+    {
+      "rx_cui": "1658460",
+      "normalized_name": "olodaterol / tiotropium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "stiolto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21859,
+      "end_offset": 21866
+    }
+  ]
+}

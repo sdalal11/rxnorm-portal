@@ -1,0 +1,44 @@
+{
+  "file": "fcc42d54-6607-457a-9ac3-4d9b0a87a39c.html",
+  "medications": [
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19138,
+      "end_offset": 19147
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20519,
+      "end_offset": 20528
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 24631,
+      "end_offset": 24640
+    }
+  ]
+}

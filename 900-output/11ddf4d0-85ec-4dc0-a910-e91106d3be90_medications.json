@@ -1,0 +1,83 @@
+{
+  "file": "11ddf4d0-85ec-4dc0-a910-e91106d3be90.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 25194,
+      "end_offset": 25205
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 25244,
+      "end_offset": 25255
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 29421,
+      "end_offset": 29432
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 31374,
+      "end_offset": 31385
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ARIMIDEX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 31387,
+      "end_offset": 31395
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 32485,
+      "end_offset": 32492
+    }
+  ]
+}

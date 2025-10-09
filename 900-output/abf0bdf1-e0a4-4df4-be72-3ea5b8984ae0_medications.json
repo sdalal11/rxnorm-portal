@@ -1,0 +1,83 @@
+{
+  "file": "abf0bdf1-e0a4-4df4-be72-3ea5b8984ae0.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9214,
+      "end_offset": 9224
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 31655,
+      "end_offset": 31665
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 32564,
+      "end_offset": 32574
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12683,
+      "end_offset": 12690
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 19183,
+      "end_offset": 19190
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 35175,
+      "end_offset": 35182
+    }
+  ]
+}

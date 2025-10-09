@@ -1,0 +1,18 @@
+{
+  "file": "b44e6999-2823-4f98-a8d7-cf25c1202bd8.html",
+  "medications": [
+    {
+      "rx_cui": "352364",
+      "normalized_name": "buprenorphine / naloxone",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Suboxone",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21963,
+      "end_offset": 21971
+    }
+  ]
+}

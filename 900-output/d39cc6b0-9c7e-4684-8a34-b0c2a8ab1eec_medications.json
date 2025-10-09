@@ -1,0 +1,83 @@
+{
+  "file": "d39cc6b0-9c7e-4684-8a34-b0c2a8ab1eec.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16218,
+      "end_offset": 16228
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16570,
+      "end_offset": 16580
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "SINEMET",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16135,
+      "end_offset": 16142
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16230,
+      "end_offset": 16235
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16791,
+      "end_offset": 16800
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LASIX",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16582,
+      "end_offset": 16587
+    }
+  ]
+}

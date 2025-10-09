@@ -1,0 +1,83 @@
+{
+  "file": "30b363fc-31d8-4f39-acea-4170eb77935c.html",
+  "medications": [
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7827,
+      "end_offset": 7836
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8229,
+      "end_offset": 8238
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13914,
+      "end_offset": 13923
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Rivastigmine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7544,
+      "end_offset": 7556
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Rivastigmine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8101,
+      "end_offset": 8113
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "rivastigmine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13929,
+      "end_offset": 13941
+    }
+  ]
+}

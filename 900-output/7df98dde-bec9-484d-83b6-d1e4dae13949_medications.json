@@ -1,0 +1,31 @@
+{
+  "file": "7df98dde-bec9-484d-83b6-d1e4dae13949.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8683,
+      "end_offset": 8693
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8211,
+      "end_offset": 8218
+    }
+  ]
+}

@@ -1,0 +1,1778 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:in="urn:lantana-com:inline-variable-data" xmlns:sdtc="urn:hl7-org:sdtc"><head>
+<meta charset="utf-8"><!-- Do NOT edit this HTML directly: it was generated via an XSLT transformation from a CDA Release 2 XML document. --><title>Data Portability</title><style type="text/css">
+body {
+  color: #003366;
+  background-color: #FFFFFF;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #003366;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #ffd700;
+}
+
+td {
+  padding: 0.1cm 0.2cm;
+  vertical-align: top;
+  background-color: #ffffcc;
+}
+
+.h1center {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.header_table{
+  border: 1pt inset #00008b;
+}
+
+.td_label{
+  font-weight: bold;
+  color: white;
+}
+
+.content_span{
+ font-family: Verdana, Tahoma, sans-serif;
+ display: inline;
+ white-space: pre-line;
+}
+
+.td_header_role_name{
+  width: 20%;
+  background-color: #3399ff;
+}
+
+.td_header_role_value{
+  width: 80%;
+  background-color: #ccccff;
+}
+
+.Bold{
+  font-weight: bold;
+}
+
+.Italics{
+  font-style: italic;
+}
+
+.Underline{
+  text-decoration:underline;
+}
+
+.internal_format
+{
+	list-style: none;
+	list-style-position:outside;
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+          </style></head><body><h1 class="h1center">Data Portability</h1><table class="header_table"><tr><td class="td_header_role_name"><span class="td_label">Patient</span></td><td class="td_header_role_value">Gary Graham</td></tr><tr><td class="td_header_role_name"><span class="td_label">Date of birth</span></td><td class="td_header_role_value">June 14, 1954 </td></tr><tr><td class="td_header_role_name"><span class="td_label">Current Gender</span></td><td class="td_header_role_value">Male</td></tr><tr><td class="td_header_role_name"><span class="td_label">Race(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>No Information</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Ethnicity</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>No Information</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Language(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>English</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Primary Home Address:<br/>9721 E COYOTE TRL<br/>HEREFORD, AZ 85615-9266, USA<br/>Effective Date: December 20, 2024 <br/><br/> Postal Address:<br/>9721 E COYOTE TRL<br/>HEREFORD, AZ 85615-9266, USA<br/>Effective Date: December 20, 2024 <br/><br/> Previous Address:<br/>9721 E COYOTE TRL<br/>HEREFORD, AZ 85615, USA<br/>Effective Date: November 22, 2024 <br/>Expiration Date: December 20, 2024 <br/><br/> Previous Address:<br/>9721 E COYOTE TRL<br/>HEREFORD, AZ 85615, USA<br/>Effective Date: November 22, 2024 <br/>Expiration Date: December 20, 2024 <br/><br/>Primary Home Phone:  +1-(520) 376-9523<br/>Mobile Phone:  +1-(520) 376-9523<br/></td></tr><tr><td class="td_header_role_name"><span class="td_label">Patient IDs</span></td><td class="td_header_role_value">a-19231.E-322846 2.16.840.1.113883.3.564<br/></td></tr></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document Id</span></td><td class="td_header_role_value"> 0555d48e-8f01-46bb-9f45-d7f40b851921</td></tr><tr><td class="td_header_role_name"><span class="td_label">Document Created:</span></td><td class="td_header_role_value">May 28, 2025, 13:36:26 -0400 </td></tr></tbody></table><table class="header_table"><tbody/></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Author</span></td><td class="td_header_role_value">Document Generation Engine</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document maintained by</span></td><td class="td_header_role_value">athenahealth</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><h2><a name="toc">Table of Contents</a></h2><ul><li><a href="#id1">Assessment</a></li><li><a href="#id2">Plan of Treatment</a></li><li><a href="#id3">Reason for Referral</a></li><li><a href="#id4">Results</a></li><li><a href="#id5">Problems</a></li><li><a href="#id6">Procedures</a></li><li><a href="#id7">Medical Equipment</a></li><li><a href="#id8">Allergies</a></li><li><a href="#id9">Medications</a></li><li><a href="#id10">Vitals</a></li><li><a href="#id11">Social History</a></li><li><a href="#id12">Functional Status</a></li><li><a href="#id13">Mental Status</a></li><li><a href="#id14">Family History</a></li><li><a href="#id15">Medical History</a></li><li><a href="#id16">Immunizations</a></li><li><a href="#id17">Past Encounters</a></li><li><a href="#id18">Goals Section</a></li><li><a href="#id19">Health Concerns Section</a></li><li><a href="#id20">Advance Directives</a></li><li><a href="#id21">Payers</a></li><li><a href="#id22">Notes</a></li></ul><hr align="left" color="teal" size="2"/><h3><a name="id1" href="#toc">Assessment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Assessment Date</th>
+                                    <th>Assessment</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">04/29/2025</td>
+                                    <td class="Botrule">04/29/2025</td>
+                                    <td class="Botrule">
+                                        Assessment: Mr. Graham is a 70-year-old male patient with known history of COPD, DVT/PE, hypertension, CKD, and obesity. Presents as a referral for management of BPH/LUTS and urinary retention. Serum creatinine was elevates on 3/27/2025 at 3.41. GFR was 18. CT A/P 3/12/2025: urinary bladder infectious/inflammatory cystitis with severe inflammatory mucosal wall thickening. Correlate with urinalysis. No evidence of emphysematous urinary cystitis. No evidence of bladder rupture/leak. Foley catheter with inflated balloon tip appropriately location. Unremarkable. No enlarged cysts. No solid mass. No hydronephrosis. No evidence of pyelonephritis. No subcapsular or perinephritic hematoma. Foley catheter has been in place for nearly 2 months on initial visit 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Plan: 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Plan for voiding trial today. Patient refused to do UroCuff examination. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        He was quite belligerent on many occasions and was hitting the wall. It has been told to him that if he does it again he will be dismissed from the practice. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Continue finasteride 5 mg p.o. daily. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Start alfuzosin 10 mg p.o. daily. Side effect profile discussed. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Plan for follow-up in 1 week for uroflowmetry. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        In the event of yet another retention episode he would be scheduled for endoscopic evaluation.  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Will obtain PSA for screening purposes. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        *** Disclaimer: The above encounter was dictated by using a speech recognition transcription software (Dragon Medical Dictation System). An attempt at proofreading has been made to minimize errors. However, if errors remain, please read document for content. May call for questions. ***
+                                    </td>
+                                    <td class="Botrule">ghendersoniii</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">04/29/2025 18:39:06</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">
+                                        Assessment: Mr. Graham is a 70-year-old male patient with known history of COPD, DVT/PE, hypertension, CKD, and obesity. Presents as a referral for management of BPH/LUTS and urinary retention. Serum creatinine was elevates on 3/27/2025 at 3.41. GFR was 18. CT A/P 3/12/2025: urinary bladder infectious/inflammatory cystitis with severe inflammatory mucosal wall thickening. Correlate with urinalysis. No evidence of emphysematous urinary cystitis. No evidence of bladder rupture/leak. Foley catheter with inflated balloon tip appropriately location. Unremarkable. No enlarged cysts. No solid mass. No hydronephrosis. No evidence of pyelonephritis. No subcapsular or perinephritic hematoma. Foley catheter has been in place for nearly 2 months on initial visit 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Plan: 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Patient has an acute UTI. Ciprofloxacin 500 mg p.o. twice daily x 10 days sent to pharmacy. Send urine for culture 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Patient refused uroflow/UroCuff testing on initial visit 4/29/2025 during voiding trial. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Foley catheter to be reinserted today. He will need exchanges every 30 days while catheter remains in place. 
+                                        <br/>
+                                        <br/>
+                                        Plan for cystoscopy and TRUS of the prostate with Dr. Niemczyk 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Continue combination therapy of finasteride/alfuzosin. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Prior PSA ordered pending. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        He was quite belligerent on many occasions and was hitting the wall. It has been told to him that if he does it again he will be dismissed from the practice. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        *** Disclaimer: The above encounter was dictated by using a speech recognition transcription software (Dragon Medical Dictation System). An attempt at proofreading has been made to minimize errors. However, if errors remain, please read document for content. May call for questions. ***
+                                    </td>
+                                    <td class="Botrule">ghendersoniii</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">04/30/2025 11:51:30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id2" href="#toc">Plan of Treatment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reminders</th>
+                                    <th/>
+                                    <th>Order Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Provider</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Appointments</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">URINARY CATHETER</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/28/2025 03:00PM
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">GOVERNOR HENDERSON, DNP</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">CYSTOSCOPY</span>
+                                    </td>
+                                    <td class="Botrule">
+    06/06/2025 02:00PM
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Peter Niemczyk, MD</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Lab</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">culture, urine + sensitivity</span>
+                                    </td>
+                                    <td class="Botrule">
+    04/30/2025
+  </td>
+                                    <td class="Botrule">
+    
+      04/30/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">vmcnair1</td>
+                                    <td class="Botrule">
+      Canyon Vista Medical Center (Lab), 5700 E Hwy 90, Sierra Vista, AZ, 85635, Ph (520) 263-2350</td>
+                                    <td class="Botrule">05/07/2025 11:15:20</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">urinalysis, dipstick</span>
+                                    </td>
+                                    <td class="Botrule">
+    04/30/2025
+  </td>
+                                    <td class="Botrule">
+    
+      04/30/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ghendersoniii</td>
+                                    <td class="Botrule">
+      Sv Urology, 75 Colonia de Salud, Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690</td>
+                                    <td class="Botrule">04/30/2025 11:49:52</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">PSA, serum or plasma</span>
+                                    </td>
+                                    <td class="Botrule">
+    04/29/2025
+  </td>
+                                    <td class="Botrule">
+    
+      04/29/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">vmcnair1</td>
+                                    <td class="Botrule">
+      Sonora Quest Laboratories, LLC, 1150 S Highway 92, Ste E, Sierra Vista, AZ, 85635, Ph (520) 515-0710</td>
+                                    <td class="Botrule">05/06/2025 11:56:04</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">lipid panel, serum</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/02/2024
+  </td>
+                                    <td class="Botrule">
+    
+      12/02/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lruiz109</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">12/02/2024 17:26:27</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">AST/SGOT (aspartate aminotransferase), serum or plasma</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/02/2024
+  </td>
+                                    <td class="Botrule">
+    
+      12/02/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lruiz109</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">12/02/2024 17:26:39</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">ALT (alanine aminotransferase), serum or plasma</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/02/2024
+  </td>
+                                    <td class="Botrule">
+    
+      12/02/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENAFAX</td>
+                                    <td class="Botrule">
+      Canyon Vista Medical Center (Lab), 5700 E Hwy 90, Sierra Vista, AZ, 85635, Ph (520) 263-2350</td>
+                                    <td class="Botrule">12/03/2024 19:40:39</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Referral</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Procedures</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Surgeries</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Imaging</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">electrocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/02/2024
+  </td>
+                                    <td class="Botrule">
+    
+      12/02/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">dcohen67</td>
+                                    <td class="Botrule">
+      Sv Cardiology, 5750 E Hwy 90, Ste 200, Sierra Vista, AZ, 85635-9113, Ph (520) 263-3765</td>
+                                    <td class="Botrule">12/02/2024 17:23:59</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Medication Orders</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">ciprofloxacin 500 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    04/30/2025
+  </td>
+                                    <td class="Botrule">
+    
+      04/30/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Walmart Pharmacy 1240, 500 N Highway 90 Byp, Sierra Vista, AZ, 85635, Ph (520) 458-9690</td>
+                                    <td class="Botrule">04/30/2025 11:49:58</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">alfuzosin ER 10 mg tablet,extended release 24 hr</span>
+                                    </td>
+                                    <td class="Botrule">
+    04/29/2025
+  </td>
+                                    <td class="Botrule">
+    
+      04/29/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Walmart Pharmacy 1240, 500 N Highway 90 Byp, Sierra Vista, AZ, 85635, Ph (520) 458-9690</td>
+                                    <td class="Botrule">04/29/2025 18:13:58</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">atorvastatin 40 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    12/02/2024
+  </td>
+                                    <td class="Botrule">
+    
+      12/02/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Walmart Pharmacy 1240, 500 N Highway 90 Byp, Sierra Vista, AZ, 85635, Ph (520) 458-9690</td>
+                                    <td class="Botrule">12/02/2024 17:24:05</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Patient Targets</span>
+                        <span class="content_span">No targets recorded.</span>
+                        <br/>
+                        <span class="content_span">Patient Instructions</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Encounter Id</th>
+                                    <th>Patient Instructions</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">04/29/2025</td>
+                                    <td class="Botrule">690080</td>
+                                    <td class="Botrule">
+                                        <content>
+                                            Complexity/Analyzation of Data:          The below items were personally reviewed by me the day of the office visit, and/or by the completion of the office visit.          
+                                            <br/>
+                                                      Review of Records:          Reviewed report          AUA Symptom Score          Previous Patient Records/Referral Notes          
+                                            <br/>
+                                                      Procedural Review:          Reviewed Bladder Scan          UroCuff Results (An approximate 15-minute review of report including max flow interpretation and EMG results).          
+                                            <br/>
+                                                      Urine/Micro/Path Review:          Urinalysis          
+                                            <br/>
+                                                      Imaging reviewed (Film personally reviewed):          CT scan A/P 3/12/2025          
+                                            <br/>
+                                                      We spent __45___ minutes dedicated to evaluation and management time, including face-to-face interaction, discussion and coordination of care, documentation, result review, and discussion with others as applicable.
+                                        </content>
+                                    </td>
+                                    <td class="Botrule">ghendersoniii</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">04/26/2025 19:44:52</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">691652</td>
+                                    <td class="Botrule">
+                                        <content>
+                                            Complexity/Analyzation of Data:          The below items were personally reviewed by me the day of the office visit, and/or by the completion of the office visit.          
+                                            <br/>
+                                                      Review of Records:          Reviewed report          AUA Symptom Score          Previous Patient Records          
+                                            <br/>
+                                                      Procedural Review:          Foley cath insertion          Bladder scan          
+                                            <br/>
+                                                      We spent __31___ minutes dedicated to evaluation and management time, including face-to-face interaction, discussion and coordination of care, documentation, result review, and discussion with others as applicable.
+                                        </content>
+                                    </td>
+                                    <td class="Botrule">ghendersoniii</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">04/30/2025 11:14:52</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id3" href="#toc">Reason for Referral</a></h3><div>
+      None Reported.
+      </div><h3><a name="id4" href="#toc">Results</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Created Date</th>
+                                    <th>Observation Date</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Value</th>
+                                    <th>Unit</th>
+                                    <th>Range</th>
+                                    <th>Abnormal Flag</th>
+                                    <th>Note</th>
+                                    <th>LastModifiedBy</th>
+                                    <th>Organization Detail</th>
+                                    <th>LastModifiedTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Leukocytes</span>
+                                    </td>
+                                    <td class="Botrule">Moderate</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Nitrite</span>
+                                    </td>
+                                    <td class="Botrule">positive</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Urobilinogen</span>
+                                    </td>
+                                    <td class="Botrule">.2</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Protein</span>
+                                    </td>
+                                    <td class="Botrule">30</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">pH</span>
+                                    </td>
+                                    <td class="Botrule">6.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Blood</span>
+                                    </td>
+                                    <td class="Botrule">Small</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Specific Gravity</span>
+                                    </td>
+                                    <td class="Botrule">1.020</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Ketone</span>
+                                    </td>
+                                    <td class="Botrule">Negative</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Bilirubin</span>
+                                    </td>
+                                    <td class="Botrule">Negative</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Glucose</span>
+                                    </td>
+                                    <td class="Botrule">Negative</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Appearance</span>
+                                    </td>
+                                    <td class="Botrule">Cloudy</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">04/30/2025
+                </td>
+                                    <td class="Botrule">urinalysis, dipstick</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Color</span>
+                                    </td>
+                                    <td class="Botrule">Yellow</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Sv Urology
+                                        <br/>
+                                        75 Colonia de Salud Ste 200c, Sierra Vista, AZ, 85635-2487, Ph (520) 263-2690
+                                    </td>
+                                    <td class="Botrule">04/30/2025 11:43:58</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">12/02/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">dcohen67</td>
+                                    <td class="Botrule">
+                                        Sv Cardiology
+                                        <br/>
+                                        5750 E Hwy 90 Ste 200, Sierra Vista, AZ, 85635-9113, Ph (520) 263-3765
+                                    </td>
+                                    <td class="Botrule">12/02/2024 17:20:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">12/02/2024</td>
+                                    <td class="Botrule">12/02/2024</td>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lruiz109</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">12/02/2024 17:09:17</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Result Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id5" href="#toc">Problems</a></h3><div>
+      None Reported
+      </div><h3><a name="id6" href="#toc">Procedures</a></h3><div>
+                        <span class="content_span">Surgical History</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Laterality</th>
+                                    <th>Status</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/28/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Foley Catheter Insertion</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+                    
+                      
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">05/25/2025 17:46:28</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Foley Catheter Insertion</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+                    
+                      
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">04/30/2025 11:48:31</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Bladder Ultrasound</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+                    
+                      
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">04/30/2025 11:48:20</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/29/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Bladder Ultrasound</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+                    
+                      
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">04/29/2025 18:37:07</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Imaging Results</span>
+                        <p>None recorded.</p>
+                        <br/>
+                        <span class="content_span">Procedure Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id7" href="#toc">Medical Equipment</a></h3><div>
+      None Reported.
+      </div><h3><a name="id8" href="#toc">Allergies</a></h3><div>
+                        <p>
+                            <span class="content_span">No known drug allergies</span>
+                        </p>
+                    </div><h3><a name="id9" href="#toc">Medications</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sig</th>
+                                    <th>Start Date</th>
+                                    <th>Stop Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    atorvastatin 40 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    prednisone 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 4 TABLETS BY MOUTH ONCE DAILY. TAKE WITH FOOD TO PREVENT STOMACH UPSET.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    ciprofloxacin 500 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY 12 HOURS FOR 10 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    finasteride 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    amoxicillin 875 mg-potassium clavulanate 125 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY 12 HOURS FOR 7 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    alfuzosin ER 10 mg tablet,extended release 24 hr
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    hydrochlorothiazide 12.5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY IN THE MORNING</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/02/2024</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    amlodipine 10 mg-valsartan 320 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Xarelto 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH ONCE DAILY WITH FOOD AFTER STARTER PACK IS COMPLETED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/02/2024</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Combivent Respimat 20 mcg-100 mcg/actuation solution for inhalation
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 1 PUFF BY MOUTH 4 TIMES DAILY. SPACE EVENLY DURING WAKING HOURS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Xarelto DVT-PE Treatment 30-Day Starter 15 mg(42)-20 mg(9) tablet pack
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">USE AS DIRECTED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  12/02/2024</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id10" href="#toc">Vitals</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Heart rate</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/02/2024</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">167.64 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">33.3 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">93666.83 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">92 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">196 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">84 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Lizbeth Ruiz
+                        
+                      </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">12/02/2024 16:26:02</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id11" href="#toc">Social History</a></h3><div>
+      
+        None recorded.
+      
+    </div><h3><a name="id12" href="#toc">Functional Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id13" href="#toc">Mental Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id14" href="#toc">Family History</a></h3><div>
+    Nothing Reported.
+    </div><h3><a name="id15" href="#toc">Medical History</a></h3><div>
+      
+        No medical history recorded.
+      
+      
+    </div><h3><a name="id16" href="#toc">Immunizations</a></h3><div>
+    
+      None recorded.
+    
+  </div><h3><a name="id17" href="#toc">Past Encounters</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter ID</th>
+                                    <th>Performer</th>
+                                    <th>Location</th>
+                                    <th>Encounter Start Date</th>
+                                    <th>Encounter Closed Date</th>
+                                    <th>Diagnosis/Indication</th>
+                                    <th>Diagnosis SNOMED-CT Code</th>
+                                    <th>Diagnosis ICD10 Code</th>
+                                    <th>Diagnosis Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">617362</span>
+                                    </td>
+                                    <td>David Cohen, MD </td>
+                                    <td>
+                                        SV Cardiology
+                              
+                                        <p>5750 E HWY 90,Ste 200</p>
+                                        <p>SIERRA VISTA, AZ 85635-9113</p>
+                                    </td>
+                                    <td>12/02/2024 16:04:20</td>
+                                    <td>12/06/2024 11:01:17</td>
+                                    <td class="Botrule">Coronary arteriosclerosis</td>
+                                    <td class="Botrule">53741008</td>
+                                    <td class="Botrule">
+                                        I25.10
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   Per the report from Pima cardiology has a proximal RCA stenosis. How this diagnosis was made is unclear. Will obtain records from his previous cardiologist to determine the accuracy of this diagnosis.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Peripheral vascular disease</td>
+                                    <td class="Botrule">400047006</td>
+                                    <td class="Botrule">
+                                        I73.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   He has a left internal carotid artery occlusion of unknown duration. Aggressive risk factor modification is indicated.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Aortic valve stenosis</td>
+                                    <td class="Botrule">60573004</td>
+                                    <td class="Botrule">
+                                        I35.0
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   He has at least moderate aortic stenosis documented by recent echocardiogram. His aortic valve will be monitored with serial echocardiograms.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Essential hypertension</td>
+                                    <td class="Botrule">59621000</td>
+                                    <td class="Botrule">
+                                        I10
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   His pressure is elevated despite medical therapy. He will check his blood pressure on a twice daily basis and record it. Appropriate adjustments in medications will be made and recommendations regarding low-sodium intake, weight loss and exercise will also be made.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Hypercholesterolemia</td>
+                                    <td class="Botrule">13644009</td>
+                                    <td class="Botrule">
+                                        E78.00
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   He has an LDL of 226 with an HDL of 35 triglycerides of 238. He will be started on atorvastatin 40 mg daily with lipids and LFTs checked prior to his next visit.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Tobacco dependence syndrome</td>
+                                    <td class="Botrule">89765005</td>
+                                    <td class="Botrule">
+                                        F17.200
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   He smokes approximately 2 packs of cigarettes per day. Tobacco cessation counseling has been given. He is noted to have lymphadenopathy on his CT scan. He will follow-up with the primary doctor for a workup.  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">690080</span>
+                                    </td>
+                                    <td>GOVERNOR HENDERSON, DNP </td>
+                                    <td>
+                                        SV Urology
+                              
+                                        <p>75 Colonia De Salud,Ste 200C</p>
+                                        <p>SIERRA VISTA, AZ 85635-2487</p>
+                                    </td>
+                                    <td>04/29/2025 16:56:45</td>
+                                    <td>04/29/2025 20:10:02</td>
+                                    <td class="Botrule">Retention of urine</td>
+                                    <td class="Botrule">267064002</td>
+                                    <td class="Botrule">
+                                        R33.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Benign prostatic hyperplasia with outflow obstruction</td>
+                                    <td class="Botrule">236646007</td>
+                                    <td class="Botrule">
+                                        N40.1
+                                        <br/>
+                                        R33.8
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Slowing of urinary stream</td>
+                                    <td class="Botrule">84471002</td>
+                                    <td class="Botrule">
+                                        R39.198
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Incomplete emptying of urinary bladder</td>
+                                    <td class="Botrule">249288007</td>
+                                    <td class="Botrule">
+                                        R33.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Increased frequency of urination</td>
+                                    <td class="Botrule">162116003</td>
+                                    <td class="Botrule">
+                                        R35.0
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">691652</span>
+                                    </td>
+                                    <td>GOVERNOR HENDERSON, DNP </td>
+                                    <td>
+                                        SV Urology
+                              
+                                        <p>75 Colonia De Salud,Ste 200C</p>
+                                        <p>SIERRA VISTA, AZ 85635-2487</p>
+                                    </td>
+                                    <td>04/30/2025 11:07:53</td>
+                                    <td>04/30/2025 14:06:48</td>
+                                    <td class="Botrule">Benign prostatic hyperplasia with outflow obstruction</td>
+                                    <td class="Botrule">236646007</td>
+                                    <td class="Botrule">
+                                        N40.1
+                                        <br/>
+                                        R33.8
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Retention of urine</td>
+                                    <td class="Botrule">267064002</td>
+                                    <td class="Botrule">
+                                        R33.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Slowing of urinary stream</td>
+                                    <td class="Botrule">84471002</td>
+                                    <td class="Botrule">
+                                        R39.198
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Incomplete emptying of urinary bladder</td>
+                                    <td class="Botrule">249288007</td>
+                                    <td class="Botrule">
+                                        R33.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Increased frequency of urination</td>
+                                    <td class="Botrule">162116003</td>
+                                    <td class="Botrule">
+                                        R35.0
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Acute urinary tract infection</td>
+                                    <td class="Botrule">431309003</td>
+                                    <td class="Botrule">
+                                        N39.0
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   See above  </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id18" href="#toc">Goals Section</a></h3><div>
+    
+      None Recorded
+    
+    </div><h3><a name="id19" href="#toc">Health Concerns Section</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Related Observation</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concern</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id20" href="#toc">Advance Directives</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Directive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id21" href="#toc">Payers</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Insurance Date</th>
+                                    <th>Sequence</th>
+                                    <th>Insurance Name</th>
+                                    <th>Policy Number</th>
+                                    <th>Policy Holder</th>
+                                    <th>Covered Member ID</th>
+                                    <th>Holder Member ID</th>
+                                    <th>Guarantor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/25/2025</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">CENTENE - WELLCARE BY ALLWELL - AZ - IFP (MEDICARE REPLACEMENT/ADVANTAGE - HMO)</td>
+                                    <td class="Botrule">AZ55900008</td>
+                                    <td class="Botrule">Gary  Graham</td>
+                                    <td class="Botrule">C4029627401</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Gary  Graham</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/25/2025</td>
+                                    <td class="Botrule">2</td>
+                                    <td class="Botrule">CENTENE - ARIZONA COMPLETE HEALTH (MEDICAID REPLACEMENT - HMO)</td>
+                                    <td class="Botrule">AZ55900008</td>
+                                    <td class="Botrule">Gary  Graham</td>
+                                    <td class="Botrule">A17970409</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Gary  Graham</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id22" href="#toc">Notes</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note Type</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">12/02/2024</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes1" class="Botrule">
+                                        <content>
+                                               The patient is a 70-year-old male with past cardiac history significant for moderate aortic stenosis, possible right current artery stenosis as well as noncardiac issues including an occluded left internal carotid artery, hide lymphadenopathy, glucose intolerance as well as significant hypercholesterolemia.   
+                                            <br/>
+                                            The patient was previously seen by Pima heart however secondary to her difficulty with medication now seeks a new cardiologist.   
+                                            <br/>
+                                            Testing performed at Pima include an echocardiogram showing moderate left ventricular hypertrophy with preserved systolic function, moderate aortic stenosis, mild diastolic dysfunction with no mention of his pulmonary pressures. CT scans have shown an occluded left internal carotid artery as well as a possible proximal RCA stenosis. Hydro lymphadenopathy was also present however no mention of malignancy was noted.   
+                                            <br/>
+                                            Laboratories have shown significant hypercholesterolemia with triglycerides of 238, HDL 35 and an LDL of 226. His hemoglobin A1c was 6.   
+                                            <br/>
+                                            The patient does take blood pressure medications however has ongoing elevated pressures. He is not active from an aerobic standpoint and normally is able to form his ADLs with only mild dyspnea.   
+                                            <br/>
+                                            An EKG performed today demonstrates normal sinus rhythm with nonspecific ST segment changes.  
+                                        </content>
+                                    </td>
+                                    <td class="Botrule">
+                                        David Cohen, MD
+              
+                
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">12/02/2024 17:24:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/29/2025</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes2" class="Botrule">
+                                        <span class="content_span">   Mr. Graham is a 70-year-old male patient who is new to our Urology Clinic. Presents as a referral from Clemons, AGNP for management of BPH/urinary retention.   </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   Medical history includes COPD, DVT/PE, hypertension, CKD, and obesity.   </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   Patient notes progressively slowing of urinary stream and the feeling of incomplete bladder emptying. This eventually progressed to worsening emptying which led him to the emergency department. He was noted to have been in acute kidney injury and Foley catheter was inserted. CT scan negative for hydronephrosis at that time.  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+              
+                
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">04/29/2025 18:39:19</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">04/30/2025</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes3" class="Botrule">
+                                        <span class="content_span">   Mr. Graham is a 70-year-old male patient, and was last seen on 4/29/2025 by Henderson, DNP. Presents for follow-up on BPH/urinary retention  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   Medical history includes COPD, DVT/PE, hypertension, CKD, and obesity.   </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   (On initial visit 4/29/2025): Patient notes progressively slowing of urinary stream and the feeling of incomplete bladder emptying. This eventually progressed to worsening emptying which led him to the emergency department. He was noted to have been in acute kidney injury and Foley catheter was inserted. CT scan negative for hydronephrosis at that time.  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   4/30/25: Patient presents as an emergency add-on as he underwent a voiding trial yesterday and was unable to urinate successfully overnight.  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        GOVERNOR HENDERSON, DNP
+              
+                
+                                        <p> 5750 E Hwy 90 Suite 375,   Sierra Vista,  </p>
+                                        <p> AZ,   85635-9113, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - LPNT - Arizona </td>
+                                    <td class="Botrule">04/30/2025 11:51:43</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><br/><br/></body></html>

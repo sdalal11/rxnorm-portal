@@ -1,0 +1,31 @@
+{
+  "file": "ab4c0711-2a2a-4c69-aaf1-719a7eeca5f0.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 11758,
+      "end_offset": 11768
+    },
+    {
+      "rx_cui": "9997",
+      "normalized_name": "spironolactone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Spironolactone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10959,
+      "end_offset": 10973
+    }
+  ]
+}

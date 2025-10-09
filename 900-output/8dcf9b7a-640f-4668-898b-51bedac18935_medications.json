@@ -1,0 +1,31 @@
+{
+  "file": "8dcf9b7a-640f-4668-898b-51bedac18935.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21390,
+      "end_offset": 21399
+    },
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21848,
+      "end_offset": 21857
+    }
+  ]
+}

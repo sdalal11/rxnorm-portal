@@ -1,0 +1,31 @@
+{
+  "file": "7cc643ab-8f40-4ad1-a426-ca49febb21e9.html",
+  "medications": [
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LUPRON",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 3942,
+      "end_offset": 3948
+    },
+    {
+      "rx_cui": "42375",
+      "normalized_name": "leuprolide",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LUPRON",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 19806,
+      "end_offset": 19812
+    }
+  ]
+}

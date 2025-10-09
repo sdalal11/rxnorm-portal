@@ -1,0 +1,2249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:in="urn:lantana-com:inline-variable-data" xmlns:sdtc="urn:hl7-org:sdtc"><head>
+<meta charset="utf-8"><!-- Do NOT edit this HTML directly: it was generated via an XSLT transformation from a CDA Release 2 XML document. --><title>Data Portability</title><style type="text/css">
+body {
+  color: #003366;
+  background-color: #FFFFFF;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #003366;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #ffd700;
+}
+
+td {
+  padding: 0.1cm 0.2cm;
+  vertical-align: top;
+  background-color: #ffffcc;
+}
+
+.h1center {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.header_table{
+  border: 1pt inset #00008b;
+}
+
+.td_label{
+  font-weight: bold;
+  color: white;
+}
+
+.content_span{
+ font-family: Verdana, Tahoma, sans-serif;
+ display: inline;
+ white-space: pre-line;
+}
+
+.td_header_role_name{
+  width: 20%;
+  background-color: #3399ff;
+}
+
+.td_header_role_value{
+  width: 80%;
+  background-color: #ccccff;
+}
+
+.Bold{
+  font-weight: bold;
+}
+
+.Italics{
+  font-style: italic;
+}
+
+.Underline{
+  text-decoration:underline;
+}
+
+.internal_format
+{
+	list-style: none;
+	list-style-position:outside;
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+          </style></head><body><h1 class="h1center">Data Portability</h1><table class="header_table"><tr><td class="td_header_role_name"><span class="td_label">Patient</span></td><td class="td_header_role_value">Jane Glorioso</td></tr><tr><td class="td_header_role_name"><span class="td_label">Date of birth</span></td><td class="td_header_role_value">February 22, 1953 </td></tr><tr><td class="td_header_role_name"><span class="td_label">Current Gender</span></td><td class="td_header_role_value">Female</td></tr><tr><td class="td_header_role_name"><span class="td_label">Race(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>White</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Ethnicity</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>Not Hispanic or Latino</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Language(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>English</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Primary Home Address:<br/>9141 RIBBON MEADOW CT<br/>LAS VEGAS, NV 89178, USA<br/>Effective Date: November 21, 2024 <br/><br/> Postal Address:<br/>9141 RIBBON MEADOW CT<br/>LAS VEGAS, NV 89178, USA<br/>Effective Date: November 21, 2024 <br/><br/>Primary Home Phone:  +1-(714) 280-3779<br/>Mobile Phone:  +1-(714) 280-3779<br/>Email:  jlglorioso1013@gmail.com<br/></td></tr><tr><td class="td_header_role_name"><span class="td_label">Patient IDs</span></td><td class="td_header_role_value">a-17520.E-148953 2.16.840.1.113883.3.564<br/></td></tr></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document Id</span></td><td class="td_header_role_value"> db2d28c7-69d1-43d1-b83d-30785267a148</td></tr><tr><td class="td_header_role_name"><span class="td_label">Document Created:</span></td><td class="td_header_role_value">March 28, 2025, 00:50:17 -0400 </td></tr></tbody></table><table class="header_table"><tbody/></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Author</span></td><td class="td_header_role_value">Document Generation Engine</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document maintained by</span></td><td class="td_header_role_value">athenahealth</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>Boston Landing<br/>80 Guest Street<br/>Boston, MA 02135, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><h2><a name="toc">Table of Contents</a></h2><ul><li><a href="#id1">Assessment</a></li><li><a href="#id2">Plan of Treatment</a></li><li><a href="#id3">Reason for Referral</a></li><li><a href="#id4">Results</a></li><li><a href="#id5">Problems</a></li><li><a href="#id6">Procedures</a></li><li><a href="#id7">Medical Equipment</a></li><li><a href="#id8">Allergies</a></li><li><a href="#id9">Medications</a></li><li><a href="#id10">Vitals</a></li><li><a href="#id11">Social History</a></li><li><a href="#id12">Functional Status</a></li><li><a href="#id13">Mental Status</a></li><li><a href="#id14">Family History</a></li><li><a href="#id15">Medical History</a></li><li><a href="#id16">Immunizations</a></li><li><a href="#id17">Past Encounters</a></li><li><a href="#id18">Goals Section</a></li><li><a href="#id19">Health Concerns Section</a></li><li><a href="#id20">Advance Directives</a></li><li><a href="#id21">Payers</a></li><li><a href="#id22">Notes</a></li><li><a href="#id23">OBGyn Episode</a></li></ul><hr align="left" color="teal" size="2"/><h3><a name="id1" href="#toc">Assessment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Assessment Date</th>
+                                    <th>Assessment</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule">
+                                        1. HTN: Blood pressure is well controlled and at goal per ACA/AHA. No change to current medication regimen. Will continue to monitor at every office visit. Please call if BP consistently &gt; 140/90 or SBP &lt; 100. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        2. HLD: Stable. On statin therapy. Encourage decrease in fatty food intake and 150min/week cardiovascular exercise. Monitor. 
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        3. Severe allergies/asthma/hx anaphylaxis: has history of anaphylaxis and has had to use her EpiPen twice prior to 2005. She has also been on biologic injections in the past. She typically avoids all peanuts, tomatoes, dairy products, eggs, most fruits.  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        4. COPD/smoker: Currently on Breyna inhaler, albuterol as needed. Reports LDCT UTD. Counseled on smoking cessation. Pt is not ready for a quit attempt at present. Will continue to encourage. 
+                                        <br/>
+                                        Current exacerbation, start medrol pack today  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        5. Skin lesion: left side of face, sees Linda Woodson dermatology, will make referral for COC. Follow  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Vaccines: UTD COVID, allergies to flu vaccine  
+                                        <br/>
+                                        Colonoscopy: 2024 normal  
+                                        <br/>
+                                        Mammo: 2022 - ordered 
+                                        <br/>
+                                        DEXA: 2022 - ordered  
+                                        <br/>
+                                        Eye exam: routine at Target optometry  
+                                        <br/>
+                                        Lung cancer screen: reports UTD, request records  
+                                        <br/>
+                                        Smoker: current  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        Lives with husband, daughter, grandson  
+                                        <br/>
+                                        Number of kids: 1 daughter  
+                                        <br/>
+                                        Patient drives  
+                                        <br/>
+                                        Education 
+                                        <br/>
+                                        Retired - fraud auditor in Orange County  
+                                        <br/>
+                                        Advance directives - POA - Elizabeth J Melillo, daughter.  
+                                        <br/>
+                                        Husband has dementia, deaf, prostate CA is his primary caregiver  
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        F/u 2-3 months  
+                                        <br/>
+                                        Labs ordered 
+                                    </td>
+                                    <td class="Botrule">wng7</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">02/10/2025 14:17:00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id2" href="#toc">Plan of Treatment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reminders</th>
+                                    <th/>
+                                    <th>Order Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Provider</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Appointments</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">LAB VISIT</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/06/2025 08:00AM
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Lab Schedule</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">M-FOLLOW-UP 30</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/12/2025 08:30AM
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Whisly Ng, FNP-C</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Lab</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">CMP, serum or plasma</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:53</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">CBC w/ auto diff</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:55</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">TSH, serum, reflex free T4</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:53</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">vitamin D, 25-hydroxy, total, serum</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:54</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">lipid panel, serum</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:54</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">HbA1c (hemoglobin A1c), blood</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Clinical Pathology Laboratories (Cpl) - Fort Apache, 5771 S Fort Apache Rd, Ste 110, Las Vegas, NV, 89148, Ph (702) 795-4900</td>
+                                    <td class="Botrule">02/10/2025 13:43:56</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Referral</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">pulmonologist referral - #Referral department#C</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/25/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/25/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENAFAX</td>
+                                    <td class="Botrule">
+      Las Vegas Lung &amp;amp; Sleep Associates, 9333 W. Sunset Rd, Las Vegas, NV, 89148, Ph (725) 745-5864</td>
+                                    <td class="Botrule">03/03/2025 14:18:12</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">dermatologist referral - #referral department#C-coc
+</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENAFAX</td>
+                                    <td class="Botrule">
+      Linda Woodson Dermatology, 2800 N Tenaya Way, Ste 203, Las Vegas, NV, 89128, Ph (702) 202-2700</td>
+                                    <td class="Botrule">02/17/2025 18:50:33</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Procedures</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Surgeries</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Imaging</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, chest, 2 view</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/25/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/25/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lgutierrez117</td>
+                                    <td class="Botrule">
+      Steinberg Diagnostic (Scheduling), 9070 W Post Rd, Las Vegas, NV, 89148, Ph (702) 732-6000</td>
+                                    <td class="Botrule">02/25/2025 11:40:22</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">DEXA, axial skeleton</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lgutierrez117</td>
+                                    <td class="Botrule">
+      Steinberg Diagnostic (Scheduling), 9070 W Post Rd, Las Vegas, NV, 89148, Ph (702) 732-6000</td>
+                                    <td class="Botrule">02/10/2025 13:58:09</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">MAMMO, screening, bilateral</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">lgutierrez117</td>
+                                    <td class="Botrule">
+      Steinberg Diagnostic (Scheduling), 9070 W Post Rd, Las Vegas, NV, 89148, Ph (702) 732-6000</td>
+                                    <td class="Botrule">02/10/2025 13:58:10</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Medication Orders</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Zithromax 250 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/25/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/25/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #2928, 1825 E. Warm Springs Rd., Las Vegas, NV, 89119, Ph (702) 837-7947</td>
+                                    <td class="Botrule">02/25/2025 10:59:09</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">lisinopril 2.5 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #2928, 1825 E. Warm Springs Rd., Las Vegas, NV, 89119, Ph (702) 837-7947</td>
+                                    <td class="Botrule">02/10/2025 14:13:45</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">rosuvastatin 20 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #2928, 1825 E. Warm Springs Rd., Las Vegas, NV, 89119, Ph (702) 837-7947</td>
+                                    <td class="Botrule">02/10/2025 13:43:54</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">Medrol (Pak) 4 mg tablets in a dose pack</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #2928, 1825 E. Warm Springs Rd., Las Vegas, NV, 89119, Ph (702) 837-7947</td>
+                                    <td class="Botrule">02/10/2025 13:43:53</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">montelukast 10 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    02/10/2025
+  </td>
+                                    <td class="Botrule">
+    
+      02/10/2025
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">wng7</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #2928, 1825 E. Warm Springs Rd., Las Vegas, NV, 89119, Ph (702) 837-7947</td>
+                                    <td class="Botrule">02/10/2025 14:13:37</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Patient Targets</span>
+                        <span class="content_span">No targets recorded.</span>
+                        <br/>
+                        <span class="content_span">Patient Instructions</span>
+                        <span class="content_span">No instructions recorded.</span>
+                    </div><h3><a name="id3" href="#toc">Reason for Referral</a></h3><div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        Dermatologist Referral for Change in skin lesion
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        #referral department#C-coc
+
+                                        <br/>
+                                        <br/>
+                                        Referring Physician: Whisly Ng, Family Medicine, (702) 844-4846
+                                        <br/>
+                                        Encounter Date: 02/10/2025
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        Pulmonologist Referral for Chronic obstructive pulmonary disease
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        #Referral department#C
+                                        <br/>
+                                        <br/>
+                                        Referring Physician: Whisly Ng, Family Medicine, (702) 844-4846
+                                        <br/>
+                                        Encounter Date: 02/25/2025
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id4" href="#toc">Results</a></h3><div>
+                        <p>
+                            <span class="content_span">None recorded.</span>
+                        </p>
+                    </div><h3><a name="id5" href="#toc">Problems</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Problem SNOMED Code</th>
+                                    <th>Status</th>
+                                    <th>Onset Date</th>
+                                    <th>Resolution Date</th>
+                                    <th>Notes</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Hypertensive disorder</span>
+                                    </td>
+                                    <td class="Botrule">38341003</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:15:56</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Hyperlipidemia</span>
+                                    </td>
+                                    <td class="Botrule">55822004</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:15:57</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">History of anaphylaxis</span>
+                                    </td>
+                                    <td class="Botrule">10839421000119104</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:16:00</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Asthma</span>
+                                    </td>
+                                    <td class="Botrule">195967001</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:16:01</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">Chronic obstructive pulmonary disease</span>
+                                    </td>
+                                    <td class="Botrule">13645005</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:16:02</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <span class="content_span">Problem Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id6" href="#toc">Procedures</a></h3><div>
+                        <span class="content_span">Surgical History</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Laterality</th>
+                                    <th>Status</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">04/01/2022</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Most Recent Mammogram</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">Precious Carino
+                    
+                  </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:33:47</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">01/01/1989</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Other</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">Precious Carino
+                    
+                  </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:33:47</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Imaging Results</span>
+                        <p>None recorded.</p>
+                        <br/>
+                        <span class="content_span">Procedure Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id7" href="#toc">Medical Equipment</a></h3><div>
+      None Reported.
+      </div><h3><a name="id8" href="#toc">Allergies</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Allergen ID</th>
+                                    <th>Allergen Name</th>
+                                    <th>Allergen Category</th>
+                                    <th>Reaction</th>
+                                    <th>Reaction Severity</th>
+                                    <th>Criticality</th>
+                                    <th>Documentation Date</th>
+                                    <th>Start Date</th>
+                                    <th>Code</th>
+                                    <th>Code System</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ID="allergy73749">
+                                    <td class="Botrule">
+                                        <span class="content_span">73749</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Product containing penicillin (product)</span>
+                                    </td>
+                                    <td class="Botrule">medication</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">02/10/2025</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">890458001</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">SNOMED</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                
+                  
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:57:51</td>
+                                </tr>
+                                <tr ID="allergy73750">
+                                    <td class="Botrule">
+                                        <span class="content_span">73750</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Substance with sulfonamide structure and antibacterial mechanism of action (substance)</span>
+                                    </td>
+                                    <td class="Botrule">medication</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Not available</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">02/10/2025</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">372788003</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">SNOMED</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                
+                  
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:58:00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id9" href="#toc">Medications</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sig</th>
+                                    <th>Start Date</th>
+                                    <th>Stop Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    albuterol sulfate 2.5 mg/3 mL (0.083 %) solution for nebulization
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 3 ML EVERY 6 HOURS AS NEEDED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    azithromycin 250 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 2 TABLETS BY MOUTH TODAY, THEN TAKE 1 TABLET DAILY FOR 4 DAYS AS DIRECTED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    montelukast 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  02/07/2025</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    epinephrine 0.3 mg/0.3 mL injection, auto-injector
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">0.3 ML INTRAMUSCULARLY ONCE &amp; MAY REPEAT ONCE 2-PAK FOR EACH LOCATION-HOME/CARRY/OTHER</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    methylprednisolone 4 mg tablets in a dose pack
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 6 TABLETS ON DAY 1 AS DIRECTED ON PACKAGE AND DECREASE BY 1 TAB EACH DAY FOR A TOTAL OF 6 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    albuterol sulfate HFA 90 mcg/actuation aerosol inhaler
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 2 PUFFS BY MOUTH EVERY 6 HOURS AS NEEDED</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 2.5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    ezetimibe 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  02/07/2025</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    rosuvastatin 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Vitamin D3
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span"/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Wixela Inhub 250 mcg-50 mcg/dose powder for inhalation
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 1 PUFF BY MOUTH TWICE A DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Wixela Inhub 100 mcg-50 mcg/dose powder for inhalation
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 2 PUFFS BY MOUTH TWICE A DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  02/07/2025</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    vitamin B12  2,500 mcg-folic acid 400 mcg disintegrating tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Breyna 160 mcg-4.5 mcg/actuation HFA aerosol inhaler
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 2 PUFFS BY MOUTH TWICE A DAY</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id10" href="#toc">Vitals</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Body temperature</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Heart rate</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">162.56 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">21.4 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">56426.89 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">98.9 [degF]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">98 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">98 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">16 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">136 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">86 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Alejandra Schoen
+                        
+                      </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 13:10:38</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Body temperature</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Heart rate</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">02/25/2025</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">162.56 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">99.1 [degF]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">97 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">97 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">79 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">18 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">20.9 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">55338.27 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">118 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">82 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Alejandra Schoen
+                        
+                      </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/25/2025 10:44:23</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id11" href="#toc">Social History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Notes</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Tobacco Smoking Status</span>
+                                    </td>
+                                    <td>Current Every Day Smoker</td>
+                                    <td/>
+                                    <td class="Botrule">
+                                        Precious Carino
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:33:47</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have An Advance Directive?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Level Of Alcohol Consumption?</td>
+                                    <td>None</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Level Of Caffeine Consumption?</td>
+                                    <td>Moderate</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Are You Currently Employed?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Type Of Diet Are You Following?</td>
+                                    <td>REGULAR</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Have There Been Any Changes To Your Family Or Social Situation?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Are There Any Guns Present In Your Home?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Eating?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Bathing?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Dressing?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Toileting?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Managing Your Medications?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Have You Fallen In The Past Three Months?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Exercise Routinely?</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>How Would You Rate Your Health?</td>
+                                    <td>Good</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Current Pain Level: (scale Of 0 To 10; 10 Being Worse Pain Possible)</td>
+                                    <td>0</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Vision Loss?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Hearing Loss?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Urine Leakage?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Type Of Exercise?</td>
+                                    <td>Walking</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Assistance Walking?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Getting Out Of Chairs?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Preparing Meals?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Have You Had A Dilated Eye Exam In The Last 12 Months?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Was The Date Of Your Most Recent Tobacco Screening?</td>
+                                    <td>02/25/2025</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/25/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Current Pack Years?</td>
+                                    <td>30ormorepackyears</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Relationship Status?</td>
+                                    <td>Married</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Are You Sexually Active?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>At What Age Did You Start Smoking Tobacco?</td>
+                                    <td>21</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>How Much Tobacco Do You Smoke?</td>
+                                    <td>0.5 PPD</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Use Any Illicit Or Recreational Drugs?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Has Tobacco Cessation Counseling Been Provided?</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>On What Date Was Tobacco Cessation Counseling Provided?</td>
+                                    <td>02/10/2025</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>How Many Years Have You Smoked Tobacco?</td>
+                                    <td>40</td>
+                                    <td/>
+                                    <td class="Botrule">aschoen6</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Any Dietary Restrictions?</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Or Have You Ever Used Any Other Forms Of Tobacco Or Nicotine?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">pcarino</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">02/10/2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Birth Sex: Unknown</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id12" href="#toc">Functional Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id13" href="#toc">Mental Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id14" href="#toc">Family History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Relationship</th>
+                                    <th>Description</th>
+                                    <th>Onset Age</th>
+                                    <th>Died of this Age</th>
+                                    <th>Resolved Age</th>
+                                    <th>Notes</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Mother</td>
+                                    <td class="Botrule">Alcohol abuse</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (11/24/24)</span>
+                                    </td>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/24/2024 17:32:44</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Mother</td>
+                                    <td class="Botrule">Arthritis</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (11/24/24)</span>
+                                    </td>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/24/2024 17:32:59</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Mother</td>
+                                    <td class="Botrule">Heart disease</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (11/24/24)</span>
+                                    </td>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/24/2024 17:33:39</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Brother</td>
+                                    <td class="Botrule">Alcohol abuse</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (11/24/24)</span>
+                                    </td>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/24/2024 17:32:44</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Father</td>
+                                    <td class="Botrule">Hypertensive disorder</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (11/24/24)</span>
+                                    </td>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/24/2024 17:33:20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id15" href="#toc">Medical History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Condition</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Hypertensive disorder</td>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p/>
+                        <span class="content_span">Gynecological History</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Statement/Question</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Date of last Dexa Scan</td>
+                                    <td class="Botrule">04/01/2022</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Abnormal Pap</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Most Recent Mammogram</td>
+                                    <td class="Botrule">04/01/2022</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Mammogram result</td>
+                                    <td class="Botrule">Normal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p/>
+                        <span class="content_span">Obstetrics History</span>
+                        <p>
+                            <span class="Bold">GPAL: </span>
+                            G 0 P 0 0 0 0
+                        </p>
+                    </div><h3><a name="id16" href="#toc">Immunizations</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Vaccine Type</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">COVID-19, mRNA, LNP-S, PF, 100 mcg/0.5mL dose or 50 mcg/0.25mL dose</span>
+                                    </td>
+                                    <td class="Botrule">03/24/2021</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:52:57</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">COVID-19, mRNA, LNP-S, PF, 100 mcg/0.5mL dose or 50 mcg/0.25mL dose</span>
+                                    </td>
+                                    <td class="Botrule">04/23/2021</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:52:57</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">COVID-19, mRNA, LNP-S, PF, 100 mcg/0.5mL dose or 50 mcg/0.25mL dose</span>
+                                    </td>
+                                    <td class="Botrule">05/31/2022</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:52:57</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">COVID-19, mRNA, LNP-S, PF, 100 mcg/0.5mL dose or 50 mcg/0.25mL dose</span>
+                                    </td>
+                                    <td class="Botrule">12/26/2021</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        Alejandra Schoen
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 12:52:57</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id17" href="#toc">Past Encounters</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter ID</th>
+                                    <th>Performer</th>
+                                    <th>Location</th>
+                                    <th>Encounter Start Date</th>
+                                    <th>Encounter Closed Date</th>
+                                    <th>Diagnosis/Indication</th>
+                                    <th>Diagnosis SNOMED-CT Code</th>
+                                    <th>Diagnosis ICD10 Code</th>
+                                    <th>Diagnosis Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">1214179</span>
+                                    </td>
+                                    <td>Whisly Ng, FNP-C </td>
+                                    <td>
+                                        P3NV - 9280 Sunset - LV
+                              
+                                        <p>9280 W. Sunset Rd,Suite 200</p>
+                                        <p>LAS VEGAS, NV 89148-4861</p>
+                                    </td>
+                                    <td>02/10/2025 12:32:17</td>
+                                    <td>02/10/2025 13:58:09</td>
+                                    <td class="Botrule">Hypertensive disorder</td>
+                                    <td class="Botrule">38341003</td>
+                                    <td class="Botrule">
+                                        I10
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Hyperlipidemia</td>
+                                    <td class="Botrule">55822004</td>
+                                    <td class="Botrule">
+                                        E78.5
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for malignant neoplasm of breast</td>
+                                    <td class="Botrule">268547008</td>
+                                    <td class="Botrule">
+                                        Z12.39
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for osteoporosis</td>
+                                    <td class="Botrule">300004007</td>
+                                    <td class="Botrule">
+                                        Z13.820
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Smoker</td>
+                                    <td class="Botrule">77176002</td>
+                                    <td class="Botrule">
+                                        F17.200
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">History of anaphylaxis</td>
+                                    <td class="Botrule">10839421000119104</td>
+                                    <td class="Botrule">
+                                        Z87.892
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Asthma</td>
+                                    <td class="Botrule">195967001</td>
+                                    <td class="Botrule">
+                                        J45.909
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Chronic obstructive pulmonary disease</td>
+                                    <td class="Botrule">13645005</td>
+                                    <td class="Botrule">
+                                        J44.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Change in skin lesion</td>
+                                    <td class="Botrule">394896005</td>
+                                    <td class="Botrule">
+                                        L98.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">1222638</span>
+                                    </td>
+                                    <td>Whisly Ng, FNP-C </td>
+                                    <td>
+                                        P3NV - 9280 Sunset - LV
+                              
+                                        <p>9280 W. Sunset Rd,Suite 200</p>
+                                        <p>LAS VEGAS, NV 89148-4861</p>
+                                    </td>
+                                    <td>02/25/2025 10:29:43</td>
+                                    <td>02/25/2025 11:40:21</td>
+                                    <td class="Botrule">Chronic obstructive pulmonary disease</td>
+                                    <td class="Botrule">13645005</td>
+                                    <td class="Botrule">
+                                        J44.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   Switch over to Wixela after finishing remaining Breyna (insurance), albuterol as needed. Reports LDCT UTD. Counseled on smoking cessation. Pt is not ready for a quit attempt at present. Will continue to encourage.   </span>
+                                        <span class="content_span">   CXR ordered, pulm referral made  </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Upper respiratory infection</td>
+                                    <td class="Botrule">54150009</td>
+                                    <td class="Botrule">
+                                        J06.9
+                                        <br/>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">   Verified with pt that she does not have azithromycin allergy. Lungs are clear today. Rec COVID test.   </span>
+                                        <span class="content_span">   Start zpak  </span>
+                                        <span class="content_span">   Monitor for improvement of symptoms.  </span>
+                                        <span class="content_span">   Seek care if experiencing adverse reaction, high fever, no improvement of symptoms, chest pain, SOB, distress  </span>
+                                        <span class="content_span">   Recommend using probiotic is having GI symptoms such as diarrhea.  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                             Increase fluids, rest, steam. Humidifier at bedside. OTC medications for symptom relief. Vitamin C and zinc for immune response and tissue repair. Salt gargles. Hydration. Call for guidance if temp &gt;100.4 or if feeling better and suddenly worse.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id18" href="#toc">Goals Section</a></h3><div>
+    
+      None Recorded
+    
+    </div><h3><a name="id19" href="#toc">Health Concerns Section</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Related Observation</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concern</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id20" href="#toc">Advance Directives</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Directive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>N: </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id21" href="#toc">Payers</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Sequence</th>
+                                    <th>Insurance Name</th>
+                                    <th>Policy Number</th>
+                                    <th>Policy Holder</th>
+                                    <th>Covered Member ID</th>
+                                    <th>Holder Member ID</th>
+                                    <th>Guarantor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">AETNA (MEDICARE REPLACEMENT HMO)</td>
+                                    <td class="Botrule">000003-NV</td>
+                                    <td class="Botrule">Jane L Glorioso</td>
+                                    <td class="Botrule">101185585100</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Jane  Glorioso</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">02/25/2025</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">AETNA (MEDICARE REPLACEMENT HMO)</td>
+                                    <td class="Botrule">000003-NV</td>
+                                    <td class="Botrule">Jane L Glorioso</td>
+                                    <td class="Botrule">101185585100</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Jane  Glorioso</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id22" href="#toc">Notes</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note Type</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">02/10/2025</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes1" class="Botrule">
+                                        <span class="content_span">   Here to establish care. Goes by Suzy   </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   She has history of COPD, asthma, severe allergies caused by different foods, plants. Also has history of anaphylaxis and has had to use her EpiPen twice prior to 2005. She has also been on biologic injections in the past. She typically avoids all peanuts, tomatoes, dairy products, eggs, most fruits. She also is a current smoker of 50+ years. Smokes 5 to 6 cigarettes a day. Reports she had a lung cancer screening scan done a few months ago.  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   Had sclerotherapy done for her varicose veins this past December and January at Vegas Vascular specialists  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <span class="content_span">   She is a primary care giver for her husband who has dementia, prostate cancer, and is deaf.  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                    </td>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+              
+                
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/10/2025 14:21:07</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">02/25/2025</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes2" class="Botrule">
+                                        <span class="content_span">   Presents today to discuss possible upper respiratory symptoms. S She did finish steroids from last time and felt better, however she lives with her grandson and helps to take care of him, notes that her grandson was recently sick and spread a sickness to her husband and herself.  </span>
+                                        <span class="content_span">   She has developed a productive cough and has been using neb treatments with her COPD/asthma. She still on Breyna and will use to remaining before she starts on Wixela. No fevers, chills. She has the perception of having shortness of breath but notes that she is still able to speak in full sentences, be physically active.  </span>
+                                        <span class="content_span">   She states she has taken Zithromax in the past without any issues.  </span>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                        <content>
+                                            <br/>
+                                        </content>
+                                    </td>
+                                    <td class="Botrule">
+                                        Whisly Ng, FNP-C
+              
+                
+                                        <p> 2370 Corporate Circle,SUITE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">02/25/2025 11:36:45</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id23" href="#toc">OBGyn Episode</a></h3><div>
+                        <p>No OBEpisode recorded.</p>
+                    </div><br/><br/></body></html>

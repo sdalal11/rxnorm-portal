@@ -1,0 +1,31 @@
+{
+  "file": "30b84503-cbdd-44d8-a8a8-61ab3eb50875.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ELIQUIS",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 29393,
+      "end_offset": 29400
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ELIQUIS",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 29437,
+      "end_offset": 29444
+    }
+  ]
+}

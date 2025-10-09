@@ -1,0 +1,1928 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:in="urn:lantana-com:inline-variable-data" xmlns:sdtc="urn:hl7-org:sdtc"><head>
+<meta charset="utf-8"><!-- Do NOT edit this HTML directly: it was generated via an XSLT transformation from a CDA Release 2 XML document. --><title>Data Portability</title><style type="text/css">
+body {
+  color: #003366;
+  background-color: #FFFFFF;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #003366;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #ffd700;
+}
+
+td {
+  padding: 0.1cm 0.2cm;
+  vertical-align: top;
+  background-color: #ffffcc;
+}
+
+.h1center {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.header_table{
+  border: 1pt inset #00008b;
+}
+
+.td_label{
+  font-weight: bold;
+  color: white;
+}
+
+.content_span{
+ font-family: Verdana, Tahoma, sans-serif;
+ display: inline;
+ white-space: pre-line;
+}
+
+.td_header_role_name{
+  width: 20%;
+  background-color: #3399ff;
+}
+
+.td_header_role_value{
+  width: 80%;
+  background-color: #ccccff;
+}
+
+.Bold{
+  font-weight: bold;
+}
+
+.Italics{
+  font-style: italic;
+}
+
+.Underline{
+  text-decoration:underline;
+}
+
+.internal_format
+{
+	list-style: none;
+	list-style-position:outside;
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+          </style></head><body><h1 class="h1center">Data Portability</h1><table class="header_table"><tr><td class="td_header_role_name"><span class="td_label">Patient</span></td><td class="td_header_role_value">Danny Dalton</td></tr><tr><td class="td_header_role_name"><span class="td_label">Date of birth</span></td><td class="td_header_role_value">October 23, 1970 </td></tr><tr><td class="td_header_role_name"><span class="td_label">Current Gender</span></td><td class="td_header_role_value">Male</td></tr><tr><td class="td_header_role_name"><span class="td_label">Race(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>White</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Ethnicity</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>Not Hispanic or Latino</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Language(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>English</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Primary Home Address:<br/>PO Box 2273<br/>Bouse, AZ 85325, USA<br/>Effective Date: September 16, 2019 <br/><br/> Postal Address:<br/>PO BOX 2273<br/>BOUSE, AZ 85325, USA<br/>Effective Date: September 16, 2019 <br/><br/>Primary Home Phone:  +1-(928) 216-6147<br/>Mobile Phone:  +1-(928) 216-6147<br/></td></tr><tr><td class="td_header_role_name"><span class="td_label">Patient IDs</span></td><td class="td_header_role_value">a-3291.E-28500 2.16.840.1.113883.3.564<br/></td></tr></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document Id</span></td><td class="td_header_role_value"> f85060b2-5ce8-4586-9f86-7e71e51f3a31</td></tr><tr><td class="td_header_role_name"><span class="td_label">Document Created:</span></td><td class="td_header_role_value">August 23, 2024, 18:18:32, EST </td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Performer </span></td><td class="td_header_role_value"><table class="header_table internal_format"><tbody><tr><td class="td_header_role_value internal_format">FRANK KRESOCK of </td></tr><tr><td class="td_header_role_value internal_format"> Work Address:<br/>1413 W 16TH ST<br/>PARKER, AZ 85344, US<br/><br/>Work Phone:   (928) 669-8161<br/></td></tr></tbody></table></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Author</span></td><td class="td_header_role_value">Document Generation Engine</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>311 Arsenal St<br/>Watertown, MA 02472, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document maintained by</span></td><td class="td_header_role_value">athenahealth</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>311 Arsenal St<br/>Watertown, MA 02472, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><h2><a name="toc">Table of Contents</a></h2><ul><li><a href="#id1">Assessment</a></li><li><a href="#id2">Plan of Treatment</a></li><li><a href="#id3">Reason for Referral</a></li><li><a href="#id4">Results</a></li><li><a href="#id5">Problems</a></li><li><a href="#id6">Procedures</a></li><li><a href="#id7">Medical Equipment</a></li><li><a href="#id8">Allergies</a></li><li><a href="#id9">Medications</a></li><li><a href="#id10">Vitals</a></li><li><a href="#id11">Social History</a></li><li><a href="#id12">Functional Status</a></li><li><a href="#id13">Mental Status</a></li><li><a href="#id14">Family History</a></li><li><a href="#id15">Medical History</a></li><li><a href="#id16">Immunizations</a></li><li><a href="#id17">Past Encounters</a></li><li><a href="#id18">Goals Section</a></li><li><a href="#id19">Health Concerns Section</a></li><li><a href="#id20">Advance Directives</a></li><li><a href="#id21">Payers</a></li><li><a href="#id22">Notes</a></li></ul><hr align="left" color="teal" size="2"/><h3><a name="id1" href="#toc">Assessment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Assessment Date</th>
+                                    <th>Assessment</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">10/15/2020</td>
+                                    <td class="Botrule">10/15/2020</td>
+                                    <td class="Botrule"> Appointment was canceled. Patient did not have procedure that this appointment was supposed to be a follow-up for. He was not seen in our office on this particular day.</td>
+                                    <td class="Botrule">pmahnke</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/12/2020 16:34:36</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id2" href="#toc">Plan of Treatment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reminders</th>
+                                    <th/>
+                                    <th>Order Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Provider</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Appointments</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Lab</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Referral</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Procedures</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Surgeries</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Imaging</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Medication Orders</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Patient Targets</span>
+                        <span class="content_span">No targets recorded.</span>
+                        <br/>
+                        <span class="content_span">Patient Instructions</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Encounter Id</th>
+                                    <th>Patient Instructions</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10/03/2019</td>
+                                    <td>287816</td>
+                                    <td>
+                                        <span class="content_span">angina: care instructions</span>
+                                    </td>
+                                    <td>fatassi2</td>
+                                    <td>Not available</td>
+                                    <td>10/04/2019 17:27:47</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">deep vein thrombosis: care instructions</span>
+                                    </td>
+                                    <td>fatassi2</td>
+                                    <td>Not available</td>
+                                    <td>10/04/2019 17:27:47</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">learning about deep vein thrombosis</span>
+                                    </td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">10/04/2019 17:27:47</td>
+                                </tr>
+                                <tr>
+                                    <td>11/14/2019</td>
+                                    <td>293258</td>
+                                    <td>
+                                        <span class="content_span">angina: care instructions</span>
+                                    </td>
+                                    <td>fatassi2</td>
+                                    <td>Not available</td>
+                                    <td>11/15/2019 23:07:38</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">deep vein thrombosis: care instructions</span>
+                                    </td>
+                                    <td>fatassi2</td>
+                                    <td>Not available</td>
+                                    <td>11/15/2019 23:07:38</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">learning about deep vein thrombosis</span>
+                                    </td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">11/15/2019 23:07:38</td>
+                                </tr>
+                                <tr>
+                                    <td>09/17/2020</td>
+                                    <td>335925</td>
+                                    <td>
+                                        <span class="content_span">deep vein thrombosis: care instructions</span>
+                                    </td>
+                                    <td>fatassi2</td>
+                                    <td>Not available</td>
+                                    <td>09/17/2020 17:44:18</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">learning about deep vein thrombosis</span>
+                                    </td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">09/17/2020 17:44:18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id3" href="#toc">Reason for Referral</a></h3><div>
+      None Reported.
+      </div><h3><a name="id4" href="#toc">Results</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Created Date</th>
+                                    <th>Observation Date</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Value</th>
+                                    <th>Unit</th>
+                                    <th>Range</th>
+                                    <th>Abnormal Flag</th>
+                                    <th>Note</th>
+                                    <th>LastModifiedBy</th>
+                                    <th>Organization Detail</th>
+                                    <th>LastModifiedTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">10/02/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">10/02/2019 17:34:27</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">10/02/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">XR, chest, 1 view</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">10/02/2019 17:34:46</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">10/02/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">CT, cervical spine, w/o contrast</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">10/02/2019 17:35:17</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">10/02/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">XR, chest, 1 view</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">10/02/2019 17:35:37</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">10/02/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">XR, shoulder</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">10/02/2019 17:36:04</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">11/04/2019</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">US, echocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">
+                                        Lakeside Heart &amp; Vascuular Center
+                                        <br/>
+                                        2082 Mesquite Ave Ste A100, Lake Havasu City, AZ, 86403, Ph (928) 453-2727
+                                    </td>
+                                    <td class="Botrule">11/04/2019 09:10:56</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">11/13/2019</td>
+                                    <td class="Botrule">10/10/2019</td>
+                                    <td class="Botrule">pharmacologic stress test</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">
+                                        La Paz Regional Hospital - Imaging
+                                        <br/>
+                                        1200 W Mohave Rd, Parker, AZ, 85344, Ph (928) 669-7325
+                                    </td>
+                                    <td class="Botrule">11/13/2019 17:58:00</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">02/02/2020</td>
+                                    <td class="Botrule">10/10/2019</td>
+                                    <td class="Botrule">pharmacologic stress test</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">
+                                        La Paz Regional Hospital
+                                        <br/>
+                                        1200 Mohave Rd, Parker, AZ, 85344, Ph (928) 669-9201
+                                    </td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/16/2020</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/16/2020</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">XR, chest, 1 view</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/16/2020</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">CT, head, w/o contrast</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/18/2020</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">
+                                        Lakeside Heart &amp; Vascuular Center
+                                        <br/>
+                                        2082 Mesquite Ave Ste A100, Lake Havasu City, AZ, 86403, Ph (928) 453-2727
+                                    </td>
+                                    <td class="Botrule">09/18/2020 13:55:31</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/24/2020</td>
+                                    <td class="Botrule">08/25/2020</td>
+                                    <td class="Botrule">XR, cervical spine, 2 or 3 view</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/24/2020 10:09:14</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/24/2020</td>
+                                    <td class="Botrule">08/25/2020</td>
+                                    <td class="Botrule">XR, lumbar spine, 1 view</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/24/2020 10:09:14</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/24/2020</td>
+                                    <td class="Botrule">08/20/2020</td>
+                                    <td class="Botrule">electrocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">09/24/2020 10:09:15</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">03/16/2022</td>
+                                    <td class="Botrule">02/24/2022</td>
+                                    <td class="Botrule">US, echocardiogram</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">
+                                        Havasu Reg Med Ctr (Rad Schedule)
+                                        <br/>
+                                        101 Civic Center Lane, Lake Havasu City, AZ, 86403, Ph (928) 302-5000
+                                    </td>
+                                    <td class="Botrule">03/16/2022 13:19:18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Result Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id5" href="#toc">Problems</a></h3><div>
+      No Known Problems
+      </div><h3><a name="id6" href="#toc">Procedures</a></h3><div>
+                        <span class="content_span">Surgical History</span>
+                        <p>None recorded.</p>
+                        <br/>
+                        <span class="content_span">Imaging Results</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Imaging Date</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule"> 10/02/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">electrocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/02/2019 17:34:27</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 10/02/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, chest, 1 view</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/02/2019 17:34:46</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 10/02/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">CT, cervical spine, w/o contrast</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/02/2019 17:35:17</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 10/02/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, chest, 1 view</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/02/2019 17:35:37</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 10/02/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, shoulder</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/02/2019 17:36:04</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 11/04/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">US, echocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">
+                                        Lakeside Heart &amp; Vascuular Center
+                
+                                        <br/>
+                                        2082 Mesquite Ave Ste A100, Lake Havasu City, AZ, 86403, Ph (928) 453-2727
+                                    </td>
+                                    <td class="Botrule">11/04/2019 09:10:56</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                10/10/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">pharmacologic stress test</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">jflores107</td>
+                                    <td class="Botrule">
+                                        La Paz Regional Hospital - Imaging
+                
+                                        <br/>
+                                        1200 W Mohave Rd, Parker, AZ, 85344, Ph (928) 669-7325
+                                    </td>
+                                    <td class="Botrule">11/13/2019 17:58:00</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                10/10/2019 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">pharmacologic stress test</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">
+                                        La Paz Regional Hospital
+                
+                                        <br/>
+                                        1200 Mohave Rd, Parker, AZ, 85344, Ph (928) 669-9201
+                                    </td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 09/16/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">electrocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 09/16/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, chest, 1 view</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 09/16/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">CT, head, w/o contrast</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">fatassi2</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/17/2020 17:42:16</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"> 09/18/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">electrocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">
+                                        Lakeside Heart &amp; Vascuular Center
+                
+                                        <br/>
+                                        2082 Mesquite Ave Ste A100, Lake Havasu City, AZ, 86403, Ph (928) 453-2727
+                                    </td>
+                                    <td class="Botrule">09/18/2020 13:55:31</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                08/25/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, cervical spine, 2 or 3 view</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/24/2020 10:09:14</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                08/25/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">XR, lumbar spine, 1 view</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/24/2020 10:09:14</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                08/20/2020 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">electrocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">BARCODE</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">09/24/2020 10:09:15</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                02/24/2022 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">US, echocardiogram</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">
+                                        Havasu Reg Med Ctr (Rad Schedule)
+                
+                                        <br/>
+                                        101 Civic Center Lane, Lake Havasu City, AZ, 86403, Ph (928) 302-5000
+                                    </td>
+                                    <td class="Botrule">03/16/2022 13:19:18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Procedure Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id7" href="#toc">Medical Equipment</a></h3><div>
+      None Reported.
+      </div><h3><a name="id8" href="#toc">Allergies</a></h3><div>
+                        <p>
+                            <span class="content_span">No known drug allergies</span>
+                        </p>
+                    </div><h3><a name="id9" href="#toc">Medications</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sig</th>
+                                    <th>Start Date</th>
+                                    <th>Stop Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    atorvastatin 40 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    simvastatin 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  09/17/2020</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    tramadol 50 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route as needed.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Flomax 0.4 mg capsule,extended release
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 capsule every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    simvastatin 40 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    benzonatate 100 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 capsule 3 times a day by oral route as needed.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    paroxetine 20 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 0.5 tablets every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  09/17/2020</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    gabapentin 100 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 3 capsules every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    nicotine 7 mg/24 hr daily transdermal patch
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Apply 1 patch every day by transdermal route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Benadryl 25 mg capsule
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 capsule as needed by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    zolpidem 5 mg sublingual tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Place 1 tablet every day by sublingual route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Xarelto 15 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet every day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                  09/17/2020</td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    Eliquis 5 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Take 1 tablet twice a day by oral route.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id10" href="#toc">Vitals</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Body weight</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body height</th>
+                                    <th>Heart rate</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">10/03/2019</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">16 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">135261.24 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">38.3 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">187.96 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">101 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">128 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">82 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Madison Colby
+                        
+                      </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">10/03/2019 15:20:49</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Heart rate</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">11/14/2019</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">187.96 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">16 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">38.3 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">135442.68 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">90 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">95 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">95 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">118 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">82 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Madison Colby
+                        
+                      </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">11/14/2019 17:52:28</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Heart rate</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">09/17/2020</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">187.96 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">16 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">40.3 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">142428 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">103 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">98 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">98 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">140 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">60 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Kristi Ashley
+                        
+                      </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">09/17/2020 17:06:29</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id11" href="#toc">Social History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Notes</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Tobacco Smoking Status</span>
+                                    </td>
+                                    <td>Current Every Day Smoker</td>
+                                    <td/>
+                                    <td class="Botrule">
+                                        Madison Colby
+                  
+                    
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">10/03/2019 15:15:37</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have An Advance Directive?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Level Of Alcohol Consumption?</td>
+                                    <td>None</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>Diabetes</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>What Type Of Diet Are You Following?</td>
+                                    <td>REGULAR</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>Which Illicit Or Recreational Drugs Have You Used?</td>
+                                    <td>Denies</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Occupation?</td>
+                                    <td>Housekeeper</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>Family History Of Heart Disease?</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>High Blood Pressure</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>High Cholesterol</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>Marital Status</td>
+                                    <td>Single</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>How Much Tobacco Do You Smoke?</td>
+                                    <td>0.5 PPD</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                                <tr>
+                                    <td>General Stress Level</td>
+                                    <td>Low</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Birth Sex: Unknown</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id12" href="#toc">Functional Status</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>What is your exercise level?</td>
+                                    <td>None</td>
+                                    <td/>
+                                    <td class="Botrule">mcolby5</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">10/03/2019</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id13" href="#toc">Mental Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id14" href="#toc">Family History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Relationship</th>
+                                    <th>Description</th>
+                                    <th>Onset Age</th>
+                                    <th>Died of this Age</th>
+                                    <th>Resolved Age</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Mother</td>
+                                    <td class="Botrule">Heart disease</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id15" href="#toc">Medical History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Condition</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Coronary Artery Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">CVA/TIA (Stroke)</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Neurologic Disorder (Parkinson's, tremor, MS)</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">COPD</td>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Depression/Anxiety</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Peripheral Arterial Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Pacemaker</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Anemia</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Genitourinary Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Heart Attack (MI)</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Gastrointestinal Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Deep Vein Thrombosis</td>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Diabetes</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Cardiomyopathy</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Antiplatelet/Anticoagulant Therapy</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Congestive Heart Failure (CHF)</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Hyperlipidemia</td>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Cancer</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Asthma</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Aortic Aneurysm</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Liver Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Valvular Abnormalities</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Arrhythmia</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Hypertension</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Kidney Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Hematologic Disease</td>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id16" href="#toc">Immunizations</a></h3><div>
+    
+      None recorded.
+      </div><h3><a name="id17" href="#toc">Past Encounters</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter ID</th>
+                                    <th>Performer</th>
+                                    <th>Location</th>
+                                    <th>Encounter Start Date</th>
+                                    <th>Encounter Closed Date</th>
+                                    <th>Diagnosis/Indication</th>
+                                    <th>Diagnosis SNOMED-CT Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">287816</span>
+                                    </td>
+                                    <td>Fadi Atassi, MD </td>
+                                    <td>
+                                        OFFICE - PARKER (SPECIALTY OFFICE)
+                              
+                                        <p>1016 S. Joshua Ave.</p>
+                                        <p>PARKER, AZ 85344-5027</p>
+                                    </td>
+                                    <td>10/03/2019 14:59:54</td>
+                                    <td>10/04/2019 17:27:09</td>
+                                    <td class="Botrule">Angina pectoris</td>
+                                    <td class="Botrule">194828000</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Deep venous thrombosis</td>
+                                    <td class="Botrule">128053003</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Mixed hyperlipidemia</td>
+                                    <td class="Botrule">267434003</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">293258</span>
+                                    </td>
+                                    <td>Fadi Atassi, MD </td>
+                                    <td>
+                                        OFFICE - PARKER (SPECIALTY OFFICE)
+                              
+                                        <p>1016 S. Joshua Ave.</p>
+                                        <p>PARKER, AZ 85344-5027</p>
+                                    </td>
+                                    <td>11/14/2019 16:47:50</td>
+                                    <td>11/15/2019 23:07:08</td>
+                                    <td class="Botrule">Angina pectoris</td>
+                                    <td class="Botrule">194828000</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Deep venous thrombosis</td>
+                                    <td class="Botrule">128053003</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Mixed hyperlipidemia</td>
+                                    <td class="Botrule">267434003</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="content_span">335925</span>
+                                    </td>
+                                    <td>Fadi Atassi, MD </td>
+                                    <td>
+                                        OFFICE - PARKER (SPECIALTY OFFICE)
+                              
+                                        <p>1016 S. Joshua Ave.</p>
+                                        <p>PARKER, AZ 85344-5027</p>
+                                    </td>
+                                    <td>09/17/2020 16:36:58</td>
+                                    <td>05/10/2021 03:48:30</td>
+                                    <td class="Botrule">History of cerebrovascular accident</td>
+                                    <td class="Botrule">275526006</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Dyslipidemia</td>
+                                    <td class="Botrule">370992007</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Deep venous thrombosis</td>
+                                    <td class="Botrule">128053003</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">339781</span>
+                                    </td>
+                                    <td class="Botrule">PAUL MAHNKE, NP </td>
+                                    <td class="Botrule">
+                                        OFFICE - PARKER (SPECIALTY OFFICE)
+                        
+                                        <p>1016 S. Joshua Ave.</p>
+                                        <p>PARKER, AZ 85344-5027</p>
+                                    </td>
+                                    <td class="Botrule">10/15/2020 16:21:52</td>
+                                    <td class="Botrule">11/12/2020 16:34:49</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id18" href="#toc">Goals Section</a></h3><div>
+    
+      None Recorded
+    
+    </div><h3><a name="id19" href="#toc">Health Concerns Section</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Related Observation</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concern</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id20" href="#toc">Advance Directives</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Directive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>N: </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id21" href="#toc">Payers</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Sequence</th>
+                                    <th>Insurance Name</th>
+                                    <th>Policy Number</th>
+                                    <th>Policy Holder</th>
+                                    <th>Covered Member ID</th>
+                                    <th>Holder Member ID</th>
+                                    <th>Guarantor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">10/03/2019</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">90 DEGREE BENEFITS</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                    <td class="Botrule">220230900</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">11/14/2019</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">90 DEGREE BENEFITS</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                    <td class="Botrule">220230900</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/17/2020</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">90 DEGREE BENEFITS</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                    <td class="Botrule">220230900</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">10/15/2020</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">CENTENE - ARIZONA COMPLETE HEALTH - IFP - AMBETTER (HMO)</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                    <td class="Botrule">A14654824</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Danny  Dalton</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id22" href="#toc">Notes</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note Type</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">10/03/2019</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes1" class="Botrule">HPI Notes: Mr. Dalton is a 48 year old male with hyperlipidemia and a family history of heart disease. He comes in today to establish cardiac care and for a follow up after a hospital stay for CP. He complains of one episode of CP that radiated into his L arm and the L side of his neck. He complains of occasional dizziness. He denies SOB and swelling in BLE. He has no other complaints today.</td>
+                                    <td class="Botrule">
+                                        Fadi Atassi, MD
+              
+                
+                                        <p> 2082 Mesquite Avenue,STE 100A,   Lake Havasu City,  </p>
+                                        <p> AZ,   86403-6710, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">10/04/2019 17:27:50</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">11/14/2019</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes2" class="Botrule">HPI Notes: Mr. Dalton is a 49 year old male with hyperlipidemia and a family history of heart disease. He comes in today for a follow up after testing. He denies CP, SOB, dizziness, and swelling in BLE. He has no other complaints today.</td>
+                                    <td class="Botrule">
+                                        Fadi Atassi, MD
+              
+                
+                                        <p> 2082 Mesquite Avenue,STE 100A,   Lake Havasu City,  </p>
+                                        <p> AZ,   86403-6710, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">11/15/2019 23:07:42</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">09/17/2020</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes3" class="Botrule">HPI Notes: Mr. Dalton is a 49 year old male with hyperlipidemia and a family history of heart disease. He comes in today for a HFU. Pt mother states that throught a cervical fusion, pt ended up having 3 stroke on L side, and has 2 blood clots, one located in the brain and the other in L BLE. HE states that he has SOB and dizziness and he has pain in BLE. PT denies CP, and swelling in BLE.</td>
+                                    <td class="Botrule">
+                                        Fadi Atassi, MD
+              
+                
+                                        <p> 2082 Mesquite Avenue,STE 100A,   Lake Havasu City,  </p>
+                                        <p> AZ,   86403-6710, US </p>
+                                    </td>
+                                    <td class="Botrule">AZ - Lakeside Heart and Vascular Center </td>
+                                    <td class="Botrule">09/17/2020 17:44:41</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><br/><br/></body></html>

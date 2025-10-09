@@ -1,0 +1,96 @@
+{
+  "file": "8178e805-2c84-4937-bf3c-efcbdde8c4ec.html",
+  "medications": [
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Farxiga",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10129,
+      "end_offset": 10136
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "FARXIGA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 15246,
+      "end_offset": 15253
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "FARXIGA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 15457,
+      "end_offset": 15464
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Farxiga",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 25361,
+      "end_offset": 25368
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Farxiga",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 26348,
+      "end_offset": 26355
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "FARXIGA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 30698,
+      "end_offset": 30705
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "FARXIGA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 30896,
+      "end_offset": 30903
+    }
+  ]
+}

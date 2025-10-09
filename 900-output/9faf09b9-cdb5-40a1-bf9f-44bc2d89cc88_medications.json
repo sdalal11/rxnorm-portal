@@ -1,0 +1,70 @@
+{
+  "file": "9faf09b9-cdb5-40a1-bf9f-44bc2d89cc88.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20542,
+      "end_offset": 20552
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20783,
+      "end_offset": 20791
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "LOPRESSOR",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20554,
+      "end_offset": 20563
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COUMADIN",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20793,
+      "end_offset": 20801
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Coumadin",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21955,
+      "end_offset": 21963
+    }
+  ]
+}

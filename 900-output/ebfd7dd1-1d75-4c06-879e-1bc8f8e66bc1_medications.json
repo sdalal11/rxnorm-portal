@@ -1,0 +1,122 @@
+{
+  "file": "ebfd7dd1-1d75-4c06-879e-1bc8f8e66bc1.html",
+  "medications": [
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17813,
+      "end_offset": 17822
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18213,
+      "end_offset": 18222
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18287,
+      "end_offset": 18296
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18705,
+      "end_offset": 18715
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ELIQUIS",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18545,
+      "end_offset": 18552
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Aricept",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 17824,
+      "end_offset": 17831
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "ARICEPT",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18224,
+      "end_offset": 18231
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "namenda",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17953,
+      "end_offset": 17960
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "NAMENDA",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18298,
+      "end_offset": 18305
+    }
+  ]
+}

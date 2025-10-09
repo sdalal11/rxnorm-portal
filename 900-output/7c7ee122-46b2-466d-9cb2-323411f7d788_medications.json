@@ -1,0 +1,31 @@
+{
+  "file": "7c7ee122-46b2-466d-9cb2-323411f7d788.html",
+  "medications": [
+    {
+      "rx_cui": "31555",
+      "normalized_name": "nebivolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "nebivoloL",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 15473,
+      "end_offset": 15482
+    },
+    {
+      "rx_cui": "31555",
+      "normalized_name": "nebivolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "BYSTOLIC",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 15484,
+      "end_offset": 15492
+    }
+  ]
+}

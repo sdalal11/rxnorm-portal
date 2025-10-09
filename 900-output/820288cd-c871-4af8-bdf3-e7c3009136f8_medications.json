@@ -1,0 +1,31 @@
+{
+  "file": "820288cd-c871-4af8-bdf3-e7c3009136f8.html",
+  "medications": [
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 5078,
+      "end_offset": 5086
+    },
+    {
+      "rx_cui": "11289",
+      "normalized_name": "warfarin",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Warfarin",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7783,
+      "end_offset": 7791
+    }
+  ]
+}

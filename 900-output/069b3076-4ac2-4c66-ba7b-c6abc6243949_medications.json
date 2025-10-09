@@ -1,0 +1,122 @@
+{
+  "file": "069b3076-4ac2-4c66-ba7b-c6abc6243949.html",
+  "medications": [
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13330,
+      "end_offset": 13339
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 16828,
+      "end_offset": 16837
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17484,
+      "end_offset": 17493
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "donepezil",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18066,
+      "end_offset": 18075
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13368,
+      "end_offset": 13377
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Memantine",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 16882,
+      "end_offset": 16891
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 17522,
+      "end_offset": 17531
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18104,
+      "end_offset": 18113
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 12774,
+      "end_offset": 12781
+    }
+  ]
+}

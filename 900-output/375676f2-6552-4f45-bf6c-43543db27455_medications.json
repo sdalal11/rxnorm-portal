@@ -1,0 +1,96 @@
+{
+  "file": "375676f2-6552-4f45-bf6c-43543db27455.html",
+  "medications": [
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9864,
+      "end_offset": 9871
+    },
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11618,
+      "end_offset": 11625
+    },
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 14410,
+      "end_offset": 14417
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8488,
+      "end_offset": 8495
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10013,
+      "end_offset": 10020
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11722,
+      "end_offset": 11729
+    },
+    {
+      "rx_cui": "1945038",
+      "normalized_name": "fluticasone / umeclidinium / vilanterol",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Trelegy",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 14586,
+      "end_offset": 14593
+    }
+  ]
+}

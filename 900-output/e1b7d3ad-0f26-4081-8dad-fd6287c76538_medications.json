@@ -1,0 +1,57 @@
+{
+  "file": "e1b7d3ad-0f26-4081-8dad-fd6287c76538.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10710,
+      "end_offset": 10720
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 14794,
+      "end_offset": 14804
+    },
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10051,
+      "end_offset": 10061
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Farxiga",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9920,
+      "end_offset": 9927
+    }
+  ]
+}

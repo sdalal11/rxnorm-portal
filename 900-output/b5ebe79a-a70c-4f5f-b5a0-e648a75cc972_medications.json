@@ -1,0 +1,31 @@
+{
+  "file": "b5ebe79a-a70c-4f5f-b5a0-e648a75cc972.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Coreg",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10980,
+      "end_offset": 10985
+    },
+    {
+      "rx_cui": "1488564",
+      "normalized_name": "dapagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Farxiga",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11306,
+      "end_offset": 11313
+    }
+  ]
+}

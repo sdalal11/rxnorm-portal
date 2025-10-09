@@ -1,0 +1,83 @@
+{
+  "file": "bc26257b-4e4e-4bf8-88cd-4b3b9f3c51bf.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 10580,
+      "end_offset": 10590
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20400,
+      "end_offset": 20410
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21068,
+      "end_offset": 21078
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 10727,
+      "end_offset": 10735
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20520,
+      "end_offset": 20528
+    },
+    {
+      "rx_cui": "1656339",
+      "normalized_name": "sacubitril / valsartan",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Entresto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21202,
+      "end_offset": 21210
+    }
+  ]
+}

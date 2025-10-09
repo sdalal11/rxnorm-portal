@@ -1,0 +1,31 @@
+{
+  "file": "024fa595-cb92-4ea8-89ff-be1118382242.html",
+  "medications": [
+    {
+      "rx_cui": "1545653",
+      "normalized_name": "empagliflozin",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Jardiance",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 7517,
+      "end_offset": 7526
+    },
+    {
+      "rx_cui": "69120",
+      "normalized_name": "tiotropium",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Spiriva",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 8644,
+      "end_offset": 8651
+    }
+  ]
+}

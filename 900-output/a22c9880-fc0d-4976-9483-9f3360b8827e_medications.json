@@ -1,0 +1,31 @@
+{
+  "file": "a22c9880-fc0d-4976-9483-9f3360b8827e.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 28304,
+      "end_offset": 28314
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "TOPROL-XL",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 28316,
+      "end_offset": 28325
+    }
+  ]
+}

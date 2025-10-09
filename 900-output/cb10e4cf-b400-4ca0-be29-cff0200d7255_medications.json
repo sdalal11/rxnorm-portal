@@ -1,0 +1,31 @@
+{
+  "file": "cb10e4cf-b400-4ca0-be29-cff0200d7255.html",
+  "medications": [
+    {
+      "rx_cui": "4603",
+      "normalized_name": "furosemide",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Furosemide",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8842,
+      "end_offset": 8852
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7104,
+      "end_offset": 7113
+    }
+  ]
+}

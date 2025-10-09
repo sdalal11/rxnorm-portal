@@ -1,0 +1,31 @@
+{
+  "file": "98d15da8-adc2-4c36-a995-c85fdd7c479e.html",
+  "medications": [
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 47650,
+      "end_offset": 47657
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "sorine",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 58726,
+      "end_offset": 58732
+    }
+  ]
+}

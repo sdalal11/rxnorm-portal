@@ -1,0 +1,31 @@
+{
+  "file": "6761a1d6-210e-467e-8ecc-0f6f94d9ea24.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 7725,
+      "end_offset": 7735
+    },
+    {
+      "rx_cui": "2387330",
+      "normalized_name": "budesonide / formoterol / glycopyrronium",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Breztri",
+      "confidence": 0.96,
+      "active_status": "non-active",
+      "start_offset": 7567,
+      "end_offset": 7574
+    }
+  ]
+}

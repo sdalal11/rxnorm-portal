@@ -1,0 +1,109 @@
+{
+  "file": "49766fd2-8faf-4497-808c-4e06e4c13d5f.html",
+  "medications": [
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 16375,
+      "end_offset": 16382
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 31217,
+      "end_offset": 31224
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Sotalol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 31879,
+      "end_offset": 31886
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16666,
+      "end_offset": 16673
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 21732,
+      "end_offset": 21739
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 31354,
+      "end_offset": 31361
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 32030,
+      "end_offset": 32037
+    },
+    {
+      "rx_cui": "1114195",
+      "normalized_name": "rivaroxaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Xarelto",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 35534,
+      "end_offset": 35541
+    }
+  ]
+}

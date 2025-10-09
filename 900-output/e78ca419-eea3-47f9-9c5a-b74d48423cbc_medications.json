@@ -1,0 +1,109 @@
+{
+  "file": "e78ca419-eea3-47f9-9c5a-b74d48423cbc.html",
+  "medications": [
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13032,
+      "end_offset": 13043
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 14463,
+      "end_offset": 14474
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 19118,
+      "end_offset": 19129
+    },
+    {
+      "rx_cui": "84857",
+      "normalized_name": "anastrozole",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Anastrozole",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 38994,
+      "end_offset": 39005
+    },
+    {
+      "rx_cui": "10324",
+      "normalized_name": "tamoxifen",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Tamoxifen",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 13047,
+      "end_offset": 13056
+    },
+    {
+      "rx_cui": "10324",
+      "normalized_name": "tamoxifen",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Tamoxifen",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 14478,
+      "end_offset": 14487
+    },
+    {
+      "rx_cui": "10324",
+      "normalized_name": "tamoxifen",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Tamoxifen",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19133,
+      "end_offset": 19142
+    },
+    {
+      "rx_cui": "10324",
+      "normalized_name": "tamoxifen",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Tamoxifen",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 39009,
+      "end_offset": 39018
+    }
+  ]
+}

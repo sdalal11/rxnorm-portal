@@ -1,0 +1,57 @@
+{
+  "file": "b628f2db-c511-4d26-b10d-2f17956052df.html",
+  "medications": [
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16255,
+      "end_offset": 16263
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 17763,
+      "end_offset": 17771
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 21095,
+      "end_offset": 21103
+    },
+    {
+      "rx_cui": "7242",
+      "normalized_name": "naloxone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Naloxone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 23867,
+      "end_offset": 23875
+    }
+  ]
+}

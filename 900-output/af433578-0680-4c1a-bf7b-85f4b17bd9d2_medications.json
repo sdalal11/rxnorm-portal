@@ -1,0 +1,57 @@
+{
+  "file": "af433578-0680-4c1a-bf7b-85f4b17bd9d2.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 14006,
+      "end_offset": 14016
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "sorine",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9022,
+      "end_offset": 9028
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "sorine",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 17341,
+      "end_offset": 17347
+    },
+    {
+      "rx_cui": "9947",
+      "normalized_name": "sotalol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "sorine",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 20966,
+      "end_offset": 20972
+    }
+  ]
+}

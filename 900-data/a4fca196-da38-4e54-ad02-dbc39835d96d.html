@@ -1,0 +1,2828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:in="urn:lantana-com:inline-variable-data" xmlns:sdtc="urn:hl7-org:sdtc"><head>
+<meta charset="utf-8"><!-- Do NOT edit this HTML directly: it was generated via an XSLT transformation from a CDA Release 2 XML document. --><title>Data Portability</title><style type="text/css">
+body {
+  color: #003366;
+  background-color: #FFFFFF;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: #003366;
+  background-color: #FFFFFF;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #ffd700;
+}
+
+td {
+  padding: 0.1cm 0.2cm;
+  vertical-align: top;
+  background-color: #ffffcc;
+}
+
+.h1center {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.header_table{
+  border: 1pt inset #00008b;
+}
+
+.td_label{
+  font-weight: bold;
+  color: white;
+}
+
+.content_span{
+ font-family: Verdana, Tahoma, sans-serif;
+ display: inline;
+ white-space: pre-line;
+}
+
+.td_header_role_name{
+  width: 20%;
+  background-color: #3399ff;
+}
+
+.td_header_role_value{
+  width: 80%;
+  background-color: #ccccff;
+}
+
+.Bold{
+  font-weight: bold;
+}
+
+.Italics{
+  font-style: italic;
+}
+
+.Underline{
+  text-decoration:underline;
+}
+
+.internal_format
+{
+	list-style: none;
+	list-style-position:outside;
+	margin:0;
+	padding:0;
+	border:0;
+	border-collapse: collapse;
+}
+          </style></head><body><h1 class="h1center">Data Portability</h1><table class="header_table"><tr><td class="td_header_role_name"><span class="td_label">Patient</span></td><td class="td_header_role_value">Teresa White</td></tr><tr><td class="td_header_role_name"><span class="td_label">Date of birth</span></td><td class="td_header_role_value">October 27, 1957 </td></tr><tr><td class="td_header_role_name"><span class="td_label">Current Gender</span></td><td class="td_header_role_value">Female</td></tr><tr><td class="td_header_role_name"><span class="td_label">Race(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>White</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Ethnicity</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>Not Hispanic or Latino</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Language(s)</span></td><td class="td_header_role_value"><ul style="list-style: none;list-style-position:outside;margin:0;padding:0; "><li>English</li></ul></td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Primary Home Address:<br/>101 JANICE ESTELLE DR<br/>101JANICEESTELLE DR<br/>LAS VEGAS, NV 89107, USA<br/>Effective Date: May 7, 2024 <br/><br/> Postal Address:<br/>101 JANICE ESTELLE DR<br/>101JANICEESTELLE DR<br/>LAS VEGAS, NV 89107, USA<br/>Effective Date: May 7, 2024 <br/><br/> Previous Address:<br/>101 JANICE ESTELLE DR<br/>LAS VEGAS, NV 89107, USA<br/>Effective Date: April 18, 2024 <br/>Expiration Date: May 7, 2024 <br/><br/> Previous Address:<br/>101 JANICE ESTELLE DR<br/>LAS VEGAS, NV 89107, USA<br/>Effective Date: April 18, 2024 <br/>Expiration Date: May 7, 2024 <br/><br/>Primary Home Phone:  +1-(317) 987-7954<br/>Mobile Phone:  +1-(317) 987-7954<br/></td></tr><tr><td class="td_header_role_name"><span class="td_label">Patient IDs</span></td><td class="td_header_role_value">a-17520.E-131308 2.16.840.1.113883.3.564<br/></td></tr></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document Id</span></td><td class="td_header_role_value"> 3587fb18-17b0-4830-8cb7-2b9e4d60653a</td></tr><tr><td class="td_header_role_name"><span class="td_label">Document Created:</span></td><td class="td_header_role_value">July 30, 2024, 14:59:48, EST </td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Performer </span></td><td class="td_header_role_value"><table class="header_table internal_format"><tbody><tr><td class="td_header_role_value internal_format">SCHADREY BONDS of </td></tr><tr><td class="td_header_role_value internal_format"> Work Address:<br/><br/>, US<br/><br/><br/></td></tr></tbody></table></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Author</span></td><td class="td_header_role_value">Document Generation Engine</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>311 Arsenal St<br/>Watertown, MA 02472, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><table class="header_table"><tbody><tr><td class="td_header_role_name"><span class="td_label">Document maintained by</span></td><td class="td_header_role_value">athenahealth</td></tr><tr><td class="td_header_role_name"><span class="td_label">Contact info</span></td><td class="td_header_role_value"> Work Address:<br/>311 Arsenal St<br/>Watertown, MA 02472, US<br/><br/>Work Phone:  +1-617-4021000<br/></td></tr></tbody></table><h2><a name="toc">Table of Contents</a></h2><ul><li><a href="#id1">Assessment</a></li><li><a href="#id2">Plan of Treatment</a></li><li><a href="#id3">Reason for Referral</a></li><li><a href="#id4">Results</a></li><li><a href="#id5">Problems</a></li><li><a href="#id6">Procedures</a></li><li><a href="#id7">Medical Equipment</a></li><li><a href="#id8">Allergies</a></li><li><a href="#id9">Medications</a></li><li><a href="#id10">Vitals</a></li><li><a href="#id11">Social History</a></li><li><a href="#id12">Functional Status</a></li><li><a href="#id13">Mental Status</a></li><li><a href="#id14">Family History</a></li><li><a href="#id15">Medical History</a></li><li><a href="#id16">Immunizations</a></li><li><a href="#id17">Past Encounters</a></li><li><a href="#id18">Goals Section</a></li><li><a href="#id19">Health Concerns Section</a></li><li><a href="#id20">Advance Directives</a></li><li><a href="#id21">Payers</a></li><li><a href="#id22">Notes</a></li><li><a href="#id23">OBGyn Episode</a></li></ul><hr align="left" color="teal" size="2"/><h3><a name="id1" href="#toc">Assessment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Assessment Date</th>
+                                    <th>Assessment</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">Records requested</td>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">05/07/2024 16:00:03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id2" href="#toc">Plan of Treatment</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Reminders</th>
+                                    <th/>
+                                    <th>Order Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Provider</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Appointments</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">M-FOLLOW-UP 30</span>
+                                    </td>
+                                    <td class="Botrule">
+    08/06/2024 11:30AM
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">SCHADREY BONDS, NP-C</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Lab</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">CBC w/ auto diff</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Labcorp PSC, 3480 S Jones Blvd, Las Vegas, NV, 89146, Ph (702) 941-1918</td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">CMP, serum or plasma</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      Labcorp PSC, 3480 S Jones Blvd, Las Vegas, NV, 89146, Ph (702) 941-1918</td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">hemoglobin, qual FIT, stool</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      Labcorp PSC, 3480 S Jones Blvd, Las Vegas, NV, 89146, Ph (702) 941-1918</td>
+                                    <td class="Botrule">05/07/2024 16:09:40</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">Hepatitis C IgG Ab, qual, serum</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      Labcorp PSC, 3480 S Jones Blvd, Las Vegas, NV, 89146, Ph (702) 941-1918</td>
+                                    <td class="Botrule">05/07/2024 16:09:41</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">TSH, ultra-sensitive, serum</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      Labcorp PSC, 3480 S Jones Blvd, Las Vegas, NV, 89146, Ph (702) 941-1918</td>
+                                    <td class="Botrule">05/07/2024 16:09:41</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Referral</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">dermatologist referral - #referral department#A</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENAFAX</td>
+                                    <td class="Botrule">
+      Vivida Dermatology Gen Derm, 2110 E Flamingo Rd, Ste 213, Las Vegas, NV, 89119, Ph (702) 255-6647</td>
+                                    <td class="Botrule">05/13/2024 20:20:34</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Procedures</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Surgeries</span>
+                                    </td>
+                                    <td class="Botrule">
+    None recorded.
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Imaging</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">arterial study, non-invasive physiologic, extremity</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      P3nv - 4275 Burnham, 4275 Burnham Avenue, Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221</td>
+                                    <td class="Botrule">05/07/2024 16:09:49</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">arterial study, non-invasive physiologic, extremity</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">ATHENA</td>
+                                    <td class="Botrule">
+      P3nv - 4275 Burnham, 4275 Burnham Avenue, Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221</td>
+                                    <td class="Botrule">05/07/2024 16:33:52</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">MAMMO, screening, digital, bilateral</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+      Desert Radiology - South Rainbow, 3025 S Rainbow Blvd, Las Vegas, NV, 89146, Ph (702) 759-8600</td>
+                                    <td class="Botrule">05/21/2024 19:24:10</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">DEXA, axial skeleton</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      Desert Radiology - South Rainbow, 3025 S Rainbow Blvd, Las Vegas, NV, 89146, Ph (702) 759-8600</td>
+                                    <td class="Botrule">05/07/2024 16:09:40</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="Bold">Medication Orders</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">albuterol sulfate HFA 90 mcg/actuation aerosol inhaler</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #8819, 4800 W Charleston Blvd., Las Vegas, NV, 89146, Ph (702) 877-6230</td>
+                                    <td class="Botrule">05/07/2024 16:09:41</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">lisinopril 10 mg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #8819, 4800 W Charleston Blvd., Las Vegas, NV, 89146, Ph (702) 877-6230</td>
+                                    <td class="Botrule">05/07/2024 16:09:39</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">levothyroxine 25 mcg tablet</span>
+                                    </td>
+                                    <td class="Botrule">
+    05/07/2024
+  </td>
+                                    <td class="Botrule">
+    
+      05/07/2024
+    
+  </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+      CVS/Pharmacy #8819, 4800 W Charleston Blvd., Las Vegas, NV, 89146, Ph (702) 877-6230</td>
+                                    <td class="Botrule">05/07/2024 16:09:39</td>
+                                    <td class="Botrule"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Patient Targets</span>
+                        <span class="content_span">No targets recorded.</span>
+                        <br/>
+                        <span class="content_span">Patient Instructions</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Encounter Id</th>
+                                    <th>Patient Instructions</th>
+                                    <th>Last Modified By</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Modified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>05/07/2024</td>
+                                    <td>1092374</td>
+                                    <td>
+                                        <span class="content_span">advance care planning: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">chronic obstructive pulmonary disease (COPD): care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:41</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">learning about copd and how to prevent lung infections</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:41</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">high blood pressure: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:41</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">learning about high blood pressure</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:41</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">spirometry testing*</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:46</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">eating healthy foods: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">preventing falls: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">P3 CV Handout</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">Patient Wellness Plan</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">learning about opioids</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:40</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">Learning About Peripheral Arterial Disease (PAD)</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:40</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">learning about breast cancer screening</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:40</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">preventing osteoporosis: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:39</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        <span class="content_span">colon cancer screening: care instructions</span>
+                                    </td>
+                                    <td>sbonds4</td>
+                                    <td>Not available</td>
+                                    <td>05/07/2024 16:09:40</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">hypothyroidism: care instructions</span>
+                                    </td>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">Not available</td>
+                                    <td class="Botrule">05/07/2024 16:09:41</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id3" href="#toc">Reason for Referral</a></h3><div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        Dermatologist Referral for Dysplastic nevus of skin
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        #referral department#A
+                                        <br/>
+                                        <br/>
+                                        Referring Physician: Schadrey Bonds, Family Medicine, (702) 888-3221
+                                        <br/>
+                                        Encounter Date: 05/07/2024
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id4" href="#toc">Results</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Created Date</th>
+                                    <th>Observation Date</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Value</th>
+                                    <th>Unit</th>
+                                    <th>Range</th>
+                                    <th>Abnormal Flag</th>
+                                    <th>LastModifiedBy</th>
+                                    <th>Organization Detail</th>
+                                    <th>LastModifiedTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/07/2024
+                </td>
+                                    <td class="Botrule">spirometry testing*</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Spirometry</span>
+                                    </td>
+                                    <td class="Botrule">abnormal</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">abnormal</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 14:25:26</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">HEPATITIS C REFLEX PCR</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">hepatitis C antibody</span>
+                                    </td>
+                                    <td class="Botrule">REACTIVE</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">non-reactive</td>
+                                    <td class="Botrule">abnormal</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:53</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">TSH, THIRD GENERATION</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TSH, third generation</span>
+                                    </td>
+                                    <td class="Botrule">2.960</td>
+                                    <td class="Botrule">uIU/mL</td>
+                                    <td class="Botrule">0.400-4.100</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:53</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">WBC</span>
+                                    </td>
+                                    <td class="Botrule">4.3</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">3.5-11.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">RBC</span>
+                                    </td>
+                                    <td class="Botrule">4.37</td>
+                                    <td class="Botrule">M/uL</td>
+                                    <td class="Botrule">3.80-5.40</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">hemoglobin</span>
+                                    </td>
+                                    <td class="Botrule">14.3</td>
+                                    <td class="Botrule">g/dL</td>
+                                    <td class="Botrule">11.5-15.5</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">hematocrit</span>
+                                    </td>
+                                    <td class="Botrule">41.6</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule">34.0-45.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">MCV</span>
+                                    </td>
+                                    <td class="Botrule">95.2</td>
+                                    <td class="Botrule">fL</td>
+                                    <td class="Botrule">80.0-99.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">MCH</span>
+                                    </td>
+                                    <td class="Botrule">32.7</td>
+                                    <td class="Botrule">pg</td>
+                                    <td class="Botrule">25.0-33.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">MCHC</span>
+                                    </td>
+                                    <td class="Botrule">34.4</td>
+                                    <td class="Botrule">g/dL</td>
+                                    <td class="Botrule">31.0-36.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">RDW</span>
+                                    </td>
+                                    <td class="Botrule">13.1</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule">11.5-15.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">neutrophils</span>
+                                    </td>
+                                    <td class="Botrule">65.5</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">lymphocytes</span>
+                                    </td>
+                                    <td class="Botrule">24.7</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">monocytes</span>
+                                    </td>
+                                    <td class="Botrule">8.4</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">eosinophils</span>
+                                    </td>
+                                    <td class="Botrule">0.7</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">basophils</span>
+                                    </td>
+                                    <td class="Botrule">0.5</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">immature granulocytes</span>
+                                    </td>
+                                    <td class="Botrule">0.2</td>
+                                    <td class="Botrule">%</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">nucleated RBCs</span>
+                                    </td>
+                                    <td class="Botrule">0.0</td>
+                                    <td class="Botrule">/100_WBC's</td>
+                                    <td class="Botrule">0.0</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">platelet count</span>
+                                    </td>
+                                    <td class="Botrule">70</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">130-400</td>
+                                    <td class="Botrule">low</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">absolute neutrophils</span>
+                                    </td>
+                                    <td class="Botrule">2.81</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">1.50-7.50</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">absolute lymphocytes</span>
+                                    </td>
+                                    <td class="Botrule">1.06</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">1.00-4.00</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">absolute monocytes</span>
+                                    </td>
+                                    <td class="Botrule">0.36</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">0.20-1.00</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">absolute eosinophils</span>
+                                    </td>
+                                    <td class="Botrule">0.03</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">0.00-0.50</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">absolute basophils</span>
+                                    </td>
+                                    <td class="Botrule">0.02</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">0.00-0.20</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">abs immature granulocytes</span>
+                                    </td>
+                                    <td class="Botrule">0.01</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">0.00-0.10</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/08/2024
+                </td>
+                                    <td class="Botrule">CBC W/AUTO DIFF WITH PLATELETS</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">abs nucleated RBCs</span>
+                                    </td>
+                                    <td class="Botrule">0.00</td>
+                                    <td class="Botrule">K/uL</td>
+                                    <td class="Botrule">0.00-0.11</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">glucose</span>
+                                    </td>
+                                    <td class="Botrule">82</td>
+                                    <td class="Botrule">mg/dL</td>
+                                    <td class="Botrule">70-99</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">BUN</span>
+                                    </td>
+                                    <td class="Botrule">16</td>
+                                    <td class="Botrule">mg/dL</td>
+                                    <td class="Botrule">8-23</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">creatinine</span>
+                                    </td>
+                                    <td class="Botrule">0.81</td>
+                                    <td class="Botrule">mg/dL</td>
+                                    <td class="Botrule">0.60-1.30</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">eGFR (2021 CKD-epi)</span>
+                                    </td>
+                                    <td class="Botrule">80</td>
+                                    <td class="Botrule">mL/min/1.73</td>
+                                    <td class="Botrule">&gt;60</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">calc BUN/creat</span>
+                                    </td>
+                                    <td class="Botrule">20</td>
+                                    <td class="Botrule">ratio</td>
+                                    <td class="Botrule">6-28</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">sodium</span>
+                                    </td>
+                                    <td class="Botrule">141</td>
+                                    <td class="Botrule">mEq/L</td>
+                                    <td class="Botrule">133-146</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">potassium</span>
+                                    </td>
+                                    <td class="Botrule">3.9</td>
+                                    <td class="Botrule">mEq/L</td>
+                                    <td class="Botrule">3.5-5.4</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">chloride</span>
+                                    </td>
+                                    <td class="Botrule">105</td>
+                                    <td class="Botrule">mEq/L</td>
+                                    <td class="Botrule">95-107</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">carbon dioxide</span>
+                                    </td>
+                                    <td class="Botrule">19</td>
+                                    <td class="Botrule">mEq/L</td>
+                                    <td class="Botrule">19-31</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">calcium</span>
+                                    </td>
+                                    <td class="Botrule">9.8</td>
+                                    <td class="Botrule">mg/dL</td>
+                                    <td class="Botrule">8.5-10.5</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">protein, total</span>
+                                    </td>
+                                    <td class="Botrule">7.3</td>
+                                    <td class="Botrule">g/dL</td>
+                                    <td class="Botrule">6.1-8.3</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">albumin</span>
+                                    </td>
+                                    <td class="Botrule">4.3</td>
+                                    <td class="Botrule">g/dL</td>
+                                    <td class="Botrule">3.5-5.2</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">calc globulin</span>
+                                    </td>
+                                    <td class="Botrule">3.0</td>
+                                    <td class="Botrule">g/dL</td>
+                                    <td class="Botrule">1.9-3.7</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">calc A/G ratio</span>
+                                    </td>
+                                    <td class="Botrule">1.4</td>
+                                    <td class="Botrule">ratio</td>
+                                    <td class="Botrule">1.0-2.6</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">bilirubin, total</span>
+                                    </td>
+                                    <td class="Botrule">0.6</td>
+                                    <td class="Botrule">mg/dL</td>
+                                    <td class="Botrule">&lt;=1.2</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">alkaline phosphatase</span>
+                                    </td>
+                                    <td class="Botrule">109</td>
+                                    <td class="Botrule">U/L</td>
+                                    <td class="Botrule">40-142</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">AST</span>
+                                    </td>
+                                    <td class="Botrule">28</td>
+                                    <td class="Botrule">U/L</td>
+                                    <td class="Botrule">9-40</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/09/2024
+                </td>
+                                    <td class="Botrule">COMPREHENSIVE METABOLIC PANEL</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">ALT</span>
+                                    </td>
+                                    <td class="Botrule">17</td>
+                                    <td class="Botrule">U/L</td>
+                                    <td class="Botrule">5-40</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:54</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/10/2024
+                </td>
+                                    <td class="Botrule">HCV RNA, PCR QUANT</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">HCV RNA, PCR quant</span>
+                                    </td>
+                                    <td class="Botrule">NOT DETEC</td>
+                                    <td class="Botrule">IU/mL</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:55</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024 </td>
+                                    <td class="Botrule">05/10/2024
+                </td>
+                                    <td class="Botrule">HCV RNA, PCR QUANT</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">HCV viral log</span>
+                                    </td>
+                                    <td class="Botrule">NOT DETEC</td>
+                                    <td class="Botrule">log_IU/mL</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">
+                                        Clinical Pathology Laboratories - Main Lab (Blood Not Drawn At This Location)
+                                        <br/>
+                                        Visit Cpllabs.Com For Location Nearest You, Austin, TX, 78754, Ph (800) 633-4757
+                                    </td>
+                                    <td class="Botrule">05/10/2024 20:46:55</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">arterial study, non-invasive physiologic, extremity</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:09:48</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">arterial study, non-invasive physiologic, extremity</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/08/2024 11:56:40</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">arterial study, non-invasive physiologic, extremity</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:39:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">spirometry testing*</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span"> No observation recorded. </span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:40:27</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Result Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id5" href="#toc">Problems</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Onset Date</th>
+                                    <th>Resolution Date</th>
+                                    <th>Notes</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Hypothyroidism</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+            
+              
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:27:39</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Essential hypertension</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+            
+              
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:28:28</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Chronic obstructive pulmonary disease</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+            
+              
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 15:58:43</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Dysplastic nevus of skin</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+            
+              
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 16:08:36</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Isolated thrombocytopenia</td>
+                                    <td class="Botrule">Active</td>
+                                    <td class="Botrule">05/12/2024</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        TARA THOMPSON, FNP-C
+            
+              
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/12/2024 20:35:44</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Problem Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id6" href="#toc">Procedures</a></h3><div>
+                        <span class="content_span">Surgical History</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Laterality</th>
+                                    <th>Status</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">P3MG CV</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        Maurice Cooper
+                    
+                      
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:21:04</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">P3MG ADLs &amp; IDLs</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        Maurice Cooper
+                    
+                      
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:21:04</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">P3MG Advanced Care Planning</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        Maurice Cooper
+                    
+                      
+                                        <p> null,   </p>
+                                        <p/>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:21:04</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">02/10/2020</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Most Recent Mammogram</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Epion </td>
+                                    <td class="Botrule">05/07/2024 14:03:06</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">01/01/1998</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">Total Hysterectomy</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+                    
+                      
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 15:55:46</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Imaging Results</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Imaging Date</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                05/07/2024 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">arterial study, non-invasive physiologic, extremity</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">sbonds4</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:09:48</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                05/07/2024 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">arterial study, non-invasive physiologic, extremity</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/08/2024 11:56:40</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                05/07/2024 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">arterial study, non-invasive physiologic, extremity</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:39:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                05/07/2024 </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">spirometry testing*</span>
+                                    </td>
+                                    <td class="Botrule">completed</td>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">
+                                        P3nv - 4275 Burnham
+                
+                                        <br/>
+                                        4275 Burnham Avenue Suite 320, Las Vegas, NV, 89119-8205, Ph (702) 888-3221
+                                    </td>
+                                    <td class="Botrule">05/07/2024 16:40:27</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <span class="content_span">Procedure Notes</span>
+                        <p>None recorded.</p>
+                    </div><h3><a name="id7" href="#toc">Medical Equipment</a></h3><div>
+      None Reported.
+      </div><h3><a name="id8" href="#toc">Allergies</a></h3><div>
+                        <p>
+                            <span class="content_span">No known drug allergies</span>
+                        </p>
+                    </div><h3><a name="id9" href="#toc">Medications</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Sig</th>
+                                    <th>Start Date</th>
+                                    <th>Stop Date</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    levothyroxine 25 mcg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY IN THE MORNING ON EMPTY STOMACH</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    lisinopril 10 mg tablet
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">TAKE 1 TABLET BY MOUTH EVERY DAY FOR 100 DAYS</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">
+                                        <span class="content_span">
+                    albuterol sulfate HFA 90 mcg/actuation aerosol inhaler
+                  </span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">INHALE 2 PUFFS EVERY 4 HOURS BY INHALATION ROUTE FOR 90 DAYS.</span>
+                                    </td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">active</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id10" href="#toc">Vitals</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date Recorded</th>
+                                    <th>Body height</th>
+                                    <th>Body mass index (BMI)</th>
+                                    <th>Body weight</th>
+                                    <th>Body temperature</th>
+                                    <th>Respiratory rate</th>
+                                    <th>Oxygen saturation</th>
+                                    <th>Oxygen saturation in Arterial blood by Pulse oximetry</th>
+                                    <th>Heart rate</th>
+                                    <th>Systolic blood pressure</th>
+                                    <th>Diastolic blood pressure</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Last Updated DateTime</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">
+                                        <span class="content_span">152.4 cm</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">22.1 kg/m2</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">51255.94 g</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">96.6 [degF]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">16 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">97 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">97 %</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">74 /min</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">120 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">
+                                        <span class="content_span">82 mm[Hg]</span>
+                                    </td>
+                                    <td class="Botrule">Maurice Cooper
+                        
+                      </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 14:15:52</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id11" href="#toc">Social History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Answer</th>
+                                    <th>Notes</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Tobacco Smoking Status</span>
+                                    </td>
+                                    <td>Former Smoker</td>
+                                    <td/>
+                                    <td class="Botrule">Not Available</td>
+                                    <td class="Botrule">Epion </td>
+                                    <td class="Botrule">05/07/2024 14:03:06</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have An Advance Directive?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Level Of Alcohol Consumption?</td>
+                                    <td>None</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Level Of Caffeine Consumption?</td>
+                                    <td>Moderate</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Are You Currently Employed?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Type Of Diet Are You Following?</td>
+                                    <td>GLUTENFREE</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Have There Been Any Changes To Your Family Or Social Situation?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>When Did You Quit Smoking?</td>
+                                    <td>6-10yearssincelastcigarette</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Are There Any Guns Present In Your Home?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Eating?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Bathing?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Dressing?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Toileting?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Managing Your Medications?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Have You Been Recently Hospitalized?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Have You Fallen In The Past Three Months?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Exercise Routinely?</td>
+                                    <td>Yes</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>If Yes, How Often Do You Exercise?</td>
+                                    <td>7 Days A Week</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>How Would You Rate Your Health?</td>
+                                    <td>Fair</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Current Pain Level: (scale Of 0 To 10; 10 Being Worse Pain Possible)</td>
+                                    <td>0</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Vision Loss?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Hearing Loss?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Urine Leakage?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>In The Past 2 Weeks, Have You Felt Down, Depressed, Or Hopeless?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Type Of Exercise?</td>
+                                    <td>Walk,situp's, Weight Bearing, Stretching</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Assistance Walking?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Getting Out Of Chairs?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Need Any Assistance Preparing Meals?</td>
+                                    <td>No Assistance</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>In The Past 2 Weeks, Have You Been Bothered By Tiredness Or Fatigue?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Within The Last 12 Months Has A Lack Of Reliable Transportation Kept You From Dr. Appointments Or Getting Things Needed For Daily Living?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Within The Past 12 Months, Have You Worried That Your Food Would Run Out Before You Had Money To Buy More?</td>
+                                    <td>Never True</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Over The Last Two Weeks Have You Felt Little Interest Or Pleasure In Doing Things?</td>
+                                    <td>Not At All</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Over The Last Two Weeks Have You Been Feeling Down, Depressed, Or Hopeless?</td>
+                                    <td>Not At All</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Have You Had A Dilated Eye Exam In The Last 12 Months?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Was The Date Of Your Most Recent Tobacco Screening?</td>
+                                    <td>05/07/2024</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Current Pack Years?</td>
+                                    <td>30ormorepackyears</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>What Is Your Relationship Status?</td>
+                                    <td>Single</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Are You Sexually Active?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>At What Age Did You Start Smoking Tobacco?</td>
+                                    <td>17</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>How Much Tobacco Do You Smoke?</td>
+                                    <td>1 PPW</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Use Any Illicit Or Recreational Drugs?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">mcooper121</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Has Tobacco Cessation Counseling Been Provided?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Have Any Dietary Restrictions?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Do You Or Have You Ever Used Any Other Forms Of Tobacco Or Nicotine?</td>
+                                    <td>No</td>
+                                    <td/>
+                                    <td class="Botrule">API-13</td>
+                                    <td class="Botrule">Information not available</td>
+                                    <td class="Botrule">05/07/2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="Bold">Birth Sex: Unknown</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id12" href="#toc">Functional Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id13" href="#toc">Mental Status</a></h3><div>
+        
+          None recorded.
+        
+      </div><h3><a name="id14" href="#toc">Family History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Relationship</th>
+                                    <th>Description</th>
+                                    <th>Onset Age</th>
+                                    <th>Died of this Age</th>
+                                    <th>Resolved Age</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Mother</td>
+                                    <td class="Botrule">Malignant neoplastic disease</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (05/07/24)</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Father</td>
+                                    <td class="Botrule">Alcohol abuse</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (05/07/24)</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Brother</td>
+                                    <td class="Botrule">Alcohol abuse</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">
+                                        <span class="content_span">pt. added directly (05/07/24)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id15" href="#toc">Medical History</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Condition</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">Flu Vaccine</td>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p/>
+                        <span class="content_span">Gynecological History</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Statement/Question</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">N</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Y</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Most Recent Mammogram</td>
+                                    <td class="Botrule">02/10/2020</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule">Mammogram result</td>
+                                    <td class="Botrule">Normal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p/>
+                        <span class="content_span">Obstetrics History</span>
+                        <p>
+                            <span class="Bold">GPAL: </span>
+                            G 0 P 0 0 0 0
+                        </p>
+                    </div><h3><a name="id16" href="#toc">Immunizations</a></h3><div>
+    
+      None recorded.
+      </div><h3><a name="id17" href="#toc">Past Encounters</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter ID</th>
+                                    <th>Performer</th>
+                                    <th>Location</th>
+                                    <th>Encounter Start Date</th>
+                                    <th>Encounter Closed Date</th>
+                                    <th>Diagnosis/Indication</th>
+                                    <th>Diagnosis SNOMED-CT Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1092374</td>
+                                    <td>SCHADREY BONDS, NP-C </td>
+                                    <td>
+                                        P3NV - 4275 Burnham
+                              
+                                        <p>4275 Burnham Avenue,Suite 320</p>
+                                        <p>LAS VEGAS, NV 89119-8205</p>
+                                    </td>
+                                    <td>05/07/2024 13:38:05</td>
+                                    <td>05/07/2024 16:04:03</td>
+                                    <td class="Botrule">Adult health examination</td>
+                                    <td class="Botrule">268565007</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Advance directive discussed with patient</td>
+                                    <td class="Botrule">310302007</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for malignant neoplasm of breast</td>
+                                    <td class="Botrule">268547008</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for malignant neoplasm of colon</td>
+                                    <td class="Botrule">275978004</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for osteoporosis</td>
+                                    <td class="Botrule">300004007</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Hepatitis C screening</td>
+                                    <td class="Botrule">413107006</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Screening for cardiovascular system disease</td>
+                                    <td class="Botrule">300007000</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Hypothyroidism</td>
+                                    <td class="Botrule">40930008</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Ex-smoker</td>
+                                    <td class="Botrule">8517006</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Essential hypertension</td>
+                                    <td class="Botrule">59621000</td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="Botrule">Chronic obstructive pulmonary disease</td>
+                                    <td class="Botrule">13645005</td>
+                                </tr>
+                                <tr>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Dysplastic nevus of skin</td>
+                                    <td class="Botrule">254818000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id18" href="#toc">Goals Section</a></h3><div>
+    
+      None Recorded
+    
+    </div><h3><a name="id19" href="#toc">Health Concerns Section</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Related Observation</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concern</th>
+                                    <th>Status</th>
+                                    <th>LastModified by</th>
+                                    <th>Organization Details</th>
+                                    <th>LastModified Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>None Recorded</td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id20" href="#toc">Advance Directives</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Directive</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>N: </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id21" href="#toc">Payers</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Encounter Date</th>
+                                    <th>Sequence</th>
+                                    <th>Insurance Name</th>
+                                    <th>Policy Number</th>
+                                    <th>Policy Holder</th>
+                                    <th>Covered Member ID</th>
+                                    <th>Holder Member ID</th>
+                                    <th>Guarantor Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">1</td>
+                                    <td class="Botrule">P3 HEALTH PARTNERS - BCBS-NV - NEVADA (MEDICARE REPLACEMENT/ADVANTAGE - HMO)</td>
+                                    <td class="Botrule">NVMCRWP0</td>
+                                    <td class="Botrule">Teresa  White</td>
+                                    <td class="Botrule">AGI497W17084</td>
+                                    <td class="Botrule"/>
+                                    <td class="Botrule">Teresa  White</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id22" href="#toc">Notes</a></h3><div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Note Type</th>
+                                    <th>Note</th>
+                                    <th>Provider Name and Address</th>
+                                    <th>Organization Details</th>
+                                    <th>Recorded Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Botrule">05/07/2024</td>
+                                    <td class="Botrule">
+              text/html
+            </td>
+                                    <td ID="clinicalnotes1" class="Botrule">
+                                        HPI Notes: P3 Hospitalization History Reported by patient. Details of most recent hospitalization: Date of admission: None; Reason for hospitalization: None  
+                                        <br/>
+                                        <br/>
+                                         P3 Patient Care Team Reported by patient. Does the patient have any Specialist (s) or DME Suppliers? Yes  
+                                        <br/>
+                                        <br/>
+                                         P3 Wellness Assessment By Provider Reported by patient. Substance use: see assessment plan  
+                                        <br/>
+                                        <br/>
+                                         66-year-old Caucasian female presents to clinic to establish care as a new patient to complete her annual wellness/comprehensive visit. She recently moved here from Indianapolis her previous primary care provider was Mary Frazier 3179572200. She reports she has hypothyroidism and hypertension is a past smoker. She worked as a room attendant Exercises daily with stretching and sit ups She has 2 adult children who are alive and healthy in Indianapolis She has 6 siblings for living 1 died of a gunshot wound and 1 died of liver cirrhosis Mom passed away at age 78 dad passed away from liver cirrhosis Patient presents for QuantaFlo peripheral vascular screening procedure.
+                                    </td>
+                                    <td class="Botrule">
+                                        SCHADREY BONDS, NP-C
+              
+                
+                                        <p> 2370 Corporate Circle,STE 300,   Henderson,  </p>
+                                        <p> NV,   89074-7760, US </p>
+                                    </td>
+                                    <td class="Botrule">NV - P3 Health Group </td>
+                                    <td class="Botrule">05/07/2024 16:10:24</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><h3><a name="id23" href="#toc">OBGyn Episode</a></h3><div>
+                        <p>No OBEpisode recorded.</p>
+                    </div><br/><br/></body></html>

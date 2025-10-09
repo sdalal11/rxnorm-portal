@@ -1,0 +1,83 @@
+{
+  "file": "ecdd8e23-c9f1-40a1-b371-630d2474d4cc.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16064,
+      "end_offset": 16074
+    },
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 43464,
+      "end_offset": 43474
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Aricept",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 11163,
+      "end_offset": 11170
+    },
+    {
+      "rx_cui": "135447",
+      "normalized_name": "donepezil",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Aricept",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 42524,
+      "end_offset": 42531
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Namenda",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 16433,
+      "end_offset": 16440
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Namenda",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 43572,
+      "end_offset": 43579
+    }
+  ]
+}

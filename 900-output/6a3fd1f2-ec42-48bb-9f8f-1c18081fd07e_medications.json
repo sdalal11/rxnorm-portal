@@ -1,0 +1,122 @@
+{
+  "file": "6a3fd1f2-ec42-48bb-9f8f-1c18081fd07e.html",
+  "medications": [
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19213,
+      "end_offset": 19223
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 15108,
+      "end_offset": 15117
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "memantine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 23230,
+      "end_offset": 23239
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "rivastigmine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 18827,
+      "end_offset": 18839
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Rivastigmine",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 20777,
+      "end_offset": 20789
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "COREG",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 19225,
+      "end_offset": 19230
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Namenda",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 15099,
+      "end_offset": 15106
+    },
+    {
+      "rx_cui": "6719",
+      "normalized_name": "memantine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Namenda",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 23221,
+      "end_offset": 23228
+    },
+    {
+      "rx_cui": "183379",
+      "normalized_name": "rivastigmine",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "EXELON",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18841,
+      "end_offset": 18847
+    }
+  ]
+}

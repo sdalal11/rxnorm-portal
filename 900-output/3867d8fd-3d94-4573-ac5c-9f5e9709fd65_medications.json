@@ -1,0 +1,18 @@
+{
+  "file": "3867d8fd-3d94-4573-ac5c-9f5e9709fd65.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 16521,
+      "end_offset": 16531
+    }
+  ]
+}

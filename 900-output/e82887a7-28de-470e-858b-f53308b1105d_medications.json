@@ -1,0 +1,31 @@
+{
+  "file": "e82887a7-28de-470e-858b-f53308b1105d.html",
+  "medications": [
+    {
+      "rx_cui": "6918",
+      "normalized_name": "metoprolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "Metoprolol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 19213,
+      "end_offset": 19223
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 18644,
+      "end_offset": 18651
+    }
+  ]
+}

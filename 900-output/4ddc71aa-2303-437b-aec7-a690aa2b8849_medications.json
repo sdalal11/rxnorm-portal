@@ -1,0 +1,44 @@
+{
+  "file": "4ddc71aa-2303-437b-aec7-a690aa2b8849.html",
+  "medications": [
+    {
+      "rx_cui": "703",
+      "normalized_name": "amiodarone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "amiodarone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 8993,
+      "end_offset": 9003
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 9540,
+      "end_offset": 9550
+    },
+    {
+      "rx_cui": "1364430",
+      "normalized_name": "apixaban",
+      "cui_type": "IN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Eliquis",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 9872,
+      "end_offset": 9879
+    }
+  ]
+}
