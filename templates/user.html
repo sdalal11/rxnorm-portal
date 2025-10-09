@@ -1745,6 +1745,12 @@
             document.getElementById('documentViewer').style.display = 'block';
             document.getElementById('viewerTitle').textContent = doc.name;
             
+            // Reset annotation count and list for new document
+            const countElement = document.getElementById('annotationCount');
+            if (countElement) {
+                countElement.textContent = '0';
+            }
+            
             try {
                 // Load document content
                 const content = await loadDocumentContent(doc);
@@ -1753,8 +1759,7 @@
                 // Important: Wait a bit for content to render, then load annotations
                 setTimeout(() => {
                     loadDocumentAnnotations(doc.id);
-                    updateAnnotationCount();
-                    updateAnnotationsList();
+                    // Note: updateAnnotationCount() and updateAnnotationsList() are called within loadDocumentAnnotations
                 }, 100);
                 
             } catch (error) {
@@ -1961,6 +1966,7 @@
                 });
                 console.log(`✅ Applied ${documentAnnotations.length} annotations`);
                 updateAnnotationCount();
+                updateAnnotationsList();
 
             }, 1000);
         }
