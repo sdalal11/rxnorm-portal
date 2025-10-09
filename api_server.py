@@ -265,36 +265,67 @@ def parse_main_py_text_output(output):
     return annotations
 
 # Database setup for persistent user storage
-DATABASE_FILE = 'users.db'
+# For production: Use external database URL if available, fallback to local SQLite
+DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_FILE = os.environ.get('DATABASE_FILE', '/tmp/users.db') if not DATABASE_URL else None
 
 def init_database():
-    """Initialize SQLite database for user storage"""
+    """Initialize database for user storage - supports both SQLite and PostgreSQL"""
     try:
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-        
-        # Create users table if it doesn't exist
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                email TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL,
-                name TEXT NOT NULL,
-                registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                last_login DATETIME
-            )
-        ''')
+        if DATABASE_URL:
+            # Using external PostgreSQL database (persistent)
+            import psycopg2
+            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+            cursor = conn.cursor()
+            
+            # Create users table if it doesn't exist
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    username VARCHAR(255) UNIQUE NOT NULL,
+                    email VARCHAR(255) UNIQUE NOT NULL,
+                    password VARCHAR(255) NOT NULL,
+                    name VARCHAR(255) NOT NULL,
+                    registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    last_login TIMESTAMP
+                )
+            ''')
+            print("✅ Connected to external PostgreSQL database")
+        else:
+            # Using local SQLite database (ephemeral on free hosting)
+            conn = sqlite3.connect(DATABASE_FILE)
+            cursor = conn.cursor()
+            
+            # Create users table if it doesn't exist
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    last_login DATETIME
+                )
+            ''')
+            print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
+            print("⚠️  Warning: User data will be lost on container restart!")
         
         # Create default admin user if no users exist
         cursor.execute('SELECT COUNT(*) FROM users')
         user_count = cursor.fetchone()[0]
         
         if user_count == 0:
-            cursor.execute('''
-                INSERT INTO users (username, email, password, name, registered_at)
-                VALUES (?, ?, ?, ?, ?)
-            ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
+            if DATABASE_URL:
+                cursor.execute('''
+                    INSERT INTO users (username, email, password, name, registered_at)
+                    VALUES (%s, %s, %s, %s, %s)
+                ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
+            else:
+                cursor.execute('''
+                    INSERT INTO users (username, email, password, name, registered_at)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
             print("✅ Created default admin user")
         
         conn.commit()
@@ -304,24 +335,60 @@ def init_database():
     except Exception as e:
         print(f"⚠️ Error initializing database: {e}")
 
+def get_db_connection():
+    """Get database connection (PostgreSQL or SQLite)"""
+    if DATABASE_URL:
+        import psycopg2
+        return psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        return sqlite3.connect(DATABASE_FILE)
+
+def execute_query(query, params=None, fetch_one=False, fetch_all=False):
+    """Execute database query with proper parameter substitution"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        if DATABASE_URL:
+            # PostgreSQL uses %s for all parameters
+            if params:
+                cursor.execute(query.replace('?', '%s'), params)
+            else:
+                cursor.execute(query)
+        else:
+            # SQLite uses ?
+            if params:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+        
+        result = None
+        if fetch_one:
+            result = cursor.fetchone()
+        elif fetch_all:
+            result = cursor.fetchall()
+        
+        conn.commit()
+        conn.close()
+        return result
+    except Exception as e:
+        print(f"⚠️ Database error: {e}")
+        return None
+
 def get_user(username):
     """Get user from database"""
     try:
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
-        user_data = cursor.fetchone()
-        conn.close()
+        result = execute_query('SELECT * FROM users WHERE username = ?', (username,), fetch_one=True)
         
-        if user_data:
+        if result:
             return {
-                'id': user_data[0],
-                'username': user_data[1],
-                'email': user_data[2],
-                'password': user_data[3],
-                'name': user_data[4],
-                'registered_at': user_data[5],
-                'last_login': user_data[6]
+                'id': result[0],
+                'username': result[1],
+                'email': result[2],
+                'password': result[3],
+                'name': result[4],
+                'registered_at': result[5],
+                'last_login': result[6]
             }
         return None
     except Exception as e:
@@ -331,54 +398,50 @@ def get_user(username):
 def create_user(username, email, password, name):
     """Create new user in database"""
     try:
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-        cursor.execute('''
+        execute_query('''
             INSERT INTO users (username, email, password, name)
             VALUES (?, ?, ?, ?)
         ''', (username, email, password, name))
-        conn.commit()
-        conn.close()
         return True
-    except sqlite3.IntegrityError as e:
-        print(f"⚠️ User creation failed - duplicate entry: {e}")
-        return False
     except Exception as e:
-        print(f"⚠️ Error creating user: {e}")
+        if "UNIQUE constraint" in str(e) or "duplicate key" in str(e):
+            print(f"⚠️ User creation failed - duplicate entry: {e}")
+        else:
+            print(f"⚠️ Error creating user: {e}")
         return False
 
 def update_last_login(username):
     """Update user's last login time"""
     try:
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-        cursor.execute('UPDATE users SET last_login = ? WHERE username = ?', 
-                      (datetime.now(), username))
-        conn.commit()
-        conn.close()
+        execute_query('UPDATE users SET last_login = ? WHERE username = ?', 
+                     (datetime.now(), username))
+        return True
     except Exception as e:
         print(f"⚠️ Error updating last login: {e}")
+        return False
 
-def get_all_users():
-    """Get all users from database"""
+def list_users():
+    """List all users (admin function)"""
     try:
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-        cursor.execute('SELECT username, email, name, registered_at, last_login FROM users')
-        users_data = cursor.fetchall()
-        conn.close()
+        results = execute_query('SELECT id, username, email, name, registered_at, last_login FROM users', 
+                               fetch_all=True)
         
-        users = []
-        for user_data in users_data:
-            users.append({
-                'username': user_data[0],
-                'email': user_data[1],
-                'name': user_data[2],
-                'registered_at': user_data[3],
-                'last_login': user_data[4]
-            })
-        return users
+        if results:
+            users = []
+            for user_data in results:
+                users.append({
+                    'id': user_data[0],
+                    'username': user_data[1],
+                    'email': user_data[2],
+                    'name': user_data[3],
+                    'registered_at': user_data[4],
+                    'last_login': user_data[5]
+                })
+            return users
+        return []
     except Exception as e:
+        print(f"⚠️ Error listing users: {e}")
+        return []
         print(f"⚠️ Error getting all users: {e}")
         return []
 
@@ -518,100 +581,8 @@ def list_users():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# User management endpoints
-@app.route('/users/register', methods=['POST', 'OPTIONS'])
-def register_user():
-    """Register a new user"""
-    if request.method == 'OPTIONS':
-        response = jsonify({'message': 'CORS preflight'})
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        return response
-    
-    try:
-        user_data = request.get_json()
-        username = user_data.get('username', '').strip().lower()
-        email = user_data.get('email', '').strip().lower()
-        password = user_data.get('password', '')
-        name = user_data.get('name', '').strip()
-        
-        if not all([username, email, password, name]):
-            return jsonify({'error': 'All fields are required'}), 400
-        
-        # Check if user already exists (database will handle uniqueness)
-        existing_user = get_user(username)
-        if existing_user:
-            return jsonify({'error': 'Username already exists'}), 409
-        
-        # Create user in database
-        if create_user(username, email, password, name):
-            print(f"📝 User registered: {username} ({email})")
-            
-            # Get user count for stats
-            all_users = get_all_users()
-            print(f"📊 Total users: {len(all_users)}")
-            
-            return jsonify({
-                'success': True,
-                'message': 'User registered successfully',
-                'user': {
-                    'username': username,
-                    'email': email,
-                    'name': name
-                }
-            })
-        else:
-            return jsonify({'error': 'Username or email already exists'}), 409
-        
-    except Exception as e:
-        print(f"❌ Registration error: {e}")
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/users/login', methods=['POST', 'OPTIONS'])
-def login_user():
-    """Authenticate user login"""
-    if request.method == 'OPTIONS':
-        response = jsonify({'message': 'CORS preflight'})
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        return response
-    
-    try:
-        login_data = request.get_json()
-        username = login_data.get('username', '').strip().lower()
-        password = login_data.get('password', '')
-        
-        if not username or not password:
-            return jsonify({'error': 'Username and password are required'}), 400
-        
-        # Get user from database
-        user = get_user(username)
-        if not user or user.get('password') != password:
-            return jsonify({'error': 'Invalid username or password'}), 401
-        
-        # Update last login in database
-        update_last_login(username)
-        
-        print(f"✅ User logged in: {username}")
-        
-        return jsonify({
-            'success': True,
-            'message': 'Login successful',
-            'user': {
-                'username': user['username'],
-                'email': user['email'],
-                'name': user['name']
-            }
-        })
-        
-    except Exception as e:
-        print(f"❌ Login error: {e}")
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/users/list', methods=['GET', 'OPTIONS'])
-def list_users():
+def get_users_list():
     """Get list of all registered users (for admin)"""
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight'})
@@ -621,7 +592,7 @@ def list_users():
         return response
     
     try:
-        user_list = get_all_users()
+        user_list = list_users()
         
         return jsonify({
             'success': True,
@@ -644,7 +615,7 @@ def backup_users():
     
     try:
         # Get all users from database
-        all_users = get_all_users()
+        all_users = list_users()
         users_json = json.dumps(all_users, separators=(',', ':'))
         return jsonify({
             'success': True,
