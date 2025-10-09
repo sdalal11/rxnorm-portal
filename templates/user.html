@@ -2986,7 +2986,7 @@
         };
         
         window.getAnnotationsWithNotes = function() {
-            return getAnnotationsWithNotes();
+            return documentAnnotations.filter(ann => ann.notes && ann.notes.trim() !== '');
         };
         
         window.exportAnnotationsWithNotes = function() {
