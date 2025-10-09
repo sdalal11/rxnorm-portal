@@ -275,7 +275,38 @@ def init_database():
         if DATABASE_URL:
             # Using external PostgreSQL database (persistent)
             import psycopg2
-            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+            
+            print(f"🔗 Attempting to connect to external database...")
+            print(f"📍 Database URL: {DATABASE_URL[:50]}...")  # Show partial URL for debugging
+            
+            # Try different connection methods for better compatibility
+            try:
+                # First try with the direct URL
+                conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+            except Exception as e1:
+                print(f"⚠️  Direct connection failed: {e1}")
+                
+                # Try parsing the URL and connecting with individual parameters
+                try:
+                    from urllib.parse import urlparse
+                    parsed = urlparse(DATABASE_URL)
+                    
+                    print(f"🔄 Trying parsed connection to {parsed.hostname}:{parsed.port}")
+                    conn = psycopg2.connect(
+                        host=parsed.hostname,
+                        port=parsed.port,
+                        database=parsed.path[1:],  # Remove leading /
+                        user=parsed.username,
+                        password=parsed.password,
+                        sslmode='require'
+                    )
+                except Exception as e2:
+                    print(f"⚠️  Parsed connection failed: {e2}")
+                    
+                    # Final fallback - try without SSL requirement
+                    print("🔄 Trying connection without SSL requirement...")
+                    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
+            
             cursor = conn.cursor()
             
             # Create users table if it doesn't exist
