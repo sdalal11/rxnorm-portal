@@ -962,7 +962,6 @@
     
     <script>
         // User data storage
-        let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
         let currentUser = null;
         let allDocuments = [];
         let filteredDocuments = [];
@@ -996,26 +995,44 @@
         }
         
         // Login form handler
-        document.getElementById('userLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            const user = registeredUsers.find(u => u.email === email && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-                showUserPortal();
-            } else {
-                document.getElementById('authError').textContent = 'Invalid email or password.';
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.user) {
+                    currentUser = data.user;
+                    sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+                    document.getElementById('authError').style.display = 'none';
+                    showUserPortal();
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Invalid email or password.';
+                    document.getElementById('authError').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
             }
         });
         
         // Register form handler
-        document.getElementById('userRegisterForm').addEventListener('submit', function(e) {
+        document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const name = document.getElementById('registerName').value;
@@ -1031,37 +1048,48 @@
                 return;
             }
             
-            if (registeredUsers.find(u => u.email === email)) {
-                document.getElementById('authError').textContent = 'Email already registered.';
+            // Register user via API
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        email: email,
+                        password: password,
+                        name: name
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message and switch to login
+                    document.getElementById('authSuccess').textContent = 'Registration successful! You can now log in.';
+                    document.getElementById('authSuccess').style.display = 'block';
+                    document.getElementById('authError').style.display = 'none';
+                    
+                    // Clear form
+                    document.getElementById('userRegisterForm').reset();
+                    
+                    // Switch to login tab after 2 seconds
+                    setTimeout(() => {
+                        showAuthTab('login');
+                        document.getElementById('loginEmail').value = email;
+                    }, 2000);
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Registration failed. Please try again.';
+                    document.getElementById('authError').style.display = 'block';
+                    document.getElementById('authSuccess').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                document.getElementById('authError').textContent = 'Registration failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
-                return;
+                document.getElementById('authSuccess').style.display = 'none';
             }
-            
-            // Create new user
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                password: password, // In production, this should be hashed
-                role: role,
-                registeredDate: new Date().toISOString()
-            };
-            
-            registeredUsers.push(newUser);
-            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-            
-            // Show success message and switch to login
-            document.getElementById('authSuccess').style.display = 'block';
-            document.getElementById('authError').style.display = 'none';
-            
-            // Clear form
-            document.getElementById('userRegisterForm').reset();
-            
-            // Switch to login tab after 2 seconds
-            setTimeout(() => {
-                showAuthTab('login');
-                document.getElementById('loginEmail').value = email;
-            }, 2000);
         });
         
         function showUserPortal() {
