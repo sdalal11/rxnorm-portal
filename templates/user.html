@@ -742,6 +742,40 @@
             color: #dc3545;
         }
 
+        /* Style for annotation notes */
+        .annotation-notes {
+            margin-top: 0.5rem;
+        }
+
+        .annotation-notes textarea {
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .annotation-notes textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+            outline: none;
+        }
+
+        .annotation-notes textarea:not(:empty) {
+            border-color: #28a745;
+            background-color: #f8fff9;
+        }
+
+        /* Visual indicator for annotations with notes */
+        .annotation-item.has-notes {
+            border-left: 4px solid #17a2b8;
+        }
+
+        .annotation-item.has-notes::after {
+            content: "📝";
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
         @media (max-width: 768px) {
             .viewer-content {
                 width: 95%;
@@ -1859,7 +1893,8 @@
                         source: 'main.py',
                         confidence: preAnn.confidence || 0.9,
                         rxnorm_code: preAnn.rx_cui || preAnn.rxnorm_code,
-                        isPreAnnotation: true
+                        isPreAnnotation: true,
+                        notes: '' // Initialize notes field for AI annotations
                     };
                 });
                 
@@ -2032,7 +2067,8 @@
                 timestamp: new Date().toISOString(),
                 position: selectedRange.startOffset,
                 source: 'user',
-                isPreAnnotation: false
+                isPreAnnotation: false,
+                notes: '' // Initialize with empty notes field
             };
             
             // Add to annotations array
@@ -2233,8 +2269,11 @@
                     annotation.text.substring(0, 50) + '...' : 
                     annotation.text;
                 
+                // Add has-notes class if annotation has notes
+                const hasNotesClass = (annotation.notes && annotation.notes.trim()) ? 'has-notes' : '';
+                
                 html += `
-                    <div class="annotation-item" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
+                    <div class="annotation-item ${hasNotesClass}" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
                         <div class="annotation-text" title="${annotation.text}">
                             <strong>"${displayText}"</strong>
                         </div>
@@ -2243,6 +2282,16 @@
                             ${sourceIcon} ${sourceText}${confidenceText}
                             <br>${new Date(annotation.timestamp).toLocaleString()}
                             ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label style="font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.25rem;">Notes:</label>
+                            <textarea 
+                                id="notes_${annotation.id}" 
+                                placeholder="Add notes or comments..."
+                                onblur="updateAnnotationNotes('${annotation.id}', this.value)"
+                                onclick="event.stopPropagation()"
+                                style="width: 100%; min-height: 40px; padding: 0.25rem; border: 1px solid #ddd; border-radius: 3px; font-size: 0.75rem; resize: vertical; font-family: inherit;"
+                            >${annotation.notes || ''}</textarea>
                         </div>
                         ${annotation.isPreAnnotation ? 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
@@ -2275,6 +2324,25 @@
             });
             
             list.innerHTML = html;
+        }
+
+        // Function to update annotation notes
+        function updateAnnotationNotes(annotationId, newNotes) {
+            console.log('📝 Updating notes for annotation:', annotationId, 'New notes:', newNotes);
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId);
+            if (annotation) {
+                annotation.notes = newNotes;
+                console.log('✅ Notes updated for annotation:', annotation.text.substring(0, 30), '...');
+                
+                // Auto-save annotations after a short delay (debounced)
+                clearTimeout(window.notesUpdateTimeout);
+                window.notesUpdateTimeout = setTimeout(() => {
+                    saveAnnotations();
+                }, 2000); // Save 2 seconds after user stops typing
+            } else {
+                console.error('❌ Annotation not found for ID:', annotationId);
+            }
         }
 
         function changeAnnotationStatus(annotationId, newStatus) {
