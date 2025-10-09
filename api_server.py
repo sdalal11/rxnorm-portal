@@ -4,6 +4,8 @@ import tempfile
 import os
 import subprocess
 import json
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
@@ -262,74 +264,129 @@ def parse_main_py_text_output(output):
     
     return annotations
 
+# Database setup for persistent user storage
+DATABASE_FILE = 'users.db'
+
+def init_database():
+    """Initialize SQLite database for user storage"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        
+        # Create users table if it doesn't exist
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL,
+                name TEXT NOT NULL,
+                registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                last_login DATETIME
+            )
+        ''')
+        
+        # Create default admin user if no users exist
+        cursor.execute('SELECT COUNT(*) FROM users')
+        user_count = cursor.fetchone()[0]
+        
+        if user_count == 0:
+            cursor.execute('''
+                INSERT INTO users (username, email, password, name, registered_at)
+                VALUES (?, ?, ?, ?, ?)
+            ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
+            print("✅ Created default admin user")
+        
+        conn.commit()
+        conn.close()
+        print(f"✅ Database initialized with {user_count + (1 if user_count == 0 else 0)} users")
+        
+    except Exception as e:
+        print(f"⚠️ Error initializing database: {e}")
+
+def get_user(username):
+    """Get user from database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        user_data = cursor.fetchone()
+        conn.close()
+        
+        if user_data:
+            return {
+                'id': user_data[0],
+                'username': user_data[1],
+                'email': user_data[2],
+                'password': user_data[3],
+                'name': user_data[4],
+                'registered_at': user_data[5],
+                'last_login': user_data[6]
+            }
+        return None
+    except Exception as e:
+        print(f"⚠️ Error getting user: {e}")
+        return None
+
+def create_user(username, email, password, name):
+    """Create new user in database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO users (username, email, password, name)
+            VALUES (?, ?, ?, ?)
+        ''', (username, email, password, name))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.IntegrityError as e:
+        print(f"⚠️ User creation failed - duplicate entry: {e}")
+        return False
+    except Exception as e:
+        print(f"⚠️ Error creating user: {e}")
+        return False
+
+def update_last_login(username):
+    """Update user's last login time"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('UPDATE users SET last_login = ? WHERE username = ?', 
+                      (datetime.now(), username))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"⚠️ Error updating last login: {e}")
+
+def get_all_users():
+    """Get all users from database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT username, email, name, registered_at, last_login FROM users')
+        users_data = cursor.fetchall()
+        conn.close()
+        
+        users = []
+        for user_data in users_data:
+            users.append({
+                'username': user_data[0],
+                'email': user_data[1],
+                'name': user_data[2],
+                'registered_at': user_data[3],
+                'last_login': user_data[4]
+            })
+        return users
+    except Exception as e:
+        print(f"⚠️ Error getting all users: {e}")
+        return []
+
+# Initialize database on startup
+init_database()
+
 # Global configuration storage (in production, use a database)
 global_config = {}
-global_users = {}  # Store registered users
-
-# File-based persistence for user data
-USERS_FILE = 'users_data.json'
-
-def load_users():
-    """Load users from persistent storage (environment variable or file)"""
-    global global_users
-    try:
-        # First try to load from environment variable (for true persistence)
-        env_users = os.environ.get('PERSISTENT_USERS')
-        if env_users:
-            global_users = json.loads(env_users)
-            print(f"✅ Loaded {len(global_users)} users from environment variable")
-            return
-        
-        # Fallback to file (may not persist on some hosting platforms)
-        if os.path.exists(USERS_FILE):
-            with open(USERS_FILE, 'r') as f:
-                global_users = json.load(f)
-            print(f"✅ Loaded {len(global_users)} users from {USERS_FILE}")
-        else:
-            # Initialize with default admin account to avoid losing access
-            global_users = {
-                'admin': {
-                    'username': 'admin',
-                    'email': 'admin@rxnorm.com',
-                    'password': 'admin123',
-                    'name': 'System Administrator',
-                    'registered_at': 'System Default',
-                    'last_login': None
-                }
-            }
-            print(f"📁 No existing users found, created default admin account")
-    except Exception as e:
-        print(f"⚠️ Error loading users: {e}")
-        # Fallback to admin account
-        global_users = {
-            'admin': {
-                'username': 'admin',
-                'email': 'admin@rxnorm.com', 
-                'password': 'admin123',
-                'name': 'System Administrator',
-                'registered_at': 'System Default',
-                'last_login': None
-            }
-        }
-
-def save_users():
-    """Save users to persistent storage (both environment and file)"""
-    try:
-        # Save to file (temporary)
-        with open(USERS_FILE, 'w') as f:
-            json.dump(global_users, f, indent=2)
-        
-        # Print users data for manual persistence (admin can copy to env variable)
-        users_json = json.dumps(global_users, separators=(',', ':'))
-        print(f"💾 Saved {len(global_users)} users to {USERS_FILE}")
-        print(f"🔐 For true persistence, set environment variable PERSISTENT_USERS to:")
-        print(f"PERSISTENT_USERS='{users_json}'")
-        
-    except Exception as e:
-        print(f"⚠️ Error saving users: {e}")
-
-# Load users on startup
-load_users()
 
 # User management endpoints
 @app.route('/users/register', methods=['POST', 'OPTIONS'])
@@ -352,40 +409,30 @@ def register_user():
         if not all([username, email, password, name]):
             return jsonify({'error': 'All fields are required'}), 400
         
-        # Check if user already exists
-        if username in global_users:
+        # Check if user already exists (database will handle uniqueness)
+        existing_user = get_user(username)
+        if existing_user:
             return jsonify({'error': 'Username already exists'}), 409
         
-        # Check if email already exists
-        for user_id, user_info in global_users.items():
-            if user_info.get('email') == email:
-                return jsonify({'error': 'Email already registered'}), 409
-        
-        # Store user (in production, hash the password!)
-        global_users[username] = {
-            'username': username,
-            'email': email,
-            'password': password,  # In production: hash this!
-            'name': name,
-            'registered_at': subprocess.run(['date'], capture_output=True, text=True).stdout.strip(),
-            'last_login': None
-        }
-        
-        # Save users to persistent storage
-        save_users()
-        
-        print(f"📝 User registered: {username} ({email})")
-        print(f"📊 Total users: {len(global_users)}")
-        
-        return jsonify({
-            'success': True,
-            'message': 'User registered successfully',
-            'user': {
-                'username': username,
-                'email': email,
-                'name': name
-            }
-        })
+        # Create user in database
+        if create_user(username, email, password, name):
+            print(f"📝 User registered: {username} ({email})")
+            
+            # Get user count for stats
+            all_users = get_all_users()
+            print(f"📊 Total users: {len(all_users)}")
+            
+            return jsonify({
+                'success': True,
+                'message': 'User registered successfully',
+                'user': {
+                    'username': username,
+                    'email': email,
+                    'name': name
+                }
+            })
+        else:
+            return jsonify({'error': 'Username or email already exists'}), 409
         
     except Exception as e:
         print(f"❌ Registration error: {e}")
@@ -409,16 +456,13 @@ def login_user():
         if not username or not password:
             return jsonify({'error': 'Username and password are required'}), 400
         
-        # Check if user exists and password matches
-        user = global_users.get(username)
+        # Get user from database
+        user = get_user(username)
         if not user or user.get('password') != password:
             return jsonify({'error': 'Invalid username or password'}), 401
         
-        # Update last login
-        global_users[username]['last_login'] = subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
-        
-        # Save users to persistent storage
-        save_users()
+        # Update last login in database
+        update_last_login(username)
         
         print(f"✅ User logged in: {username}")
         
@@ -447,15 +491,7 @@ def list_users():
         return response
     
     try:
-        user_list = []
-        for username, user_info in global_users.items():
-            user_list.append({
-                'username': user_info['username'],
-                'email': user_info['email'],
-                'name': user_info['name'],
-                'registered_at': user_info['registered_at'],
-                'last_login': user_info['last_login']
-            })
+        user_list = get_all_users()
         
         return jsonify({
             'success': True,
@@ -477,12 +513,14 @@ def backup_users():
         return response
     
     try:
-        users_json = json.dumps(global_users, separators=(',', ':'))
+        # Get all users from database
+        all_users = get_all_users()
+        users_json = json.dumps(all_users, separators=(',', ':'))
         return jsonify({
             'success': True,
             'users_backup': users_json,
-            'total_users': len(global_users),
-            'message': 'Copy this backup string to PERSISTENT_USERS environment variable for permanent storage'
+            'total_users': len(all_users),
+            'message': 'Database backup created successfully'
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
