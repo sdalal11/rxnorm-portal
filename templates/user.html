@@ -2386,28 +2386,42 @@
 
         // Update the convertToUserAnnotation and changeAnnotationStatus functions to auto-save:
         function convertToUserAnnotation(annotationId) {
-            const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+            console.log('🤖➡️👤 Converting AI annotation to user annotation:', annotationId);
+            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20), isPreAnnotation: a.isPreAnnotation})));
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
+            console.log('🔍 Found annotation:', annotation);
+            
             if (annotation) {
                 annotation.isPreAnnotation = false;
                 annotation.source = 'user';
                 annotation.timestamp = new Date().toISOString();
+                
+                console.log('✅ Successfully converted AI annotation to user annotation:', annotation.text.substring(0, 30) + '...');
+                
                 updateAnnotationsList();
                 
                 // Auto-save to Azure
                 autoSaveAnnotations();
-                
-                console.log('✅ Converted AI annotation to user annotation:', annotation);
+            } else {
+                console.error('❌ Annotation not found with ID:', annotationId);
+                alert('Error: Annotation not found. Please refresh the page and try again.');
             }
         }
 
         function changeAnnotationStatus(annotationId, newStatus) {
-            const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+            console.log('🔄 Attempting to change annotation status:', {annotationId, newStatus});
+            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20), status: a.status})));
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
+            console.log('🔍 Found annotation:', annotation);
+            
             if (annotation && annotation.status !== newStatus) {
                 const oldStatus = annotation.status;
                 annotation.status = newStatus;
                 annotation.timestamp = new Date().toISOString();
                 
-                console.log(`🔄 Changed annotation "${annotation.text}" from ${oldStatus} to ${newStatus}`);
+                console.log(`✅ Changed annotation "${annotation.text.substring(0, 30)}..." from ${oldStatus} to ${newStatus}`);
                 
                 // Re-highlight the text with new status
                 rehighlightAnnotation(annotation, oldStatus);
@@ -2418,6 +2432,11 @@
                 
                 // Auto-save to Azure
                 autoSaveAnnotations();
+            } else if (!annotation) {
+                console.error('❌ Annotation not found with ID:', annotationId);
+                alert('Error: Annotation not found. Please refresh the page and try again.');
+            } else {
+                console.log('ℹ️ Annotation already has status:', newStatus);
             }
         }
 
@@ -2427,15 +2446,16 @@
             // Clear previous timeout
             clearTimeout(autoSaveTimeout);
             
-            // Set new timeout to auto-save after 3 seconds of no changes
+            // Set new timeout to auto-save after 5 seconds of no changes (increased delay)
             autoSaveTimeout = setTimeout(async () => {
                 try {
+                    console.log('💾 Starting auto-save...');
                     await saveAnnotationsToAzure();
-                    console.log('💾 Auto-saved annotations to Azure');
+                    console.log('✅ Auto-saved annotations to Azure');
                     
                     // Show subtle indicator
                     const indicator = document.createElement('div');
-                    indicator.textContent = '☁️ Auto-saved';
+                    indicator.textContent = '☁️ Saved';
                     indicator.style.cssText = `
                         position: fixed; top: 20px; right: 20px; 
                         background: #28a745; color: white; 
@@ -2448,14 +2468,18 @@
                     setTimeout(() => indicator.style.opacity = '1', 100);
                     setTimeout(() => {
                         indicator.style.opacity = '0';
-                        setTimeout(() => document.body.removeChild(indicator), 300);
+                        setTimeout(() => {
+                            if (document.body.contains(indicator)) {
+                                document.body.removeChild(indicator);
+                            }
+                        }, 300);
                     }, 2000);
                     
                 } catch (error) {
-                    console.warn('⚠️ Auto-save failed, saving to localStorage:', error);
+                    console.warn('⚠️ Auto-save failed, using localStorage fallback:', error);
                     saveAnnotationsToStorage(); // Fallback to localStorage
                 }
-            }, 3000); // 3 second delay
+            }, 5000); // 5 second delay (increased from 3)
         }
 
         // Add helper function for just Azure save (without UI feedback):
@@ -2532,11 +2556,18 @@
         }
 
         function removeAnnotationById(annotationId) {
+            console.log('🗑️ Attempting to remove annotation with ID:', annotationId);
+            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20)})));
+            
             if (confirm('Remove this annotation?')) {
-                const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+                const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
+                console.log('🔍 Found annotation:', annotation);
+                
                 if (annotation) {
                     // Remove from annotations array
-                    documentAnnotations = documentAnnotations.filter(ann => ann.id !== annotationId);
+                    const originalLength = documentAnnotations.length;
+                    documentAnnotations = documentAnnotations.filter(ann => ann.id != annotationId); // Use != for loose comparison
+                    console.log(`📊 Removed annotation. Count: ${originalLength} → ${documentAnnotations.length}`);
                     
                     // Remove the highlight from the document immediately
                     removeHighlightFromDocument(annotation.text, annotation.status);
@@ -2545,11 +2576,13 @@
                     updateAnnotationCount();
                     updateAnnotationsList();
                     
-                    // Save changes to storage
-                    saveAnnotationsToStorage();
+                    // Auto-save to Azure (with delay to avoid conflicts)
+                    autoSaveAnnotations();
                     
-                    console.log('Removed annotation:', annotation);
-                    console.log('Remaining annotations:', documentAnnotations.length);
+                    console.log('✅ Successfully removed annotation:', annotation.text);
+                } else {
+                    console.error('❌ Annotation not found with ID:', annotationId);
+                    alert('Error: Annotation not found. Please refresh the page and try again.');
                 }
             }
         }
