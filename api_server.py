@@ -4,6 +4,8 @@ import tempfile
 import os
 import subprocess
 import json
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
@@ -262,6 +264,127 @@ def parse_main_py_text_output(output):
     
     return annotations
 
+# Database setup for persistent user storage
+DATABASE_FILE = 'users.db'
+
+def init_database():
+    """Initialize SQLite database for user storage"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        
+        # Create users table if it doesn't exist
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL,
+                name TEXT NOT NULL,
+                registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                last_login DATETIME
+            )
+        ''')
+        
+        # Create default admin user if no users exist
+        cursor.execute('SELECT COUNT(*) FROM users')
+        user_count = cursor.fetchone()[0]
+        
+        if user_count == 0:
+            cursor.execute('''
+                INSERT INTO users (username, email, password, name, registered_at)
+                VALUES (?, ?, ?, ?, ?)
+            ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
+            print("✅ Created default admin user")
+        
+        conn.commit()
+        conn.close()
+        print(f"✅ Database initialized with {user_count + (1 if user_count == 0 else 0)} users")
+        
+    except Exception as e:
+        print(f"⚠️ Error initializing database: {e}")
+
+def get_user(username):
+    """Get user from database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        user_data = cursor.fetchone()
+        conn.close()
+        
+        if user_data:
+            return {
+                'id': user_data[0],
+                'username': user_data[1],
+                'email': user_data[2],
+                'password': user_data[3],
+                'name': user_data[4],
+                'registered_at': user_data[5],
+                'last_login': user_data[6]
+            }
+        return None
+    except Exception as e:
+        print(f"⚠️ Error getting user: {e}")
+        return None
+
+def create_user(username, email, password, name):
+    """Create new user in database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO users (username, email, password, name)
+            VALUES (?, ?, ?, ?)
+        ''', (username, email, password, name))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.IntegrityError as e:
+        print(f"⚠️ User creation failed - duplicate entry: {e}")
+        return False
+    except Exception as e:
+        print(f"⚠️ Error creating user: {e}")
+        return False
+
+def update_last_login(username):
+    """Update user's last login time"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('UPDATE users SET last_login = ? WHERE username = ?', 
+                      (datetime.now(), username))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"⚠️ Error updating last login: {e}")
+
+def get_all_users():
+    """Get all users from database"""
+    try:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT username, email, name, registered_at, last_login FROM users')
+        users_data = cursor.fetchall()
+        conn.close()
+        
+        users = []
+        for user_data in users_data:
+            users.append({
+                'username': user_data[0],
+                'email': user_data[1],
+                'name': user_data[2],
+                'registered_at': user_data[3],
+                'last_login': user_data[4]
+            })
+        return users
+    except Exception as e:
+        print(f"⚠️ Error getting all users: {e}")
+        return []
+
+# Initialize database on startup
+init_database()
+
 # Global configuration storage (in production, use a database)
 global_config = {}
 global_users = {}  # Store registered users
@@ -392,6 +515,143 @@ def list_users():
             'total': len(user_list)
         })
         
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# User management endpoints
+@app.route('/users/register', methods=['POST', 'OPTIONS'])
+def register_user():
+    """Register a new user"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        user_data = request.get_json()
+        username = user_data.get('username', '').strip().lower()
+        email = user_data.get('email', '').strip().lower()
+        password = user_data.get('password', '')
+        name = user_data.get('name', '').strip()
+        
+        if not all([username, email, password, name]):
+            return jsonify({'error': 'All fields are required'}), 400
+        
+        # Check if user already exists (database will handle uniqueness)
+        existing_user = get_user(username)
+        if existing_user:
+            return jsonify({'error': 'Username already exists'}), 409
+        
+        # Create user in database
+        if create_user(username, email, password, name):
+            print(f"📝 User registered: {username} ({email})")
+            
+            # Get user count for stats
+            all_users = get_all_users()
+            print(f"📊 Total users: {len(all_users)}")
+            
+            return jsonify({
+                'success': True,
+                'message': 'User registered successfully',
+                'user': {
+                    'username': username,
+                    'email': email,
+                    'name': name
+                }
+            })
+        else:
+            return jsonify({'error': 'Username or email already exists'}), 409
+        
+    except Exception as e:
+        print(f"❌ Registration error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/login', methods=['POST', 'OPTIONS'])
+def login_user():
+    """Authenticate user login"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        login_data = request.get_json()
+        username = login_data.get('username', '').strip().lower()
+        password = login_data.get('password', '')
+        
+        if not username or not password:
+            return jsonify({'error': 'Username and password are required'}), 400
+        
+        # Get user from database
+        user = get_user(username)
+        if not user or user.get('password') != password:
+            return jsonify({'error': 'Invalid username or password'}), 401
+        
+        # Update last login in database
+        update_last_login(username)
+        
+        print(f"✅ User logged in: {username}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Login successful',
+            'user': {
+                'username': user['username'],
+                'email': user['email'],
+                'name': user['name']
+            }
+        })
+        
+    except Exception as e:
+        print(f"❌ Login error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/list', methods=['GET', 'OPTIONS'])
+def list_users():
+    """Get list of all registered users (for admin)"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        user_list = get_all_users()
+        
+        return jsonify({
+            'success': True,
+            'users': user_list,
+            'total': len(user_list)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/backup', methods=['GET', 'OPTIONS'])
+def backup_users():
+    """Get users data for backup/persistence"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        # Get all users from database
+        all_users = get_all_users()
+        users_json = json.dumps(all_users, separators=(',', ':'))
+        return jsonify({
+            'success': True,
+            'users_backup': users_json,
+            'total_users': len(all_users),
+            'message': 'Database backup created successfully'
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
