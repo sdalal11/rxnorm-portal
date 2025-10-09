@@ -1859,80 +1859,35 @@
         // Function to load pre-annotations from processed document data
         async function loadPreAnnotations(doc) {
             try {
-                console.log('🔍 Attempting to load pre-annotations for:', doc.name);
+                console.log('🔍 Loading pre-annotations for:', doc.name);
                 
-                // First, try to get existing pre-annotations from the API server
-                let response = await fetch(`${API_BASE_URL}/process`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        document_name: doc.name,
-                        get_annotations_only: true
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.annotations && Array.isArray(data.annotations) && data.annotations.length > 0) {
-                        console.log(`🤖 Loaded ${data.annotations.length} existing pre-annotations from API`);
-                        doc.preAnnotations = data.annotations;
-                        doc.hasPreAnnotations = data.annotations.length > 0;
-                        return data.annotations;
-                    }
+                // Check if document already has pre-annotations from admin processing
+                if (doc.preAnnotations && Array.isArray(doc.preAnnotations) && doc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations from admin processing`);
+                    doc.hasPreAnnotations = true;
+                    return doc.preAnnotations;
                 }
                 
-                // If no existing annotations found, process the document to generate them
-                console.log('📝 No existing pre-annotations found. Processing document to generate annotations...');
+                // If no pre-annotations in document object, check localStorage for updated documents data
+                const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                const localDoc = localDocuments.find(d => d.id === doc.id || d.name === doc.name);
                 
-                // Get the document content from Azure
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
-                if (!adminConfigData) {
-                    console.warn('⚠️ No Azure config available for document processing');
-                    return [];
+                if (localDoc && localDoc.preAnnotations && Array.isArray(localDoc.preAnnotations) && localDoc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${localDoc.preAnnotations.length} pre-annotations from localStorage`);
+                    doc.preAnnotations = localDoc.preAnnotations;
+                    doc.hasPreAnnotations = true;
+                    return localDoc.preAnnotations;
                 }
                 
-                const azureConfig = JSON.parse(adminConfigData);
-                const blobUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${doc.blobName}${azureConfig.sasToken}`;
-                
-                // Fetch document content
-                const docResponse = await fetch(blobUrl);
-                if (!docResponse.ok) {
-                    console.warn('⚠️ Failed to fetch document content for processing');
-                    return [];
-                }
-                
-                const htmlContent = await docResponse.text();
-                
-                // Send document for processing
-                response = await fetch(`${API_BASE_URL}/process`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        document_name: doc.name,
-                        document_content: htmlContent,
-                        process_new_document: true
-                    })
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.annotations && Array.isArray(data.annotations)) {
-                        console.log(`🎉 Generated ${data.annotations.length} new pre-annotations for document`);
-                        doc.preAnnotations = data.annotations;
-                        doc.hasPreAnnotations = data.annotations.length > 0;
-                        return data.annotations;
-                    }
-                }
-                
-                console.log('ℹ️ No pre-annotations generated for this document');
+                console.log('ℹ️ No pre-annotations found for this document');
+                doc.preAnnotations = [];
+                doc.hasPreAnnotations = false;
                 return [];
                 
             } catch (error) {
-                console.warn('⚠️ Failed to load/generate pre-annotations:', error);
+                console.warn('⚠️ Failed to load pre-annotations:', error);
+                doc.preAnnotations = [];
+                doc.hasPreAnnotations = false;
                 return [];
             }
         }
