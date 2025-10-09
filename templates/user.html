@@ -2239,11 +2239,21 @@
             }
             
             const count = documentAnnotations.length;
+            const notesStats = getNotesStatistics();
+            
             console.log('📊 Updating annotation count:', count, 'annotations:', documentAnnotations);
+            console.log('📝 Notes stats:', notesStats);
             
             const countElement = document.getElementById('annotationCount');
             if (countElement) {
-                countElement.textContent = count;
+                // Show total count with notes indicator if any annotations have notes
+                if (notesStats.withNotes > 0) {
+                    countElement.textContent = `${count} (${notesStats.withNotes} 📝)`;
+                    countElement.title = `${count} total annotations, ${notesStats.withNotes} with notes`;
+                } else {
+                    countElement.textContent = count;
+                    countElement.title = `${count} total annotations`;
+                }
             }
         }
 
@@ -2324,6 +2334,42 @@
             });
             
             list.innerHTML = html;
+        }
+
+        // Helper function to check annotations with notes
+        function getAnnotationsWithNotes() {
+            return documentAnnotations.filter(ann => ann.notes && ann.notes.trim() !== '');
+        }
+
+        // Helper function to get notes statistics
+        function getNotesStatistics() {
+            const annotationsWithNotes = getAnnotationsWithNotes();
+            const totalAnnotations = documentAnnotations.length;
+            
+            return {
+                total: totalAnnotations,
+                withNotes: annotationsWithNotes.length,
+                withoutNotes: totalAnnotations - annotationsWithNotes.length,
+                percentage: totalAnnotations > 0 ? Math.round((annotationsWithNotes.length / totalAnnotations) * 100) : 0,
+                annotationsWithNotes: annotationsWithNotes
+            };
+        }
+
+        // Function to log notes information to console (for debugging)
+        function showNotesInfo() {
+            const stats = getNotesStatistics();
+            console.log('📝 Notes Statistics:', stats);
+            
+            if (stats.withNotes > 0) {
+                console.log('📝 Annotations with notes:');
+                stats.annotationsWithNotes.forEach((ann, index) => {
+                    console.log(`${index + 1}. "${ann.text.substring(0, 50)}..." - Note: "${ann.notes}"`);
+                });
+            } else {
+                console.log('📝 No annotations have notes yet');
+            }
+            
+            return stats;
         }
 
         // Function to update annotation notes
@@ -2844,6 +2890,33 @@
         if (typeof updateAnnotationCount !== 'undefined') {
                 updateAnnotationCount();
             }
+            
+        // Global helper functions for testing/debugging (accessible from browser console)
+        window.checkNotes = function() {
+            return showNotesInfo();
+        };
+        
+        window.getAnnotationsWithNotes = function() {
+            return getAnnotationsWithNotes();
+        };
+        
+        window.exportAnnotationsWithNotes = function() {
+            const annotationsWithNotes = getAnnotationsWithNotes();
+            const exportData = {
+                documentName: currentDocument ? currentDocument.name : 'Unknown',
+                timestamp: new Date().toISOString(),
+                annotations: annotationsWithNotes.map(ann => ({
+                    text: ann.text,
+                    status: ann.status,
+                    notes: ann.notes,
+                    source: ann.source,
+                    isPreAnnotation: ann.isPreAnnotation,
+                    timestamp: ann.timestamp
+                }))
+            };
+            console.log('📝 Exporting annotations with notes:', exportData);
+            return exportData;
+        };
     </script>
 
     
