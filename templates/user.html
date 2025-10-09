@@ -1385,7 +1385,7 @@
                                 blobName: name,
                                 isFromFolder: isFromFolder,
                                 hasPreAnnotations: false,
-                                preAnnotations: []
+                                preAnnotations: [] // Will be loaded when document is opened
                             });
                         }
                     }
@@ -1856,6 +1856,42 @@
             }
         }
 
+        // Function to load pre-annotations from processed document data
+        async function loadPreAnnotations(doc) {
+            try {
+                console.log('🔍 Attempting to load pre-annotations for:', doc.name);
+                
+                // Try to get pre-annotations from the API server
+                const response = await fetch(`${API_BASE_URL}/process`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        document_name: doc.name,
+                        get_annotations_only: true
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.annotations && Array.isArray(data.annotations)) {
+                        console.log(`🤖 Loaded ${data.annotations.length} pre-annotations from API`);
+                        doc.preAnnotations = data.annotations;
+                        doc.hasPreAnnotations = data.annotations.length > 0;
+                        return data.annotations;
+                    }
+                }
+                
+                console.log('ℹ️ No pre-annotations found for this document');
+                return [];
+                
+            } catch (error) {
+                console.warn('⚠️ Failed to load pre-annotations:', error);
+                return [];
+            }
+        }
+
         // Replace the loadDocumentAnnotations function with this Azure-enabled version:
         async function loadDocumentAnnotations(docId) {
             console.log('🔄 Loading annotations for document:', docId);
@@ -1877,11 +1913,18 @@
             
             // Load pre-annotations from document (AI-generated)
             const doc = allDocuments.find(d => d.id == docId);
-            if (doc && doc.preAnnotations && doc.preAnnotations.length > 0) {
-                console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations`);
+            if (doc) {
+                // If document doesn't have pre-annotations, try to load them
+                if (!doc.preAnnotations || doc.preAnnotations.length === 0) {
+                    console.log('🔍 No pre-annotations found, attempting to load from API...');
+                    await loadPreAnnotations(doc);
+                }
                 
-                // Convert pre-annotations to our annotation format
-                const preAnnotations = doc.preAnnotations.map((preAnn, index) => {
+                if (doc.preAnnotations && doc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations`);
+                    
+                    // Convert pre-annotations to our annotation format
+                    const preAnnotations = doc.preAnnotations.map((preAnn, index) => {
                     // Handle both string and object formats
                     let cleanText = preAnn.text || preAnn.normalized_name || preAnn.medication || String(preAnn);
                     
@@ -1906,6 +1949,7 @@
                 
                 documentAnnotations = [...documentAnnotations, ...uniquePreAnnotations];
                 console.log(`📊 Total annotations: ${documentAnnotations.length} (${uniquePreAnnotations.length} from AI)`);
+                }
             }
             
             // Apply all annotations to the document
