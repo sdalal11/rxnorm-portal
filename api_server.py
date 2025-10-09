@@ -270,26 +270,61 @@ global_users = {}  # Store registered users
 USERS_FILE = 'users_data.json'
 
 def load_users():
-    """Load users from persistent storage"""
+    """Load users from persistent storage (environment variable or file)"""
     global global_users
     try:
+        # First try to load from environment variable (for true persistence)
+        env_users = os.environ.get('PERSISTENT_USERS')
+        if env_users:
+            global_users = json.loads(env_users)
+            print(f"✅ Loaded {len(global_users)} users from environment variable")
+            return
+        
+        # Fallback to file (may not persist on some hosting platforms)
         if os.path.exists(USERS_FILE):
             with open(USERS_FILE, 'r') as f:
                 global_users = json.load(f)
             print(f"✅ Loaded {len(global_users)} users from {USERS_FILE}")
         else:
-            global_users = {}
-            print(f"📁 No existing users file found, starting fresh")
+            # Initialize with default admin account to avoid losing access
+            global_users = {
+                'admin': {
+                    'username': 'admin',
+                    'email': 'admin@rxnorm.com',
+                    'password': 'admin123',
+                    'name': 'System Administrator',
+                    'registered_at': 'System Default',
+                    'last_login': None
+                }
+            }
+            print(f"📁 No existing users found, created default admin account")
     except Exception as e:
         print(f"⚠️ Error loading users: {e}")
-        global_users = {}
+        # Fallback to admin account
+        global_users = {
+            'admin': {
+                'username': 'admin',
+                'email': 'admin@rxnorm.com', 
+                'password': 'admin123',
+                'name': 'System Administrator',
+                'registered_at': 'System Default',
+                'last_login': None
+            }
+        }
 
 def save_users():
-    """Save users to persistent storage"""
+    """Save users to persistent storage (both environment and file)"""
     try:
+        # Save to file (temporary)
         with open(USERS_FILE, 'w') as f:
             json.dump(global_users, f, indent=2)
+        
+        # Print users data for manual persistence (admin can copy to env variable)
+        users_json = json.dumps(global_users, separators=(',', ':'))
         print(f"💾 Saved {len(global_users)} users to {USERS_FILE}")
+        print(f"🔐 For true persistence, set environment variable PERSISTENT_USERS to:")
+        print(f"PERSISTENT_USERS='{users_json}'")
+        
     except Exception as e:
         print(f"⚠️ Error saving users: {e}")
 
@@ -428,6 +463,27 @@ def list_users():
             'total': len(user_list)
         })
         
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/backup', methods=['GET', 'OPTIONS'])
+def backup_users():
+    """Get users data for backup/persistence"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        users_json = json.dumps(global_users, separators=(',', ':'))
+        return jsonify({
+            'success': True,
+            'users_backup': users_json,
+            'total_users': len(global_users),
+            'message': 'Copy this backup string to PERSISTENT_USERS environment variable for permanent storage'
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
