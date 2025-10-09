@@ -22,7 +22,7 @@ def home():
     """Root endpoint"""
     return jsonify({
         'message': 'RxNorm Document Processing API',
-        'version': '1.1',
+        'version': '1.2',  # Updated for database authentication
         'endpoints': {
             'health': '/health',
             'process': '/process-document',
