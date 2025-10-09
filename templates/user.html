@@ -2211,68 +2211,6 @@
             }
         }
 
-        // function updateAnnotationsList() {
-        //     const list = document.getElementById('annotationsList');
-            
-        //     if (documentAnnotations.length === 0) {
-        //         list.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No annotations yet</p>';
-        //         return;
-        //     }
-            
-        //     let html = '';
-        //     documentAnnotations.forEach((annotation, index) => {
-        //         const statusClass = annotation.status === 'active' ? 'status-active' : 'status-inactive';
-        //         const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
-        //         const sourceText = annotation.isPreAnnotation ? 'AI Detected' : 'User Added';
-        //         const confidenceText = annotation.confidence ? ` (${Math.round(annotation.confidence * 100)}%)` : '';
-                
-        //         html += `
-        //             <div class="annotation-item" onclick="scrollToAnnotation('${annotation.text}')">
-        //                 <div class="annotation-text">"${annotation.text.substring(0, 50)}${annotation.text.length > 50 ? '...' : ''}"</div>
-        //                 <div class="annotation-status ${statusClass}">${annotation.status.toUpperCase()}</div>
-        //                 <div style="font-size: 0.75rem; color: #999; margin-top: 0.25rem;">
-        //                     ${sourceIcon} ${sourceText}${confidenceText}
-        //                     <br>${new Date(annotation.timestamp).toLocaleString()}
-        //                     ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
-        //                 </div>
-        //                 ${annotation.isPreAnnotation ? 
-        //                     `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'active')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'active' ? '#28a745' : '#6c757d'}; 
-        //                                     color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             ${annotation.status === 'active' ? '✓ Active' : 'Set Active'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'inactive')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'inactive' ? '#dc3545' : '#6c757d'}; 
-        //                                     color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); convertToUserAnnotation('${annotation.id}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #007bff; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem; width: 100%; margin-top: 0.25rem;">
-        //                             Confirm AI Detection
-        //                         </button>
-        //                     </div>` : 
-        //                     `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'inactive' : 'active'}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #6c757d; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             Change to ${annotation.status === 'active' ? 'Inactive' : 'Active'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); removeAnnotationById('${annotation.id}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #dc3545; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem;">
-        //                             Remove
-        //                         </button>
-        //                     </div>`
-        //                 }
-        //             </div>
-        //         `;
-        //     });
-            
-        //     list.innerHTML = html;
-        // }
-
         // Replace the updateAnnotationsList function with this enhanced version that passes the full text:
         function updateAnnotationsList() {
             const list = document.getElementById('annotationsList');
@@ -2318,11 +2256,6 @@
                                             color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
                                     ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
                                 </button>
-                                <button onclick="event.stopPropagation(); convertToUserAnnotation('${annotation.id}')" 
-                                        style="padding: 0.25rem 0.5rem; background: #007bff; color: white; border: none; 
-                                            border-radius: 3px; font-size: 0.7rem; width: 100%; margin-top: 0.25rem;">
-                                    Confirm AI Detection
-                                </button>
                             </div>` : 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
                                 <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'inactive' : 'active'}')" 
@@ -2342,74 +2275,6 @@
             });
             
             list.innerHTML = html;
-        }
-
-        // Add this new function after the updateAnnotationsList function:
-        // function convertToUserAnnotation(annotationId) {
-        //     const annotation = documentAnnotations.find(ann => ann.id === annotationId);
-        //     if (annotation) {
-        //         annotation.isPreAnnotation = false;
-        //         annotation.source = 'user';
-        //         annotation.timestamp = new Date().toISOString();
-        //         updateAnnotationsList();
-                
-        //         // Save the updated annotations
-        //         const allAnnotations = JSON.parse(localStorage.getItem('documentAnnotations')) || {};
-        //         allAnnotations[currentDocument.id] = documentAnnotations;
-        //         localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
-                
-        //         console.log('Converted AI annotation to user annotation:', annotation);
-        //     }
-        // }
-
-        // // Add these new functions after the convertToUserAnnotation function:
-
-        // function changeAnnotationStatus(annotationId, newStatus) {
-        //     const annotation = documentAnnotations.find(ann => ann.id === annotationId);
-        //     if (annotation && annotation.status !== newStatus) {
-        //         const oldStatus = annotation.status;
-        //         annotation.status = newStatus;
-        //         annotation.timestamp = new Date().toISOString();
-                
-        //         console.log(`Changed annotation "${annotation.text}" from ${oldStatus} to ${newStatus}`);
-                
-        //         // Re-highlight the text with new status
-        //         rehighlightAnnotation(annotation, oldStatus);
-                
-        //         // Update the display
-        //         updateAnnotationsList();
-        //         updateAnnotationCount();
-                
-        //         // Save if it's a user annotation
-        //         if (!annotation.isPreAnnotation) {
-        //             saveAnnotationsToStorage();
-        //         }
-        //     }
-        // }
-
-        // Update the convertToUserAnnotation and changeAnnotationStatus functions to auto-save:
-        function convertToUserAnnotation(annotationId) {
-            console.log('🤖➡️👤 Converting AI annotation to user annotation:', annotationId);
-            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20), isPreAnnotation: a.isPreAnnotation})));
-            
-            const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
-            console.log('🔍 Found annotation:', annotation);
-            
-            if (annotation) {
-                annotation.isPreAnnotation = false;
-                annotation.source = 'user';
-                annotation.timestamp = new Date().toISOString();
-                
-                console.log('✅ Successfully converted AI annotation to user annotation:', annotation.text.substring(0, 30) + '...');
-                
-                updateAnnotationsList();
-                
-                // Auto-save to Azure
-                autoSaveAnnotations();
-            } else {
-                console.error('❌ Annotation not found with ID:', annotationId);
-                alert('Error: Annotation not found. Please refresh the page and try again.');
-            }
         }
 
         function changeAnnotationStatus(annotationId, newStatus) {
@@ -2618,21 +2483,6 @@
             localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
         }
 
-        // function scrollToAnnotation(text) {
-        //     const highlights = document.querySelectorAll('.highlight-active, .highlight-inactive');
-        //     for (let highlight of highlights) {
-        //         if (highlight.textContent.includes(text)) {
-        //             highlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        //             highlight.style.boxShadow = '0 0 10px #667eea';
-        //             setTimeout(() => {
-        //                 highlight.style.boxShadow = '';
-        //             }, 2000);
-        //             break;
-        //         }
-        //     }
-        // }
-
-
         // Replace the scrollToAnnotation function (around line 1950) with this enhanced version:
         function scrollToAnnotation(text) {
             console.log('🔍 Scrolling to annotation:', text);
@@ -2738,25 +2588,6 @@
 
 
 
-        // function saveAnnotations() {
-        //     if (!currentDocument) return;
-            
-        //     // Save annotations to localStorage
-        //     const allAnnotations = JSON.parse(localStorage.getItem('documentAnnotations')) || {};
-        //     allAnnotations[currentDocument.id] = documentAnnotations;
-        //     localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
-            
-        //     // Show success message
-        //     const originalText = event.target.textContent;
-        //     event.target.textContent = 'Saved!';
-        //     event.target.style.background = '#28a745';
-            
-        //     setTimeout(() => {
-        //         event.target.textContent = originalText;
-        //         event.target.style.background = '#28a745';
-        //     }, 2000);
-        // }
-
         // Replace the saveAnnotations function (around line 1800) with this Azure-enabled version:
         async function saveAnnotations() {
             if (!currentDocument || !currentUser) return;
@@ -2797,8 +2628,7 @@
                         activeCount: documentAnnotations.filter(ann => ann.status === 'active').length,
                         inactiveCount: documentAnnotations.filter(ann => ann.status === 'inactive').length,
                         aiGeneratedCount: documentAnnotations.filter(ann => ann.isPreAnnotation).length,
-                        userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length,
-                        confirmedAiCount: documentAnnotations.filter(ann => ann.source === 'main.py' && !ann.isPreAnnotation).length
+                        userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length
                     }
                 };
                 
