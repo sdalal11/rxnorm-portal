@@ -1,0 +1,109 @@
+{
+  "file": "test_carbidopa.html",
+  "medications": [
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carbidopa / levodopa",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 47,
+      "end_offset": 67
+    },
+    {
+      "rx_cui": null,
+      "normalized_name": "carbidopa/levodopa",
+      "cui_type": null,
+      "mapping_method": "no_match",
+      "mapping_confidence": 0.0,
+      "flag": "unrecognized_medication",
+      "text": "carbidopa/levodopa",
+      "confidence": 0.97,
+      "active_status": "non-active",
+      "start_offset": 84,
+      "end_offset": 102
+    },
+    {
+      "rx_cui": null,
+      "normalized_name": "carbidopa/levodopa",
+      "cui_type": null,
+      "mapping_method": "no_match",
+      "mapping_confidence": 0.0,
+      "flag": "unrecognized_medication",
+      "text": "carbidopa/levodopa",
+      "confidence": 0.97,
+      "active_status": "active",
+      "start_offset": 430,
+      "end_offset": 448
+    },
+    {
+      "rx_cui": null,
+      "normalized_name": "carbidopa-levodopa",
+      "cui_type": null,
+      "mapping_method": "no_match",
+      "mapping_confidence": 0.0,
+      "flag": "unrecognized_medication",
+      "text": "carbidopa-levodopa",
+      "confidence": 0.97,
+      "active_status": "active",
+      "start_offset": 285,
+      "end_offset": 303
+    },
+    {
+      "rx_cui": null,
+      "normalized_name": "levodopa-carbidopa",
+      "cui_type": null,
+      "mapping_method": "no_match",
+      "mapping_confidence": 0.0,
+      "flag": "unrecognized_medication",
+      "text": "levodopa-carbidopa",
+      "confidence": 0.97,
+      "active_status": "active",
+      "start_offset": 227,
+      "end_offset": 245
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Sinemet",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 157,
+      "end_offset": 164
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Rytary",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 277,
+      "end_offset": 283
+    },
+    {
+      "rx_cui": "103990",
+      "normalized_name": "carbidopa / levodopa",
+      "cui_type": "MIN",
+      "mapping_method": "brand_name",
+      "mapping_confidence": 0.96,
+      "flag": null,
+      "text": "Duopa",
+      "confidence": 0.96,
+      "active_status": "active",
+      "start_offset": 399,
+      "end_offset": 404
+    }
+  ]
+}
