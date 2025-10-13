@@ -2264,7 +2264,18 @@
                     return localDoc.preAnnotations;
                 }
                 
-                console.log('ℹ️ No pre-annotations found for this document');
+                // If no pre-annotations found, generate them using main.py API
+                console.log('🚀 No pre-annotations found, generating new ones via main.py API...');
+                const generatedAnnotations = await generatePreAnnotationsFromAPI(doc);
+                
+                if (generatedAnnotations && generatedAnnotations.length > 0) {
+                    console.log(`✨ Generated ${generatedAnnotations.length} new pre-annotations via API`);
+                    doc.preAnnotations = generatedAnnotations;
+                    doc.hasPreAnnotations = true;
+                    return generatedAnnotations;
+                }
+                
+                console.log('ℹ️ No medications found in this document');
                 doc.preAnnotations = [];
                 doc.hasPreAnnotations = false;
                 return [];
@@ -2274,6 +2285,134 @@
                 doc.preAnnotations = [];
                 doc.hasPreAnnotations = false;
                 return [];
+            }
+        }
+        
+        // Function to generate pre-annotations by calling main.py API
+        async function generatePreAnnotationsFromAPI(doc) {
+            // Show progress notification
+            showProcessingNotification(`🤖 Analyzing ${doc.name} for medications...`);
+            
+            try {
+                console.log('🔄 Calling main.py API to process document:', doc.name);
+                
+                // Get document content from Azure
+                const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
+                if (!azureConfigData) {
+                    throw new Error('No Azure configuration found');
+                }
+                
+                const azureConfig = JSON.parse(azureConfigData);
+                const documentUrl = `${doc.azureUrl}${azureConfig.sasToken}`;
+                
+                // First, fetch the document content
+                console.log('📄 Fetching document content from:', documentUrl);
+                updateProcessingNotification('📄 Downloading document content...');
+                
+                const docResponse = await fetch(documentUrl);
+                if (!docResponse.ok) {
+                    throw new Error(`Failed to fetch document: ${docResponse.status}`);
+                }
+                
+                const docBlob = await docResponse.blob();
+                
+                // Create FormData to send to main.py API
+                const formData = new FormData();
+                formData.append('file', docBlob, doc.name);
+                
+                console.log('🤖 Sending document to main.py for processing...');
+                updateProcessingNotification('🤖 Processing with AI medication extraction...');
+                
+                const apiResponse = await fetch(`${API_BASE_URL}/process-document`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!apiResponse.ok) {
+                    const errorText = await apiResponse.text();
+                    throw new Error(`API processing failed: ${apiResponse.status} ${apiResponse.statusText} - ${errorText}`);
+                }
+                
+                const result = await apiResponse.json();
+                console.log('📊 API processing result:', result);
+                
+                hideProcessingNotification();
+                
+                if (result.success && result.annotations && Array.isArray(result.annotations)) {
+                    console.log(`✅ Successfully generated ${result.annotations.length} annotations`);
+                    showSuccessNotification(`✨ Found ${result.annotations.length} medications in ${doc.name}`);
+                    return result.annotations;
+                } else {
+                    console.log('ℹ️ API processing completed but no annotations found');
+                    showSuccessNotification(`ℹ️ No medications found in ${doc.name}`);
+                    return [];
+                }
+                
+            } catch (error) {
+                console.error('❌ Failed to generate pre-annotations from API:', error);
+                hideProcessingNotification();
+                showErrorNotification(`❌ Failed to analyze ${doc.name}: ${error.message}`);
+                return [];
+            }
+        }
+        
+        // Notification functions for processing status
+        function showProcessingNotification(message) {
+            hideConfigurationNotification(); // Clear any existing notifications
+            
+            let notification = document.getElementById('processingNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'processingNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    color: white;
+                    padding: 15px 20px;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    font-weight: 500;
+                `;
+                document.body.prepend(notification);
+            }
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    ${message}
+                </div>
+            `;
+            notification.style.display = 'block';
+            
+            // Add CSS animation if not already added
+            if (!document.getElementById('spinAnimation')) {
+                const style = document.createElement('style');
+                style.id = 'spinAnimation';
+                style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+                document.head.appendChild(style);
+            }
+        }
+        
+        function updateProcessingNotification(message) {
+            const notification = document.getElementById('processingNotification');
+            if (notification) {
+                notification.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <div style="width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        ${message}
+                    </div>
+                `;
+            }
+        }
+        
+        function hideProcessingNotification() {
+            const notification = document.getElementById('processingNotification');
+            if (notification) {
+                notification.style.display = 'none';
             }
         }
 
@@ -2299,10 +2438,19 @@
             // Load pre-annotations from document (AI-generated)
             const doc = allDocuments.find(d => d.id == docId);
             if (doc) {
+                console.log('📄 Document found:', doc.name, 'Pre-annotations:', doc.preAnnotations?.length || 0);
+                
                 // If document doesn't have pre-annotations, try to load them
                 if (!doc.preAnnotations || doc.preAnnotations.length === 0) {
                     console.log('🔍 No pre-annotations found, attempting to load from API...');
-                    await loadPreAnnotations(doc);
+                    try {
+                        await loadPreAnnotations(doc);
+                        console.log('✅ Pre-annotation loading completed. Found:', doc.preAnnotations?.length || 0);
+                    } catch (error) {
+                        console.error('❌ Error loading pre-annotations:', error);
+                    }
+                } else {
+                    console.log(`✨ Document already has ${doc.preAnnotations.length} pre-annotations`);
                 }
                 
                 if (doc.preAnnotations && doc.preAnnotations.length > 0) {
