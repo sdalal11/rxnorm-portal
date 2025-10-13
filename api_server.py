@@ -23,12 +23,22 @@ class FolderManager:
         self.total_folders = len(AVAILABLE_FOLDERS)
     
     def get_next_assignment_order(self):
-        """Get the next assignment order number by counting existing assignments"""
-        assignment_count = 0
-        for username, user_data in global_users.items():
-            if 'assignment_order' in user_data and user_data['assignment_order'] is not None:
-                assignment_count += 1
-        return assignment_count + 1
+        """Get the next assignment order number by counting existing assignments from database"""
+        try:
+            # Count users who have folder assignments in the database
+            result = execute_query('SELECT COUNT(*) FROM users WHERE assigned_folder IS NOT NULL', fetch_one=True)
+            assignment_count = result[0] if result else 0
+            
+            print(f"📊 Current folder assignments in database: {assignment_count}")
+            return assignment_count + 1
+        except Exception as e:
+            print(f"⚠️ Error getting assignment count from database: {e}")
+            # Fallback to memory-based counting
+            assignment_count = 0
+            for username, user_data in global_users.items():
+                if 'assignment_order' in user_data and user_data['assignment_order'] is not None:
+                    assignment_count += 1
+            return assignment_count + 1
     
     def assign_folder_to_user(self, username, login_timestamp):
         """Assign folder based on sequential order with cycling"""
@@ -377,9 +387,31 @@ def init_database():
                     password VARCHAR(255) NOT NULL,
                     name VARCHAR(255) NOT NULL,
                     registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP
+                    last_login TIMESTAMP,
+                    assigned_folder VARCHAR(50),
+                    assignment_order INTEGER,
+                    login_timestamp TIMESTAMP
                 )
             ''')
+            
+            # Add folder assignment columns to existing table if they don't exist
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(50)')
+                print("✅ Added assigned_folder column")
+            except Exception:
+                pass  # Column already exists
+            
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
+                print("✅ Added assignment_order column")
+            except Exception:
+                pass  # Column already exists
+                
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN login_timestamp TIMESTAMP')
+                print("✅ Added login_timestamp column")
+            except Exception:
+                pass  # Column already exists
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
@@ -395,9 +427,31 @@ def init_database():
                     password TEXT NOT NULL,
                     name TEXT NOT NULL,
                     registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    last_login DATETIME
+                    last_login DATETIME,
+                    assigned_folder TEXT,
+                    assignment_order INTEGER,
+                    login_timestamp DATETIME
                 )
             ''')
+            
+            # Add folder assignment columns to existing table if they don't exist
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder TEXT')
+                print("✅ Added assigned_folder column")
+            except Exception:
+                pass  # Column already exists
+            
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
+                print("✅ Added assignment_order column")
+            except Exception:
+                pass  # Column already exists
+                
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN login_timestamp DATETIME')
+                print("✅ Added login_timestamp column")
+            except Exception:
+                pass  # Column already exists
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
         
@@ -478,7 +532,10 @@ def get_user(username):
                 'password': result[3],
                 'name': result[4],
                 'registered_at': result[5],
-                'last_login': result[6]
+                'last_login': result[6],
+                'assigned_folder': result[7] if len(result) > 7 else None,
+                'assignment_order': result[8] if len(result) > 8 else None,
+                'login_timestamp': result[9] if len(result) > 9 else None
             }
         return None
     except Exception as e:
@@ -508,6 +565,21 @@ def update_last_login(username):
         return True
     except Exception as e:
         print(f"⚠️ Error updating last login: {e}")
+        return False
+
+def update_user_folder_assignment(username, assigned_folder, assignment_order, login_timestamp):
+    """Update user's folder assignment in database"""
+    try:
+        execute_query('''
+            UPDATE users 
+            SET assigned_folder = ?, assignment_order = ?, login_timestamp = ? 
+            WHERE username = ?
+        ''', (assigned_folder, assignment_order, login_timestamp, username))
+        
+        print(f"💾 Saved folder assignment to database: {username} → {assigned_folder} (Order: {assignment_order})")
+        return True
+    except Exception as e:
+        print(f"⚠️ Error updating folder assignment: {e}")
         return False
 
 def list_users():
@@ -635,23 +707,34 @@ def login_user():
         # Update last login in database
         update_last_login(username)
         
-        # Also update global_users for compatibility (temporary)
+        # Check if user already has a folder assigned (from database)
+        if not user.get('assigned_folder'):
+            # Assign folder based on login order
+            folder_assignment = folder_manager.assign_folder_to_user(username, login_timestamp)
+            
+            # Save folder assignment to database
+            update_user_folder_assignment(
+                username, 
+                folder_assignment['folder'],
+                folder_assignment['assignment_order'],
+                login_timestamp
+            )
+            
+            # Update user object with assignment
+            user['assigned_folder'] = folder_assignment['folder']
+            user['assignment_order'] = folder_assignment['assignment_order']
+            user['login_timestamp'] = login_timestamp
+            
+            print(f"🎯 New folder assignment - User: {username}, Folder: {folder_assignment['folder']}, Order: {folder_assignment['assignment_order']}")
+        else:
+            print(f"🔄 Existing user login - User: {username}, Folder: {user['assigned_folder']}")
+        
+        # Update global_users for compatibility (temporary)
         if username in global_users:
             global_users[username]['last_login'] = login_timestamp
-            
-            # Check if user already has a folder assigned
-            if 'assigned_folder' not in global_users[username] or global_users[username]['assigned_folder'] is None:
-                # Assign folder based on login order
-                folder_assignment = folder_manager.assign_folder_to_user(username, login_timestamp)
-                
-                # Update user record with folder assignment
-                global_users[username]['assigned_folder'] = folder_assignment['folder']
-                global_users[username]['assignment_order'] = folder_assignment['assignment_order']
-                global_users[username]['login_timestamp'] = login_timestamp
-                
-                print(f"🎯 New folder assignment - User: {username}, Folder: {folder_assignment['folder']}, Order: {folder_assignment['assignment_order']}")
-            else:
-                print(f"🔄 Existing user login - User: {username}, Folder: {global_users[username]['assigned_folder']}")
+            global_users[username]['assigned_folder'] = user.get('assigned_folder')
+            global_users[username]['assignment_order'] = user.get('assignment_order')
+            global_users[username]['login_timestamp'] = user.get('login_timestamp')
         
         print(f"✅ User logged in: {username}")
         
@@ -662,9 +745,9 @@ def login_user():
                 'username': user['username'],
                 'email': user['email'],
                 'name': user['name'],
-                'assigned_folder': global_users[username].get('assigned_folder') if username in global_users else None,
-                'assignment_order': global_users[username].get('assignment_order') if username in global_users else None,
-                'login_timestamp': login_timestamp,
+                'assigned_folder': user.get('assigned_folder'),
+                'assignment_order': user.get('assignment_order'),
+                'login_timestamp': user.get('login_timestamp', login_timestamp),
                 'folder_count': len(AVAILABLE_FOLDERS)
             }
         })
