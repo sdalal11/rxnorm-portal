@@ -453,6 +453,80 @@
             font-weight: bold;
         }
 
+        
+        /* Folder View Styles */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .breadcrumb-item {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: #6c757d;
+        }
+        
+        .folder-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.2);
+            border-color: #6f42c1;
+        }
+        
+        .folder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .folder-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .folder-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        
+        .folder-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #6f42c1;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
         .document-viewer {
             display: none;
             position: fixed;
@@ -924,7 +998,14 @@
                 <button class="search-btn" onclick="filterDocuments()">Search</button>
                 <button class="search-btn btn-secondary" onclick="clearFilters()">Clear</button>
                 <button class="search-btn" onclick="toggleView()" id="viewToggleBtn">📁 Folder View</button>
+                <button class="search-btn" onclick="toggleView()" id="viewToggleBtn">📁 Folder View</button>
             </div>
+        </div>
+        
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb" class="breadcrumb" style="display: none;">
+            <span onclick="navigateToFolder('')" class="breadcrumb-item">📁 Documents</span>
+            <span id="breadcrumbPath"></span>
         </div>
         
         <!-- Breadcrumb Navigation -->
@@ -1005,10 +1086,21 @@
         
         // Authentication functions
         function showAuthTab(tabName, event = null) {
+        function showAuthTab(tabName, event = null) {
             // Update tab buttons
             document.querySelectorAll('.auth-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
+            
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Fallback: find the tab by tabName
+                const targetTab = document.querySelector(`[onclick="showAuthTab('${tabName}')"]`);
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+            }
             
             if (event && event.target) {
                 event.target.classList.add('active');
@@ -1032,6 +1124,7 @@
         }
         
         // Login form handler
+        document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
         document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1064,11 +1157,38 @@
             } catch (error) {
                 console.error('Login error:', error);
                 document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.user) {
+                    currentUser = data.user;
+                    sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+                    document.getElementById('authError').style.display = 'none';
+                    showUserPortal();
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Invalid email or password.';
+                    document.getElementById('authError').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
             }
         });
         
         // Register form handler
+        document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
         document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1127,6 +1247,48 @@
                 document.getElementById('authError').style.display = 'block';
                 document.getElementById('authSuccess').style.display = 'none';
             }
+            // Register user via API
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        email: email,
+                        password: password,
+                        name: name
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message and switch to login
+                    document.getElementById('authSuccess').textContent = 'Registration successful! You can now log in.';
+                    document.getElementById('authSuccess').style.display = 'block';
+                    document.getElementById('authError').style.display = 'none';
+                    
+                    // Clear form
+                    document.getElementById('userRegisterForm').reset();
+                    
+                    // Switch to login tab after 2 seconds
+                    setTimeout(() => {
+                        showAuthTab('login');
+                        document.getElementById('loginEmail').value = email;
+                    }, 2000);
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Registration failed. Please try again.';
+                    document.getElementById('authError').style.display = 'block';
+                    document.getElementById('authSuccess').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                document.getElementById('authError').textContent = 'Registration failed. Please check your connection and try again.';
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('authSuccess').style.display = 'none';
+            }
         });
         
         function showUserPortal() {
@@ -1137,8 +1299,138 @@
             // Ensure Azure configuration is available for new users
             ensureAzureConfigForUser();
             
+            // Ensure Azure configuration is available for new users
+            ensureAzureConfigForUser();
+            
             loadDocuments();
             updateStats();
+        }
+        
+        // Ensure Azure configuration is available for the user
+        async function ensureAzureConfigForUser() {
+            // Check if user already has Azure config
+            let userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            
+            if (!userConfig) {
+                // Try to fetch from API server
+                console.log('No local Azure configuration found. Attempting to fetch from API...');
+                try {
+                    const response = await fetch('https://rxnorm-portal-nscs.onrender.com/config/azure', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    console.log('API Response status:', response.status);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('API Response data:', data);
+                        
+                        if (data.success && data.config) {
+                            // Store the fetched config locally
+                            localStorage.setItem('globalAzureConfig', JSON.stringify(data.config));
+                            console.log('Azure configuration fetched successfully from API');
+                            hideConfigurationNotification();
+                            
+                            // Show success message
+                            showSuccessNotification('✅ Configuration loaded successfully! Documents should now be accessible.');
+                            return;
+                        } else {
+                            console.log('API returned no configuration');
+                            showErrorNotification('❌ No configuration found on server. Admin needs to configure Azure first.');
+                        }
+                    } else {
+                        console.log('API request failed with status:', response.status);
+                        showErrorNotification('❌ Failed to fetch configuration from server.');
+                    }
+                } catch (error) {
+                    console.log('Failed to fetch Azure config from API:', error);
+                    showErrorNotification('❌ Network error while fetching configuration.');
+                }
+                
+                // If we still don't have config, show notification
+                console.log('No Azure configuration available. Documents may not be accessible.');
+                showConfigurationNotification();
+            } else {
+                console.log('Azure configuration found for user');
+                hideConfigurationNotification();
+            }
+        }
+        
+        function showConfigurationNotification() {
+            // Create or show notification banner
+            let notification = document.getElementById('configNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'configNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #f39c12;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    z-index: 1000;
+                    font-weight: bold;
+                `;
+                notification.innerHTML = `
+                    ⚠️ Document access may be limited. Administrator needs to configure document sharing. 
+                    <button onclick="retryConfigurationFetch()" style="margin-left: 10px; background: rgba(255,255,255,0.3); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button>
+                    <button onclick="hideConfigurationNotification()" style="margin-left: 5px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>
+                `;
+                document.body.prepend(notification);
+            }
+            notification.style.display = 'block';
+        }
+        
+        async function retryConfigurationFetch() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.innerHTML = `🔄 Checking for configuration...`;
+                notification.style.background = '#17a2b8'; // Blue for loading
+            }
+            
+            await ensureAzureConfigForUser();
+            
+            // Reload documents if config was found
+            const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            if (userConfig) {
+                console.log('Config found, reloading documents...');
+                await loadDocuments();
+                updateStats();
+            }
+        }
+        
+        function showSuccessNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#28a745';
+                notification.innerHTML = message + ` <button onclick="hideConfigurationNotification()" style="margin-left: 10px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    hideConfigurationNotification();
+                }, 3000);
+            }
+        }
+        
+        function showErrorNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#dc3545';
+                notification.innerHTML = message + ` <button onclick="retryConfigurationFetch()" style="margin-left: 10px; background: rgba(255,255,255,0.3); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button> <button onclick="hideConfigurationNotification()" style="margin-left: 5px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
+            }
+        }
+        
+        function hideConfigurationNotification() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.display = 'none';
+            }
         }
         
         // Ensure Azure configuration is available for the user
@@ -1599,6 +1891,11 @@
                 return;
             }
             
+            if (currentView === 'folder') {
+                displayFolderView();
+                return;
+            }
+            
             const documentsGrid = document.getElementById('documentsGrid');
             
             if (filteredDocuments.length === 0) {
@@ -1619,14 +1916,19 @@
                 // Add folder indicator for files from folder uploads
                 const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
                 
+                // Add folder indicator for files from folder uploads
+                const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
+                
                 html += `
                     <div class="document-card" onclick="viewDocument('${doc.id}')">
                         <div class="document-icon">${icon}</div>
                         <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
                         <div class="document-title">${folderIndicator}${doc.name}</div>
+                        <div class="document-title">${folderIndicator}${doc.name}</div>
                         <div class="document-meta">
                             Uploaded: ${doc.uploadDate}<br>
                             Size: ${doc.size}
+                            ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                             ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                         </div>
                         ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
@@ -1785,6 +2087,7 @@
             if (fileExtension === 'html' || fileExtension === 'htm') {
                 try {
                     // Get Azure config from localStorage
+                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     
                     if (!adminConfigData) {
@@ -1976,6 +2279,7 @@
             if (!currentUser) return;
             
             try {
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found');
@@ -2519,6 +2823,7 @@
             if (!currentDocument || !currentUser) return;
             
             const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
+            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
             if (!adminConfigData) {
                 throw new Error('Azure configuration not found');
             }
@@ -2766,6 +3071,7 @@
                 
                 // Get Azure config (try both public and admin configs)
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found. Please contact administrator.');
                 }
@@ -2875,6 +3181,7 @@
             
             try {
                 // Get Azure config
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) return;
                 

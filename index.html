@@ -5,10 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Authentication</title>
-    <!-- Cache busting for deployment v1.1 -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -436,22 +432,6 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="folderInput">Or Upload Entire Folder:</label>
-                            <input type="file" id="folderInput" webkitdirectory directory multiple>
-                            <small style="color: #666; display: block; margin-top: 0.25rem;">
-                                📁 This will upload all files in the selected folder and subfolders
-                            </small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="folderInput">Or Upload Entire Folder:</label>
-                            <input type="file" id="folderInput" webkitdirectory directory multiple>
-                            <small style="color: #666; display: block; margin-top: 0.25rem;">
-                                📁 This will upload all files in the selected folder and subfolders
-                            </small>
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="documentCategory">Category:</label>
                             <select id="documentCategory">
                                 <option value="general">General</option>
@@ -502,8 +482,6 @@
                 <div style="margin-bottom: 1rem;">
                     <button class="btn" onclick="refreshDocuments()">Refresh from Azure</button>
                     <button class="btn" onclick="syncWithAzure()">Sync with Azure Storage</button>
-                    <button class="btn" style="background-color: #dc3545; margin-left: 1rem;" onclick="deleteAllDocuments()">Delete All Documents</button>
-                    <button class="btn" style="background-color: #dc3545; margin-left: 1rem;" onclick="deleteAllDocuments()">Delete All Documents</button>
                 </div>
                 
                 <div class="documents-list">
@@ -517,9 +495,6 @@
     </div>
     
     <script>
-        // API Configuration
-        const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
-        
         // API Configuration
         const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
         
@@ -659,8 +634,7 @@
         }
 
 
-        async function shareAzureConfigForUsers() {
-        async function shareAzureConfigForUsers() {
+        function shareAzureConfigForUsers() {
             // Make Azure config available for user portal (without sensitive info)
             const publicConfig = {
                 storageAccount: azureConfig.storageAccount,
@@ -668,48 +642,10 @@
                 sasToken: azureConfig.sasToken
             };
             localStorage.setItem('azureConfigPublic', JSON.stringify(publicConfig));
-            
-            // Also store in a global configuration that all users can access
-            localStorage.setItem('globalAzureConfig', JSON.stringify(publicConfig));
-            
-            // Send configuration to API server for global access
-            try {
-                console.log('Uploading Azure config to API server...', publicConfig);
-                const response = await fetch('https://rxnorm-portal-nscs.onrender.com/config/azure', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(publicConfig)
-                });
-                
-                console.log('API server response status:', response.status);
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('✅ Azure config uploaded to API server successfully:', result);
-                    
-                    // Show success message to admin
-                    const statusElement = document.getElementById('azureTestResult');
-                    if (statusElement) {
-                        statusElement.innerHTML = '✅ Connected to Azure and shared with users!';
-                        statusElement.style.background = '#d4edda';
-                        statusElement.style.color = '#155724';
-                        statusElement.style.border = '1px solid #c3e6cb';
-                    }
-                } else {
-                    const errorText = await response.text();
-                    console.log('❌ Failed to upload Azure config to API server:', response.status, errorText);
-                    alert('Warning: Azure connected locally but failed to share with other users. Error: ' + response.status);
-                }
-            } catch (error) {
-                console.log('❌ Error uploading Azure config to API server:', error);
-                alert('Warning: Azure connected locally but failed to share with other users. Network error: ' + error.message);
-            }
-            
             console.log('Azure config shared for user portal:', publicConfig);
-            console.log('Global Azure config stored for all users');
-        }
+}
+        
+
         function updateAzureStatus(connected) {
             azureConfig.isConnected = connected;
             const statusIndicator = document.getElementById('azureStatus');
@@ -734,185 +670,17 @@
             }
             
             const fileInput = document.getElementById('fileInput');
-            const folderInput = document.getElementById('folderInput');
-            const folderInput = document.getElementById('folderInput');
             const category = document.getElementById('documentCategory').value;
             const description = document.getElementById('documentDescription').value;
             const publicAccess = document.getElementById('publicAccess').checked;
             
-            let filesToUpload = [];
-            
-            // Check if files were selected via file input
-            if (fileInput.files.length > 0) {
-                filesToUpload = Array.from(fileInput.files);
-            }
-            // Check if folder was selected
-            else if (folderInput.files.length > 0) {
-                filesToUpload = Array.from(folderInput.files);
-                console.log(`📁 Folder upload detected: ${filesToUpload.length} files found`);
-            }
-            
-            if (filesToUpload.length === 0) {
-                alert('Please select files or a folder to upload.');
-            let filesToUpload = [];
-            
-            // Check if files were selected via file input
-            if (fileInput.files.length > 0) {
-                filesToUpload = Array.from(fileInput.files);
-            }
-            // Check if folder was selected
-            else if (folderInput.files.length > 0) {
-                filesToUpload = Array.from(folderInput.files);
-                console.log(`📁 Folder upload detected: ${filesToUpload.length} files found`);
-            }
-            
-            if (filesToUpload.length === 0) {
-                alert('Please select files or a folder to upload.');
+            if (fileInput.files.length === 0) {
+                alert('Please select files to upload.');
                 return;
             }
             
-            uploadToAzure(filesToUpload, category, description, publicAccess);
+            uploadToAzure(fileInput.files, category, description, publicAccess);
         });
-        
-        // Clear the other input when one is selected
-        document.getElementById('fileInput').addEventListener('change', function() {
-            if (this.files.length > 0) {
-                document.getElementById('folderInput').value = '';
-                updateUploadPreview();
-            }
-        });
-        
-        document.getElementById('folderInput').addEventListener('change', function() {
-            if (this.files.length > 0) {
-                document.getElementById('fileInput').value = '';
-                updateUploadPreview();
-            }
-        });
-        
-        function updateUploadPreview() {
-            const fileInput = document.getElementById('fileInput');
-            const folderInput = document.getElementById('folderInput');
-            
-            let selectedFiles = [];
-            let uploadType = '';
-            
-            if (fileInput.files.length > 0) {
-                selectedFiles = Array.from(fileInput.files);
-                uploadType = 'Individual Files';
-            } else if (folderInput.files.length > 0) {
-                selectedFiles = Array.from(folderInput.files);
-                uploadType = 'Folder Upload';
-            }
-            
-            if (selectedFiles.length > 0) {
-                // Show upload preview
-                const previewHtml = `
-                    <div style="background: #e7f3ff; padding: 1rem; border-radius: 4px; margin-top: 1rem;">
-                        <strong>📂 ${uploadType}</strong><br>
-                        📄 ${selectedFiles.length} file(s) selected<br>
-                        📊 Total size: ${formatTotalSize(selectedFiles)}<br>
-                        <details style="margin-top: 0.5rem;">
-                            <summary style="cursor: pointer; color: #007bff;">View file list</summary>
-                            <div style="max-height: 150px; overflow-y: auto; margin-top: 0.5rem; font-size: 0.875rem;">
-                                ${selectedFiles.map(file => `
-                                    <div style="padding: 2px 0;">
-                                        📄 ${file.webkitRelativePath || file.name} (${formatFileSize(file.size)})
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </details>
-                    </div>
-                `;
-                
-                // Remove existing preview
-                const existingPreview = document.getElementById('uploadPreview');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
-                
-                // Add new preview
-                const previewDiv = document.createElement('div');
-                previewDiv.id = 'uploadPreview';
-                previewDiv.innerHTML = previewHtml;
-                document.getElementById('uploadForm').appendChild(previewDiv);
-            }
-        }
-        
-        function formatTotalSize(files) {
-            const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
-            return formatFileSize(totalBytes);
-        }
-            uploadToAzure(filesToUpload, category, description, publicAccess);
-        });
-        
-        // Clear the other input when one is selected
-        document.getElementById('fileInput').addEventListener('change', function() {
-            if (this.files.length > 0) {
-                document.getElementById('folderInput').value = '';
-                updateUploadPreview();
-            }
-        });
-        
-        document.getElementById('folderInput').addEventListener('change', function() {
-            if (this.files.length > 0) {
-                document.getElementById('fileInput').value = '';
-                updateUploadPreview();
-            }
-        });
-        
-        function updateUploadPreview() {
-            const fileInput = document.getElementById('fileInput');
-            const folderInput = document.getElementById('folderInput');
-            
-            let selectedFiles = [];
-            let uploadType = '';
-            
-            if (fileInput.files.length > 0) {
-                selectedFiles = Array.from(fileInput.files);
-                uploadType = 'Individual Files';
-            } else if (folderInput.files.length > 0) {
-                selectedFiles = Array.from(folderInput.files);
-                uploadType = 'Folder Upload';
-            }
-            
-            if (selectedFiles.length > 0) {
-                // Show upload preview
-                const previewHtml = `
-                    <div style="background: #e7f3ff; padding: 1rem; border-radius: 4px; margin-top: 1rem;">
-                        <strong>📂 ${uploadType}</strong><br>
-                        📄 ${selectedFiles.length} file(s) selected<br>
-                        📊 Total size: ${formatTotalSize(selectedFiles)}<br>
-                        <details style="margin-top: 0.5rem;">
-                            <summary style="cursor: pointer; color: #007bff;">View file list</summary>
-                            <div style="max-height: 150px; overflow-y: auto; margin-top: 0.5rem; font-size: 0.875rem;">
-                                ${selectedFiles.map(file => `
-                                    <div style="padding: 2px 0;">
-                                        📄 ${file.webkitRelativePath || file.name} (${formatFileSize(file.size)})
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </details>
-                    </div>
-                `;
-                
-                // Remove existing preview
-                const existingPreview = document.getElementById('uploadPreview');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
-                
-                // Add new preview
-                const previewDiv = document.createElement('div');
-                previewDiv.id = 'uploadPreview';
-                previewDiv.innerHTML = previewHtml;
-                document.getElementById('uploadForm').appendChild(previewDiv);
-            }
-        }
-        
-        function formatTotalSize(files) {
-            const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
-            return formatFileSize(totalBytes);
-        }
 
         
         // Upload files directly to Azure using REST API (no SDK needed)
@@ -925,39 +693,14 @@
 
             try {
                 let uploadedCount = 0;
-                const filesArray = Array.from(files);
                 
-                // Check if this is a folder upload
-                const isFolderUpload = filesArray.some(file => file.webkitRelativePath);
-                
-                // Extract the root folder name for folder uploads
-                let rootFolderName = '';
-                if (isFolderUpload) {
-                    const firstFile = filesArray.find(file => file.webkitRelativePath);
-                    if (firstFile && firstFile.webkitRelativePath) {
-                        rootFolderName = firstFile.webkitRelativePath.split('/')[0];
-                        console.log(`📁 Detected folder upload: "${rootFolderName}" with ${filesArray.length} files`);
-                    }
-                }
-                
-                for (let file of filesArray) {
+                for (let file of files) {
                     // Create unique blob name with timestamp
                     const timestamp = Date.now();
-                    let blobName;
-                    
-                    if (isFolderUpload && file.webkitRelativePath) {
-                        // Preserve the complete folder structure exactly as uploaded
-                        blobName = `${category}/${file.webkitRelativePath}`;
-                    } else {
-                        // Regular file upload
-                        blobName = `${category}/${timestamp}_${file.name}`;
-                    }
+                    const blobName = `${category}/${timestamp}_${file.name}`;
                     
                     // Update status for current file
-                    const displayName = file.webkitRelativePath || file.name;
-                    document.getElementById('uploadStatus').textContent = `Uploading ${displayName}...`;
-                    const displayName = file.webkitRelativePath || file.name;
-                    document.getElementById('uploadStatus').textContent = `Uploading ${displayName}...`;
+                    document.getElementById('uploadStatus').textContent = `Uploading ${file.name}...`;
                     
                     // Construct the full blob URL with SAS token
                     const blobUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
@@ -975,28 +718,23 @@
                     
                     if (!response.ok) {
                         const errorText = await response.text();
-                        throw new Error(`Upload failed for ${displayName} (${response.status}): ${errorText}`);
-                        throw new Error(`Upload failed for ${displayName} (${response.status}): ${errorText}`);
+                        throw new Error(`Upload failed (${response.status}): ${errorText}`);
                     }
                     
                     // Process the file with main.py if it's an HTML file
                     let preAnnotations = null;
                     if (file.name.toLowerCase().endsWith('.html') || file.name.toLowerCase().endsWith('.htm')) {
                         try {
-                            document.getElementById('uploadStatus').textContent = `Processing ${displayName} for medication extraction...`;
-                            document.getElementById('uploadStatus').textContent = `Processing ${displayName} for medication extraction...`;
+                            document.getElementById('uploadStatus').textContent = `Processing ${file.name} for medication extraction...`;
                             preAnnotations = await processFileWithMainPy(file);
                             
                             if (preAnnotations && preAnnotations.length > 0) {
-                                console.log(`✅ Extracted ${preAnnotations.length} medications from ${displayName}:`, preAnnotations);
-                                console.log(`✅ Extracted ${preAnnotations.length} medications from ${displayName}:`, preAnnotations);
+                                console.log(`✅ Extracted ${preAnnotations.length} medications from ${file.name}:`, preAnnotations);
                             } else {
-                                console.log(`ℹ️ No medications found in ${displayName}`);
-                                console.log(`ℹ️ No medications found in ${displayName}`);
+                                console.log(`ℹ️ No medications found in ${file.name}`);
                             }
                         } catch (error) {
-                            console.warn(`⚠️ Failed to process ${displayName} with main.py:`, error);
-                            console.warn(`⚠️ Failed to process ${displayName} with main.py:`, error);
+                            console.warn(`⚠️ Failed to process ${file.name} with main.py:`, error);
                             // Continue without pre-annotations if processing fails
                             preAnnotations = [];
                         }
@@ -1005,9 +743,7 @@
                     // Add to documents list AFTER successful upload
                     const newDoc = {
                         id: timestamp + uploadedCount,
-                        name: displayName,
-                        originalPath: file.webkitRelativePath || file.name,
-                        folderName: isFolderUpload ? rootFolderName : null, // Add folder name for organization
+                        name: file.name,
                         category: category,
                         description: description,
                         uploadDate: new Date().toISOString().split('T')[0],
@@ -1016,68 +752,37 @@
                         azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}`,
                         blobName: blobName,
                         preAnnotations: preAnnotations || [], // Store the pre-annotations
-                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0, // Flag for quick checking
-                        isFromFolder: isFolderUpload
-                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0, // Flag for quick checking
-                        isFromFolder: isFolderUpload
+                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0 // Flag for quick checking
                     };
                     documentsData.push(newDoc);
                     
                     uploadedCount++;
-                    const progress = (uploadedCount / filesArray.length) * 100;
-                    const progress = (uploadedCount / filesArray.length) * 100;
+                    const progress = (uploadedCount / files.length) * 100;
                     document.getElementById('progressBar').style.width = progress + '%';
                     document.getElementById('progressBar').textContent = Math.round(progress) + '%';
-                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${filesArray.length} files`;
-                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${filesArray.length} files`;
+                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${files.length} files`;
                 }
                 
                 // Save updated documents list
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
-                
-                // Also save to Azure for user portal access
-                try {
-                    await saveDocumentsMetadataToAzure();
-                    console.log('✅ Document metadata saved to Azure');
-                } catch (error) {
-                    console.warn('⚠️ Failed to save metadata to Azure:', error);
-                }
                 
                 document.getElementById('uploadProgress').style.display = 'none';
                 document.getElementById('uploadSuccess').style.display = 'block';
                 
                 // Show detailed success message
                 const totalPreAnnotations = documentsData
-                    .slice(-filesArray.length) // Get only the newly uploaded files
-                    .slice(-filesArray.length) // Get only the newly uploaded files
+                    .slice(-files.length) // Get only the newly uploaded files
                     .reduce((sum, doc) => sum + (doc.preAnnotations ? doc.preAnnotations.length : 0), 0);
                 
-                const uploadTypeText = isFolderUpload ? `📁 Folder "${rootFolderName}"` : '📄 Files';
                 document.getElementById('uploadSuccess').innerHTML = `
                     <strong>Upload completed successfully!</strong><br>
-                    ${uploadTypeText} - ${filesArray.length} file(s) uploaded<br>
+                    📁 ${files.length} file(s) uploaded<br>
                     🤖 ${totalPreAnnotations} medication(s) automatically detected<br>
                     ✨ Files are ready for annotation
                 `;
                 
-                // Clear both inputs
-                // Clear both inputs
                 document.getElementById('fileInput').value = '';
-                document.getElementById('folderInput').value = '';
-                document.getElementById('folderInput').value = '';
                 document.getElementById('documentDescription').value = '';
-                
-                // Remove upload preview
-                const existingPreview = document.getElementById('uploadPreview');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
-                
-                // Remove upload preview
-                const existingPreview = document.getElementById('uploadPreview');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
                 
                 updateStats();
                 
@@ -1107,8 +812,6 @@
                 const formData = new FormData();
                 formData.append('file', file);
                 
-                // Call the deployed API server
-                const response = await fetch(`${API_BASE_URL}/process-document`, {
                 // Call the deployed API server
                 const response = await fetch(`${API_BASE_URL}/process-document`, {
                     method: 'POST',
@@ -1157,28 +860,13 @@
                     ? '<span style="background: #28a745; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem;">Public</span>'
                     : '<span style="background: #dc3545; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem;">Admin Only</span>';
                 
-                const folderBadge = doc.isFromFolder 
-                    ? `<span style="background: #6f42c1; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">📁 ${doc.folderName || 'Folder'}</span>`
-                    : '';
-                
-                const annotationsBadge = doc.hasPreAnnotations 
-                    ? `<span style="background: #17a2b8; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 5px;">🤖 ${doc.preAnnotations.length} meds</span>`
-                    : '';
-                
-                const displayPath = doc.originalPath && doc.originalPath !== doc.name 
-                    ? `<br><small style="color: #666;">📂 ${doc.originalPath}</small>` 
-                    : '';
-                
                 html += `
                     <div class="document-item">
                         <div class="document-info">
-                            <div class="document-name">${doc.name} ${accessBadge}${folderBadge}${annotationsBadge}</div>
-                            <div class="document-name">${doc.name} ${accessBadge}${folderBadge}${annotationsBadge}</div>
+                            <div class="document-name">${doc.name} ${accessBadge}</div>
                             <div class="document-meta">
                                 Category: ${doc.category} | Uploaded: ${doc.uploadDate} | Size: ${doc.size}
                                 ${doc.description ? `<br>Description: ${doc.description}` : ''}
-                                ${displayPath}
-                                ${displayPath}
                             </div>
                         </div>
                         <div class="document-actions">
@@ -1199,43 +887,8 @@
             if (confirm('Are you sure you want to delete this document from Azure?')) {
                 documentsData = documentsData.filter(doc => doc.id != docId);
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
-                
-                // Update Azure metadata
-                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
-                
                 loadDocuments();
                 updateStats();
-            }
-        }
-        
-        function deleteAllDocuments() {
-            if (documentsData.length === 0) {
-                alert('No documents to delete.');
-                return;
-            }
-            
-            const documentCount = documentsData.length;
-            const confirmMessage = `⚠️ WARNING: This will permanently delete all ${documentCount} documents from the system.\n\nThis action cannot be undone. Are you absolutely sure?`;
-            
-            if (confirm(confirmMessage)) {
-                // Second confirmation for safety
-                const secondConfirm = confirm(`Last chance! Delete ALL ${documentCount} documents?\n\nClick OK to permanently delete everything.`);
-                
-                if (secondConfirm) {
-                    // Clear all documents
-                    documentsData = [];
-                    localStorage.setItem('documentsData', JSON.stringify(documentsData));
-                    
-                    // Update Azure metadata
-                    saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
-                    
-                    // Update UI
-                    loadDocuments();
-                    updateStats();
-                    
-                    // Show success message
-                    alert(`✅ Successfully deleted all ${documentCount} documents.\n\nThe document list has been cleared.`);
-                }
             }
         }
         
@@ -1244,10 +897,6 @@
             if (doc) {
                 doc.publicAccess = !doc.publicAccess;
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
-                
-                // Update Azure metadata
-                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
-                
                 loadDocuments();
             }
         }
@@ -1298,44 +947,10 @@
             if (confirm('This will clear all simulated documents. Are you sure?')) {
                 documentsData = [];
                 localStorage.setItem('documentsData', JSON.stringify(documentsData));
-                
-                // Update Azure metadata
-                saveDocumentsMetadataToAzure().catch(err => console.warn('Failed to update metadata:', err));
-                
                 loadDocuments();
                 updateStats();
                 alert('Cleared! Now you can upload real files to Azure.');
             }
-        }
-        
-        // Save documents metadata to Azure for user portal access
-        async function saveDocumentsMetadataToAzure() {
-            if (!azureConfig.isConnected) {
-                throw new Error('Azure not connected');
-            }
-            
-            const metadataBlob = new Blob([JSON.stringify(documentsData, null, 2)], {
-                type: 'application/json'
-            });
-            
-            const blobName = 'documents-metadata.json';
-            const uploadUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
-            
-            const response = await fetch(uploadUrl, {
-                method: 'PUT',
-                headers: {
-                    'x-ms-blob-type': 'BlockBlob',
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                body: metadataBlob
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Failed to upload metadata: ${response.status} ${response.statusText}`);
-            }
-            
-            console.log('📝 Documents metadata saved to Azure:', blobName);
         }
         
         // Initialize admin panel with pre-configured Azure settings
@@ -1356,10 +971,6 @@
             // Auto-test connection since we have valid credentials
             updateAzureStatus(true);
             azureConfig.isConnected = true;
-            
-            // Share Azure config with users immediately on admin panel load
-            console.log('🔄 Sharing Azure config with users on admin panel initialization...');
-            shareAzureConfigForUsers();
             
             // Load documents data
             const savedDocs = localStorage.getItem('documentsData');
