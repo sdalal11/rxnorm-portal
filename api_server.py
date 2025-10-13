@@ -10,6 +10,65 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
 
+# Available folders for sequential assignment
+AVAILABLE_FOLDERS = [
+    "100-200", "200-300", "300-400", "400-500", "500-600",
+    "600-700", "700-800", "800-900", "900-1000"
+]
+
+class FolderManager:
+    """Manages sequential folder assignment based on login timestamps"""
+    
+    def __init__(self):
+        self.total_folders = len(AVAILABLE_FOLDERS)
+    
+    def get_next_assignment_order(self):
+        """Get the next assignment order number by counting existing assignments"""
+        assignment_count = 0
+        for username, user_data in global_users.items():
+            if 'assignment_order' in user_data and user_data['assignment_order'] is not None:
+                assignment_count += 1
+        return assignment_count + 1
+    
+    def assign_folder_to_user(self, username, login_timestamp):
+        """Assign folder based on sequential order with cycling"""
+        assignment_order = self.get_next_assignment_order()
+        
+        # Calculate folder index using modulo for cycling
+        folder_index = (assignment_order - 1) % self.total_folders
+        assigned_folder = AVAILABLE_FOLDERS[folder_index]
+        
+        print(f"🎯 Assigning folder '{assigned_folder}' to user '{username}' (Order: {assignment_order})")
+        
+        return {
+            'folder': assigned_folder,
+            'assignment_order': assignment_order,
+            'timestamp': login_timestamp,
+            'folder_index': folder_index
+        }
+    
+    def get_folder_assignments(self):
+        """Get all current folder assignments for admin view"""
+        assignments = []
+        for username, user_data in global_users.items():
+            if 'assigned_folder' in user_data:
+                assignments.append({
+                    'username': username,
+                    'name': user_data.get('name', 'N/A'),
+                    'email': user_data.get('email', 'N/A'),
+                    'assigned_folder': user_data.get('assigned_folder'),
+                    'assignment_order': user_data.get('assignment_order'),
+                    'login_timestamp': user_data.get('login_timestamp'),
+                    'last_login': user_data.get('last_login')
+                })
+        
+        # Sort by assignment order
+        assignments.sort(key=lambda x: x.get('assignment_order', 0))
+        return assignments
+
+# Initialize folder manager
+folder_manager = FolderManager()
+
 @app.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -570,12 +629,29 @@ def login_user():
         if not user or user.get('password') != password:
             return jsonify({'error': 'Invalid username or password'}), 401
         
+        # Generate precise login timestamp
+        login_timestamp = datetime.now().isoformat()
+        
         # Update last login in database
         update_last_login(username)
         
         # Also update global_users for compatibility (temporary)
         if username in global_users:
-            global_users[username]['last_login'] = datetime.now().isoformat()
+            global_users[username]['last_login'] = login_timestamp
+            
+            # Check if user already has a folder assigned
+            if 'assigned_folder' not in global_users[username] or global_users[username]['assigned_folder'] is None:
+                # Assign folder based on login order
+                folder_assignment = folder_manager.assign_folder_to_user(username, login_timestamp)
+                
+                # Update user record with folder assignment
+                global_users[username]['assigned_folder'] = folder_assignment['folder']
+                global_users[username]['assignment_order'] = folder_assignment['assignment_order']
+                global_users[username]['login_timestamp'] = login_timestamp
+                
+                print(f"🎯 New folder assignment - User: {username}, Folder: {folder_assignment['folder']}, Order: {folder_assignment['assignment_order']}")
+            else:
+                print(f"🔄 Existing user login - User: {username}, Folder: {global_users[username]['assigned_folder']}")
         
         print(f"✅ User logged in: {username}")
         
@@ -585,7 +661,11 @@ def login_user():
             'user': {
                 'username': user['username'],
                 'email': user['email'],
-                'name': user['name']
+                'name': user['name'],
+                'assigned_folder': global_users[username].get('assigned_folder') if username in global_users else None,
+                'assignment_order': global_users[username].get('assignment_order') if username in global_users else None,
+                'login_timestamp': login_timestamp,
+                'folder_count': len(AVAILABLE_FOLDERS)
             }
         })
         
@@ -665,6 +745,75 @@ def backup_users():
             'total_users': len(all_users),
             'message': 'Database backup created successfully'
         })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/admin/folder-assignments', methods=['GET', 'OPTIONS'])
+def get_folder_assignments():
+    """Get folder assignments for admin dashboard"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        assignments = folder_manager.get_folder_assignments()
+        
+        # Calculate folder distribution stats
+        folder_stats = {}
+        for folder in AVAILABLE_FOLDERS:
+            folder_stats[folder] = len([a for a in assignments if a['assigned_folder'] == folder])
+        
+        return jsonify({
+            'success': True,
+            'assignments': assignments,
+            'total_users': len(assignments),
+            'total_folders': len(AVAILABLE_FOLDERS),
+            'folder_distribution': folder_stats,
+            'available_folders': AVAILABLE_FOLDERS
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/user/folder-info', methods=['GET', 'POST', 'OPTIONS'])
+def get_user_folder_info():
+    """Get specific user's folder assignment info"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        if request.method == 'POST':
+            data = request.get_json()
+            username = data.get('username', '').strip().lower()
+        else:
+            username = request.args.get('username', '').strip().lower()
+        
+        if not username:
+            return jsonify({'error': 'Username is required'}), 400
+        
+        user = global_users.get(username)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        return jsonify({
+            'success': True,
+            'user_info': {
+                'username': username,
+                'name': user.get('name'),
+                'assigned_folder': user.get('assigned_folder'),
+                'assignment_order': user.get('assignment_order'),
+                'login_timestamp': user.get('login_timestamp'),
+                'last_login': user.get('last_login')
+            }
+        })
+        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
