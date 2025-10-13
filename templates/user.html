@@ -2244,7 +2244,7 @@
         // Function to load pre-annotations from processed document data
         async function loadPreAnnotations(doc) {
             try {
-                console.log('🔍 Loading pre-annotations for:', doc.name);
+                console.log('🔍🆕 [V3-' + new Date().getTime() + '] Loading pre-annotations for:', doc.name);
                 
                 // Check if document already has pre-annotations from admin processing
                 if (doc.preAnnotations && Array.isArray(doc.preAnnotations) && doc.preAnnotations.length > 0) {
@@ -2265,7 +2265,7 @@
                 }
                 
                 // If no pre-annotations found, generate them using main.py API
-                console.log('🚀 No pre-annotations found, generating new ones via main.py API...');
+                console.log('🚀🆕 [V3] No pre-annotations found, generating new ones via main.py API...');
                 const generatedAnnotations = await generatePreAnnotationsFromAPI(doc);
                 
                 if (generatedAnnotations && generatedAnnotations.length > 0) {
@@ -2294,7 +2294,7 @@
             showProcessingNotification(`🤖 Analyzing ${doc.name} for medications...`);
             
             try {
-                console.log('🔄 Calling main.py API to process document:', doc.name);
+                console.log('🔄🆕 [V3] Calling main.py API to process document:', doc.name);
                 
                 // Get document content from Azure
                 const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
