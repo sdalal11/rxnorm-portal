@@ -340,6 +340,7 @@
             <!-- Tabs -->
             <div class="tabs">
                 <div class="tab active" onclick="showTab('overview')">Overview</div>
+                <div class="tab" onclick="showTab('users')">User Management</div>
                 <div class="tab" onclick="showTab('azure-config')">Azure Setup</div>
                 <div class="tab" onclick="showTab('upload')">Upload Documents</div>
                 <div class="tab" onclick="showTab('manage')">Manage Documents</div>
@@ -373,6 +374,19 @@
                     <p>Total Documents: <span id="totalDocs">0</span></p>
                     <p>Storage Used: <span id="storageUsed">0 MB</span></p>
                     <p>Categories: <span id="totalCategories">0</span></p>
+                </div>
+                
+                <div id="userStatsSection" style="margin-top: 2rem;">
+                    <h4>User & Folder Assignment Stats:</h4>
+                    <p>Total Users: <span id="totalUsers">0</span></p>
+                    <p>Users with Folder Assignments: <span id="assignedUsers">0</span></p>
+                    <p>Active Folders: <span id="activeFolders">0</span> / 9</p>
+                    <div id="folderDistribution" style="margin-top: 1rem;">
+                        <h5>Folder Distribution:</h5>
+                        <div id="folderDistributionGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                            <!-- Folder distribution cards will be populated by JavaScript -->
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -420,6 +434,55 @@
                         <li>Generate a SAS token with read/write permissions</li>
                         <li>Enter the details above and test connection</li>
                     </ol>
+                </div>
+            </div>
+            
+            <!-- User Management Tab -->
+            <div id="users" class="tab-content">
+                <h3>User Management & Folder Assignments</h3>
+                
+                <div class="upload-section">
+                    <h4>Folder Assignment System</h4>
+                    <p><strong>How it works:</strong> Users are automatically assigned folders (100-200, 200-300, etc.) based on login order. After 9 users, assignment cycles back to folder 1.</p>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <button class="btn" onclick="loadFolderAssignments()" style="background-color: #28a745;">🔄 Refresh Assignments</button>
+                        <button class="btn" onclick="exportFolderAssignments()" style="background-color: #17a2b8; margin-left: 10px;">📊 Export Data</button>
+                    </div>
+                    
+                    <!-- Folder Assignment Status -->
+                    <div id="folderAssignmentStatus">
+                        <h5>Assignment Status:</h5>
+                        <div id="assignmentStatusGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 2rem;">
+                            <!-- Status cards will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- User List Table -->
+                    <div style="margin-top: 2rem;">
+                        <h5>User Assignments:</h5>
+                        <div style="overflow-x: auto;">
+                            <table id="userAssignmentTable" style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                                <thead>
+                                    <tr style="background-color: #f8f9fa;">
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Order</th>
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">User Name</th>
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Email</th>
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Assigned Folder</th>
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Login Time</th>
+                                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Last Activity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userAssignmentTableBody">
+                                    <tr>
+                                        <td colspan="6" style="padding: 20px; text-align: center; color: #666;">
+                                            Click "Refresh Assignments" to load user data
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -591,6 +654,8 @@
             
             if (tabName === 'manage') {
                 loadDocuments();
+            } else if (tabName === 'users') {
+                loadFolderAssignments();
             }
         }
         
@@ -1254,6 +1319,157 @@
             
             const categories = [...new Set(documentsData.map(doc => doc.category))];
             document.getElementById('totalCategories').textContent = categories.length;
+            
+            // Also update user stats
+            updateUserStats();
+        }
+        
+        // Folder Assignment Management Functions
+        async function loadFolderAssignments() {
+            try {
+                console.log('Loading folder assignments from API...');
+                const response = await fetch(`${API_BASE_URL}/admin/folder-assignments`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('📊 Folder assignments loaded:', data);
+                    
+                    displayFolderAssignments(data);
+                    updateUserStats(data);
+                } else {
+                    console.error('Failed to load folder assignments:', response.status);
+                    alert('Failed to load folder assignments from server');
+                }
+            } catch (error) {
+                console.error('Error loading folder assignments:', error);
+                alert('Error connecting to server: ' + error.message);
+            }
+        }
+        
+        function displayFolderAssignments(data) {
+            const { assignments, folder_distribution, available_folders } = data;
+            
+            // Update assignment status grid
+            const statusGrid = document.getElementById('assignmentStatusGrid');
+            statusGrid.innerHTML = '';
+            
+            available_folders.forEach(folder => {
+                const userCount = folder_distribution[folder] || 0;
+                const statusCard = document.createElement('div');
+                statusCard.style.cssText = `
+                    background: ${userCount > 0 ? '#d4edda' : '#f8f9fa'};
+                    border: 1px solid ${userCount > 0 ? '#c3e6cb' : '#ddd'};
+                    border-radius: 8px;
+                    padding: 15px;
+                    text-align: center;
+                `;
+                
+                statusCard.innerHTML = `
+                    <div style="font-weight: bold; color: #333; margin-bottom: 5px;">${folder}</div>
+                    <div style="font-size: 24px; font-weight: bold; color: ${userCount > 0 ? '#28a745' : '#6c757d'};">
+                        ${userCount}
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        ${userCount === 1 ? 'User' : 'Users'}
+                    </div>
+                `;
+                
+                statusGrid.appendChild(statusCard);
+            });
+            
+            // Update user assignments table
+            const tableBody = document.getElementById('userAssignmentTableBody');
+            tableBody.innerHTML = '';
+            
+            if (assignments.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="padding: 20px; text-align: center; color: #666;">
+                            No user assignments found. Users will be assigned folders when they first log in.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                assignments.forEach(assignment => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td style="padding: 12px; border: 1px solid #ddd;">${assignment.assignment_order || '-'}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">${assignment.name || 'N/A'}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">${assignment.email || 'N/A'}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">
+                            <span style="background: #007bff; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
+                                ${assignment.assigned_folder || 'Not Assigned'}
+                            </span>
+                        </td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">${formatTimestamp(assignment.login_timestamp)}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">${formatTimestamp(assignment.last_login)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+        
+        function updateUserStats(data = null) {
+            if (data) {
+                document.getElementById('totalUsers').textContent = data.total_users || 0;
+                document.getElementById('assignedUsers').textContent = data.assignments?.length || 0;
+                
+                const activeFolders = Object.values(data.folder_distribution || {}).filter(count => count > 0).length;
+                document.getElementById('activeFolders').textContent = activeFolders;
+                
+                // Update folder distribution in overview
+                updateFolderDistribution(data.folder_distribution, data.available_folders);
+            }
+        }
+        
+        function updateFolderDistribution(distribution, folders) {
+            const grid = document.getElementById('folderDistributionGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            folders.forEach(folder => {
+                const count = distribution[folder] || 0;
+                const card = document.createElement('div');
+                card.style.cssText = `
+                    background: ${count > 0 ? '#e7f3ff' : '#f8f9fa'};
+                    border: 1px solid ${count > 0 ? '#b3d9ff' : '#ddd'};
+                    border-radius: 6px;
+                    padding: 10px;
+                    text-align: center;
+                    font-size: 12px;
+                `;
+                
+                card.innerHTML = `
+                    <div style="font-weight: bold;">${folder}</div>
+                    <div style="font-size: 18px; font-weight: bold; color: ${count > 0 ? '#007bff' : '#6c757d'};">
+                        ${count}
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'Never';
+            
+            try {
+                const date = new Date(timestamp);
+                return date.toLocaleString();
+            } catch (error) {
+                return timestamp;
+            }
+        }
+        
+        function exportFolderAssignments() {
+            // This would export the current assignments as CSV or JSON
+            alert('Export functionality - would download assignments as CSV file');
         }
 
         // Add this function to clear fake documents
