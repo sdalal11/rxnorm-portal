@@ -1086,7 +1086,6 @@
         
         // Authentication functions
         function showAuthTab(tabName, event = null) {
-        function showAuthTab(tabName, event = null) {
             // Update tab buttons
             document.querySelectorAll('.auth-tab').forEach(tab => {
                 tab.classList.remove('active');
@@ -1125,7 +1124,6 @@
         
         // Login form handler
         document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
-        document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
@@ -1157,38 +1155,11 @@
             } catch (error) {
                 console.error('Login error:', error);
                 document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
-            try {
-                const response = await fetch(`${API_BASE_URL}/users/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: email, // Use email as username
-                        password: password
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success && data.user) {
-                    currentUser = data.user;
-                    sessionStorage.setItem('currentUser', JSON.stringify(data.user));
-                    document.getElementById('authError').style.display = 'none';
-                    showUserPortal();
-                } else {
-                    document.getElementById('authError').textContent = data.message || 'Invalid email or password.';
-                    document.getElementById('authError').style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
             }
         });
         
         // Register form handler
-        document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
         document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1916,9 +1887,6 @@
                 // Add folder indicator for files from folder uploads
                 const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
                 
-                // Add folder indicator for files from folder uploads
-                const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
-                
                 html += `
                     <div class="document-card" onclick="viewDocument('${doc.id}')">
                         <div class="document-icon">${icon}</div>
@@ -2087,7 +2055,6 @@
             if (fileExtension === 'html' || fileExtension === 'htm') {
                 try {
                     // Get Azure config from localStorage
-                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     
                     if (!adminConfigData) {
@@ -2279,7 +2246,6 @@
             if (!currentUser) return;
             
             try {
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found');
@@ -2823,7 +2789,6 @@
             if (!currentDocument || !currentUser) return;
             
             const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
-            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
             if (!adminConfigData) {
                 throw new Error('Azure configuration not found');
             }
@@ -3071,7 +3036,6 @@
                 
                 // Get Azure config (try both public and admin configs)
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found. Please contact administrator.');
                 }
@@ -3182,7 +3146,6 @@
             try {
                 // Get Azure config
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) return;
                 
                 const azureConfig = JSON.parse(adminConfigData);
@@ -3245,8 +3208,8 @@
         // Initialize annotation mode
         setAnnotationMode('active');
         if (typeof updateAnnotationCount !== 'undefined') {
-                updateAnnotationCount();
-            }
+            updateAnnotationCount();
+        }
             
         // Global helper functions for testing/debugging (accessible from browser console)
         window.checkNotes = function() {
@@ -3275,7 +3238,5 @@
             return exportData;
         };
     </script>
-
-    
 </body>
 </html>

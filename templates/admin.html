@@ -520,9 +520,6 @@
         // API Configuration
         const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
         
-        // API Configuration
-        const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
-        
         // Admin credentials
         const VALID_USERS = [
             { username: 'admin', password: 'admin123' },
@@ -628,7 +625,6 @@
         }
         
         // Replace the saveAzureConfig function (around line 590) with this:
-        // Replace the saveAzureConfig function (around line 590) with this:
         function saveAzureConfig() {
             const storageAccount = document.getElementById('storageAccount').value;
             const containerName = document.getElementById('containerName').value;
@@ -659,7 +655,6 @@
         }
 
 
-        async function shareAzureConfigForUsers() {
         async function shareAzureConfigForUsers() {
             // Make Azure config available for user portal (without sensitive info)
             const publicConfig = {
@@ -735,25 +730,10 @@
             
             const fileInput = document.getElementById('fileInput');
             const folderInput = document.getElementById('folderInput');
-            const folderInput = document.getElementById('folderInput');
             const category = document.getElementById('documentCategory').value;
             const description = document.getElementById('documentDescription').value;
             const publicAccess = document.getElementById('publicAccess').checked;
             
-            let filesToUpload = [];
-            
-            // Check if files were selected via file input
-            if (fileInput.files.length > 0) {
-                filesToUpload = Array.from(fileInput.files);
-            }
-            // Check if folder was selected
-            else if (folderInput.files.length > 0) {
-                filesToUpload = Array.from(folderInput.files);
-                console.log(`📁 Folder upload detected: ${filesToUpload.length} files found`);
-            }
-            
-            if (filesToUpload.length === 0) {
-                alert('Please select files or a folder to upload.');
             let filesToUpload = [];
             
             // Check if files were selected via file input
@@ -842,8 +822,6 @@
             const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
             return formatFileSize(totalBytes);
         }
-            uploadToAzure(filesToUpload, category, description, publicAccess);
-        });
         
         // Clear the other input when one is selected
         document.getElementById('fileInput').addEventListener('change', function() {
@@ -956,8 +934,6 @@
                     // Update status for current file
                     const displayName = file.webkitRelativePath || file.name;
                     document.getElementById('uploadStatus').textContent = `Uploading ${displayName}...`;
-                    const displayName = file.webkitRelativePath || file.name;
-                    document.getElementById('uploadStatus').textContent = `Uploading ${displayName}...`;
                     
                     // Construct the full blob URL with SAS token
                     const blobUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
@@ -1018,17 +994,13 @@
                         preAnnotations: preAnnotations || [], // Store the pre-annotations
                         hasPreAnnotations: preAnnotations && preAnnotations.length > 0, // Flag for quick checking
                         isFromFolder: isFolderUpload
-                        hasPreAnnotations: preAnnotations && preAnnotations.length > 0, // Flag for quick checking
-                        isFromFolder: isFolderUpload
                     };
                     documentsData.push(newDoc);
                     
                     uploadedCount++;
                     const progress = (uploadedCount / filesArray.length) * 100;
-                    const progress = (uploadedCount / filesArray.length) * 100;
                     document.getElementById('progressBar').style.width = progress + '%';
                     document.getElementById('progressBar').textContent = Math.round(progress) + '%';
-                    document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${filesArray.length} files`;
                     document.getElementById('uploadStatus').textContent = `Processed ${uploadedCount} of ${filesArray.length} files`;
                 }
                 
@@ -1064,14 +1036,7 @@
                 // Clear both inputs
                 document.getElementById('fileInput').value = '';
                 document.getElementById('folderInput').value = '';
-                document.getElementById('folderInput').value = '';
                 document.getElementById('documentDescription').value = '';
-                
-                // Remove upload preview
-                const existingPreview = document.getElementById('uploadPreview');
-                if (existingPreview) {
-                    existingPreview.remove();
-                }
                 
                 // Remove upload preview
                 const existingPreview = document.getElementById('uploadPreview');
@@ -1107,8 +1072,6 @@
                 const formData = new FormData();
                 formData.append('file', file);
                 
-                // Call the deployed API server
-                const response = await fetch(`${API_BASE_URL}/process-document`, {
                 // Call the deployed API server
                 const response = await fetch(`${API_BASE_URL}/process-document`, {
                     method: 'POST',
