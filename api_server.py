@@ -10,6 +10,14 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
 
+# Additional CORS configuration to ensure all responses have proper headers
+@app.after_request
+def after_request(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    return response
+
 # Available folders for sequential assignment
 AVAILABLE_FOLDERS = [
     "100-200", "200-300", "300-400", "400-500", "500-600",
@@ -932,29 +940,45 @@ def azure_config():
                 'timestamp': subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
             }
             
-            return jsonify({
+            response = jsonify({
                 'success': True,
                 'message': 'Azure configuration stored successfully'
             })
+            # Add CORS headers to POST response
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+            return response
         except Exception as e:
-            return jsonify({'error': str(e)}), 500
+            error_response = jsonify({'error': str(e)})
+            error_response.headers['Access-Control-Allow-Origin'] = '*'
+            return error_response, 500
     
     elif request.method == 'GET':
         # Retrieve Azure configuration (called by users)
         try:
             azure_config = global_config.get('azure', {})
             if azure_config:
-                return jsonify({
+                response = jsonify({
                     'success': True,
                     'config': azure_config
                 })
+                # Add CORS headers to GET response
+                response.headers['Access-Control-Allow-Origin'] = '*'
+                response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+                response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+                return response
             else:
-                return jsonify({
+                error_response = jsonify({
                     'success': False,
                     'message': 'No Azure configuration found'
-                }), 404
+                })
+                error_response.headers['Access-Control-Allow-Origin'] = '*'
+                return error_response, 404
         except Exception as e:
-            return jsonify({'error': str(e)}), 500
+            error_response = jsonify({'error': str(e)})
+            error_response.headers['Access-Control-Allow-Origin'] = '*'
+            return error_response, 500
 
 if __name__ == '__main__':
     print("=" * 50)
