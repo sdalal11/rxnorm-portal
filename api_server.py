@@ -394,24 +394,32 @@ def init_database():
                 )
             ''')
             
-            # Add folder assignment columns to existing table if they don't exist
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(50)')
-                print("✅ Added assigned_folder column")
-            except Exception:
-                pass  # Column already exists
+            # Check which columns exist and add missing ones
+            cursor.execute("""
+                SELECT column_name 
+                FROM information_schema.columns 
+                WHERE table_name = 'users' AND table_schema = 'public'
+            """)
+            existing_columns = [row[0] for row in cursor.fetchall()]
+            print(f"📋 Existing columns: {existing_columns}")
             
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
-                print("✅ Added assignment_order column")
-            except Exception:
-                pass  # Column already exists
-                
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN login_timestamp TIMESTAMP')
-                print("✅ Added login_timestamp column")
-            except Exception:
-                pass  # Column already exists
+            columns_to_add = [
+                ('assigned_folder', 'VARCHAR(50)'),
+                ('assignment_order', 'INTEGER'),
+                ('login_timestamp', 'TIMESTAMP')
+            ]
+            
+            for column_name, column_type in columns_to_add:
+                if column_name not in existing_columns:
+                    try:
+                        cursor.execute(f'ALTER TABLE users ADD COLUMN {column_name} {column_type}')
+                        conn.commit()  # Commit each ALTER TABLE separately
+                        print(f"✅ Added {column_name} column")
+                    except Exception as e:
+                        conn.rollback()  # Rollback if there's an error
+                        print(f"⚠️ Error adding {column_name}: {e}")
+                else:
+                    print(f"ℹ️ Column {column_name} already exists")
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
@@ -434,24 +442,26 @@ def init_database():
                 )
             ''')
             
-            # Add folder assignment columns to existing table if they don't exist
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder TEXT')
-                print("✅ Added assigned_folder column")
-            except Exception:
-                pass  # Column already exists
+            # Check which columns exist and add missing ones
+            cursor.execute("PRAGMA table_info(users)")
+            existing_columns = [row[1] for row in cursor.fetchall()]
+            print(f"📋 Existing columns: {existing_columns}")
             
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
-                print("✅ Added assignment_order column")
-            except Exception:
-                pass  # Column already exists
-                
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN login_timestamp DATETIME')
-                print("✅ Added login_timestamp column")
-            except Exception:
-                pass  # Column already exists
+            columns_to_add = [
+                ('assigned_folder', 'TEXT'),
+                ('assignment_order', 'INTEGER'), 
+                ('login_timestamp', 'DATETIME')
+            ]
+            
+            for column_name, column_type in columns_to_add:
+                if column_name not in existing_columns:
+                    try:
+                        cursor.execute(f'ALTER TABLE users ADD COLUMN {column_name} {column_type}')
+                        print(f"✅ Added {column_name} column")
+                    except Exception as e:
+                        print(f"⚠️ Error adding {column_name}: {e}")
+                else:
+                    print(f"ℹ️ Column {column_name} already exists")
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
         
