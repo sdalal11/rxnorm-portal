@@ -1885,15 +1885,26 @@
 
         // Add helper functions for Azure loading:
         async function loadAnnotationsFromAzure(docId) {
-            if (!currentUser) return;
+            if (!currentUser) {
+                console.log('❌ No currentUser - cannot load from Azure');
+                return;
+            }
             
             try {
                 const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
+                    console.log('❌ Azure configuration not found in localStorage');
+                    console.log('Available localStorage keys:', Object.keys(localStorage));
                     throw new Error('Azure configuration not found');
                 }
                 
                 const azureConfig = JSON.parse(adminConfigData);
+                console.log('✅ Azure config found:', {
+                    storageAccount: azureConfig.storageAccount,
+                    containerName: azureConfig.containerName,
+                    hasSasToken: !!azureConfig.sasToken
+                });
+                
                 const userFolder = currentUser.email.replace(/[@.]/g, '_');
                 const doc = allDocuments.find(d => d.id == docId);
                 const fileName = `${docId}_${doc.name.replace(/[^a-zA-Z0-9]/g, '_')}_annotations.json`;
@@ -1901,7 +1912,13 @@
                 
                 const blobUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${blobName}${azureConfig.sasToken}`;
                 
-                console.log('📥 Loading annotations from Azure:', blobUrl);
+                console.log('📥 Loading annotations from Azure:', {
+                    userEmail: currentUser.email,
+                    userFolder: userFolder,
+                    fileName: fileName,
+                    blobName: blobName,
+                    blobUrl: blobUrl.substring(0, 100) + '...'
+                });
                 
                 const response = await fetch(blobUrl, {
                     method: 'GET',
@@ -1910,13 +1927,19 @@
                     }
                 });
                 
+                console.log('📥 Azure fetch response:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    ok: response.ok
+                });
+                
                 if (response.status === 404) {
                     console.log('ℹ️ No saved annotations found in Azure for this document');
                     return;
                 }
                 
                 if (!response.ok) {
-                    throw new Error(`Failed to load from Azure: ${response.status}`);
+                    throw new Error(`Failed to load from Azure: ${response.status} ${response.statusText}`);
                 }
                 
                 const annotationData = await response.json();
