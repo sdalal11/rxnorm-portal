@@ -408,10 +408,12 @@ class LocalMedicationLLM:
         return high_confidence_medications
 
     def _extract_by_generic_names(self, text: str) -> List[Dict]:
-        """Extract using generic drug names - highest confidence"""
+        """Extract using generic drug names - highest confidence with improved combination drug matching"""
         medications = []
         lowered_text = text.lower()
+        
         for generic_name in self.generic_names:
+            # Method 1: Exact match (existing logic)
             idx = 0
             while True:
                 idx = lowered_text.find(generic_name.lower(), idx)
@@ -422,10 +424,58 @@ class LocalMedicationLLM:
                     'start_offset': idx,
                     'end_offset': idx+len(generic_name),
                     'confidence': 0.98,
-                    'match_type': 'generic'
+                    'match_type': 'generic_exact'
                 })
                 idx += len(generic_name)
+            
+            # Method 2: Handle combination drugs with flexible separators
+            if '/' in generic_name or ' / ' in generic_name:
+                # Create variations for combination drugs
+                variations = self._create_combination_variations(generic_name)
+                for variation in variations:
+                    idx = 0
+                    while True:
+                        idx = lowered_text.find(variation.lower(), idx)
+                        if idx == -1:
+                            break
+                        medications.append({
+                            'text': text[idx:idx+len(variation)],
+                            'start_offset': idx,
+                            'end_offset': idx+len(variation),
+                            'confidence': 0.97,  # Slightly lower for variations
+                            'match_type': 'generic_combination'
+                        })
+                        idx += len(variation)
+        
         return medications
+
+    def _create_combination_variations(self, generic_name: str) -> List[str]:
+        """Create variations for combination drug names"""
+        variations = []
+        
+        # Handle both "drug1 / drug2" and "drug1/drug2" patterns
+        if ' / ' in generic_name:
+            # Original: "carbidopa / levodopa"
+            parts = [part.strip() for part in generic_name.split(' / ')]
+            
+            # Add variations:
+            variations.append('/'.join(parts))  # "carbidopa/levodopa"
+            variations.append('-'.join(parts))  # "carbidopa-levodopa" 
+            variations.append(' + '.join(parts))  # "carbidopa + levodopa"
+            variations.append('/'.join(reversed(parts)))  # "levodopa/carbidopa"
+            variations.append('-'.join(reversed(parts)))  # "levodopa-carbidopa"
+            
+        elif '/' in generic_name and ' / ' not in generic_name:
+            # Original: "drug1/drug2"
+            parts = [part.strip() for part in generic_name.split('/')]
+            
+            variations.append(' / '.join(parts))  # "drug1 / drug2"
+            variations.append('-'.join(parts))  # "drug1-drug2"
+            variations.append(' + '.join(parts))  # "drug1 + drug2"
+            variations.append('/'.join(reversed(parts)))  # "drug2/drug1"
+            variations.append('-'.join(reversed(parts)))  # "drug2-drug1"
+        
+        return variations
 
     def _extract_by_brand_names(self, text: str) -> List[Dict]:
         """Extract using brand drug names - high confidence"""
@@ -799,8 +849,9 @@ class RxNormMapper:
         return mapped_medications
 
     def _lookup_medication(self, med: Dict) -> Dict:
-        """Lookup individual medication in RxNorm database"""
+        """Lookup individual medication in RxNorm database with enhanced combination drug matching"""
         med_text = med['text'].lower().strip()
+        
         # First, try direct generic name lookup
         if med_text in self.rxnorm_db:
             info = self.rxnorm_db[med_text]
@@ -812,6 +863,7 @@ class RxNormMapper:
                 'mapping_confidence': 1.0,
                 'flag': None
             }
+        
         # Try brand name lookup
         if med_text in self.brand_to_generic:
             generic = self.brand_to_generic[med_text]
@@ -824,6 +876,12 @@ class RxNormMapper:
                 'mapping_confidence': 0.96,
                 'flag': None
             }
+        
+        # Enhanced: Try combination drug variations mapping
+        combination_match = self._find_combination_match(med_text)
+        if combination_match:
+            return combination_match
+            
         # No match found
         return {
             'rx_cui': None,
@@ -833,6 +891,59 @@ class RxNormMapper:
             'mapping_confidence': 0.0,
             'flag': 'unrecognized_medication'
         }
+    
+    def _find_combination_match(self, med_text: str) -> Optional[Dict]:
+        """Try to match combination drug variations to canonical forms"""
+        # Check if this looks like a combination drug
+        if not any(sep in med_text for sep in ['/', '-', '+']):
+            return None
+            
+        # For each known combination drug in our database, check if med_text is a variation
+        for canonical_generic, info in self.rxnorm_db.items():
+            if '/' in canonical_generic or ' / ' in canonical_generic:
+                # Generate all variations for this canonical form
+                variations = self._create_combination_variations_for_lookup(canonical_generic)
+                
+                if med_text in [var.lower() for var in variations]:
+                    return {
+                        'rx_cui': info['rx_cui'],
+                        'normalized_name': canonical_generic,
+                        'cui_type': info.get('cui_type'),
+                        'mapping_method': 'combination_variation',
+                        'mapping_confidence': 0.95,
+                        'flag': None
+                    }
+        
+        return None
+    
+    def _create_combination_variations_for_lookup(self, canonical_name: str) -> List[str]:
+        """Create variations for combination drug lookup (similar to extraction but for mapping)"""
+        variations = [canonical_name]  # Include original
+        
+        if ' / ' in canonical_name:
+            parts = [part.strip() for part in canonical_name.split(' / ')]
+            
+            variations.extend([
+                '/'.join(parts),  # "carbidopa/levodopa"
+                '-'.join(parts),  # "carbidopa-levodopa" 
+                ' + '.join(parts),  # "carbidopa + levodopa"
+                '/'.join(reversed(parts)),  # "levodopa/carbidopa"
+                '-'.join(reversed(parts)),  # "levodopa-carbidopa"
+                ' + '.join(reversed(parts)),  # "levodopa + carbidopa"
+            ])
+            
+        elif '/' in canonical_name and ' / ' not in canonical_name:
+            parts = [part.strip() for part in canonical_name.split('/')]
+            
+            variations.extend([
+                ' / '.join(parts),  # "drug1 / drug2"
+                '-'.join(parts),  # "drug1-drug2"
+                ' + '.join(parts),  # "drug1 + drug2"
+                '/'.join(reversed(parts)),  # "drug2/drug1"
+                '-'.join(reversed(parts)),  # "drug2-drug1"
+            ])
+        
+        return variations
 
 
 class MedicationExtractionPipeline:
