@@ -1043,9 +1043,23 @@
                         }
                     }
                     
+                    // Create consistent ID based on file name and path
+                    const createDocumentId = (fileName, relativePath) => {
+                        // Use relative path for folder uploads, or filename for single uploads
+                        const base = relativePath || fileName;
+                        // Simple hash function to create consistent IDs
+                        let hash = 0;
+                        for (let i = 0; i < base.length; i++) {
+                            const char = base.charCodeAt(i);
+                            hash = ((hash << 5) - hash) + char;
+                            hash = hash & hash; // Convert to 32-bit integer
+                        }
+                        return Math.abs(hash);
+                    };
+
                     // Add to documents list AFTER successful upload
                     const newDoc = {
-                        id: timestamp + uploadedCount,
+                        id: createDocumentId(displayName, file.webkitRelativePath || file.name),
                         name: displayName,
                         originalPath: file.webkitRelativePath || file.name,
                         folderName: isFolderUpload ? rootFolderName : null, // Add folder name for organization

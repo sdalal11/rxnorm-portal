@@ -1637,36 +1637,60 @@
                 // Check if user has an assigned folder
                 const userAssignedFolder = currentUser?.assignedFolder;
                 
-                // First try to load from localStorage (for admin or users on same browser)
+                // Load documents from localStorage (admin uploaded)
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                console.log(`Found ${localDocuments.length} documents in localStorage`);
                 
-                if (localDocuments.length > 0) {
-                    // Filter documents by user's assigned folder if they have one
+                // Create consistent ID function
+                const createDocumentId = (blobName, filename, originalPath) => {
+                    // Use blob name for Azure documents, original path for localStorage documents, or filename as fallback
+                    const base = blobName || originalPath || filename;
+                    // Simple hash function to create consistent IDs
+                    let hash = 0;
+                    for (let i = 0; i < base.length; i++) {
+                        const char = base.charCodeAt(i);
+                        hash = ((hash << 5) - hash) + char;
+                        hash = hash & hash; // Convert to 32-bit integer
+                    }
+                    return Math.abs(hash);
+                };
+                
+                // Migrate localStorage documents to use consistent IDs
+                let documentsUpdated = false;
+                for (const doc of localDocuments) {
+                    const newId = createDocumentId(doc.blobName, doc.name, doc.originalPath);
+                    if (doc.id !== newId) {
+                        console.log(`📝 Migrating document ID: ${doc.name} from ${doc.id} to ${newId}`);
+                        doc.id = newId;
+                        documentsUpdated = true;
+                    }
+                }
+                
+                // Save updated localStorage documents if IDs were changed
+                if (documentsUpdated) {
+                    localStorage.setItem('documentsData', JSON.stringify(localDocuments));
+                    console.log('✅ Updated localStorage with consistent document IDs');
+                }
+                
+                // Always try to fetch from Azure as well to merge both sources
+                console.log('Attempting to fetch from Azure...');
+                
+                const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+                if (!azureConfigData) {
+                    console.log('No Azure configuration available - using only localStorage documents');
+                    // Filter localStorage documents by user's assigned folder if they have one
                     if (userAssignedFolder) {
                         allDocuments = localDocuments.filter(doc => 
                             doc.category === userAssignedFolder || 
                             doc.blobName?.includes(userAssignedFolder) ||
                             doc.folderPath === userAssignedFolder
                         );
-                        console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from assigned folder`);
+                        console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage`);
                     } else {
                         allDocuments = localDocuments;
                         console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (no folder restriction)`);
                     }
-                    
                     filteredDocuments = [...allDocuments];
-                    displayDocuments();
-                    return;
-                }
-                
-                // If no local documents, try to fetch from Azure
-                console.log('No local documents found, attempting to fetch from Azure...');
-                
-                const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
-                if (!azureConfigData) {
-                    console.log('No Azure configuration available for document loading');
-                    allDocuments = [];
-                    filteredDocuments = [];
                     displayDocuments();
                     return;
                 }
@@ -1733,7 +1757,7 @@
                             const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
                             
                             documents.push({
-                                id: Date.now() + i,
+                                id: createDocumentId(name, filename),
                                 name: filename,
                                 originalPath: originalPath,
                                 folderName: folderName,
@@ -1753,17 +1777,33 @@
                     
                     console.log(`Created ${documents.length} document objects from Azure blobs`);
                     
+                    // Merge Azure documents with localStorage documents
+                    const allAvailableDocuments = [...localDocuments];
+                    
+                    // Add Azure documents that aren't already in localStorage
+                    for (const azureDoc of documents) {
+                        const existsInLocal = localDocuments.some(localDoc => 
+                            localDoc.blobName === azureDoc.blobName || 
+                            localDoc.name === azureDoc.name
+                        );
+                        if (!existsInLocal) {
+                            allAvailableDocuments.push(azureDoc);
+                        }
+                    }
+                    
+                    console.log(`Total merged documents: ${allAvailableDocuments.length} (${localDocuments.length} from localStorage + ${documents.length - (allAvailableDocuments.length - localDocuments.length)} new from Azure)`);
+                    
                     // Filter documents by user's assigned folder if they have one
                     if (userAssignedFolder) {
-                        allDocuments = documents.filter(doc => 
+                        allDocuments = allAvailableDocuments.filter(doc => 
                             doc.category === userAssignedFolder || 
                             doc.blobName?.includes(userAssignedFolder) ||
                             doc.folderPath === userAssignedFolder
                         );
-                        console.log(`🎯 Filtered Azure documents - User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length}/${documents.length} documents from assigned folder`);
+                        console.log(`🎯 Filtered merged documents - User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length}/${allAvailableDocuments.length} documents from assigned folder`);
                     } else {
-                        allDocuments = documents;
-                        console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name} (no folder restriction)`);
+                        allDocuments = allAvailableDocuments;
+                        console.log(`Loaded ${allDocuments.length} merged documents for user: ${currentUser.name} (no folder restriction)`);
                     }
                     
                     filteredDocuments = [...allDocuments];
@@ -1773,14 +1813,44 @@
                 } else {
                     const errorText = await response.text();
                     console.log('Failed to fetch document list from Azure:', response.status, errorText);
-                    allDocuments = [];
-                    filteredDocuments = [];
+                    console.log('Using only localStorage documents due to Azure error');
+                    
+                    // Filter localStorage documents by user's assigned folder if they have one
+                    if (userAssignedFolder) {
+                        allDocuments = localDocuments.filter(doc => 
+                            doc.category === userAssignedFolder || 
+                            doc.blobName?.includes(userAssignedFolder) ||
+                            doc.folderPath === userAssignedFolder
+                        );
+                        console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (Azure failed)`);
+                    } else {
+                        allDocuments = localDocuments;
+                        console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (Azure failed)`);
+                    }
+                    filteredDocuments = [...allDocuments];
                 }
                 
             } catch (error) {
                 console.log('Error loading documents:', error);
-                allDocuments = [];
-                filteredDocuments = [];
+                console.log('Using only localStorage documents due to error');
+                
+                // Load documents from localStorage as fallback
+                const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                
+                // Filter localStorage documents by user's assigned folder if they have one
+                const userAssignedFolder = currentUser?.assignedFolder;
+                if (userAssignedFolder) {
+                    allDocuments = localDocuments.filter(doc => 
+                        doc.category === userAssignedFolder || 
+                        doc.blobName?.includes(userAssignedFolder) ||
+                        doc.folderPath === userAssignedFolder
+                    );
+                    console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (error fallback)`);
+                } else {
+                    allDocuments = localDocuments;
+                    console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (error fallback)`);
+                }
+                filteredDocuments = [...allDocuments];
             }
             
             displayDocuments();
