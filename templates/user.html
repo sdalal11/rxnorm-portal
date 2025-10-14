@@ -1277,48 +1277,6 @@
                 document.getElementById('authError').style.display = 'block';
                 document.getElementById('authSuccess').style.display = 'none';
             }
-            // Register user via API
-            try {
-                const response = await fetch(`${API_BASE_URL}/users/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: email, // Use email as username
-                        email: email,
-                        password: password,
-                        name: name
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    // Show success message and switch to login
-                    document.getElementById('authSuccess').textContent = 'Registration successful! You can now log in.';
-                    document.getElementById('authSuccess').style.display = 'block';
-                    document.getElementById('authError').style.display = 'none';
-                    
-                    // Clear form
-                    document.getElementById('userRegisterForm').reset();
-                    
-                    // Switch to login tab after 2 seconds
-                    setTimeout(() => {
-                        showAuthTab('login');
-                        document.getElementById('loginEmail').value = email;
-                    }, 2000);
-                } else {
-                    document.getElementById('authError').textContent = data.message || 'Registration failed. Please try again.';
-                    document.getElementById('authError').style.display = 'block';
-                    document.getElementById('authSuccess').style.display = 'none';
-                }
-            } catch (error) {
-                console.error('Registration error:', error);
-                document.getElementById('authError').textContent = 'Registration failed. Please check your connection and try again.';
-                document.getElementById('authError').style.display = 'block';
-                document.getElementById('authSuccess').style.display = 'none';
-            }
         });
         
         function showUserPortal() {
