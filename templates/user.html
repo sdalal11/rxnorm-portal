@@ -1761,6 +1761,11 @@
                             const pathParts = name.split('/');
                             const filename = pathParts[pathParts.length - 1];
                             
+                            // Debug: Log the path parsing details
+                            console.log(`🔍 Parsing blob: ${name}`);
+                            console.log(`🔍 Path parts:`, pathParts);
+                            console.log(`🔍 Length: ${pathParts.length}, First part: '${pathParts[0]}'`);
+                            
                             // Handle new structure: general/1/filename.html, general/2/filename.html, etc.
                             let category, folderName, isFromFolder;
                             if (pathParts.length === 3 && pathParts[0] === 'general') {
@@ -1768,11 +1773,13 @@
                                 category = pathParts[1]; // Use folder number (1, 2, 3) as category for filtering
                                 folderName = pathParts[1]; // Keep folder name for compatibility
                                 isFromFolder = true;
+                                console.log(`✅ Matched new structure: category=${category}, folderName=${folderName}`);
                             } else {
                                 // Legacy structure or other formats
                                 category = pathParts[0] || 'general';
                                 folderName = pathParts.length > 2 ? pathParts[1] : null;
                                 isFromFolder = pathParts.length > 2;
+                                console.log(`⚠️ Using legacy structure: category=${category}, folderName=${folderName}`);
                             }
                             
                             // Create proper originalPath for folder structure
