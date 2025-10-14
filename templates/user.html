@@ -1635,7 +1635,7 @@
         async function loadDocuments() {
             try {
                 // Check if user has an assigned folder
-                const userAssignedFolder = currentUser?.assignedFolder;
+                const userAssignedFolder = currentUser?.assigned_folder;
                 
                 // Load documents from localStorage (admin uploaded)
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
@@ -1847,7 +1847,7 @@
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
                 
                 // Filter localStorage documents by user's assigned folder if they have one
-                const userAssignedFolder = currentUser?.assignedFolder;
+                const userAssignedFolder = currentUser?.assigned_folder;
                 if (userAssignedFolder) {
                     allDocuments = localDocuments.filter(doc => 
                         doc.category === userAssignedFolder || 
