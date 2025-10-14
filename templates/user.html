@@ -1718,6 +1718,15 @@
                     sasParams.set('sp', sp + 'l'); // Add list permission
                 }
                 
+                // Create a separate SAS token for blob access with read permissions
+                const blobSasParams = new URLSearchParams(sasToken);
+                blobSasParams.set('sr', 'b'); // Blob resource (instead of container)
+                const blobSp = blobSasParams.get('sp') || '';
+                if (!blobSp.includes('r')) {
+                    blobSasParams.set('sp', blobSp + 'r'); // Add read permission for blobs
+                }
+                const blobSasToken = blobSasParams.toString();
+                
                 // Construct the final URL
                 const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${sasParams.toString()}`;
                 console.log('Fetching from Azure URL:', listUrl);
@@ -1757,7 +1766,7 @@
                             const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
                             
                             documents.push({
-                                id: createDocumentId(name, filename),
+                                id: createDocumentId(name, filename, originalPath),
                                 name: filename,
                                 originalPath: originalPath,
                                 folderName: folderName,
@@ -1766,7 +1775,7 @@
                                 publicAccess: true,
                                 uploadDate: lastModified ? new Date(lastModified).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
                                 size: formatFileSize(parseInt(size) || 0),
-                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`,
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${blobSasToken}`,
                                 blobName: name,
                                 isFromFolder: isFromFolder,
                                 hasPreAnnotations: false,
@@ -2373,15 +2382,22 @@
                 }
                 
                 const azureConfig = JSON.parse(azureConfigData);
-                const documentUrl = `${doc.azureUrl}${azureConfig.sasToken}`;
+                // doc.azureUrl already includes the SAS token, so use it directly
+                const documentUrl = doc.azureUrl;
                 
                 // First, fetch the document content
                 console.log('📄 Fetching document content from:', documentUrl);
+                console.log('🔐 Document URL SAS token permissions check:', documentUrl.includes('sp=') ? documentUrl.match(/sp=([^&]*)/)?.[1] : 'No sp parameter found');
                 updateProcessingNotification('📄 Downloading document content...');
                 
                 const docResponse = await fetch(documentUrl);
+                console.log('📄 Document fetch response status:', docResponse.status);
+                console.log('📄 Document fetch response headers:', [...docResponse.headers.entries()]);
+                
                 if (!docResponse.ok) {
-                    throw new Error(`Failed to fetch document: ${docResponse.status}`);
+                    const errorText = await docResponse.text();
+                    console.error('📄 Document fetch error details:', errorText);
+                    throw new Error(`Failed to fetch document: ${docResponse.status} - ${errorText}`);
                 }
                 
                 const docBlob = await docResponse.blob();
