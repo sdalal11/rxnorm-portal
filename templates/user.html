@@ -1747,6 +1747,18 @@
                     const blobs = xmlDoc.getElementsByTagName('Blob');
                     console.log('Found blobs:', blobs.length);
                     
+                    // Debug: Log ALL blob names to see the structure
+                    const allBlobNames = [];
+                    for (let i = 0; i < blobs.length; i++) {
+                        const blob = blobs[i];
+                        const name = blob.getElementsByTagName('Name')[0]?.textContent;
+                        if (name) {
+                            allBlobNames.push(name);
+                        }
+                    }
+                    console.log('🔍 ALL BLOB NAMES:', allBlobNames);
+                    console.log('🔍 HTML blobs only:', allBlobNames.filter(name => name.endsWith('.html')));
+                    
                     const documents = [];
                     for (let i = 0; i < blobs.length; i++) {
                         const blob = blobs[i];
@@ -2026,7 +2038,15 @@
             const folders = new Map();
             const files = [];
             
+            // Check if user has an assigned folder - if so, only show that folder's content
+            const userAssignedFolder = currentUser?.assigned_folder;
+            
             filteredDocuments.forEach(doc => {
+                // Skip documents that don't belong to user's assigned folder if they have one
+                if (userAssignedFolder && doc.category !== userAssignedFolder) {
+                    return;
+                }
+                
                 if (!doc.originalPath || !doc.isFromFolder) {
                     // Individual files (not from folder uploads) - show in root
                     if (currentPath === '') {
@@ -2059,8 +2079,14 @@
                             // File is directly in current folder
                             files.push(doc);
                         } else {
-                            // File is in a subfolder
+                            // File is in a subfolder - but only show if user is assigned to this folder
                             const subfolderName = pathParts[currentPathParts.length];
+                            
+                            // If user has assigned folder, only show that specific folder
+                            if (userAssignedFolder && subfolderName !== userAssignedFolder) {
+                                return;
+                            }
+                            
                             const subfolderPath = [...currentPathParts, subfolderName].join('/');
                             
                             if (!folders.has(subfolderName)) {
