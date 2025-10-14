@@ -1760,9 +1760,20 @@
                             // Parse folder structure from blob name
                             const pathParts = name.split('/');
                             const filename = pathParts[pathParts.length - 1];
-                            const category = pathParts[0] || 'general';
-                            const folderName = pathParts.length > 2 ? pathParts[1] : null;
-                            const isFromFolder = pathParts.length > 2;
+                            
+                            // Handle new structure: general/1/filename.html, general/2/filename.html, etc.
+                            let category, folderName, isFromFolder;
+                            if (pathParts.length === 3 && pathParts[0] === 'general') {
+                                // New structure: general/1/filename.html
+                                category = pathParts[1]; // Use folder number (1, 2, 3) as category for filtering
+                                folderName = pathParts[1]; // Keep folder name for compatibility
+                                isFromFolder = true;
+                            } else {
+                                // Legacy structure or other formats
+                                category = pathParts[0] || 'general';
+                                folderName = pathParts.length > 2 ? pathParts[1] : null;
+                                isFromFolder = pathParts.length > 2;
+                            }
                             
                             // Create proper originalPath for folder structure
                             const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
@@ -1783,6 +1794,9 @@
                                 hasPreAnnotations: false,
                                 preAnnotations: [] // Will be loaded when document is opened
                             });
+                            
+                            // Debug log for new document structure
+                            console.log(`📄 Document parsed: ${filename} -> category: ${category}, folderName: ${folderName}, blobName: ${name}`);
                         }
                     }
                     
