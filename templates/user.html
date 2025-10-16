@@ -2134,14 +2134,30 @@
                 return;
             }
             
-            if (currentView === 'folder') {
-                displayFolderView();
-                return;
-            }
-            
             const documentsGrid = document.getElementById('documentsGrid');
             
-            if (filteredDocuments.length === 0) {
+            // Apply folder filtering for assigned users - same logic as getFoldersAndFiles
+            const userAssignedFolder = currentUser?.assigned_folder;
+            let documentsToShow = filteredDocuments;
+            
+            if (userAssignedFolder) {
+                console.log(`🎯 Grid view: Filtering documents for user assigned to folder '${userAssignedFolder}'`);
+                console.log(`🎯 Before filtering: ${filteredDocuments.length} documents`);
+                
+                documentsToShow = filteredDocuments.filter(doc => {
+                    const matches = doc.category === userAssignedFolder || 
+                                  doc.blobName?.includes(userAssignedFolder) ||
+                                  doc.folderPath === userAssignedFolder;
+                    if (matches) {
+                        console.log(`✅ Grid view: Document matches: ${doc.name} (category: ${doc.category})`);
+                    }
+                    return matches;
+                });
+                
+                console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folder '${userAssignedFolder}'`);
+            }
+            
+            if (documentsToShow.length === 0) {
                 documentsGrid.innerHTML = `
                     <div class="no-documents">
                         <h3>No Documents Found</h3>
@@ -2152,7 +2168,7 @@
             }
             
             let html = '';
-            filteredDocuments.forEach(doc => {
+            documentsToShow.forEach(doc => {
                 const icon = getDocumentIcon(doc.name);
                 const badgeClass = `badge-${doc.category}`;
                 
@@ -2164,11 +2180,9 @@
                         <div class="document-icon">${icon}</div>
                         <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
                         <div class="document-title">${folderIndicator}${doc.name}</div>
-                        <div class="document-title">${folderIndicator}${doc.name}</div>
                         <div class="document-meta">
                             Uploaded: ${doc.uploadDate}<br>
                             Size: ${doc.size}
-                            ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                             ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                         </div>
                         ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
