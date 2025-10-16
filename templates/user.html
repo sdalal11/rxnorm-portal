@@ -3084,8 +3084,8 @@
             let html = '';
             documentAnnotations.forEach((annotation, index) => {
                 const statusClass = annotation.status === 'active' ? 'status-active' : 'status-inactive';
-                const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
-                const sourceText = annotation.isPreAnnotation ? 'AI Detected' : 'User Added';
+                // const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
+                const sourceText = annotation.isPreAnnotation ? 'Preannotation' : 'User Added';
                 const confidenceText = annotation.confidence ? ` (${Math.round(annotation.confidence * 100)}%)` : '';
                 
                 // Escape quotes for onclick attribute
