@@ -3084,8 +3084,8 @@
             let html = '';
             documentAnnotations.forEach((annotation, index) => {
                 const statusClass = annotation.status === 'active' ? 'status-active' : 'status-inactive';
-                const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
-                const sourceText = annotation.isPreAnnotation ? 'AI Detected' : 'User Added';
+                // const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
+                const sourceText = annotation.isPreAnnotation ? 'Preannotated' : 'User Added';
                 const confidenceText = annotation.confidence ? ` (${Math.round(annotation.confidence * 100)}%)` : '';
                 
                 // Escape quotes for onclick attribute
@@ -3103,11 +3103,6 @@
                             <strong>"${displayText}"</strong>
                         </div>
                         <div class="annotation-status ${statusClass}">${annotation.status.toUpperCase()}</div>
-                        <div style="font-size: 0.75rem; color: #999; margin-top: 0.25rem;">
-                            ${sourceIcon} ${sourceText}${confidenceText}
-                            <br>${new Date(annotation.timestamp).toLocaleString()}
-                            ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
-                        </div>
                         <div style="margin-top: 0.5rem;">
                             <label style="font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.25rem;">Notes:</label>
                             <textarea 
