@@ -1640,11 +1640,7 @@
                     console.log('No Azure configuration available - using only localStorage documents');
                     // Filter localStorage documents by user's assigned folder if they have one
                     if (userAssignedFolder) {
-                        allDocuments = localDocuments.filter(doc => 
-                            doc.category === userAssignedFolder || 
-                            doc.blobName?.includes(userAssignedFolder) ||
-                            doc.folderPath === userAssignedFolder
-                        );
+                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
                         console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage`);
                     } else {
                         allDocuments = localDocuments;
@@ -1856,9 +1852,7 @@
                         console.log('🔍 Sample categories in documents:', [...new Set(allAvailableDocuments.map(doc => doc.category))].slice(0, 10));
                         
                         allDocuments = allAvailableDocuments.filter(doc => {
-                            const matches = doc.category === userAssignedFolder || 
-                                          doc.blobName?.includes(userAssignedFolder) ||
-                                          doc.folderPath === userAssignedFolder;
+                            const matches = documentMatchesUserFolder(doc, userAssignedFolder);
                             if (matches) {
                                 console.log(`✅ Document matches: ${doc.name} (category: ${doc.category})`);
                             }
@@ -1881,11 +1875,7 @@
                     
                     // Filter localStorage documents by user's assigned folder if they have one
                     if (userAssignedFolder) {
-                        allDocuments = localDocuments.filter(doc => 
-                            doc.category === userAssignedFolder || 
-                            doc.blobName?.includes(userAssignedFolder) ||
-                            doc.folderPath === userAssignedFolder
-                        );
+                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
                         console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (Azure failed)`);
                     } else {
                         allDocuments = localDocuments;
@@ -1904,11 +1894,7 @@
                 // Filter localStorage documents by user's assigned folder if they have one
                 const userAssignedFolder = currentUser?.assigned_folder;
                 if (userAssignedFolder) {
-                    allDocuments = localDocuments.filter(doc => 
-                        doc.category === userAssignedFolder || 
-                        doc.blobName?.includes(userAssignedFolder) ||
-                        doc.folderPath === userAssignedFolder
-                    );
+                    allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
                     console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (error fallback)`);
                 } else {
                     allDocuments = localDocuments;
@@ -1918,6 +1904,33 @@
             }
             
             displayDocuments();
+        }
+        
+        // Helper function to get mapped categories for a user's assigned folder
+        function getMappedCategories(userAssignedFolder) {
+            if (!userAssignedFolder) return null;
+            
+            // Create mapping from assigned folder numbers (1, 2, 3, 4) to actual Azure folder categories
+            // Based on the Azure structure, we need to map assigned folders to actual Azure categories
+            const folderMapping = {
+                '1': ['87', '1'],   // User assigned folder 1 maps to Azure category 87 or 1
+                '2': ['88', '2'],   // User assigned folder 2 maps to Azure category 88 or 2  
+                '3': ['89', '3'],   // User assigned folder 3 maps to Azure category 89 or 3
+                '4': ['90', '4']    // User assigned folder 4 maps to Azure category 90 or 4
+            };
+            
+            return folderMapping[userAssignedFolder] || [userAssignedFolder];
+        }
+        
+        // Helper function to check if a document matches the user's assigned folder
+        function documentMatchesUserFolder(doc, userAssignedFolder) {
+            if (!userAssignedFolder) return true; // No restriction if no assigned folder
+            
+            const mappedCategories = getMappedCategories(userAssignedFolder);
+            
+            return mappedCategories.includes(doc.category) ||
+                   mappedCategories.some(cat => doc.blobName?.includes(`/${cat}/`)) ||
+                   mappedCategories.includes(doc.folderPath);
         }
         
         function formatFileSize(bytes) {
@@ -2048,12 +2061,19 @@
             console.log(`🔍 getFoldersAndFiles: userAssignedFolder = ${userAssignedFolder}, currentPath = '${currentPath}'`);
             console.log(`🔍 Total filteredDocuments: ${filteredDocuments.length}`);
             
+            // Create the same mapping as in displayDocuments
+            let mappedCategories = [userAssignedFolder];
+            if (userAssignedFolder) {
+                mappedCategories = getMappedCategories(userAssignedFolder);
+                console.log(`🔍 getFoldersAndFiles: Mapping assigned folder '${userAssignedFolder}' to categories:`, mappedCategories);
+            }
+            
             filteredDocuments.forEach((doc, index) => {
                 console.log(`🔍 Processing doc ${index}: ${doc.name}, category: ${doc.category}, originalPath: ${doc.originalPath}`);
                 
                 // Skip documents that don't belong to user's assigned folder if they have one
-                if (userAssignedFolder && doc.category !== userAssignedFolder) {
-                    console.log(`⏭️ Skipping doc ${doc.name} - category ${doc.category} doesn't match user folder ${userAssignedFolder}`);
+                if (userAssignedFolder && !mappedCategories.includes(doc.category)) {
+                    console.log(`⏭️ Skipping doc ${doc.name} - category ${doc.category} doesn't match mapped categories [${mappedCategories.join(', ')}]`);
                     return;
                 }
                 
@@ -2096,9 +2116,9 @@
                             
                             console.log(`📁 Found subfolder: ${subfolderName}, userAssignedFolder: ${userAssignedFolder}`);
                             
-                            // If user has assigned folder, only show that specific folder
-                            if (userAssignedFolder && subfolderName !== userAssignedFolder) {
-                                console.log(`⏭️ Skipping subfolder ${subfolderName} - doesn't match user assigned folder ${userAssignedFolder}`);
+                            // If user has assigned folder, only show that specific folder using mapping
+                            if (userAssignedFolder && !mappedCategories.includes(subfolderName)) {
+                                console.log(`⏭️ Skipping subfolder ${subfolderName} - doesn't match mapped categories [${mappedCategories.join(', ')}]`);
                                 return;
                             }
                             
@@ -2148,6 +2168,14 @@
                 console.log(`🎯 Grid view: Filtering documents for user assigned to folder '${userAssignedFolder}'`);
                 console.log(`🎯 Before filtering: ${filteredDocuments.length} documents`);
                 
+                // Debug: Show all unique categories to understand the mapping needed
+                const allCategories = [...new Set(filteredDocuments.map(doc => doc.category))];
+                console.log(`🎯 ALL AVAILABLE CATEGORIES:`, allCategories.sort());
+                
+                // Get mapped categories for the user's assigned folder
+                const mappedCategories = getMappedCategories(userAssignedFolder);
+                console.log(`🎯 Mapping assigned folder '${userAssignedFolder}' to categories:`, mappedCategories);
+                
                 // Debug: Show sample document categories
                 const sampleDocs = filteredDocuments.slice(0, 5);
                 console.log(`🎯 Sample documents before filtering:`, sampleDocs.map(doc => ({
@@ -2158,18 +2186,14 @@
                 })));
                 
                 documentsToShow = filteredDocuments.filter(doc => {
-                    const matches = doc.category === userAssignedFolder || 
-                                  doc.blobName?.includes(userAssignedFolder) ||
-                                  doc.folderPath === userAssignedFolder;
+                    const matches = documentMatchesUserFolder(doc, userAssignedFolder);
                     if (matches) {
-                        console.log(`✅ Grid view: Document matches: ${doc.name} (category: '${doc.category}', blobName: '${doc.blobName}', folderPath: '${doc.folderPath}')`);
-                    } else {
-                        console.log(`❌ Grid view: Document DOES NOT match: ${doc.name} (category: '${doc.category}', blobName: '${doc.blobName}', folderPath: '${doc.folderPath}') vs userFolder: '${userAssignedFolder}'`);
+                        console.log(`✅ Grid view: Document matches: ${doc.name} (category: '${doc.category}', mapped categories: [${mappedCategories.join(', ')}])`);
                     }
                     return matches;
                 });
                 
-                console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folder '${userAssignedFolder}'`);
+                console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folder '${userAssignedFolder}' (mapped to categories: [${mappedCategories.join(', ')}])`);
             } else {
                 console.log(`🎯 Grid view: No assigned folder - showing all ${filteredDocuments.length} documents`);
             }
