@@ -115,4 +115,4 @@ wheels/
 # Azure secrets (if any)
 *.key
 *.pem
-config.json
+config.jsondlp-service-account-key.json

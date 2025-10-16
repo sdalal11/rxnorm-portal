@@ -6,93 +6,18 @@ import subprocess
 import json
 import sqlite3
 from datetime import datetime
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
 
-# Additional CORS configuration to ensure all responses have proper headers
 @app.after_request
 def after_request(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
-
-# Available folders for sequential assignment
-AVAILABLE_FOLDERS = [
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-    "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-    "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-    "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
-    "51", "52", "53", "54", "55", "56", "57", "58", "59", "60",
-    "61", "62", "63", "64", "65", "66", "67", "68", "69", "70",
-    "71", "72", "73", "74", "75", "76", "77", "78", "79", "80",
-    "81", "82", "83", "84", "85", "86", "87", "88", "89", "90"
-]
-
-class FolderManager:
-    """Manages sequential folder assignment based on login timestamps"""
-    
-    def __init__(self):
-        self.total_folders = len(AVAILABLE_FOLDERS)
-    
-    def get_next_assignment_order(self):
-        """Get the next assignment order number by counting existing assignments from database"""
-        try:
-            # Count users who have folder assignments in the database
-            result = execute_query('SELECT COUNT(*) FROM users WHERE assigned_folder IS NOT NULL', fetch_one=True)
-            assignment_count = result[0] if result else 0
-            
-            print(f"📊 Current folder assignments in database: {assignment_count}")
-            return assignment_count + 1
-        except Exception as e:
-            print(f"⚠️ Error getting assignment count from database: {e}")
-            # Fallback to memory-based counting
-            assignment_count = 0
-            for username, user_data in global_users.items():
-                if 'assignment_order' in user_data and user_data['assignment_order'] is not None:
-                    assignment_count += 1
-            return assignment_count + 1
-    
-    def assign_folder_to_user(self, username, login_timestamp):
-        """Assign folder based on sequential order with cycling"""
-        assignment_order = self.get_next_assignment_order()
-        
-        # Calculate folder index using modulo for cycling
-        folder_index = (assignment_order - 1) % self.total_folders
-        assigned_folder = AVAILABLE_FOLDERS[folder_index]
-        
-        print(f"🎯 Assigning folder '{assigned_folder}' to user '{username}' (Order: {assignment_order})")
-        
-        return {
-            'folder': assigned_folder,
-            'assignment_order': assignment_order,
-            'timestamp': login_timestamp,
-            'folder_index': folder_index
-        }
-    
-    def get_folder_assignments(self):
-        """Get all current folder assignments for admin view"""
-        assignments = []
-        for username, user_data in global_users.items():
-            if 'assigned_folder' in user_data:
-                assignments.append({
-                    'username': username,
-                    'name': user_data.get('name', 'N/A'),
-                    'email': user_data.get('email', 'N/A'),
-                    'assigned_folder': user_data.get('assigned_folder'),
-                    'assignment_order': user_data.get('assignment_order'),
-                    'login_timestamp': user_data.get('login_timestamp'),
-                    'last_login': user_data.get('last_login')
-                })
-        
-        # Sort by assignment order
-        assignments.sort(key=lambda x: x.get('assignment_order', 0))
-        return assignments
-
-# Initialize folder manager
-folder_manager = FolderManager()
 
 @app.after_request
 def after_request(response):
@@ -107,8 +32,14 @@ def home():
     return jsonify({
         'message': 'RxNorm Document Processing API',
         'version': '1.2',  # Updated for database authentication
+        'version': '1.2',  # Updated for database authentication
         'endpoints': {
             'health': '/health',
+            'process': '/process-document',
+            'azure_config': '/config/azure',
+            'user_register': '/users/register',
+            'user_login': '/users/login',
+            'user_list': '/users/list'
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',
@@ -129,7 +60,12 @@ def health_check():
 # Replace the process_document function with this updated version:
 
 @app.route('/process-document', methods=['POST', 'OPTIONS'])
+@app.route('/process-document', methods=['POST', 'OPTIONS'])
 def process_document():
+    # Handle CORS preflight request
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight'})
+    
     # Handle CORS preflight request
     if request.method == 'OPTIONS':
         return jsonify({'message': 'CORS preflight'})
@@ -355,51 +291,11 @@ DATABASE_FILE = os.environ.get('DATABASE_FILE', '/tmp/users.db') if not DATABASE
 
 def init_database():
     """Initialize database for user storage - supports both SQLite and PostgreSQL"""
-    print(f"🔍 DEBUG: DATABASE_URL = {repr(DATABASE_URL)}")
-    print(f"🔍 DEBUG: DATABASE_FILE = {repr(DATABASE_FILE)}")
     try:
         if DATABASE_URL:
             # Using external PostgreSQL database (persistent)
             import psycopg2
-            
-            print(f"🔗 Attempting to connect to external database...")
-            print(f"📍 Database URL: {DATABASE_URL[:50]}...")  # Show partial URL for debugging
-            
-            # Parse URL for better diagnostics
-            from urllib.parse import urlparse
-            parsed = urlparse(DATABASE_URL)
-            print(f"🔍 Host: {parsed.hostname}")
-            print(f"🔍 Port: {parsed.port}")
-            print(f"🔍 Database: {parsed.path}")
-            
-            # Try different connection methods for better compatibility
-            try:
-                # First try with the direct URL
-                conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-            except Exception as e1:
-                print(f"⚠️  Direct connection failed: {e1}")
-                
-                # Try parsing the URL and connecting with individual parameters
-                try:
-                    from urllib.parse import urlparse
-                    parsed = urlparse(DATABASE_URL)
-                    
-                    print(f"🔄 Trying parsed connection to {parsed.hostname}:{parsed.port}")
-                    conn = psycopg2.connect(
-                        host=parsed.hostname,
-                        port=parsed.port,
-                        database=parsed.path[1:],  # Remove leading /
-                        user=parsed.username,
-                        password=parsed.password,
-                        sslmode='require'
-                    )
-                except Exception as e2:
-                    print(f"⚠️  Parsed connection failed: {e2}")
-                    
-                    # Final fallback - try without SSL requirement
-                    print("🔄 Trying connection without SSL requirement...")
-                    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
-            
+            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             cursor = conn.cursor()
             
             # Create users table if it doesn't exist
@@ -411,39 +307,9 @@ def init_database():
                     password VARCHAR(255) NOT NULL,
                     name VARCHAR(255) NOT NULL,
                     registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP,
-                    assigned_folder VARCHAR(50),
-                    assignment_order INTEGER,
-                    login_timestamp TIMESTAMP
+                    last_login TIMESTAMP
                 )
             ''')
-            
-            # Check which columns exist and add missing ones
-            cursor.execute("""
-                SELECT column_name 
-                FROM information_schema.columns 
-                WHERE table_name = 'users' AND table_schema = 'public'
-            """)
-            existing_columns = [row[0] for row in cursor.fetchall()]
-            print(f"📋 Existing columns: {existing_columns}")
-            
-            columns_to_add = [
-                ('assigned_folder', 'VARCHAR(50)'),
-                ('assignment_order', 'INTEGER'),
-                ('login_timestamp', 'TIMESTAMP')
-            ]
-            
-            for column_name, column_type in columns_to_add:
-                if column_name not in existing_columns:
-                    try:
-                        cursor.execute(f'ALTER TABLE users ADD COLUMN {column_name} {column_type}')
-                        conn.commit()  # Commit each ALTER TABLE separately
-                        print(f"✅ Added {column_name} column")
-                    except Exception as e:
-                        conn.rollback()  # Rollback if there's an error
-                        print(f"⚠️ Error adding {column_name}: {e}")
-                else:
-                    print(f"ℹ️ Column {column_name} already exists")
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
@@ -459,33 +325,9 @@ def init_database():
                     password TEXT NOT NULL,
                     name TEXT NOT NULL,
                     registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    last_login DATETIME,
-                    assigned_folder TEXT,
-                    assignment_order INTEGER,
-                    login_timestamp DATETIME
+                    last_login DATETIME
                 )
             ''')
-            
-            # Check which columns exist and add missing ones
-            cursor.execute("PRAGMA table_info(users)")
-            existing_columns = [row[1] for row in cursor.fetchall()]
-            print(f"📋 Existing columns: {existing_columns}")
-            
-            columns_to_add = [
-                ('assigned_folder', 'TEXT'),
-                ('assignment_order', 'INTEGER'), 
-                ('login_timestamp', 'DATETIME')
-            ]
-            
-            for column_name, column_type in columns_to_add:
-                if column_name not in existing_columns:
-                    try:
-                        cursor.execute(f'ALTER TABLE users ADD COLUMN {column_name} {column_type}')
-                        print(f"✅ Added {column_name} column")
-                    except Exception as e:
-                        print(f"⚠️ Error adding {column_name}: {e}")
-                else:
-                    print(f"ℹ️ Column {column_name} already exists")
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
         
@@ -566,10 +408,7 @@ def get_user(username):
                 'password': result[3],
                 'name': result[4],
                 'registered_at': result[5],
-                'last_login': result[6],
-                'assigned_folder': result[7] if len(result) > 7 else None,
-                'assignment_order': result[8] if len(result) > 8 else None,
-                'login_timestamp': result[9] if len(result) > 9 else None
+                'last_login': result[6]
             }
         return None
     except Exception as e:
@@ -599,21 +438,6 @@ def update_last_login(username):
         return True
     except Exception as e:
         print(f"⚠️ Error updating last login: {e}")
-        return False
-
-def update_user_folder_assignment(username, assigned_folder, assignment_order, login_timestamp):
-    """Update user's folder assignment in database"""
-    try:
-        execute_query('''
-            UPDATE users 
-            SET assigned_folder = ?, assignment_order = ?, login_timestamp = ? 
-            WHERE username = ?
-        ''', (assigned_folder, assignment_order, login_timestamp, username))
-        
-        print(f"💾 Saved folder assignment to database: {username} → {assigned_folder} (Order: {assignment_order})")
-        return True
-    except Exception as e:
-        print(f"⚠️ Error updating folder assignment: {e}")
         return False
 
 def list_users():
@@ -674,27 +498,9 @@ def register_user():
         if existing_user:
             return jsonify({'error': 'Username already exists'}), 409
         
-        # Check if email already exists in database
-        try:
-            email_check = execute_query('SELECT username FROM users WHERE email = ?', (email,), fetch_one=True)
-            if email_check:
-                return jsonify({'error': 'Email already registered'}), 409
-        except Exception as e:
-            print(f"⚠️ Error checking email: {e}")
-        
         # Create user in database
         if create_user(username, email, password, name):
-            print(f"📝 User registered in database: {username} ({email})")
-            
-            # Also add to global_users for compatibility (temporary)
-            global_users[username] = {
-                'username': username,
-                'email': email,
-                'password': password,
-                'name': name,
-                'registered_at': datetime.now().isoformat(),
-                'last_login': None
-            }
+            print(f"📝 User registered: {username} ({email})")
             
             return jsonify({
                 'success': True,
@@ -706,7 +512,7 @@ def register_user():
                 }
             })
         else:
-            return jsonify({'error': 'Registration failed. Please try again.'}), 500
+            return jsonify({'error': 'Failed to create user - username or email may already exist'}), 409
         
     except Exception as e:
         print(f"❌ Registration error: {e}")
@@ -735,40 +541,8 @@ def login_user():
         if not user or user.get('password') != password:
             return jsonify({'error': 'Invalid username or password'}), 401
         
-        # Generate precise login timestamp
-        login_timestamp = datetime.now().isoformat()
-        
         # Update last login in database
         update_last_login(username)
-        
-        # Check if user already has a folder assigned (from database)
-        if not user.get('assigned_folder'):
-            # Assign folder based on login order
-            folder_assignment = folder_manager.assign_folder_to_user(username, login_timestamp)
-            
-            # Save folder assignment to database
-            update_user_folder_assignment(
-                username, 
-                folder_assignment['folder'],
-                folder_assignment['assignment_order'],
-                login_timestamp
-            )
-            
-            # Update user object with assignment
-            user['assigned_folder'] = folder_assignment['folder']
-            user['assignment_order'] = folder_assignment['assignment_order']
-            user['login_timestamp'] = login_timestamp
-            
-            print(f"🎯 New folder assignment - User: {username}, Folder: {folder_assignment['folder']}, Order: {folder_assignment['assignment_order']}")
-        else:
-            print(f"🔄 Existing user login - User: {username}, Folder: {user['assigned_folder']}")
-        
-        # Update global_users for compatibility (temporary)
-        if username in global_users:
-            global_users[username]['last_login'] = login_timestamp
-            global_users[username]['assigned_folder'] = user.get('assigned_folder')
-            global_users[username]['assignment_order'] = user.get('assignment_order')
-            global_users[username]['login_timestamp'] = user.get('login_timestamp')
         
         print(f"✅ User logged in: {username}")
         
@@ -778,11 +552,7 @@ def login_user():
             'user': {
                 'username': user['username'],
                 'email': user['email'],
-                'name': user['name'],
-                'assigned_folder': user.get('assigned_folder'),
-                'assignment_order': user.get('assignment_order'),
-                'login_timestamp': user.get('login_timestamp', login_timestamp),
-                'folder_count': len(AVAILABLE_FOLDERS)
+                'name': user['name']
             }
         })
         
@@ -865,75 +635,6 @@ def backup_users():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/admin/folder-assignments', methods=['GET', 'OPTIONS'])
-def get_folder_assignments():
-    """Get folder assignments for admin dashboard"""
-    if request.method == 'OPTIONS':
-        response = jsonify({'message': 'CORS preflight'})
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        return response
-    
-    try:
-        assignments = folder_manager.get_folder_assignments()
-        
-        # Calculate folder distribution stats
-        folder_stats = {}
-        for folder in AVAILABLE_FOLDERS:
-            folder_stats[folder] = len([a for a in assignments if a['assigned_folder'] == folder])
-        
-        return jsonify({
-            'success': True,
-            'assignments': assignments,
-            'total_users': len(assignments),
-            'total_folders': len(AVAILABLE_FOLDERS),
-            'folder_distribution': folder_stats,
-            'available_folders': AVAILABLE_FOLDERS
-        })
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/user/folder-info', methods=['GET', 'POST', 'OPTIONS'])
-def get_user_folder_info():
-    """Get specific user's folder assignment info"""
-    if request.method == 'OPTIONS':
-        response = jsonify({'message': 'CORS preflight'})
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        return response
-    
-    try:
-        if request.method == 'POST':
-            data = request.get_json()
-            username = data.get('username', '').strip().lower()
-        else:
-            username = request.args.get('username', '').strip().lower()
-        
-        if not username:
-            return jsonify({'error': 'Username is required'}), 400
-        
-        user = global_users.get(username)
-        if not user:
-            return jsonify({'error': 'User not found'}), 404
-        
-        return jsonify({
-            'success': True,
-            'user_info': {
-                'username': username,
-                'name': user.get('name'),
-                'assigned_folder': user.get('assigned_folder'),
-                'assignment_order': user.get('assignment_order'),
-                'login_timestamp': user.get('login_timestamp'),
-                'last_login': user.get('last_login')
-            }
-        })
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/config/azure', methods=['POST', 'GET', 'OPTIONS'])
 def azure_config():
     """Manage Azure configuration for document sharing"""
@@ -956,50 +657,49 @@ def azure_config():
                 'timestamp': subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
             }
             
-            response = jsonify({
+            return jsonify({
                 'success': True,
                 'message': 'Azure configuration stored successfully'
             })
-            # Add CORS headers to POST response
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-            return response
         except Exception as e:
-            error_response = jsonify({'error': str(e)})
-            error_response.headers['Access-Control-Allow-Origin'] = '*'
-            return error_response, 500
+            return jsonify({'error': str(e)}), 500
     
     elif request.method == 'GET':
         # Retrieve Azure configuration (called by users)
         try:
             azure_config = global_config.get('azure', {})
             if azure_config:
-                response = jsonify({
+                return jsonify({
                     'success': True,
                     'config': azure_config
                 })
-                # Add CORS headers to GET response
-                response.headers['Access-Control-Allow-Origin'] = '*'
-                response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-                response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-                return response
             else:
-                error_response = jsonify({
+                return jsonify({
                     'success': False,
                     'message': 'No Azure configuration found'
-                })
-                error_response.headers['Access-Control-Allow-Origin'] = '*'
-                return error_response, 404
+                }), 404
         except Exception as e:
-            error_response = jsonify({'error': str(e)})
-            error_response.headers['Access-Control-Allow-Origin'] = '*'
-            return error_response, 500
+            return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     print("=" * 50)
     print("🚀 Starting RxNorm Document Processing API")
     print("=" * 50)
+    
+    # Debug database connection
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url:
+        print(f"🔗 DATABASE_URL found: {database_url[:50]}...")
+        print("📊 Using PostgreSQL database")
+    else:
+        print("⚠️ No DATABASE_URL found, using SQLite")
+    
+    # Initialize database
+    try:
+        init_database()
+        print("✅ Database initialized successfully")
+    except Exception as e:
+        print(f"❌ Database initialization failed: {e}")
     
     # Get port from environment variable (Render requirement)
     port = int(os.environ.get('PORT', 8000))
