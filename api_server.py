@@ -306,18 +306,30 @@ def init_database():
                 )
             ''')
             
-            # Add columns if they don't exist (for existing databases)
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(10)')
-                print("✅ Added assigned_folder column")
-            except Exception:
-                pass  # Column already exists
-                
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
-                print("✅ Added assignment_order column")
-            except Exception:
-                pass  # Column already exists
+            # Check and add columns if they don't exist (for existing databases)
+            # Check if assigned_folder column exists
+            cursor.execute("""
+                SELECT column_name FROM information_schema.columns 
+                WHERE table_name='users' AND column_name='assigned_folder'
+            """)
+            if not cursor.fetchone():
+                try:
+                    cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(10)')
+                    print("✅ Added assigned_folder column")
+                except Exception as e:
+                    print(f"⚠️ Error adding assigned_folder column: {e}")
+            
+            # Check if assignment_order column exists
+            cursor.execute("""
+                SELECT column_name FROM information_schema.columns 
+                WHERE table_name='users' AND column_name='assignment_order'
+            """)
+            if not cursor.fetchone():
+                try:
+                    cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
+                    print("✅ Added assignment_order column")
+                except Exception as e:
+                    print(f"⚠️ Error adding assignment_order column: {e}")
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
