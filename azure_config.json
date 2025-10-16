@@ -1,0 +1,15 @@
+{
+    "storageAccount": "your-storage-account-name",
+    "containerName": "documents",
+    "sasToken": "?your-sas-token-here",
+    "notes": {
+        "description": "Azure Blob Storage configuration for downloading general folder",
+        "instructions": [
+            "1. Replace 'your-storage-account-name' with your actual storage account name",
+            "2. Replace 'your-sas-token-here' with your actual SAS token",
+            "3. Keep the '?' at the beginning of the SAS token if it's there",
+            "4. Make sure the SAS token has read and list permissions",
+            "5. Save this file and run: python download_general_folder.py"
+        ]
+    }
+}

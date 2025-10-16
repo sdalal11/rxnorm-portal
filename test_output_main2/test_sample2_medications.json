@@ -1,0 +1,44 @@
+{
+  "file": "test_sample2.html",
+  "medications": [
+    {
+      "rx_cui": "703",
+      "normalized_name": "amiodarone",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "amiodarone",
+      "confidence": 0.98,
+      "active_status": "active",
+      "start_offset": 103,
+      "end_offset": 113
+    },
+    {
+      "rx_cui": "1202",
+      "normalized_name": "atenolol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "atenolol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 178,
+      "end_offset": 186
+    },
+    {
+      "rx_cui": "20352",
+      "normalized_name": "carvedilol",
+      "cui_type": "IN",
+      "mapping_method": "generic_name",
+      "mapping_confidence": 1.0,
+      "flag": null,
+      "text": "carvedilol",
+      "confidence": 0.98,
+      "active_status": "non-active",
+      "start_offset": 256,
+      "end_offset": 266
+    }
+  ]
+}
