@@ -1738,6 +1738,9 @@
                             
                             // Handle new structure: general/1/filename.html, general/2/filename.html, etc.
                             let category, folderName, isFromFolder;
+                            console.log(`🔍 Checking condition: pathParts.length (${pathParts.length}) === 3 && pathParts[0] ('${pathParts[0]}') === 'general'`);
+                            console.log(`🔍 Condition result: ${pathParts.length === 3 && pathParts[0] === 'general'}`);
+                            
                             if (pathParts.length === 3 && pathParts[0] === 'general') {
                                 // New structure: general/1/filename.html
                                 category = pathParts[1]; // Use folder number (1, 2, 3) as category for filtering
@@ -1750,6 +1753,7 @@
                                 folderName = pathParts.length > 2 ? pathParts[1] : null;
                                 isFromFolder = pathParts.length > 2;
                                 console.log(`⚠️ Using legacy structure: category=${category}, folderName=${folderName}`);
+                                console.log(`⚠️ Reason: pathParts.length=${pathParts.length}, pathParts[0]='${pathParts[0]}'`);
                             }
                             
                             // Create proper originalPath for folder structure
@@ -1998,10 +2002,15 @@
             
             // Check if user has an assigned folder - if so, only show that folder's content
             const userAssignedFolder = currentUser?.assigned_folder;
+            console.log(`🔍 getFoldersAndFiles: userAssignedFolder = ${userAssignedFolder}, currentPath = '${currentPath}'`);
+            console.log(`🔍 Total filteredDocuments: ${filteredDocuments.length}`);
             
-            filteredDocuments.forEach(doc => {
+            filteredDocuments.forEach((doc, index) => {
+                console.log(`🔍 Processing doc ${index}: ${doc.name}, category: ${doc.category}, originalPath: ${doc.originalPath}`);
+                
                 // Skip documents that don't belong to user's assigned folder if they have one
                 if (userAssignedFolder && doc.category !== userAssignedFolder) {
+                    console.log(`⏭️ Skipping doc ${doc.name} - category ${doc.category} doesn't match user folder ${userAssignedFolder}`);
                     return;
                 }
                 
@@ -2009,6 +2018,7 @@
                     // Individual files (not from folder uploads) - show in root
                     if (currentPath === '') {
                         files.push(doc);
+                        console.log(`📄 Added individual file: ${doc.name}`);
                     }
                     return;
                 }
@@ -2036,12 +2046,16 @@
                         if (pathParts.length === currentPathParts.length + 1) {
                             // File is directly in current folder
                             files.push(doc);
+                            console.log(`📄 Added file to current folder: ${doc.name}`);
                         } else {
                             // File is in a subfolder - but only show if user is assigned to this folder
                             const subfolderName = pathParts[currentPathParts.length];
                             
+                            console.log(`📁 Found subfolder: ${subfolderName}, userAssignedFolder: ${userAssignedFolder}`);
+                            
                             // If user has assigned folder, only show that specific folder
                             if (userAssignedFolder && subfolderName !== userAssignedFolder) {
+                                console.log(`⏭️ Skipping subfolder ${subfolderName} - doesn't match user assigned folder ${userAssignedFolder}`);
                                 return;
                             }
                             
@@ -2054,12 +2068,16 @@
                                     fileCount: 0,
                                     category: doc.category
                                 });
+                                console.log(`📁 Created folder: ${subfolderName}`);
                             }
                             folders.get(subfolderName).fileCount++;
                         }
                     }
                 }
             });
+            
+            console.log(`🔍 Final result - folders: ${folders.size}, files: ${files.length}`);
+            console.log(`🔍 Folder names:`, Array.from(folders.keys()));
             
             return {
                 folders: Array.from(folders.values()),
