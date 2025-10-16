@@ -2,7 +2,7 @@ import psycopg2
 import os
 
 # Test connection to Supabase
-connection_string = "postgresql://postgres:Sanjana123!@aws-1-us-east-1.pooler.supabase.com:6543/rxnorm-users?sslmode=require"
+connection_string = "postgresql://postgres:Sanjana123!@db.ynbsbpmyzubwkmfgdzes.supabase.co:5432/postgres"
 
 print("Testing PostgreSQL connection...")
 print(f"Connection string: {connection_string}")

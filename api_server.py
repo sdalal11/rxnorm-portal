@@ -6,18 +6,9 @@ import subprocess
 import json
 import sqlite3
 from datetime import datetime
-import sqlite3
-from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
-
-@app.after_request
-def after_request(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
 
 @app.after_request
 def after_request(response):
@@ -32,14 +23,8 @@ def home():
     return jsonify({
         'message': 'RxNorm Document Processing API',
         'version': '1.2',  # Updated for database authentication
-        'version': '1.2',  # Updated for database authentication
         'endpoints': {
             'health': '/health',
-            'process': '/process-document',
-            'azure_config': '/config/azure',
-            'user_register': '/users/register',
-            'user_login': '/users/login',
-            'user_list': '/users/list'
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',
