@@ -300,9 +300,24 @@ def init_database():
                     password VARCHAR(255) NOT NULL,
                     name VARCHAR(255) NOT NULL,
                     registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP
+                    last_login TIMESTAMP,
+                    assigned_folder VARCHAR(10),
+                    assignment_order INTEGER
                 )
             ''')
+            
+            # Add columns if they don't exist (for existing databases)
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(10)')
+                print("✅ Added assigned_folder column")
+            except Exception:
+                pass  # Column already exists
+                
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
+                print("✅ Added assignment_order column")
+            except Exception:
+                pass  # Column already exists
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
@@ -318,9 +333,24 @@ def init_database():
                     password TEXT NOT NULL,
                     name TEXT NOT NULL,
                     registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    last_login DATETIME
+                    last_login DATETIME,
+                    assigned_folder TEXT,
+                    assignment_order INTEGER
                 )
             ''')
+            
+            # Add columns if they don't exist (for existing databases)
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder TEXT')
+                print("✅ Added assigned_folder column")
+            except Exception:
+                pass  # Column already exists
+                
+            try:
+                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
+                print("✅ Added assignment_order column")
+            except Exception:
+                pass  # Column already exists
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
         
@@ -408,7 +438,9 @@ def get_user(username):
                 'password': result[3],
                 'name': result[4],
                 'registered_at': result[5],
-                'last_login': result[6]
+                'last_login': result[6],
+                'assigned_folder': result[7] if len(result) > 7 else None,
+                'assignment_order': result[8] if len(result) > 8 else None
             }
         return None
     except Exception as e:
@@ -416,12 +448,24 @@ def get_user(username):
         return None
 
 def create_user(username, email, password, name):
-    """Create new user in database"""
+    """Create new user in database with automatic folder assignment"""
     try:
+        # First, get the count of existing users to determine assignment order
+        result = execute_query('SELECT COUNT(*) FROM users', fetch_one=True)
+        user_count = result[0] if result else 0
+        
+        # Calculate folder assignment (folders 1-90, then cycle back)
+        assignment_order = user_count + 1
+        folder_number = ((user_count) % 90) + 1  # Folders 1-90, then cycle back to 1
+        assigned_folder = str(folder_number)
+        
+        # Insert user with automatic folder assignment
         execute_query('''
-            INSERT INTO users (username, email, password, name)
-            VALUES (?, ?, ?, ?)
-        ''', (username, email, password, name))
+            INSERT INTO users (username, email, password, name, assigned_folder, assignment_order)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (username, email, password, name, assigned_folder, assignment_order))
+        
+        print(f"📁 New user {username} assigned to folder {assigned_folder} (order: {assignment_order})")
         return True
     except Exception as e:
         if "UNIQUE constraint" in str(e) or "duplicate key" in str(e):
