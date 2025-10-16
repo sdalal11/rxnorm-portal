@@ -493,37 +493,26 @@ def register_user():
         if not all([username, email, password, name]):
             return jsonify({'error': 'All fields are required'}), 400
         
-        # Check if user already exists
-        if username in global_users:
+        # Check if user already exists in database
+        existing_user = get_user(username)
+        if existing_user:
             return jsonify({'error': 'Username already exists'}), 409
         
-        # Check if email already exists
-        for user_id, user_info in global_users.items():
-            if user_info.get('email') == email:
-                return jsonify({'error': 'Email already registered'}), 409
-        
-        # Store user (in production, hash the password!)
-        global_users[username] = {
-            'username': username,
-            'email': email,
-            'password': password,  # In production: hash this!
-            'name': name,
-            'registered_at': subprocess.run(['date'], capture_output=True, text=True).stdout.strip(),
-            'last_login': None
-        }
-        
-        print(f"📝 User registered: {username} ({email})")
-        print(f"📊 Total users: {len(global_users)}")
-        
-        return jsonify({
-            'success': True,
-            'message': 'User registered successfully',
-            'user': {
-                'username': username,
-                'email': email,
-                'name': name
-            }
-        })
+        # Create user in database
+        if create_user(username, email, password, name):
+            print(f"📝 User registered: {username} ({email})")
+            
+            return jsonify({
+                'success': True,
+                'message': 'User registered successfully',
+                'user': {
+                    'username': username,
+                    'email': email,
+                    'name': name
+                }
+            })
+        else:
+            return jsonify({'error': 'Failed to create user - username or email may already exist'}), 409
         
     except Exception as e:
         print(f"❌ Registration error: {e}")
@@ -547,13 +536,13 @@ def login_user():
         if not username or not password:
             return jsonify({'error': 'Username and password are required'}), 400
         
-        # Check if user exists and password matches
-        user = global_users.get(username)
+        # Check if user exists in database and password matches
+        user = get_user(username)
         if not user or user.get('password') != password:
             return jsonify({'error': 'Invalid username or password'}), 401
         
-        # Update last login
-        global_users[username]['last_login'] = subprocess.run(['date'], capture_output=True, text=True).stdout.strip()
+        # Update last login in database
+        update_last_login(username)
         
         print(f"✅ User logged in: {username}")
         
@@ -696,6 +685,21 @@ if __name__ == '__main__':
     print("=" * 50)
     print("🚀 Starting RxNorm Document Processing API")
     print("=" * 50)
+    
+    # Debug database connection
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url:
+        print(f"🔗 DATABASE_URL found: {database_url[:50]}...")
+        print("📊 Using PostgreSQL database")
+    else:
+        print("⚠️ No DATABASE_URL found, using SQLite")
+    
+    # Initialize database
+    try:
+        init_database()
+        print("✅ Database initialized successfully")
+    except Exception as e:
+        print(f"❌ Database initialization failed: {e}")
     
     # Get port from environment variable (Render requirement)
     port = int(os.environ.get('PORT', 8000))
