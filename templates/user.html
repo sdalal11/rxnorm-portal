@@ -1910,16 +1910,9 @@
         function getMappedCategories(userAssignedFolder) {
             if (!userAssignedFolder) return null;
             
-            // Create mapping from assigned folder numbers (1, 2, 3, 4) to actual Azure folder categories
-            // Based on the Azure structure, we need to map assigned folders to actual Azure categories
-            const folderMapping = {
-                '1': ['87', '1'],   // User assigned folder 1 maps to Azure category 87 or 1
-                '2': ['88', '2'],   // User assigned folder 2 maps to Azure category 88 or 2  
-                '3': ['89', '3'],   // User assigned folder 3 maps to Azure category 89 or 3
-                '4': ['90', '4']    // User assigned folder 4 maps to Azure category 90 or 4
-            };
-            
-            return folderMapping[userAssignedFolder] || [userAssignedFolder];
+            // Simple 1:1 mapping - user assigned to folder "1" should only see category "1" documents
+            // No need for complex mapping unless there's a specific business requirement
+            return [userAssignedFolder];
         }
         
         // Helper function to check if a document matches the user's assigned folder
