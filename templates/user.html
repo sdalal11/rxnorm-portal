@@ -1795,8 +1795,17 @@
                         originalPath: doc.originalPath
                     })));
                     
+                    // Debug: Show Azure document categories before merging
+                    const azureCategories = [...new Set(documents.map(doc => doc.category))];
+                    console.log('🔍 AZURE CATEGORIES BEFORE MERGE:', azureCategories.sort());
+                    
                     // Merge Azure documents with localStorage documents
                     const allAvailableDocuments = [...localDocuments];
+                    
+                    // Debug: Show localStorage document categories
+                    const localCategories = [...new Set(localDocuments.map(doc => doc.category))];
+                    console.log('🔍 LOCALSTORAGE CATEGORIES:', localCategories.sort());
+                    console.log('🔍 LOCALSTORAGE DOCUMENTS COUNT:', localDocuments.length);
                     
                     // Add Azure documents that aren't already in localStorage
                     for (const azureDoc of documents) {
@@ -1806,6 +1815,8 @@
                         );
                         if (!existsInLocal) {
                             allAvailableDocuments.push(azureDoc);
+                        } else {
+                            console.log(`🔍 Skipping duplicate Azure doc: ${azureDoc.name} (category: ${azureDoc.category})`);
                         }
                     }
                     
