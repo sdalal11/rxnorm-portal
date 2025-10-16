@@ -280,7 +280,15 @@ def init_database():
         if DATABASE_URL:
             # Using external PostgreSQL database (persistent)
             import psycopg2
-            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+            # Add connection parameters for better reliability on Render
+            conn = psycopg2.connect(
+                DATABASE_URL, 
+                sslmode='require',
+                connect_timeout=30,
+                keepalives_idle=600,
+                keepalives_interval=30,
+                keepalives_count=3
+            )
             cursor = conn.cursor()
             
             # Create users table if it doesn't exist
@@ -344,7 +352,14 @@ def get_db_connection():
     """Get database connection (PostgreSQL or SQLite)"""
     if DATABASE_URL:
         import psycopg2
-        return psycopg2.connect(DATABASE_URL, sslmode='require')
+        return psycopg2.connect(
+            DATABASE_URL, 
+            sslmode='require',
+            connect_timeout=30,
+            keepalives_idle=600,
+            keepalives_interval=30,
+            keepalives_count=3
+        )
     else:
         return sqlite3.connect(DATABASE_FILE)
 
