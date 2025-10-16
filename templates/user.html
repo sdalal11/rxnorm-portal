@@ -1811,6 +1811,11 @@
                     
                     console.log(`Total merged documents: ${allAvailableDocuments.length} (${localDocuments.length} from localStorage + ${documents.length - (allAvailableDocuments.length - localDocuments.length)} new from Azure)`);
                     
+                    // Debug: Show all available categories
+                    const allCategories = [...new Set(allAvailableDocuments.map(doc => doc.category))];
+                    console.log('🔍 ALL AVAILABLE CATEGORIES:', allCategories.sort());
+                    console.log('🔍 User assigned to folder:', userAssignedFolder);
+                    
                     // Filter documents by user's assigned folder if they have one
                     if (userAssignedFolder) {
                         console.log(`🔍 Before filtering: ${allAvailableDocuments.length} total documents`);
