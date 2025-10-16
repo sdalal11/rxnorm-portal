@@ -620,7 +620,7 @@
             color: white;
         }
 
-        .btn-inactive {
+        .btn-past {
             background: #dc3545;
             color: white;
         }
@@ -693,7 +693,7 @@
             cursor: pointer;
         }
 
-        .highlight-inactive {
+        .highlight-past {
             background-color: #f8d7da;
             border: 2px solid #dc3545;
             border-radius: 3px;
@@ -719,8 +719,8 @@
             z-index: 10;
         }
 
-        .highlight-inactive::after {
-            content: "INACTIVE";
+        .highlight-past::after {
+            content: "past";
             position: absolute;
             top: -20px;
             left: 0;
@@ -737,7 +737,7 @@
         }
 
         .highlight-active:hover::after,
-        .highlight-inactive:hover::after {
+        .highlight-past:hover::after {
             opacity: 1;
         }
 
@@ -846,7 +846,7 @@
             color: #28a745;
         }
 
-        .status-inactive {
+        .status-past {
             background: #f8d7da;
             color: #dc3545;
         }
@@ -1084,8 +1084,8 @@
                     <button class="annotation-btn btn-active" onclick="markAsActive()" id="activeBtn">
                         Mark as Active
                     </button>
-                    <button class="annotation-btn btn-inactive" onclick="markAsInactive()" id="inactiveBtn">
-                        Mark as Inactive
+                    <button class="annotation-btn btn-past" onclick="markAsPast()" id="pastBtn">
+                        Mark as Past
                     </button>
                     <button class="annotation-btn btn-clear" onclick="clearSelection()">
                         Clear Selection
@@ -1107,7 +1107,7 @@
                 </div>
                 <div class="selection-popup" id="selectionPopup">
                     <button class="btn-active" onclick="annotateSelection('active')">Active</button>
-                    <button class="btn-inactive" onclick="annotateSelection('inactive')">Inactive</button>
+                    <button class="btn-past" onclick="annotateSelection('past')">Past</button>
                     <button class="btn-clear" onclick="hideSelectionPopup()">Cancel</button>
                 </div>
             </div>
@@ -2801,7 +2801,7 @@
             
             // Update button states
             document.getElementById('activeBtn').style.opacity = mode === 'active' ? '1' : '0.6';
-            document.getElementById('inactiveBtn').style.opacity = mode === 'inactive' ? '1' : '0.6';
+            document.getElementById('pastBtn').style.opacity = mode === 'past' ? '1' : '0.6';
         }
 
         // Text selection and annotation
@@ -2912,7 +2912,7 @@
                 return;
             }
             
-            const className = status === 'active' ? 'highlight-active' : 'highlight-inactive';
+            const className = status === 'active' ? 'highlight-active' : 'highlight-past';
             
             // If we have a specific range (new annotation), use it
             if (isNew && range) {
@@ -2949,7 +2949,7 @@
                 const parent = textNode.parentNode;
                 
                 // Skip already highlighted text
-                if (parent.classList.contains('highlight-active') || parent.classList.contains('highlight-inactive')) {
+                if (parent.classList.contains('highlight-active') || parent.classList.contains('highlight-past')) {
                     continue;
                 }
                 
@@ -3006,7 +3006,7 @@
             }
         }
 
-        // Replace the markAsActive and markAsInactive functions with these improved versions:
+        // Replace the markAsActive and markAsPast functions with these improved versions:
         function markAsActive() {
             console.log('Mark as Active clicked');
             const selection = window.getSelection();
@@ -3020,14 +3020,14 @@
             }
         }
 
-        function markAsInactive() {
-            console.log('Mark as Inactive clicked');
+        function markAsPast() {
+            console.log('Mark as Past clicked');
             const selection = window.getSelection();
             const selectedText = selection.toString().trim();
             
             if (selectedText.length > 0 && selection.rangeCount > 0) {
                 selectedRange = selection.getRangeAt(0).cloneRange(); // Clone the range
-                annotateSelection('inactive');
+                annotateSelection('past');
             } else {
                 alert('Please select some text first');
             }
@@ -3083,7 +3083,7 @@
             
             let html = '';
             documentAnnotations.forEach((annotation, index) => {
-                const statusClass = annotation.status === 'active' ? 'status-active' : 'status-inactive';
+                const statusClass = annotation.status === 'active' ? 'status-active' : 'status-past';
                 const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
                 const sourceText = annotation.isPreAnnotation ? 'Preannotation' : 'User Added';
                 const confidenceText = annotation.confidence ? ` (${Math.round(annotation.confidence * 100)}%)` : '';
@@ -3128,17 +3128,17 @@
                                             color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
                                     ${annotation.status === 'active' ? '✓ Active' : 'Set Active'}
                                 </button>
-                                <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'inactive')" 
-                                        style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'inactive' ? '#dc3545' : '#6c757d'}; 
+                                <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'past')" 
+                                        style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'past' ? '#dc3545' : '#6c757d'}; 
                                             color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
-                                    ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
+                                    ${annotation.status === 'past' ? '✓ Past' : 'Set Past'}
                                 </button>
                             </div>` : 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
-                                <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'inactive' : 'active'}')" 
+                                <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'past' : 'active'}')" 
                                         style="padding: 0.25rem 0.5rem; background: #6c757d; color: white; border: none; 
                                             border-radius: 3px; font-size: 0.7rem; flex: 1;">
-                                    Change to ${annotation.status === 'active' ? 'Inactive' : 'Active'}
+                                    Change to ${annotation.status === 'active' ? 'Past' : 'Active'}
                                 </button>
                                 <button onclick="event.stopPropagation(); removeAnnotationById('${annotation.id}')" 
                                         style="padding: 0.25rem 0.5rem; background: #dc3545; color: white; border: none; 
@@ -3257,7 +3257,7 @@
                 console.log(`✅ Marked "${annotation.text.substring(0, 30)}..." as correct AI detection`);
                 
                 // Re-highlight the text with active status
-                rehighlightAnnotation(annotation, annotation.status === 'active' ? 'inactive' : 'active');
+                rehighlightAnnotation(annotation, annotation.status === 'active' ? 'past' : 'active');
                 
                 // Update the display
                 updateAnnotationsList();
@@ -3362,7 +3362,7 @@
                 statistics: {
                     totalAnnotations: documentAnnotations.length,
                     activeCount: documentAnnotations.filter(ann => ann.status === 'active').length,
-                    inactiveCount: documentAnnotations.filter(ann => ann.status === 'inactive').length,
+                    pastCount: documentAnnotations.filter(ann => ann.status === 'past').length,
                     aiGeneratedCount: documentAnnotations.filter(ann => ann.isPreAnnotation).length,
                     userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length
                 }
@@ -3393,8 +3393,8 @@
 
         function rehighlightAnnotation(annotation, oldStatus) {
             // Find and remove the old highlight
-            const oldClassName = oldStatus === 'active' ? 'highlight-active' : 'highlight-inactive';
-            const newClassName = annotation.status === 'active' ? 'highlight-active' : 'highlight-inactive';
+            const oldClassName = oldStatus === 'active' ? 'highlight-active' : 'highlight-past';
+            const newClassName = annotation.status === 'active' ? 'highlight-active' : 'highlight-past';
             
             const highlights = document.querySelectorAll(`.${oldClassName}`);
             for (let highlight of highlights) {
@@ -3444,7 +3444,7 @@
         }
 
         function removeHighlightFromDocument(text, status) {
-            const className = status === 'active' ? 'highlight-active' : 'highlight-inactive';
+            const className = status === 'active' ? 'highlight-active' : 'highlight-past';
             const highlights = document.querySelectorAll(`.${className}`);
             
             // Convert NodeList to Array to avoid issues with live collection
@@ -3476,7 +3476,7 @@
             console.log('🔍 Scrolling to annotation:', text);
             
             // Find all highlights in the document
-            const highlights = document.querySelectorAll('.highlight-active, .highlight-inactive');
+            const highlights = document.querySelectorAll('.highlight-active, .highlight-past');
             let foundHighlight = null;
             
             // Look for exact or partial text match
@@ -3614,7 +3614,7 @@
                     statistics: {
                         totalAnnotations: documentAnnotations.length,
                         activeCount: documentAnnotations.filter(ann => ann.status === 'active').length,
-                        inactiveCount: documentAnnotations.filter(ann => ann.status === 'inactive').length,
+                        pastCount: documentAnnotations.filter(ann => ann.status === 'past').length,
                         aiGeneratedCount: documentAnnotations.filter(ann => ann.isPreAnnotation).length,
                         userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length
                     }
@@ -3720,7 +3720,7 @@
                             lastModified: new Date().toISOString(),
                             annotationCount: documentAnnotations.length,
                             activeCount: documentAnnotations.filter(ann => ann.status === 'active').length,
-                            inactiveCount: documentAnnotations.filter(ann => ann.status === 'inactive').length
+                            pastCount: documentAnnotations.filter(ann => ann.status === 'past').length
                         }
                     ]
                 };
