@@ -992,7 +992,7 @@
                 <p>Browse and access medical documents</p>
                 
                 <!-- Folder Assignment Info -->
-                <div class="folder-assignment-info" id="folderAssignmentInfo" style="display: none;">
+                <div class="folder-assignment-info" id="folderAssignmentInfo" style="display: none; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; padding: 10px; border: 2px solid transparent;" onclick="goToAssignedFolder()" title="Click to navigate to your assigned folder" onmouseover="this.style.borderColor='#6f42c1'; this.style.backgroundColor='rgba(111, 66, 193, 0.05)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
                     <div class="assignment-badge">
                         <span class="folder-icon">📁</span>
                         <span class="assignment-text">
@@ -1002,6 +1002,7 @@
                     </div>
                     <div class="assignment-details">
                         <small>Login time: <span id="loginTime">-</span> | Documents from folder <span id="folderRange">-</span></small>
+                        <small class="click-hint" style="color: #6f42c1; margin-left: 10px;">👆 Click to navigate</small>
                     </div>
                 </div>
             </div>
@@ -1570,6 +1571,25 @@
             const notification = document.getElementById('configNotification');
             if (notification) {
                 notification.style.display = 'none';
+            }
+        }
+        
+        // Function to navigate to user's assigned folder
+        function goToAssignedFolder() {
+            if (currentUser && currentUser.assignedFolder) {
+                console.log(`🎯 Navigating to assigned folder: ${currentUser.assignedFolder}`);
+                
+                // Switch to folder view if not already there
+                if (currentView !== 'folder') {
+                    currentView = 'folder';
+                    document.getElementById('viewToggleBtn').textContent = '📄 List View';
+                    document.getElementById('breadcrumb').style.display = 'block';
+                }
+                
+                // Navigate directly to the assigned folder
+                navigateToFolder(currentUser.assignedFolder);
+            } else {
+                console.warn('⚠️ No assigned folder found for user');
             }
         }
         
