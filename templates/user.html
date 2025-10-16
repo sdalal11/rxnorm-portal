@@ -1799,24 +1799,47 @@
                     const azureCategories = [...new Set(documents.map(doc => doc.category))];
                     console.log('🔍 AZURE CATEGORIES BEFORE MERGE:', azureCategories.sort());
                     
-                    // Merge Azure documents with localStorage documents
-                    const allAvailableDocuments = [...localDocuments];
-                    
                     // Debug: Show localStorage document categories
                     const localCategories = [...new Set(localDocuments.map(doc => doc.category))];
                     console.log('🔍 LOCALSTORAGE CATEGORIES:', localCategories.sort());
                     console.log('🔍 LOCALSTORAGE DOCUMENTS COUNT:', localDocuments.length);
                     
-                    // Add Azure documents that aren't already in localStorage
-                    for (const azureDoc of documents) {
-                        const existsInLocal = localDocuments.some(localDoc => 
-                            localDoc.blobName === azureDoc.blobName || 
-                            localDoc.name === azureDoc.name
-                        );
-                        if (!existsInLocal) {
-                            allAvailableDocuments.push(azureDoc);
-                        } else {
-                            console.log(`🔍 Skipping duplicate Azure doc: ${azureDoc.name} (category: ${azureDoc.category})`);
+                    // If we have Azure documents with proper categories, prioritize them over localStorage
+                    // Clear localStorage documents that might have incorrect categories
+                    let allAvailableDocuments;
+                    if (documents.length > 0 && azureCategories.some(cat => cat !== 'general')) {
+                        console.log('🔄 Prioritizing Azure documents with correct categories over localStorage');
+                        allAvailableDocuments = [...documents]; // Start with Azure documents
+                        
+                        // Only add localStorage documents that don't conflict with Azure ones
+                        for (const localDoc of localDocuments) {
+                            const existsInAzure = documents.some(azureDoc => 
+                                azureDoc.blobName === localDoc.blobName || 
+                                azureDoc.name === localDoc.name
+                            );
+                            if (!existsInAzure) {
+                                allAvailableDocuments.push(localDoc);
+                                console.log(`➕ Adding non-conflicting localStorage doc: ${localDoc.name}`);
+                            } else {
+                                console.log(`🔍 Skipping localStorage doc (replaced by Azure): ${localDoc.name} (category: ${localDoc.category})`);
+                            }
+                        }
+                    } else {
+                        console.log('� Using traditional merge (localStorage first, then Azure)');
+                        // Merge Azure documents with localStorage documents
+                        allAvailableDocuments = [...localDocuments];
+                        
+                        // Add Azure documents that aren't already in localStorage
+                        for (const azureDoc of documents) {
+                            const existsInLocal = localDocuments.some(localDoc => 
+                                localDoc.blobName === azureDoc.blobName || 
+                                localDoc.name === azureDoc.name
+                            );
+                            if (!existsInLocal) {
+                                allAvailableDocuments.push(azureDoc);
+                            } else {
+                                console.log(`🔍 Skipping duplicate Azure doc: ${azureDoc.name} (category: ${azureDoc.category})`);
+                            }
                         }
                     }
                     
