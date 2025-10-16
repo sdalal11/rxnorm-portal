@@ -355,6 +355,8 @@ DATABASE_FILE = os.environ.get('DATABASE_FILE', '/tmp/users.db') if not DATABASE
 
 def init_database():
     """Initialize database for user storage - supports both SQLite and PostgreSQL"""
+    print(f"🔍 DEBUG: DATABASE_URL = {repr(DATABASE_URL)}")
+    print(f"🔍 DEBUG: DATABASE_FILE = {repr(DATABASE_FILE)}")
     try:
         if DATABASE_URL:
             # Using external PostgreSQL database (persistent)
@@ -362,6 +364,13 @@ def init_database():
             
             print(f"🔗 Attempting to connect to external database...")
             print(f"📍 Database URL: {DATABASE_URL[:50]}...")  # Show partial URL for debugging
+            
+            # Parse URL for better diagnostics
+            from urllib.parse import urlparse
+            parsed = urlparse(DATABASE_URL)
+            print(f"🔍 Host: {parsed.hostname}")
+            print(f"🔍 Port: {parsed.port}")
+            print(f"🔍 Database: {parsed.path}")
             
             # Try different connection methods for better compatibility
             try:
