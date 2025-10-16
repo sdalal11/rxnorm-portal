@@ -608,7 +608,9 @@ def login_user():
             'user': {
                 'username': user['username'],
                 'email': user['email'],
-                'name': user['name']
+                'name': user['name'],
+                'assigned_folder': user.get('assigned_folder'),
+                'assignment_order': user.get('assignment_order')
             }
         })
         
