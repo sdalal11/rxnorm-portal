@@ -1613,7 +1613,7 @@
         async function loadDocuments() {
             try {
                 // Check if user has an assigned folder
-                const userAssignedFolder = currentUser?.assigned_folder;
+                const userAssignedFolder = currentUser?.assignedFolder;
                 console.log('🎯 Debug - Current user:', currentUser);
                 console.log('🎯 Debug - User assigned folder:', userAssignedFolder);
                 
@@ -1912,7 +1912,7 @@
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
                 
                 // Filter localStorage documents by user's assigned folder if they have one
-                const userAssignedFolder = currentUser?.assigned_folder;
+                const userAssignedFolder = currentUser?.assignedFolder;
                 if (userAssignedFolder) {
                     allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
                     console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (error fallback)`);
@@ -1937,13 +1937,20 @@
         
         // Helper function to check if a document matches the user's assigned folder
         function documentMatchesUserFolder(doc, userAssignedFolder) {
-            if (!userAssignedFolder) return true; // No restriction if no assigned folder
+            if (!userAssignedFolder) {
+                console.log(`⚠️ No assigned folder for user - showing all documents`);
+                return true; // No restriction if no assigned folder
+            }
             
             const mappedCategories = getMappedCategories(userAssignedFolder);
             
-            return mappedCategories.includes(doc.category) ||
-                   mappedCategories.some(cat => doc.blobName?.includes(`/${cat}/`)) ||
-                   mappedCategories.includes(doc.folderPath);
+            const matches = mappedCategories.includes(doc.category) ||
+                           mappedCategories.some(cat => doc.blobName?.includes(`/${cat}/`)) ||
+                           mappedCategories.includes(doc.folderPath);
+            
+            console.log(`🔍 Filtering: ${doc.name} | UserFolder: ${userAssignedFolder} | DocCategory: ${doc.category} | Matches: ${matches}`);
+            
+            return matches;
         }
         
         function formatFileSize(bytes) {
@@ -2070,7 +2077,7 @@
             const files = [];
             
             // Check if user has an assigned folder - if so, only show that folder's content
-            const userAssignedFolder = currentUser?.assigned_folder;
+            const userAssignedFolder = currentUser?.assignedFolder;
             console.log(`🔍 getFoldersAndFiles: userAssignedFolder = ${userAssignedFolder}, currentPath = '${currentPath}'`);
             console.log(`🔍 Total filteredDocuments: ${filteredDocuments.length}`);
             
@@ -2170,7 +2177,7 @@
             const documentsGrid = document.getElementById('documentsGrid');
             
             // Apply folder filtering for assigned users - same logic as getFoldersAndFiles
-            const userAssignedFolder = currentUser?.assigned_folder;
+            const userAssignedFolder = currentUser?.assignedFolder;
             let documentsToShow = filteredDocuments;
             
             console.log(`🎯 Grid view DEBUG - currentUser:`, currentUser);
