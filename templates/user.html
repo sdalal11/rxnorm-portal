@@ -1738,10 +1738,14 @@
                             
                             // Handle new structure: general/1/filename.html, general/2/filename.html, etc.
                             let category, folderName, isFromFolder;
-                            console.log(`🔍 Checking condition: pathParts.length (${pathParts.length}) === 3 && pathParts[0] ('${pathParts[0]}') === 'general'`);
-                            console.log(`🔍 Condition result: ${pathParts.length === 3 && pathParts[0] === 'general'}`);
                             
-                            if (pathParts.length === 3 && pathParts[0] === 'general') {
+                            // More explicit condition checking
+                            const isLength3 = pathParts.length === 3;
+                            const isFirstPartGeneral = pathParts[0] === 'general';
+                            console.log(`🔍 isLength3: ${isLength3}, isFirstPartGeneral: ${isFirstPartGeneral}`);
+                            console.log(`🔍 Combined condition: ${isLength3 && isFirstPartGeneral}`);
+                            
+                            if (isLength3 && isFirstPartGeneral) {
                                 // New structure: general/1/filename.html
                                 category = pathParts[1]; // Use folder number (1, 2, 3) as category for filtering
                                 folderName = pathParts[1]; // Keep folder name for compatibility
