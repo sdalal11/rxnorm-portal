@@ -2140,21 +2140,38 @@
             const userAssignedFolder = currentUser?.assigned_folder;
             let documentsToShow = filteredDocuments;
             
+            console.log(`🎯 Grid view DEBUG - currentUser:`, currentUser);
+            console.log(`🎯 Grid view DEBUG - userAssignedFolder: '${userAssignedFolder}'`);
+            console.log(`🎯 Grid view DEBUG - filteredDocuments.length: ${filteredDocuments.length}`);
+            
             if (userAssignedFolder) {
                 console.log(`🎯 Grid view: Filtering documents for user assigned to folder '${userAssignedFolder}'`);
                 console.log(`🎯 Before filtering: ${filteredDocuments.length} documents`);
+                
+                // Debug: Show sample document categories
+                const sampleDocs = filteredDocuments.slice(0, 5);
+                console.log(`🎯 Sample documents before filtering:`, sampleDocs.map(doc => ({
+                    name: doc.name,
+                    category: doc.category,
+                    blobName: doc.blobName,
+                    folderPath: doc.folderPath
+                })));
                 
                 documentsToShow = filteredDocuments.filter(doc => {
                     const matches = doc.category === userAssignedFolder || 
                                   doc.blobName?.includes(userAssignedFolder) ||
                                   doc.folderPath === userAssignedFolder;
                     if (matches) {
-                        console.log(`✅ Grid view: Document matches: ${doc.name} (category: ${doc.category})`);
+                        console.log(`✅ Grid view: Document matches: ${doc.name} (category: '${doc.category}', blobName: '${doc.blobName}', folderPath: '${doc.folderPath}')`);
+                    } else {
+                        console.log(`❌ Grid view: Document DOES NOT match: ${doc.name} (category: '${doc.category}', blobName: '${doc.blobName}', folderPath: '${doc.folderPath}') vs userFolder: '${userAssignedFolder}'`);
                     }
                     return matches;
                 });
                 
                 console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folder '${userAssignedFolder}'`);
+            } else {
+                console.log(`🎯 Grid view: No assigned folder - showing all ${filteredDocuments.length} documents`);
             }
             
             if (documentsToShow.length === 0) {
