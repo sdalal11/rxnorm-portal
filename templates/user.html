@@ -3118,6 +3118,11 @@
                         </div>
                         ${annotation.isPreAnnotation ? 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
+                                <button onclick="event.stopPropagation(); markAsCorrectDetection('${annotation.id}')" 
+                                        style="padding: 0.25rem 0.5rem; background: #17a2b8; 
+                                            color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
+                                    ✓ Correct Detection
+                                </button>
                                 <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'active')" 
                                         style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'active' ? '#28a745' : '#6c757d'}; 
                                             color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
@@ -3232,6 +3237,62 @@
                 alert('Error: Annotation not found. Please refresh the page and try again.');
             } else {
                 console.log('ℹ️ Annotation already has status:', newStatus);
+            }
+        }
+
+        // Function to mark AI detection as correct
+        function markAsCorrectDetection(annotationId) {
+            console.log('✅ Marking AI detection as correct for annotation ID:', annotationId);
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId);
+            
+            if (annotation && annotation.isPreAnnotation) {
+                // Mark as correct detection and set to active
+                annotation.isCorrectDetection = true;
+                annotation.status = 'active';
+                annotation.timestamp = new Date().toISOString();
+                annotation.verifiedBy = currentUser ? currentUser.email : 'user';
+                annotation.verifiedAt = new Date().toISOString();
+                
+                console.log(`✅ Marked "${annotation.text.substring(0, 30)}..." as correct AI detection`);
+                
+                // Re-highlight the text with active status
+                rehighlightAnnotation(annotation, annotation.status === 'active' ? 'inactive' : 'active');
+                
+                // Update the display
+                updateAnnotationsList();
+                updateAnnotationCount();
+                
+                // Auto-save to Azure
+                autoSaveAnnotations();
+                
+                // Show confirmation message
+                const message = document.createElement('div');
+                message.textContent = '✅ AI detection marked as correct!';
+                message.style.cssText = `
+                    position: fixed; top: 20px; right: 20px; 
+                    background: #28a745; color: white; 
+                    padding: 0.5rem 1rem; border-radius: 6px; 
+                    font-size: 0.875rem; z-index: 1100;
+                    opacity: 0; transition: opacity 0.3s;
+                `;
+                document.body.appendChild(message);
+                
+                setTimeout(() => message.style.opacity = '1', 100);
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    setTimeout(() => {
+                        if (document.body.contains(message)) {
+                            document.body.removeChild(message);
+                        }
+                    }, 300);
+                }, 2000);
+                
+            } else if (!annotation) {
+                console.error('❌ Annotation not found with ID:', annotationId);
+                alert('Error: Annotation not found. Please refresh the page and try again.');
+            } else {
+                console.log('ℹ️ Annotation is not an AI pre-annotation');
             }
         }
 
