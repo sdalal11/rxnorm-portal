@@ -31,15 +31,9 @@ def home():
     """Root endpoint"""
     return jsonify({
         'message': 'RxNorm Document Processing API',
-        'version': '1.2',  # Updated for database authentication
-        'version': '1.2',  # Updated for database authentication
+        'version': '1.2',
         'endpoints': {
             'health': '/health',
-            'process': '/process-document',
-            'azure_config': '/config/azure',
-            'user_register': '/users/register',
-            'user_login': '/users/login',
-            'user_list': '/users/list'
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',

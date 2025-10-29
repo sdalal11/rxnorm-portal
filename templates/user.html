@@ -2734,7 +2734,8 @@
                 console.log('🎨 Applying annotations to document...');
                 documentAnnotations.forEach((annotation, index) => {
                     console.log(`🎯 ${index + 1}. Highlighting: "${annotation.text}" as ${annotation.status}`);
-                    highlightText(annotation.text, annotation.status, false);
+                    const highlightId = highlightText(annotation.text, annotation.status, false);
+                    annotation.highlightId = highlightId; // Store the highlight ID with the annotation
                 });
                 console.log(`✅ Applied ${documentAnnotations.length} annotations`);
                 updateAnnotationCount();
@@ -2896,8 +2897,9 @@
             // Add to annotations array
             documentAnnotations.push(annotation);
             
-            // Highlight the text with the specific range
-            highlightText(selectedText, status, true, selectedRange.cloneRange());
+            // Highlight the text with the specific range and store the highlight ID
+            const highlightId = highlightText(selectedText, status, true, selectedRange.cloneRange());
+            annotation.highlightId = highlightId; // Store the highlight ID with the annotation
             
             // Clear selection
             window.getSelection().removeAllRanges();
@@ -2921,15 +2923,19 @@
             
             const className = status === 'active' ? 'highlight-active' : 'highlight-past';
             
+            // Generate unique ID for this highlight
+            const highlightId = `highlight-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            
             // If we have a specific range (new annotation), use it
             if (isNew && range) {
                 try {
                     const span = document.createElement('span');
                     span.className = className;
+                    span.id = highlightId;
                     span.onclick = () => removeAnnotation(text, status);
                     range.surroundContents(span);
                     console.log('Range highlighting successful');
-                    return;
+                    return highlightId;
                 } catch (error) {
                     console.log('Range highlighting failed, falling back to text search');
                 }
@@ -2972,6 +2978,7 @@
                     
                     const span = document.createElement('span');
                     span.className = className;
+                    span.id = highlightId;
                     span.textContent = matchText;
                     span.onclick = () => removeAnnotation(text, status);
                     span.style.backgroundColor = status === 'active' ? '#d4edda' : '#f8d7da';
@@ -2986,9 +2993,10 @@
                     
                     parent.replaceChild(fragment, textNode);
                     console.log(`Successfully highlighted: "${text}"`);
-                    break; // Only highlight first occurrence
+                    return highlightId; // Return the unique ID
                 }
             }
+            return null; // Return null if no highlighting occurred
         }
 
         function removeAnnotation(text, status) {
@@ -3105,7 +3113,7 @@
                 const hasNotesClass = (annotation.notes && annotation.notes.trim()) ? 'has-notes' : '';
                 
                 html += `
-                    <div class="annotation-item ${hasNotesClass}" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
+                    <div class="annotation-item ${hasNotesClass}" onclick="scrollToAnnotationById('${annotation.highlightId || ''}')" style="cursor: pointer; transition: background-color 0.2s;">
                         <div class="annotation-text" title="${annotation.text}">
                             <strong>"${displayText}"</strong>
                         </div>
@@ -3479,6 +3487,51 @@
         }
 
         // Replace the scrollToAnnotation function (around line 1950) with this enhanced version:
+        function scrollToAnnotationById(highlightId) {
+            console.log('🔍 Scrolling to annotation by ID:', highlightId);
+            
+            if (!highlightId) {
+                console.warn('No highlight ID provided, falling back to text search');
+                return;
+            }
+            
+            // Find the specific highlight by its unique ID
+            const highlight = document.getElementById(highlightId);
+            
+            if (highlight) {
+                console.log('✅ Found highlight by ID, scrolling to it');
+                
+                // Scroll to the highlight
+                highlight.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
+                
+                // Add visual emphasis with animation
+                const originalStyle = {
+                    boxShadow: highlight.style.boxShadow,
+                    transform: highlight.style.transform,
+                    transition: highlight.style.transition
+                };
+                
+                // Apply highlight animation
+                highlight.style.transition = 'all 0.5s ease';
+                highlight.style.transform = 'scale(1.05)';
+                highlight.style.boxShadow = '0 0 15px rgba(255, 193, 7, 0.8)';
+                
+                // Reset after animation
+                setTimeout(() => {
+                    highlight.style.transition = originalStyle.transition || '';
+                    highlight.style.transform = originalStyle.transform || '';
+                    highlight.style.boxShadow = originalStyle.boxShadow || '';
+                }, 1500);
+                
+            } else {
+                console.warn('❌ Highlight not found by ID:', highlightId);
+            }
+        }
+
         function scrollToAnnotation(text) {
             console.log('🔍 Scrolling to annotation:', text);
             
