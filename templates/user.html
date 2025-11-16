@@ -1937,10 +1937,17 @@
         
         // Helper function to check if a document matches the user's assigned folder
         function documentMatchesUserFolder(doc, userAssignedFolder) {
+            // TEMPORARY DEBUG: Log document details
+            console.log(`🔍 DEBUG - Document: "${doc.name}" | Category: "${doc.category}" | BlobName: "${doc.blobName}" | FolderPath: "${doc.folderPath}"`);
+            
             if (!userAssignedFolder) {
                 console.log(`⚠️ No assigned folder for user - showing all documents`);
                 return true; // No restriction if no assigned folder
             }
+            
+            // TEMPORARY: Always return true to see all documents
+            console.log(`🔍 TEMP DEBUG - Showing all documents to debug categories`);
+            return true;
             
             const mappedCategories = getMappedCategories(userAssignedFolder);
             
