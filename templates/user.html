@@ -992,16 +992,16 @@
                 <p>Browse and access medical documents</p>
                 
                 <!-- Folder Assignment Info -->
-                <div class="folder-assignment-info" id="folderAssignmentInfo" style="display: none; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; padding: 10px; border: 2px solid transparent;" onclick="goToAssignedFolder()" title="Click to navigate to your assigned folders" onmouseover="this.style.borderColor='#6f42c1'; this.style.backgroundColor='rgba(111, 66, 193, 0.05)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
+                <div class="folder-assignment-info" id="folderAssignmentInfo" style="display: none; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; padding: 10px; border: 2px solid transparent;" onclick="goToAssignedFolder()" title="Click to navigate to your assigned folder" onmouseover="this.style.borderColor='#6f42c1'; this.style.backgroundColor='rgba(111, 66, 193, 0.05)'" onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='transparent'">
                     <div class="assignment-badge">
                         <span class="folder-icon">📁</span>
                         <span class="assignment-text">
-                            Your assigned: <strong id="assignedFolderName">-</strong>
+                            Your assigned folder: <strong id="assignedFolderName">-</strong>
                         </span>
                         <span class="assignment-order">#<span id="assignmentOrder">-</span></span>
                     </div>
                     <div class="assignment-details">
-                        <small>Login time: <span id="loginTime">-</span> | Documents from <span id="folderRange">-</span></small>
+                        <small>Login time: <span id="loginTime">-</span> | Documents from folder <span id="folderRange">-</span></small>
                         <small class="click-hint" style="color: #6f42c1; margin-left: 10px;">👆 Click to navigate</small>
                     </div>
                 </div>
@@ -1196,21 +1196,8 @@
                 if (data.success && data.user) {
                     currentUser = data.user;
                     
-                    // Store folder assignment information - handle both single and multiple folders
-                    if (data.user.assigned_folders && Array.isArray(data.user.assigned_folders)) {
-                        // New multi-folder format
-                        currentUser.assignedFolders = data.user.assigned_folders;
-                        currentUser.assignedFolder = data.user.assigned_folders[0]; // Keep backward compatibility
-                    } else if (data.user.assigned_folder) {
-                        // Legacy single folder format - convert to array
-                        currentUser.assignedFolders = [data.user.assigned_folder];
-                        currentUser.assignedFolder = data.user.assigned_folder;
-                    } else {
-                        // No folders assigned
-                        currentUser.assignedFolders = [];
-                        currentUser.assignedFolder = null;
-                    }
-                    
+                    // Store folder assignment information
+                    currentUser.assignedFolder = data.user.assigned_folder;
                     currentUser.assignmentOrder = data.user.assignment_order;
                     currentUser.loginTimestamp = data.user.login_timestamp;
                     currentUser.folderCount = data.user.folder_count;
@@ -1218,7 +1205,7 @@
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     document.getElementById('authError').style.display = 'none';
                     
-                    console.log(`🎯 User ${currentUser.name} assigned to folders: [${currentUser.assignedFolders.join(', ')}] (Order: ${currentUser.assignmentOrder})`);
+                    console.log(`🎯 User ${currentUser.name} assigned to folder: ${currentUser.assignedFolder} (Order: ${currentUser.assignmentOrder})`);
                     
                     showUserPortal();
                 } else {
@@ -1310,25 +1297,12 @@
         
         // Update folder assignment UI
         function updateFolderAssignmentUI() {
-            if (currentUser && currentUser.assignedFolders && currentUser.assignedFolders.length > 0) {
+            if (currentUser && currentUser.assignedFolder) {
                 // Show folder assignment info
                 document.getElementById('folderAssignmentInfo').style.display = 'block';
-                
-                // Display multiple folders
-                const folderCount = currentUser.assignedFolders.length;
-                if (folderCount === 1) {
-                    // Single folder - keep existing display
-                    document.getElementById('assignedFolderName').textContent = currentUser.assignedFolders[0];
-                    document.getElementById('folderRange').textContent = currentUser.assignedFolders[0];
-                } else {
-                    // Multiple folders - show count and range
-                    const sortedFolders = currentUser.assignedFolders.sort((a, b) => parseInt(a) - parseInt(b));
-                    const folderRange = `${sortedFolders[0]}-${sortedFolders[sortedFolders.length - 1]}`;
-                    document.getElementById('assignedFolderName').textContent = `${folderCount} folders`;
-                    document.getElementById('folderRange').textContent = `Folders: ${sortedFolders.join(', ')}`;
-                }
-                
+                document.getElementById('assignedFolderName').textContent = currentUser.assignedFolder;
                 document.getElementById('assignmentOrder').textContent = currentUser.assignmentOrder || '-';
+                document.getElementById('folderRange').textContent = currentUser.assignedFolder;
                 
                 // Format and display login time
                 if (currentUser.loginTimestamp) {
@@ -1339,15 +1313,7 @@
                     document.getElementById('loginTime').textContent = 'Just now';
                 }
                 
-                console.log(`📁 UI Updated - User: ${currentUser.name}, Folders: [${currentUser.assignedFolders.join(', ')}], Order: ${currentUser.assignmentOrder}`);
-            } else if (currentUser && currentUser.assignedFolder) {
-                // Fallback for legacy single folder format
-                document.getElementById('folderAssignmentInfo').style.display = 'block';
-                document.getElementById('assignedFolderName').textContent = currentUser.assignedFolder;
-                document.getElementById('assignmentOrder').textContent = currentUser.assignmentOrder || '-';
-                document.getElementById('folderRange').textContent = currentUser.assignedFolder;
-                
-                console.log(`📁 UI Updated (legacy) - User: ${currentUser.name}, Folder: ${currentUser.assignedFolder}`);
+                console.log(`📁 UI Updated - User: ${currentUser.name}, Folder: ${currentUser.assignedFolder}, Order: ${currentUser.assignmentOrder}`);
             } else {
                 document.getElementById('folderAssignmentInfo').style.display = 'none';
                 console.warn('⚠️ No folder assignment found for user');
@@ -1610,13 +1576,8 @@
         
         // Function to navigate to user's assigned folder
         function goToAssignedFolder() {
-            // Handle both multiple folders and single folder
-            const assignedFolders = currentUser?.assignedFolders || (currentUser?.assignedFolder ? [currentUser.assignedFolder] : []);
-            
-            if (assignedFolders.length > 0) {
-                // Navigate to the first assigned folder (or could show a menu for multiple folders)
-                const targetFolder = assignedFolders[0];
-                console.log(`🎯 Navigating to assigned folder: ${targetFolder} (${assignedFolders.length} total folders assigned)`);
+            if (currentUser && currentUser.assignedFolder) {
+                console.log(`🎯 Navigating to assigned folder: ${currentUser.assignedFolder}`);
                 
                 // Switch to folder view if not already there
                 if (currentView !== 'folder') {
@@ -1626,9 +1587,9 @@
                 }
                 
                 // Navigate directly to the assigned folder
-                navigateToFolder(targetFolder);
+                navigateToFolder(currentUser.assignedFolder);
             } else {
-                console.warn('⚠️ No assigned folders found for user');
+                console.warn('⚠️ No assigned folder found for user');
             }
         }
         
@@ -1651,10 +1612,10 @@
         
         async function loadDocuments() {
             try {
-                // Check if user has assigned folders (support both new and legacy format)
-                const userAssignedFolders = currentUser?.assignedFolders || (currentUser?.assignedFolder ? [currentUser.assignedFolder] : []);
+                // Check if user has an assigned folder
+                const userAssignedFolder = currentUser?.assignedFolder;
                 console.log('🎯 Debug - Current user:', currentUser);
-                console.log('🎯 Debug - User assigned folders:', userAssignedFolders);
+                console.log('🎯 Debug - User assigned folder:', userAssignedFolder);
                 
                 // Load documents from localStorage (admin uploaded)
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
@@ -1697,10 +1658,10 @@
                 const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
                 if (!azureConfigData) {
                     console.log('No Azure configuration available - using only localStorage documents');
-                    // Filter localStorage documents by user's assigned folders if they have any
-                    if (userAssignedFolders.length > 0) {
-                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolders));
-                        console.log(`🎯 User ${currentUser.name} assigned to folders [${userAssignedFolders.join(', ')}] - Showing ${allDocuments.length} documents from localStorage`);
+                    // Filter localStorage documents by user's assigned folder if they have one
+                    if (userAssignedFolder) {
+                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
+                        console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage`);
                     } else {
                         allDocuments = localDocuments;
                         console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (no folder restriction)`);
@@ -1903,21 +1864,21 @@
                     // Debug: Show all available categories
                     const allCategories = [...new Set(allAvailableDocuments.map(doc => doc.category))];
                     console.log('🔍 ALL AVAILABLE CATEGORIES:', allCategories.sort());
-                    console.log('🔍 User assigned to folders:', userAssignedFolders);
+                    console.log('🔍 User assigned to folder:', userAssignedFolder);
                     
-                    // Filter documents by user's assigned folders if they have any
-                    if (userAssignedFolders.length > 0) {
+                    // Filter documents by user's assigned folder if they have one
+                    if (userAssignedFolder) {
                         console.log(`🔍 Before filtering: ${allAvailableDocuments.length} total documents`);
                         console.log('🔍 Sample categories in documents:', [...new Set(allAvailableDocuments.map(doc => doc.category))].slice(0, 10));
                         
                         allDocuments = allAvailableDocuments.filter(doc => {
-                            const matches = documentMatchesUserFolder(doc, userAssignedFolders);
+                            const matches = documentMatchesUserFolder(doc, userAssignedFolder);
                             if (matches) {
                                 console.log(`✅ Document matches: ${doc.name} (category: ${doc.category})`);
                             }
                             return matches;
                         });
-                        console.log(`🎯 Filtered merged documents - User ${currentUser.name} assigned to folders [${userAssignedFolders.join(', ')}] - Showing ${allDocuments.length}/${allAvailableDocuments.length} documents from assigned folders`);
+                        console.log(`🎯 Filtered merged documents - User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length}/${allAvailableDocuments.length} documents from assigned folder`);
                     } else {
                         allDocuments = allAvailableDocuments;
                         console.log(`Loaded ${allDocuments.length} merged documents for user: ${currentUser.name} (no folder restriction)`);
@@ -1932,10 +1893,10 @@
                     console.log('Failed to fetch document list from Azure:', response.status, errorText);
                     console.log('Using only localStorage documents due to Azure error');
                     
-                    // Filter localStorage documents by user's assigned folders if they have any
-                    if (userAssignedFolders.length > 0) {
-                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolders));
-                        console.log(`🎯 User ${currentUser.name} assigned to folders [${userAssignedFolders.join(', ')}] - Showing ${allDocuments.length} documents from localStorage (Azure failed)`);
+                    // Filter localStorage documents by user's assigned folder if they have one
+                    if (userAssignedFolder) {
+                        allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
+                        console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (Azure failed)`);
                     } else {
                         allDocuments = localDocuments;
                         console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (Azure failed)`);
@@ -1950,10 +1911,11 @@
                 // Load documents from localStorage as fallback
                 const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
                 
-                // Filter localStorage documents by user's assigned folders if they have any
-                if (userAssignedFolders.length > 0) {
-                    allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolders));
-                    console.log(`🎯 User ${currentUser.name} assigned to folders [${userAssignedFolders.join(', ')}] - Showing ${allDocuments.length} documents from localStorage (error fallback)`);
+                // Filter localStorage documents by user's assigned folder if they have one
+                const userAssignedFolder = currentUser?.assignedFolder;
+                if (userAssignedFolder) {
+                    allDocuments = localDocuments.filter(doc => documentMatchesUserFolder(doc, userAssignedFolder));
+                    console.log(`🎯 User ${currentUser.name} assigned to folder '${userAssignedFolder}' - Showing ${allDocuments.length} documents from localStorage (error fallback)`);
                 } else {
                     allDocuments = localDocuments;
                     console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name} (error fallback)`);
@@ -1965,48 +1927,35 @@
         }
         
         // Helper function to get mapped categories for a user's assigned folder
-        function getMappedCategories(userAssignedFolders) {
-            if (!userAssignedFolders) return null;
+        function getMappedCategories(userAssignedFolder) {
+            if (!userAssignedFolder) return null;
             
-            // Handle both single folder (legacy) and multiple folders (new format)
-            if (Array.isArray(userAssignedFolders)) {
-                // Multiple folders - return all as strings for category matching
-                return userAssignedFolders.map(folder => String(folder));
-            } else {
-                // Single folder (legacy) - convert to array
-                return [String(userAssignedFolders)];
-            }
+            // Simple 1:1 mapping - user assigned to folder "1" should only see category "1" documents
+            // No need for complex mapping unless there's a specific business requirement
+            return [userAssignedFolder];
         }
         
-        // Helper function to check if a document matches the user's assigned folders
-        function documentMatchesUserFolder(doc, userAssignedFolders) {
-            // Handle both legacy single folder and new multiple folders format
-            let foldersToCheck = [];
+        // Helper function to check if a document matches the user's assigned folder
+        function documentMatchesUserFolder(doc, userAssignedFolder) {
+            // TEMPORARY DEBUG: Log document details
+            console.log(`🔍 DEBUG - Document: "${doc.name}" | Category: "${doc.category}" | BlobName: "${doc.blobName}" | FolderPath: "${doc.folderPath}"`);
             
-            if (Array.isArray(userAssignedFolders)) {
-                // New format: array of folders
-                foldersToCheck = userAssignedFolders;
-            } else if (userAssignedFolders) {
-                // Legacy format: single folder
-                foldersToCheck = [userAssignedFolders];
-            } else {
-                // No assigned folders - show all documents
-                console.log(`⚠️ No assigned folders for user - showing all documents`);
-                return true;
+            if (!userAssignedFolder) {
+                console.log(`⚠️ No assigned folder for user - showing all documents`);
+                return true; // No restriction if no assigned folder
             }
             
-            if (foldersToCheck.length === 0) {
-                console.log(`⚠️ Empty folder assignment - showing all documents`);
-                return true;
-            }
+            // TEMPORARY: Always return true to see all documents
+            console.log(`🔍 TEMP DEBUG - Showing all documents to debug categories`);
+            return true;
             
-            const mappedCategories = getMappedCategories(foldersToCheck);
+            const mappedCategories = getMappedCategories(userAssignedFolder);
             
             const matches = mappedCategories.includes(doc.category) ||
                            mappedCategories.some(cat => doc.blobName?.includes(`/${cat}/`)) ||
                            mappedCategories.includes(doc.folderPath);
             
-            console.log(`🔍 Filtering: ${doc.name} | UserFolders: [${foldersToCheck.join(', ')}] | DocCategory: ${doc.category} | Matches: ${matches}`);
+            console.log(`🔍 Filtering: ${doc.name} | UserFolder: ${userAssignedFolder} | DocCategory: ${doc.category} | Matches: ${matches}`);
             
             return matches;
         }
@@ -2235,24 +2184,24 @@
             const documentsGrid = document.getElementById('documentsGrid');
             
             // Apply folder filtering for assigned users - same logic as getFoldersAndFiles
-            const userAssignedFolders = currentUser?.assignedFolders || (currentUser?.assignedFolder ? [currentUser.assignedFolder] : []);
+            const userAssignedFolder = currentUser?.assignedFolder;
             let documentsToShow = filteredDocuments;
             
             console.log(`🎯 Grid view DEBUG - currentUser:`, currentUser);
-            console.log(`🎯 Grid view DEBUG - userAssignedFolders:`, userAssignedFolders);
+            console.log(`🎯 Grid view DEBUG - userAssignedFolder: '${userAssignedFolder}'`);
             console.log(`🎯 Grid view DEBUG - filteredDocuments.length: ${filteredDocuments.length}`);
             
-            if (userAssignedFolders.length > 0) {
-                console.log(`🎯 Grid view: Filtering documents for user assigned to folders [${userAssignedFolders.join(', ')}]`);
+            if (userAssignedFolder) {
+                console.log(`🎯 Grid view: Filtering documents for user assigned to folder '${userAssignedFolder}'`);
                 console.log(`🎯 Before filtering: ${filteredDocuments.length} documents`);
                 
                 // Debug: Show all unique categories to understand the mapping needed
                 const allCategories = [...new Set(filteredDocuments.map(doc => doc.category))];
                 console.log(`🎯 ALL AVAILABLE CATEGORIES:`, allCategories.sort());
                 
-                // Get mapped categories for the user's assigned folders
-                const mappedCategories = getMappedCategories(userAssignedFolders);
-                console.log(`🎯 Mapping assigned folders [${userAssignedFolders.join(', ')}] to categories:`, mappedCategories);
+                // Get mapped categories for the user's assigned folder
+                const mappedCategories = getMappedCategories(userAssignedFolder);
+                console.log(`🎯 Mapping assigned folder '${userAssignedFolder}' to categories:`, mappedCategories);
                 
                 // Debug: Show sample document categories
                 const sampleDocs = filteredDocuments.slice(0, 5);
@@ -2264,16 +2213,16 @@
                 })));
                 
                 documentsToShow = filteredDocuments.filter(doc => {
-                    const matches = documentMatchesUserFolder(doc, userAssignedFolders);
+                    const matches = documentMatchesUserFolder(doc, userAssignedFolder);
                     if (matches) {
                         console.log(`✅ Grid view: Document matches: ${doc.name} (category: '${doc.category}', mapped categories: [${mappedCategories.join(', ')}])`);
                     }
                     return matches;
                 });
                 
-                console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folders [${userAssignedFolders.join(', ')}] (mapped to categories: [${mappedCategories.join(', ')}])`);
+                console.log(`🎯 Grid view: After filtering: ${documentsToShow.length} documents for folder '${userAssignedFolder}' (mapped to categories: [${mappedCategories.join(', ')}])`);
             } else {
-                console.log(`🎯 Grid view: No assigned folders - showing all ${filteredDocuments.length} documents`);
+                console.log(`🎯 Grid view: No assigned folder - showing all ${filteredDocuments.length} documents`);
             }
             
             if (documentsToShow.length === 0) {
