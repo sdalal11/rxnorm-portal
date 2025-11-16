@@ -6,9 +6,18 @@ import subprocess
 import json
 import sqlite3
 from datetime import datetime
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
+
+@app.after_request
+def after_request(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return response
 
 @app.after_request
 def after_request(response):
@@ -22,14 +31,18 @@ def home():
     """Root endpoint"""
     return jsonify({
         'message': 'RxNorm Document Processing API',
-        'version': '1.2',  # Updated for database authentication
+        'version': '1.3',
         'endpoints': {
             'health': '/health',
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',
             'user_login': '/users/login',
-            'user_list': '/users/list'
+            'user_list': '/users/list',
+            'admin_folder_assignments': '/admin/folder-assignments',
+            'admin_assign_folders': '/admin/assign-folders',
+            'user_folders': '/users/folders/<username>',
+            'admin_emails': '/admin/emails'
         }
     })
 
@@ -280,15 +293,7 @@ def init_database():
         if DATABASE_URL:
             # Using external PostgreSQL database (persistent)
             import psycopg2
-            # Add connection parameters for better reliability on Render
-            conn = psycopg2.connect(
-                DATABASE_URL, 
-                sslmode='require',
-                connect_timeout=30,
-                keepalives_idle=600,
-                keepalives_interval=30,
-                keepalives_count=3
-            )
+            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             cursor = conn.cursor()
             
             # Create users table if it doesn't exist
@@ -300,36 +305,9 @@ def init_database():
                     password VARCHAR(255) NOT NULL,
                     name VARCHAR(255) NOT NULL,
                     registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP,
-                    assigned_folder VARCHAR(10),
-                    assignment_order INTEGER
+                    last_login TIMESTAMP
                 )
             ''')
-            
-            # Check and add columns if they don't exist (for existing databases)
-            # Check if assigned_folder column exists
-            cursor.execute("""
-                SELECT column_name FROM information_schema.columns 
-                WHERE table_name='users' AND column_name='assigned_folder'
-            """)
-            if not cursor.fetchone():
-                try:
-                    cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(10)')
-                    print("✅ Added assigned_folder column")
-                except Exception as e:
-                    print(f"⚠️ Error adding assigned_folder column: {e}")
-            
-            # Check if assignment_order column exists
-            cursor.execute("""
-                SELECT column_name FROM information_schema.columns 
-                WHERE table_name='users' AND column_name='assignment_order'
-            """)
-            if not cursor.fetchone():
-                try:
-                    cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
-                    print("✅ Added assignment_order column")
-                except Exception as e:
-                    print(f"⚠️ Error adding assignment_order column: {e}")
             print("✅ Connected to external PostgreSQL database")
         else:
             # Using local SQLite database (ephemeral on free hosting)
@@ -345,24 +323,9 @@ def init_database():
                     password TEXT NOT NULL,
                     name TEXT NOT NULL,
                     registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    last_login DATETIME,
-                    assigned_folder TEXT,
-                    assignment_order INTEGER
+                    last_login DATETIME
                 )
             ''')
-            
-            # Add columns if they don't exist (for existing databases)
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder TEXT')
-                print("✅ Added assigned_folder column")
-            except Exception:
-                pass  # Column already exists
-                
-            try:
-                cursor.execute('ALTER TABLE users ADD COLUMN assignment_order INTEGER')
-                print("✅ Added assignment_order column")
-            except Exception:
-                pass  # Column already exists
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
         
@@ -394,14 +357,7 @@ def get_db_connection():
     """Get database connection (PostgreSQL or SQLite)"""
     if DATABASE_URL:
         import psycopg2
-        return psycopg2.connect(
-            DATABASE_URL, 
-            sslmode='require',
-            connect_timeout=30,
-            keepalives_idle=600,
-            keepalives_interval=30,
-            keepalives_count=3
-        )
+        return psycopg2.connect(DATABASE_URL, sslmode='require')
     else:
         return sqlite3.connect(DATABASE_FILE)
 
@@ -450,9 +406,7 @@ def get_user(username):
                 'password': result[3],
                 'name': result[4],
                 'registered_at': result[5],
-                'last_login': result[6],
-                'assigned_folder': result[7] if len(result) > 7 else None,
-                'assignment_order': result[8] if len(result) > 8 else None
+                'last_login': result[6]
             }
         return None
     except Exception as e:
@@ -460,24 +414,12 @@ def get_user(username):
         return None
 
 def create_user(username, email, password, name):
-    """Create new user in database with automatic folder assignment"""
+    """Create new user in database"""
     try:
-        # First, get the count of existing users to determine assignment order
-        result = execute_query('SELECT COUNT(*) FROM users', fetch_one=True)
-        user_count = result[0] if result else 0
-        
-        # Calculate folder assignment (folders 1-90, then cycle back)
-        assignment_order = user_count + 1
-        folder_number = ((user_count) % 90) + 1  # Folders 1-90, then cycle back to 1
-        assigned_folder = str(folder_number)
-        
-        # Insert user with automatic folder assignment
         execute_query('''
-            INSERT INTO users (username, email, password, name, assigned_folder, assignment_order)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (username, email, password, name, assigned_folder, assignment_order))
-        
-        print(f"📁 New user {username} assigned to folder {assigned_folder} (order: {assignment_order})")
+            INSERT INTO users (username, email, password, name)
+            VALUES (?, ?, ?, ?)
+        ''', (username, email, password, name))
         return True
     except Exception as e:
         if "UNIQUE constraint" in str(e) or "duplicate key" in str(e):
@@ -494,6 +436,88 @@ def update_last_login(username):
         return True
     except Exception as e:
         print(f"⚠️ Error updating last login: {e}")
+        return False
+
+def get_user_assigned_folders(username):
+    """Get the assigned folders for a user"""
+    try:
+        # First try to get from assigned_folders column (new approach)
+        result = execute_query(
+            'SELECT assigned_folders FROM users WHERE username = ?', 
+            (username,), 
+            fetch_one=True
+        )
+        
+        if result and result[0]:
+            # If it's a JSONB array, return it directly
+            if isinstance(result[0], list):
+                return result[0]
+            # If it's a JSON string, parse it
+            elif isinstance(result[0], str):
+                try:
+                    return json.loads(result[0])
+                except:
+                    # If parsing fails, maybe it's a comma-separated string
+                    return [int(x.strip()) for x in result[0].split(',') if x.strip().isdigit()]
+            # If it's a single number (old format), convert to list
+            elif isinstance(result[0], int):
+                return [result[0]]
+        
+        # Fallback to old assigned_folder column if new one doesn't exist
+        result = execute_query(
+            'SELECT assigned_folder FROM users WHERE username = ?', 
+            (username,), 
+            fetch_one=True
+        )
+        
+        if result and result[0]:
+            # Handle different data types in assigned_folder
+            if isinstance(result[0], list):
+                return result[0]
+            elif isinstance(result[0], str):
+                try:
+                    # Try parsing as JSON first
+                    return json.loads(result[0])
+                except:
+                    # If not JSON, try comma-separated
+                    if ',' in result[0]:
+                        return [int(x.strip()) for x in result[0].split(',') if x.strip().isdigit()]
+                    # If single number as string
+                    elif result[0].isdigit():
+                        return [int(result[0])]
+            elif isinstance(result[0], int):
+                return [result[0]]
+        
+        # If no assignments found, return empty list
+        return []
+        
+    except Exception as e:
+        print(f"⚠️ Error getting user assigned folders: {e}")
+        return []
+
+def set_user_assigned_folders(username, folder_list):
+    """Set the assigned folders for a user"""
+    try:
+        # Convert list to JSON string for storage
+        folders_json = json.dumps(folder_list)
+        
+        # Try to update assigned_folders column first
+        try:
+            execute_query(
+                'UPDATE users SET assigned_folders = ? WHERE username = ?',
+                (folders_json, username)
+            )
+            return True
+        except:
+            # If assigned_folders column doesn't exist, try assigned_folder
+            execute_query(
+                'UPDATE users SET assigned_folder = ? WHERE username = ?',
+                (folders_json, username)
+            )
+            return True
+            
+    except Exception as e:
+        print(f"⚠️ Error setting user assigned folders: {e}")
         return False
 
 def list_users():
@@ -597,10 +621,13 @@ def login_user():
         if not user or user.get('password') != password:
             return jsonify({'error': 'Invalid username or password'}), 401
         
+        # Get user's assigned folders
+        assigned_folders = get_user_assigned_folders(username)
+        
         # Update last login in database
         update_last_login(username)
         
-        print(f"✅ User logged in: {username}")
+        print(f"✅ User logged in: {username} with folders: {assigned_folders}")
         
         return jsonify({
             'success': True,
@@ -609,8 +636,7 @@ def login_user():
                 'username': user['username'],
                 'email': user['email'],
                 'name': user['name'],
-                'assigned_folder': user.get('assigned_folder'),
-                'assignment_order': user.get('assignment_order')
+                'assigned_folders': assigned_folders  # Include folder assignments
             }
         })
         
@@ -691,6 +717,166 @@ def backup_users():
             'message': 'Database backup created successfully'
         })
     except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/admin/folder-assignments', methods=['GET', 'OPTIONS'])
+def get_folder_assignments():
+    """Get folder assignments for admin dashboard"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        # Get all users from database
+        users = list_users()
+        
+        # Available folders (9 folders as mentioned in admin.html)
+        available_folders = ['100-200', '200-300', '300-400', '400-500', '500-600', '600-700', '700-800', '800-900', '900-1000']
+        
+        # Assign folders based on registration order (cycle through 9 folders)
+        assignments = []
+        folder_distribution = {}
+        
+        for folder in available_folders:
+            folder_distribution[folder] = 0
+        
+        for i, user in enumerate(users):
+            # Assign folder based on order (cycle through 9 folders)
+            assigned_folder = available_folders[i % len(available_folders)]
+            folder_distribution[assigned_folder] += 1
+            
+            assignments.append({
+                'assignment_order': i + 1,
+                'name': user.get('name', 'N/A'),
+                'email': user.get('email', 'N/A'),
+                'assigned_folder': assigned_folder,
+                'login_timestamp': user.get('registered_at'),
+                'last_login': user.get('last_login')
+            })
+        
+        return jsonify({
+            'success': True,
+            'assignments': assignments,
+            'folder_distribution': folder_distribution,
+            'available_folders': available_folders,
+            'total_users': len(users)
+        })
+        
+    except Exception as e:
+        print(f"❌ Error getting folder assignments: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/admin/emails', methods=['GET', 'OPTIONS'])
+def get_all_emails():
+    """Get all email addresses from the database"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        # Get all users from database
+        users = list_users()
+        
+        # Extract just the email addresses
+        emails = [user.get('email') for user in users if user.get('email')]
+        
+        return jsonify({
+            'success': True,
+            'emails': emails,
+            'total_count': len(emails),
+            'message': f'Retrieved {len(emails)} email addresses from rxnorm-users database'
+        })
+        
+    except Exception as e:
+        print(f"❌ Error getting emails: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/admin/assign-folders', methods=['POST', 'OPTIONS'])
+def assign_folders_to_user():
+    """Assign multiple folders to a user"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        data = request.get_json()
+        username = data.get('username', '').strip().lower()
+        folders = data.get('folders', [])
+        
+        if not username:
+            return jsonify({'error': 'Username is required'}), 400
+        
+        if not isinstance(folders, list):
+            return jsonify({'error': 'Folders must be a list'}), 400
+        
+        # Validate that folders are integers
+        try:
+            folder_numbers = [int(f) for f in folders]
+        except ValueError:
+            return jsonify({'error': 'All folder values must be integers'}), 400
+        
+        # Check if user exists
+        user = get_user(username)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        # Assign folders to user
+        success = set_user_assigned_folders(username, folder_numbers)
+        
+        if success:
+            print(f"✅ Assigned folders {folder_numbers} to user: {username}")
+            return jsonify({
+                'success': True,
+                'message': f'Successfully assigned {len(folder_numbers)} folders to {username}',
+                'username': username,
+                'assigned_folders': folder_numbers
+            })
+        else:
+            return jsonify({'error': 'Failed to assign folders'}), 500
+            
+    except Exception as e:
+        print(f"❌ Error assigning folders: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/folders/<username>', methods=['GET', 'OPTIONS'])
+def get_user_folders(username):
+    """Get assigned folders for a specific user"""
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight'})
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    try:
+        username = username.strip().lower()
+        
+        # Check if user exists
+        user = get_user(username)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        # Get assigned folders
+        assigned_folders = get_user_assigned_folders(username)
+        
+        return jsonify({
+            'success': True,
+            'username': username,
+            'assigned_folders': assigned_folders,
+            'total_folders': len(assigned_folders)
+        })
+        
+    except Exception as e:
+        print(f"❌ Error getting user folders: {e}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/config/azure', methods=['POST', 'GET', 'OPTIONS'])
