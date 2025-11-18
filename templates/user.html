@@ -2703,6 +2703,7 @@
                 console.log('📄 Document found:', doc.name, 'Pre-annotations:', doc.preAnnotations?.length || 0);
                 
                 // If document doesn't have pre-annotations, try to load them
+                if (!doc.preAnnotations || doc.preAnnotations.length === 0) {
                     console.log('🔍 No pre-annotations found, attempting to load from API...');
                     try {
                         await loadPreAnnotations(doc);

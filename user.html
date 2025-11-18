@@ -379,6 +379,79 @@
                 min-width: auto;
             }
         }
+        
+        /* Folder View Styles */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .breadcrumb-item {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: #6c757d;
+        }
+        
+        .folder-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.2);
+            border-color: #6f42c1;
+        }
+        
+        .folder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .folder-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .folder-meta {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        
+        .folder-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #6f42c1;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
 
         .document-viewer {
             display: none;
@@ -669,6 +742,40 @@
             color: #dc3545;
         }
 
+        /* Style for annotation notes */
+        .annotation-notes {
+            margin-top: 0.5rem;
+        }
+
+        .annotation-notes textarea {
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .annotation-notes textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+            outline: none;
+        }
+
+        .annotation-notes textarea:not(:empty) {
+            border-color: #28a745;
+            background-color: #f8fff9;
+        }
+
+        /* Visual indicator for annotations with notes */
+        .annotation-item.has-notes {
+            border-left: 4px solid #17a2b8;
+        }
+
+        .annotation-item.has-notes::after {
+            content: "📝";
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
         @media (max-width: 768px) {
             .viewer-content {
                 width: 95%;
@@ -816,7 +923,14 @@
                 </div>
                 <button class="search-btn" onclick="filterDocuments()">Search</button>
                 <button class="search-btn btn-secondary" onclick="clearFilters()">Clear</button>
+                <button class="search-btn" onclick="toggleView()" id="viewToggleBtn">📁 Folder View</button>
             </div>
+        </div>
+        
+        <!-- Breadcrumb Navigation -->
+        <div id="breadcrumb" class="breadcrumb" style="display: none;">
+            <span onclick="navigateToFolder('')" class="breadcrumb-item">📁 Documents</span>
+            <span id="breadcrumbPath"></span>
         </div>
         
         <!-- Documents Grid -->
@@ -881,19 +995,30 @@
     </div>
     
     <script>
+        // API Configuration
+        const API_BASE_URL = 'https://rxnorm-portal-nscs.onrender.com';
+        
         // User data storage
-        let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
         let currentUser = null;
         let allDocuments = [];
         let filteredDocuments = [];
         
         // Authentication functions
-        function showAuthTab(tabName) {
+        function showAuthTab(tabName, event = null) {
             // Update tab buttons
             document.querySelectorAll('.auth-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Fallback: find the tab by tabName
+                const targetTab = document.querySelector(`[onclick="showAuthTab('${tabName}')"]`);
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+            }
             
             // Show correct form
             document.querySelectorAll('.auth-form').forEach(form => {
@@ -907,26 +1032,44 @@
         }
         
         // Login form handler
-        document.getElementById('userLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('userLoginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            const user = registeredUsers.find(u => u.email === email && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                sessionStorage.setItem('currentUser', JSON.stringify(user));
-                showUserPortal();
-            } else {
-                document.getElementById('authError').textContent = 'Invalid email or password.';
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.user) {
+                    currentUser = data.user;
+                    sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+                    document.getElementById('authError').style.display = 'none';
+                    showUserPortal();
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Invalid email or password.';
+                    document.getElementById('authError').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('authError').textContent = 'Login failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
             }
         });
         
         // Register form handler
-        document.getElementById('userRegisterForm').addEventListener('submit', function(e) {
+        document.getElementById('userRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const name = document.getElementById('registerName').value;
@@ -942,37 +1085,48 @@
                 return;
             }
             
-            if (registeredUsers.find(u => u.email === email)) {
-                document.getElementById('authError').textContent = 'Email already registered.';
+            // Register user via API
+            try {
+                const response = await fetch(`${API_BASE_URL}/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: email, // Use email as username
+                        email: email,
+                        password: password,
+                        name: name
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message and switch to login
+                    document.getElementById('authSuccess').textContent = 'Registration successful! You can now log in.';
+                    document.getElementById('authSuccess').style.display = 'block';
+                    document.getElementById('authError').style.display = 'none';
+                    
+                    // Clear form
+                    document.getElementById('userRegisterForm').reset();
+                    
+                    // Switch to login tab after 2 seconds
+                    setTimeout(() => {
+                        showAuthTab('login');
+                        document.getElementById('loginEmail').value = email;
+                    }, 2000);
+                } else {
+                    document.getElementById('authError').textContent = data.message || 'Registration failed. Please try again.';
+                    document.getElementById('authError').style.display = 'block';
+                    document.getElementById('authSuccess').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                document.getElementById('authError').textContent = 'Registration failed. Please check your connection and try again.';
                 document.getElementById('authError').style.display = 'block';
-                return;
+                document.getElementById('authSuccess').style.display = 'none';
             }
-            
-            // Create new user
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                password: password, // In production, this should be hashed
-                role: role,
-                registeredDate: new Date().toISOString()
-            };
-            
-            registeredUsers.push(newUser);
-            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-            
-            // Show success message and switch to login
-            document.getElementById('authSuccess').style.display = 'block';
-            document.getElementById('authError').style.display = 'none';
-            
-            // Clear form
-            document.getElementById('userRegisterForm').reset();
-            
-            // Switch to login tab after 2 seconds
-            setTimeout(() => {
-                showAuthTab('login');
-                document.getElementById('loginEmail').value = email;
-            }, 2000);
         });
         
         function showUserPortal() {
@@ -980,8 +1134,138 @@
             document.getElementById('userPortal').style.display = 'block';
             document.getElementById('userName').textContent = currentUser.name;
             
+            // Ensure Azure configuration is available for new users
+            ensureAzureConfigForUser();
+            
             loadDocuments();
             updateStats();
+        }
+        
+        // Ensure Azure configuration is available for the user
+        async function ensureAzureConfigForUser() {
+            // Check if user already has Azure config
+            let userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            
+            if (!userConfig) {
+                // Try to fetch from API server
+                console.log('No local Azure configuration found. Attempting to fetch from API...');
+                try {
+                    const response = await fetch('https://rxnorm-portal-nscs.onrender.com/config/azure', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    console.log('API Response status:', response.status);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('API Response data:', data);
+                        
+                        if (data.success && data.config) {
+                            // Store the fetched config locally
+                            localStorage.setItem('globalAzureConfig', JSON.stringify(data.config));
+                            console.log('Azure configuration fetched successfully from API');
+                            hideConfigurationNotification();
+                            
+                            // Show success message
+                            showSuccessNotification('✅ Configuration loaded successfully! Documents should now be accessible.');
+                            return;
+                        } else {
+                            console.log('API returned no configuration');
+                            showErrorNotification('❌ No configuration found on server. Admin needs to configure Azure first.');
+                        }
+                    } else {
+                        console.log('API request failed with status:', response.status);
+                        showErrorNotification('❌ Failed to fetch configuration from server.');
+                    }
+                } catch (error) {
+                    console.log('Failed to fetch Azure config from API:', error);
+                    showErrorNotification('❌ Network error while fetching configuration.');
+                }
+                
+                // If we still don't have config, show notification
+                console.log('No Azure configuration available. Documents may not be accessible.');
+                showConfigurationNotification();
+            } else {
+                console.log('Azure configuration found for user');
+                hideConfigurationNotification();
+            }
+        }
+        
+        function showConfigurationNotification() {
+            // Create or show notification banner
+            let notification = document.getElementById('configNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'configNotification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #f39c12;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    z-index: 1000;
+                    font-weight: bold;
+                `;
+                notification.innerHTML = `
+                    ⚠️ Document access may be limited. Administrator needs to configure document sharing. 
+                    <button onclick="retryConfigurationFetch()" style="margin-left: 10px; background: rgba(255,255,255,0.3); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button>
+                    <button onclick="hideConfigurationNotification()" style="margin-left: 5px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>
+                `;
+                document.body.prepend(notification);
+            }
+            notification.style.display = 'block';
+        }
+        
+        async function retryConfigurationFetch() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.innerHTML = `🔄 Checking for configuration...`;
+                notification.style.background = '#17a2b8'; // Blue for loading
+            }
+            
+            await ensureAzureConfigForUser();
+            
+            // Reload documents if config was found
+            const userConfig = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+            if (userConfig) {
+                console.log('Config found, reloading documents...');
+                await loadDocuments();
+                updateStats();
+            }
+        }
+        
+        function showSuccessNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#28a745';
+                notification.innerHTML = message + ` <button onclick="hideConfigurationNotification()" style="margin-left: 10px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    hideConfigurationNotification();
+                }, 3000);
+            }
+        }
+        
+        function showErrorNotification(message) {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.background = '#dc3545';
+                notification.innerHTML = message + ` <button onclick="retryConfigurationFetch()" style="margin-left: 10px; background: rgba(255,255,255,0.3); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Retry</button> <button onclick="hideConfigurationNotification()" style="margin-left: 5px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Dismiss</button>`;
+            }
+        }
+        
+        function hideConfigurationNotification() {
+            const notification = document.getElementById('configNotification');
+            if (notification) {
+                notification.style.display = 'none';
+            }
         }
         
         function logout() {
@@ -998,18 +1282,323 @@
         }
         
         // Document functions
-        function loadDocuments() {
-            // Load documents from admin's localStorage (simulating shared storage)
-            const adminDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
-            
-            // Filter only public documents
-            allDocuments = adminDocuments.filter(doc => doc.publicAccess === true);
-            filteredDocuments = [...allDocuments];
+        let currentView = 'grid'; // 'grid' or 'folder'
+        let currentFolder = ''; // Current folder path
+        
+        async function loadDocuments() {
+            try {
+                // First try to load from localStorage (for admin or users on same browser)
+                const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                
+                if (localDocuments.length > 0) {
+                    allDocuments = localDocuments;
+                    filteredDocuments = [...allDocuments];
+                    console.log(`Loaded ${allDocuments.length} documents from localStorage for user: ${currentUser.name}`);
+                    displayDocuments();
+                    return;
+                }
+                
+                // If no local documents, try to fetch from Azure
+                console.log('No local documents found, attempting to fetch from Azure...');
+                
+                const azureConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig');
+                if (!azureConfigData) {
+                    console.log('No Azure configuration available for document loading');
+                    allDocuments = [];
+                    filteredDocuments = [];
+                    displayDocuments();
+                    return;
+                }
+                
+                const azureConfig = JSON.parse(azureConfigData);
+                console.log('Using Azure config:', azureConfig);
+                
+                // Clean the SAS token
+                let sasToken = azureConfig.sasToken;
+                if (sasToken.startsWith('?')) {
+                    sasToken = sasToken.substring(1); // Remove leading ?
+                }
+                
+                // Parse existing SAS parameters
+                const sasParams = new URLSearchParams(sasToken);
+                
+                // Ensure we have the correct permissions for container listing
+                if (!sasParams.has('sr')) {
+                    sasParams.set('sr', 'c'); // Container resource
+                }
+                
+                // Ensure we have list permission
+                const sp = sasParams.get('sp') || '';
+                if (!sp.includes('l')) {
+                    sasParams.set('sp', sp + 'l'); // Add list permission
+                }
+                
+                // Construct the final URL
+                const listUrl = `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}?restype=container&comp=list&${sasParams.toString()}`;
+                console.log('Fetching from Azure URL:', listUrl);
+                
+                const response = await fetch(listUrl);
+                console.log('Azure response status:', response.status);
+                
+                if (response.ok) {
+                    const xmlText = await response.text();
+                    console.log('Azure XML response length:', xmlText.length);
+                    console.log('Azure XML response (first 500 chars):', xmlText.substring(0, 500));
+                    
+                    // Parse the XML response to extract blob names
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+                    const blobs = xmlDoc.getElementsByTagName('Blob');
+                    console.log('Found blobs:', blobs.length);
+                    
+                    const documents = [];
+                    for (let i = 0; i < blobs.length; i++) {
+                        const blob = blobs[i];
+                        const name = blob.getElementsByTagName('Name')[0]?.textContent;
+                        const lastModified = blob.getElementsByTagName('Last-Modified')[0]?.textContent;
+                        const size = blob.getElementsByTagName('Content-Length')[0]?.textContent;
+                        
+                        console.log(`Blob ${i}:`, { name, lastModified, size });
+                        
+                        if (name && name.endsWith('.html')) {
+                            // Parse folder structure from blob name
+                            const pathParts = name.split('/');
+                            const filename = pathParts[pathParts.length - 1];
+                            const category = pathParts[0] || 'general';
+                            const folderName = pathParts.length > 2 ? pathParts[1] : null;
+                            const isFromFolder = pathParts.length > 2;
+                            
+                            // Create proper originalPath for folder structure
+                            const originalPath = isFromFolder ? pathParts.slice(1).join('/') : filename;
+                            
+                            documents.push({
+                                id: Date.now() + i,
+                                name: filename,
+                                originalPath: originalPath,
+                                folderName: folderName,
+                                category: category,
+                                description: 'Document from Azure Storage',
+                                publicAccess: true,
+                                uploadDate: lastModified ? new Date(lastModified).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+                                size: formatFileSize(parseInt(size) || 0),
+                                azureUrl: `https://${azureConfig.storageAccount}.blob.core.windows.net/${azureConfig.containerName}/${name}?${azureConfig.sasToken}`,
+                                blobName: name,
+                                isFromFolder: isFromFolder,
+                                hasPreAnnotations: false,
+                                preAnnotations: [] // Will be loaded when document is opened
+                            });
+                        }
+                    }
+                    
+                    console.log(`Created ${documents.length} document objects from Azure blobs`);
+                    allDocuments = documents;
+                    filteredDocuments = [...allDocuments];
+                    console.log(`Loaded ${allDocuments.length} documents from Azure for user: ${currentUser.name}`);
+                    
+                    // Debug: Show what documents we have
+                    console.log('All documents:', allDocuments);
+                } else {
+                    const errorText = await response.text();
+                    console.log('Failed to fetch document list from Azure:', response.status, errorText);
+                    allDocuments = [];
+                    filteredDocuments = [];
+                }
+                
+            } catch (error) {
+                console.log('Error loading documents:', error);
+                allDocuments = [];
+                filteredDocuments = [];
+            }
             
             displayDocuments();
         }
         
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function toggleView() {
+            const toggleBtn = document.getElementById('viewToggleBtn');
+            const breadcrumb = document.getElementById('breadcrumb');
+            
+            if (currentView === 'grid') {
+                currentView = 'folder';
+                toggleBtn.textContent = '📄 List View';
+                breadcrumb.style.display = 'block';
+                navigateToFolder('');
+            } else {
+                currentView = 'grid';
+                toggleBtn.textContent = '📁 Folder View';
+                breadcrumb.style.display = 'none';
+                displayDocuments();
+            }
+        }
+        
+        function navigateToFolder(folderPath) {
+            currentFolder = folderPath;
+            updateBreadcrumb();
+            
+            if (currentView === 'folder') {
+                displayFolderView();
+            }
+        }
+        
+        function updateBreadcrumb() {
+            const breadcrumbPath = document.getElementById('breadcrumbPath');
+            
+            if (currentFolder === '') {
+                breadcrumbPath.innerHTML = '';
+                return;
+            }
+            
+            const pathParts = currentFolder.split('/').filter(part => part);
+            let html = '';
+            let currentPath = '';
+            
+            pathParts.forEach((part, index) => {
+                currentPath += (currentPath ? '/' : '') + part;
+                html += `<span class="breadcrumb-separator">></span>`;
+                html += `<span onclick="navigateToFolder('${currentPath}')" class="breadcrumb-item">📁 ${part}</span>`;
+            });
+            
+            breadcrumbPath.innerHTML = html;
+        }
+        
+        function displayFolderView() {
+            const documentsGrid = document.getElementById('documentsGrid');
+            
+            // Get unique folders and files for current path
+            const foldersAndFiles = getFoldersAndFiles(currentFolder);
+            
+            if (foldersAndFiles.folders.length === 0 && foldersAndFiles.files.length === 0) {
+                documentsGrid.innerHTML = `
+                    <div class="no-documents">
+                        <h3>Empty Folder</h3>
+                        <p>This folder contains no documents or subfolders.</p>
+                        <button class="btn btn-primary" onclick="navigateToFolder('')">Back to Root</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            
+            // Display folders first
+            foldersAndFiles.folders.forEach(folder => {
+                const folderName = folder.name;
+                const folderPath = currentFolder ? `${currentFolder}/${folderName}` : folderName;
+                const fileCount = folder.fileCount;
+                
+                html += `
+                    <div class="folder-card" onclick="navigateToFolder('${folderPath}')">
+                        <div class="folder-badge">${fileCount} files</div>
+                        <div class="folder-icon">📁</div>
+                        <div class="folder-title">${folderName}</div>
+                        <div class="folder-meta">
+                            Category: ${folder.category}<br>
+                            ${fileCount} file(s)
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Display files in current folder
+            foldersAndFiles.files.forEach(doc => {
+                const icon = getDocumentIcon(doc.name);
+                const badgeClass = `badge-${doc.category}`;
+                
+                html += `
+                    <div class="document-card" onclick="viewDocument('${doc.id}')">
+                        <div class="document-icon">${icon}</div>
+                        <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
+                        <div class="document-title">${doc.name}</div>
+                        <div class="document-meta">
+                            Uploaded: ${doc.uploadDate}<br>
+                            Size: ${doc.size}
+                        </div>
+                        ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
+                        <div class="document-actions">
+                            <button class="btn-small btn-view" onclick="event.stopPropagation(); viewDocument('${doc.id}')">View</button>
+                            <button class="btn-small btn-download" onclick="event.stopPropagation(); downloadDocument('${doc.id}')">Download</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            documentsGrid.innerHTML = html;
+        }
+        
+        function getFoldersAndFiles(currentPath) {
+            const folders = new Map();
+            const files = [];
+            
+            filteredDocuments.forEach(doc => {
+                if (!doc.originalPath || !doc.isFromFolder) {
+                    // Individual files (not from folder uploads) - show in root
+                    if (currentPath === '') {
+                        files.push(doc);
+                    }
+                    return;
+                }
+                
+                // Parse the folder structure from originalPath
+                const relativePath = doc.originalPath;
+                const pathParts = relativePath.split('/').filter(part => part);
+                
+                if (pathParts.length === 0) return;
+                
+                // Check if this file belongs to the current path
+                const currentPathParts = currentPath ? currentPath.split('/').filter(part => part) : [];
+                
+                // Check if the file is in a subfolder of current path
+                if (pathParts.length > currentPathParts.length) {
+                    let isInCurrentPath = true;
+                    for (let i = 0; i < currentPathParts.length; i++) {
+                        if (pathParts[i] !== currentPathParts[i]) {
+                            isInCurrentPath = false;
+                            break;
+                        }
+                    }
+                    
+                    if (isInCurrentPath) {
+                        if (pathParts.length === currentPathParts.length + 1) {
+                            // File is directly in current folder
+                            files.push(doc);
+                        } else {
+                            // File is in a subfolder
+                            const subfolderName = pathParts[currentPathParts.length];
+                            const subfolderPath = [...currentPathParts, subfolderName].join('/');
+                            
+                            if (!folders.has(subfolderName)) {
+                                folders.set(subfolderName, {
+                                    name: subfolderName,
+                                    path: subfolderPath,
+                                    fileCount: 0,
+                                    category: doc.category
+                                });
+                            }
+                            folders.get(subfolderName).fileCount++;
+                        }
+                    }
+                }
+            });
+            
+            return {
+                folders: Array.from(folders.values()),
+                files: files
+            };
+        }
+        
         function displayDocuments() {
+            if (currentView === 'folder') {
+                displayFolderView();
+                return;
+            }
+            
             const documentsGrid = document.getElementById('documentsGrid');
             
             if (filteredDocuments.length === 0) {
@@ -1027,14 +1616,18 @@
                 const icon = getDocumentIcon(doc.name);
                 const badgeClass = `badge-${doc.category}`;
                 
+                // Add folder indicator for files from folder uploads
+                const folderIndicator = doc.isFromFolder ? '<span style="color: #6f42c1;">📁</span> ' : '';
+                
                 html += `
                     <div class="document-card" onclick="viewDocument('${doc.id}')">
                         <div class="document-icon">${icon}</div>
                         <div class="category-badge ${badgeClass}">${doc.category.toUpperCase()}</div>
-                        <div class="document-title">${doc.name}</div>
+                        <div class="document-title">${folderIndicator}${doc.name}</div>
                         <div class="document-meta">
                             Uploaded: ${doc.uploadDate}<br>
                             Size: ${doc.size}
+                            ${doc.originalPath && doc.originalPath !== doc.name ? `<br><small>📂 ${doc.originalPath}</small>` : ''}
                         </div>
                         ${doc.description ? `<div class="document-description">${doc.description}</div>` : ''}
                         <div class="document-actions">
@@ -1187,7 +1780,7 @@
             if (fileExtension === 'html' || fileExtension === 'htm') {
                 try {
                     // Get Azure config from localStorage
-                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                    const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                     
                     if (!adminConfigData) {
                         throw new Error('Azure configuration not found. Please contact administrator to configure Azure access.');
@@ -1263,6 +1856,42 @@
             }
         }
 
+        // Function to load pre-annotations from processed document data
+        async function loadPreAnnotations(doc) {
+            try {
+                console.log('🔍 Loading pre-annotations for:', doc.name);
+                
+                // Check if document already has pre-annotations from admin processing
+                if (doc.preAnnotations && Array.isArray(doc.preAnnotations) && doc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations from admin processing`);
+                    doc.hasPreAnnotations = true;
+                    return doc.preAnnotations;
+                }
+                
+                // If no pre-annotations in document object, check localStorage for updated documents data
+                const localDocuments = JSON.parse(localStorage.getItem('documentsData')) || [];
+                const localDoc = localDocuments.find(d => d.id === doc.id || d.name === doc.name);
+                
+                if (localDoc && localDoc.preAnnotations && Array.isArray(localDoc.preAnnotations) && localDoc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${localDoc.preAnnotations.length} pre-annotations from localStorage`);
+                    doc.preAnnotations = localDoc.preAnnotations;
+                    doc.hasPreAnnotations = true;
+                    return localDoc.preAnnotations;
+                }
+                
+                console.log('ℹ️ No pre-annotations found for this document');
+                doc.preAnnotations = [];
+                doc.hasPreAnnotations = false;
+                return [];
+                
+            } catch (error) {
+                console.warn('⚠️ Failed to load pre-annotations:', error);
+                doc.preAnnotations = [];
+                doc.hasPreAnnotations = false;
+                return [];
+            }
+        }
+
         // Replace the loadDocumentAnnotations function with this Azure-enabled version:
         async function loadDocumentAnnotations(docId) {
             console.log('🔄 Loading annotations for document:', docId);
@@ -1284,11 +1913,18 @@
             
             // Load pre-annotations from document (AI-generated)
             const doc = allDocuments.find(d => d.id == docId);
-            if (doc && doc.preAnnotations && doc.preAnnotations.length > 0) {
-                console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations`);
+            if (doc) {
+                // If document doesn't have pre-annotations, try to load them
+                if (!doc.preAnnotations || doc.preAnnotations.length === 0) {
+                    console.log('🔍 No pre-annotations found, attempting to load from API...');
+                    await loadPreAnnotations(doc);
+                }
                 
-                // Convert pre-annotations to our annotation format
-                const preAnnotations = doc.preAnnotations.map((preAnn, index) => {
+                if (doc.preAnnotations && doc.preAnnotations.length > 0) {
+                    console.log(`🤖 Found ${doc.preAnnotations.length} pre-annotations`);
+                    
+                    // Convert pre-annotations to our annotation format
+                    const preAnnotations = doc.preAnnotations.map((preAnn, index) => {
                     // Handle both string and object formats
                     let cleanText = preAnn.text || preAnn.normalized_name || preAnn.medication || String(preAnn);
                     
@@ -1300,7 +1936,8 @@
                         source: 'main.py',
                         confidence: preAnn.confidence || 0.9,
                         rxnorm_code: preAnn.rx_cui || preAnn.rxnorm_code,
-                        isPreAnnotation: true
+                        isPreAnnotation: true,
+                        notes: '' // Initialize notes field for AI annotations
                     };
                 });
                 
@@ -1312,6 +1949,7 @@
                 
                 documentAnnotations = [...documentAnnotations, ...uniquePreAnnotations];
                 console.log(`📊 Total annotations: ${documentAnnotations.length} (${uniquePreAnnotations.length} from AI)`);
+                }
             }
             
             // Apply all annotations to the document
@@ -1332,7 +1970,7 @@
             if (!currentUser) return;
             
             try {
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found');
                 }
@@ -1473,7 +2111,8 @@
                 timestamp: new Date().toISOString(),
                 position: selectedRange.startOffset,
                 source: 'user',
-                isPreAnnotation: false
+                isPreAnnotation: false,
+                notes: '' // Initialize with empty notes field
             };
             
             // Add to annotations array
@@ -1644,75 +2283,23 @@
             }
             
             const count = documentAnnotations.length;
+            const notesStats = getNotesStatistics();
+            
             console.log('📊 Updating annotation count:', count, 'annotations:', documentAnnotations);
+            console.log('📝 Notes stats:', notesStats);
             
             const countElement = document.getElementById('annotationCount');
             if (countElement) {
-                countElement.textContent = count;
+                // Show total count with notes indicator if any annotations have notes
+                if (notesStats.withNotes > 0) {
+                    countElement.textContent = `${count} (${notesStats.withNotes} 📝)`;
+                    countElement.title = `${count} total annotations, ${notesStats.withNotes} with notes`;
+                } else {
+                    countElement.textContent = count;
+                    countElement.title = `${count} total annotations`;
+                }
             }
         }
-
-        // function updateAnnotationsList() {
-        //     const list = document.getElementById('annotationsList');
-            
-        //     if (documentAnnotations.length === 0) {
-        //         list.innerHTML = '<p style="text-align: center; color: #666; padding: 1rem;">No annotations yet</p>';
-        //         return;
-        //     }
-            
-        //     let html = '';
-        //     documentAnnotations.forEach((annotation, index) => {
-        //         const statusClass = annotation.status === 'active' ? 'status-active' : 'status-inactive';
-        //         const sourceIcon = annotation.isPreAnnotation ? '🤖' : '👤';
-        //         const sourceText = annotation.isPreAnnotation ? 'AI Detected' : 'User Added';
-        //         const confidenceText = annotation.confidence ? ` (${Math.round(annotation.confidence * 100)}%)` : '';
-                
-        //         html += `
-        //             <div class="annotation-item" onclick="scrollToAnnotation('${annotation.text}')">
-        //                 <div class="annotation-text">"${annotation.text.substring(0, 50)}${annotation.text.length > 50 ? '...' : ''}"</div>
-        //                 <div class="annotation-status ${statusClass}">${annotation.status.toUpperCase()}</div>
-        //                 <div style="font-size: 0.75rem; color: #999; margin-top: 0.25rem;">
-        //                     ${sourceIcon} ${sourceText}${confidenceText}
-        //                     <br>${new Date(annotation.timestamp).toLocaleString()}
-        //                     ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
-        //                 </div>
-        //                 ${annotation.isPreAnnotation ? 
-        //                     `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'active')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'active' ? '#28a745' : '#6c757d'}; 
-        //                                     color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             ${annotation.status === 'active' ? '✓ Active' : 'Set Active'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', 'inactive')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'inactive' ? '#dc3545' : '#6c757d'}; 
-        //                                     color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); convertToUserAnnotation('${annotation.id}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #007bff; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem; width: 100%; margin-top: 0.25rem;">
-        //                             Confirm AI Detection
-        //                         </button>
-        //                     </div>` : 
-        //                     `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
-        //                         <button onclick="event.stopPropagation(); changeAnnotationStatus('${annotation.id}', '${annotation.status === 'active' ? 'inactive' : 'active'}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #6c757d; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem; flex: 1;">
-        //                             Change to ${annotation.status === 'active' ? 'Inactive' : 'Active'}
-        //                         </button>
-        //                         <button onclick="event.stopPropagation(); removeAnnotationById('${annotation.id}')" 
-        //                                 style="padding: 0.25rem 0.5rem; background: #dc3545; color: white; border: none; 
-        //                                     border-radius: 3px; font-size: 0.7rem;">
-        //                             Remove
-        //                         </button>
-        //                     </div>`
-        //                 }
-        //             </div>
-        //         `;
-        //     });
-            
-        //     list.innerHTML = html;
-        // }
 
         // Replace the updateAnnotationsList function with this enhanced version that passes the full text:
         function updateAnnotationsList() {
@@ -1736,8 +2323,11 @@
                     annotation.text.substring(0, 50) + '...' : 
                     annotation.text;
                 
+                // Add has-notes class if annotation has notes
+                const hasNotesClass = (annotation.notes && annotation.notes.trim()) ? 'has-notes' : '';
+                
                 html += `
-                    <div class="annotation-item" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
+                    <div class="annotation-item ${hasNotesClass}" onclick="scrollToAnnotation('${escapedText}')" style="cursor: pointer; transition: background-color 0.2s;">
                         <div class="annotation-text" title="${annotation.text}">
                             <strong>"${displayText}"</strong>
                         </div>
@@ -1746,6 +2336,16 @@
                             ${sourceIcon} ${sourceText}${confidenceText}
                             <br>${new Date(annotation.timestamp).toLocaleString()}
                             ${annotation.rxnorm_code ? `<br>RxNorm: ${annotation.rxnorm_code}` : ''}
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <label style="font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.25rem;">Notes:</label>
+                            <textarea 
+                                id="notes_${annotation.id}" 
+                                placeholder="Add notes or comments..."
+                                onblur="updateAnnotationNotes('${annotation.id}', this.value)"
+                                onclick="event.stopPropagation()"
+                                style="width: 100%; min-height: 40px; padding: 0.25rem; border: 1px solid #ddd; border-radius: 3px; font-size: 0.75rem; resize: vertical; font-family: inherit;"
+                            >${annotation.notes || ''}</textarea>
                         </div>
                         ${annotation.isPreAnnotation ? 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem; flex-wrap: wrap;">
@@ -1758,11 +2358,6 @@
                                         style="padding: 0.25rem 0.5rem; background: ${annotation.status === 'inactive' ? '#dc3545' : '#6c757d'}; 
                                             color: white; border: none; border-radius: 3px; font-size: 0.7rem; flex: 1;">
                                     ${annotation.status === 'inactive' ? '✓ Inactive' : 'Set Inactive'}
-                                </button>
-                                <button onclick="event.stopPropagation(); convertToUserAnnotation('${annotation.id}')" 
-                                        style="padding: 0.25rem 0.5rem; background: #007bff; color: white; border: none; 
-                                            border-radius: 3px; font-size: 0.7rem; width: 100%; margin-top: 0.25rem;">
-                                    Confirm AI Detection
                                 </button>
                             </div>` : 
                             `<div style="margin-top: 0.5rem; display: flex; gap: 0.25rem;">
@@ -1785,73 +2380,74 @@
             list.innerHTML = html;
         }
 
-        // Add this new function after the updateAnnotationsList function:
-        // function convertToUserAnnotation(annotationId) {
-        //     const annotation = documentAnnotations.find(ann => ann.id === annotationId);
-        //     if (annotation) {
-        //         annotation.isPreAnnotation = false;
-        //         annotation.source = 'user';
-        //         annotation.timestamp = new Date().toISOString();
-        //         updateAnnotationsList();
-                
-        //         // Save the updated annotations
-        //         const allAnnotations = JSON.parse(localStorage.getItem('documentAnnotations')) || {};
-        //         allAnnotations[currentDocument.id] = documentAnnotations;
-        //         localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
-                
-        //         console.log('Converted AI annotation to user annotation:', annotation);
-        //     }
-        // }
+        // Helper function to check annotations with notes
+        function getAnnotationsWithNotes() {
+            return documentAnnotations.filter(ann => ann.notes && ann.notes.trim() !== '');
+        }
 
-        // // Add these new functions after the convertToUserAnnotation function:
+        // Helper function to get notes statistics
+        function getNotesStatistics() {
+            const annotationsWithNotes = getAnnotationsWithNotes();
+            const totalAnnotations = documentAnnotations.length;
+            
+            return {
+                total: totalAnnotations,
+                withNotes: annotationsWithNotes.length,
+                withoutNotes: totalAnnotations - annotationsWithNotes.length,
+                percentage: totalAnnotations > 0 ? Math.round((annotationsWithNotes.length / totalAnnotations) * 100) : 0,
+                annotationsWithNotes: annotationsWithNotes
+            };
+        }
 
-        // function changeAnnotationStatus(annotationId, newStatus) {
-        //     const annotation = documentAnnotations.find(ann => ann.id === annotationId);
-        //     if (annotation && annotation.status !== newStatus) {
-        //         const oldStatus = annotation.status;
-        //         annotation.status = newStatus;
-        //         annotation.timestamp = new Date().toISOString();
-                
-        //         console.log(`Changed annotation "${annotation.text}" from ${oldStatus} to ${newStatus}`);
-                
-        //         // Re-highlight the text with new status
-        //         rehighlightAnnotation(annotation, oldStatus);
-                
-        //         // Update the display
-        //         updateAnnotationsList();
-        //         updateAnnotationCount();
-                
-        //         // Save if it's a user annotation
-        //         if (!annotation.isPreAnnotation) {
-        //             saveAnnotationsToStorage();
-        //         }
-        //     }
-        // }
+        // Function to log notes information to console (for debugging)
+        function showNotesInfo() {
+            const stats = getNotesStatistics();
+            console.log('📝 Notes Statistics:', stats);
+            
+            if (stats.withNotes > 0) {
+                console.log('📝 Annotations with notes:');
+                stats.annotationsWithNotes.forEach((ann, index) => {
+                    console.log(`${index + 1}. "${ann.text.substring(0, 50)}..." - Note: "${ann.notes}"`);
+                });
+            } else {
+                console.log('📝 No annotations have notes yet');
+            }
+            
+            return stats;
+        }
 
-        // Update the convertToUserAnnotation and changeAnnotationStatus functions to auto-save:
-        function convertToUserAnnotation(annotationId) {
-            const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+        // Function to update annotation notes
+        function updateAnnotationNotes(annotationId, newNotes) {
+            console.log('📝 Updating notes for annotation:', annotationId, 'New notes:', newNotes);
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId);
             if (annotation) {
-                annotation.isPreAnnotation = false;
-                annotation.source = 'user';
-                annotation.timestamp = new Date().toISOString();
-                updateAnnotationsList();
+                annotation.notes = newNotes;
+                console.log('✅ Notes updated for annotation:', annotation.text.substring(0, 30), '...');
                 
-                // Auto-save to Azure
-                autoSaveAnnotations();
-                
-                console.log('✅ Converted AI annotation to user annotation:', annotation);
+                // Auto-save annotations after a short delay (debounced)
+                clearTimeout(window.notesUpdateTimeout);
+                window.notesUpdateTimeout = setTimeout(() => {
+                    saveAnnotations();
+                }, 2000); // Save 2 seconds after user stops typing
+            } else {
+                console.error('❌ Annotation not found for ID:', annotationId);
             }
         }
 
         function changeAnnotationStatus(annotationId, newStatus) {
-            const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+            console.log('🔄 Attempting to change annotation status:', {annotationId, newStatus});
+            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20), status: a.status})));
+            
+            const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
+            console.log('🔍 Found annotation:', annotation);
+            
             if (annotation && annotation.status !== newStatus) {
                 const oldStatus = annotation.status;
                 annotation.status = newStatus;
                 annotation.timestamp = new Date().toISOString();
                 
-                console.log(`🔄 Changed annotation "${annotation.text}" from ${oldStatus} to ${newStatus}`);
+                console.log(`✅ Changed annotation "${annotation.text.substring(0, 30)}..." from ${oldStatus} to ${newStatus}`);
                 
                 // Re-highlight the text with new status
                 rehighlightAnnotation(annotation, oldStatus);
@@ -1862,6 +2458,11 @@
                 
                 // Auto-save to Azure
                 autoSaveAnnotations();
+            } else if (!annotation) {
+                console.error('❌ Annotation not found with ID:', annotationId);
+                alert('Error: Annotation not found. Please refresh the page and try again.');
+            } else {
+                console.log('ℹ️ Annotation already has status:', newStatus);
             }
         }
 
@@ -1871,15 +2472,16 @@
             // Clear previous timeout
             clearTimeout(autoSaveTimeout);
             
-            // Set new timeout to auto-save after 3 seconds of no changes
+            // Set new timeout to auto-save after 5 seconds of no changes (increased delay)
             autoSaveTimeout = setTimeout(async () => {
                 try {
+                    console.log('💾 Starting auto-save...');
                     await saveAnnotationsToAzure();
-                    console.log('💾 Auto-saved annotations to Azure');
+                    console.log('✅ Auto-saved annotations to Azure');
                     
                     // Show subtle indicator
                     const indicator = document.createElement('div');
-                    indicator.textContent = '☁️ Auto-saved';
+                    indicator.textContent = '☁️ Saved';
                     indicator.style.cssText = `
                         position: fixed; top: 20px; right: 20px; 
                         background: #28a745; color: white; 
@@ -1892,21 +2494,25 @@
                     setTimeout(() => indicator.style.opacity = '1', 100);
                     setTimeout(() => {
                         indicator.style.opacity = '0';
-                        setTimeout(() => document.body.removeChild(indicator), 300);
+                        setTimeout(() => {
+                            if (document.body.contains(indicator)) {
+                                document.body.removeChild(indicator);
+                            }
+                        }, 300);
                     }, 2000);
                     
                 } catch (error) {
-                    console.warn('⚠️ Auto-save failed, saving to localStorage:', error);
+                    console.warn('⚠️ Auto-save failed, using localStorage fallback:', error);
                     saveAnnotationsToStorage(); // Fallback to localStorage
                 }
-            }, 3000); // 3 second delay
+            }, 5000); // 5 second delay (increased from 3)
         }
 
         // Add helper function for just Azure save (without UI feedback):
         async function saveAnnotationsToAzure() {
             if (!currentDocument || !currentUser) return;
             
-            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+            const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
             if (!adminConfigData) {
                 throw new Error('Azure configuration not found');
             }
@@ -1976,11 +2582,18 @@
         }
 
         function removeAnnotationById(annotationId) {
+            console.log('🗑️ Attempting to remove annotation with ID:', annotationId);
+            console.log('📋 Current annotations:', documentAnnotations.map(a => ({id: a.id, text: a.text.substring(0, 20)})));
+            
             if (confirm('Remove this annotation?')) {
-                const annotation = documentAnnotations.find(ann => ann.id === annotationId);
+                const annotation = documentAnnotations.find(ann => ann.id == annotationId); // Use == for loose comparison
+                console.log('🔍 Found annotation:', annotation);
+                
                 if (annotation) {
                     // Remove from annotations array
-                    documentAnnotations = documentAnnotations.filter(ann => ann.id !== annotationId);
+                    const originalLength = documentAnnotations.length;
+                    documentAnnotations = documentAnnotations.filter(ann => ann.id != annotationId); // Use != for loose comparison
+                    console.log(`📊 Removed annotation. Count: ${originalLength} → ${documentAnnotations.length}`);
                     
                     // Remove the highlight from the document immediately
                     removeHighlightFromDocument(annotation.text, annotation.status);
@@ -1989,11 +2602,13 @@
                     updateAnnotationCount();
                     updateAnnotationsList();
                     
-                    // Save changes to storage
-                    saveAnnotationsToStorage();
+                    // Auto-save to Azure (with delay to avoid conflicts)
+                    autoSaveAnnotations();
                     
-                    console.log('Removed annotation:', annotation);
-                    console.log('Remaining annotations:', documentAnnotations.length);
+                    console.log('✅ Successfully removed annotation:', annotation.text);
+                } else {
+                    console.error('❌ Annotation not found with ID:', annotationId);
+                    alert('Error: Annotation not found. Please refresh the page and try again.');
                 }
             }
         }
@@ -2025,21 +2640,6 @@
             allAnnotations[currentDocument.id] = documentAnnotations;
             localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
         }
-
-        // function scrollToAnnotation(text) {
-        //     const highlights = document.querySelectorAll('.highlight-active, .highlight-inactive');
-        //     for (let highlight of highlights) {
-        //         if (highlight.textContent.includes(text)) {
-        //             highlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        //             highlight.style.boxShadow = '0 0 10px #667eea';
-        //             setTimeout(() => {
-        //                 highlight.style.boxShadow = '';
-        //             }, 2000);
-        //             break;
-        //         }
-        //     }
-        // }
-
 
         // Replace the scrollToAnnotation function (around line 1950) with this enhanced version:
         function scrollToAnnotation(text) {
@@ -2146,25 +2746,6 @@
 
 
 
-        // function saveAnnotations() {
-        //     if (!currentDocument) return;
-            
-        //     // Save annotations to localStorage
-        //     const allAnnotations = JSON.parse(localStorage.getItem('documentAnnotations')) || {};
-        //     allAnnotations[currentDocument.id] = documentAnnotations;
-        //     localStorage.setItem('documentAnnotations', JSON.stringify(allAnnotations));
-            
-        //     // Show success message
-        //     const originalText = event.target.textContent;
-        //     event.target.textContent = 'Saved!';
-        //     event.target.style.background = '#28a745';
-            
-        //     setTimeout(() => {
-        //         event.target.textContent = originalText;
-        //         event.target.style.background = '#28a745';
-        //     }, 2000);
-        // }
-
         // Replace the saveAnnotations function (around line 1800) with this Azure-enabled version:
         async function saveAnnotations() {
             if (!currentDocument || !currentUser) return;
@@ -2178,7 +2759,7 @@
                 saveButton.disabled = true;
                 
                 // Get Azure config (try both public and admin configs)
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) {
                     throw new Error('Azure configuration not found. Please contact administrator.');
                 }
@@ -2205,8 +2786,7 @@
                         activeCount: documentAnnotations.filter(ann => ann.status === 'active').length,
                         inactiveCount: documentAnnotations.filter(ann => ann.status === 'inactive').length,
                         aiGeneratedCount: documentAnnotations.filter(ann => ann.isPreAnnotation).length,
-                        userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length,
-                        confirmedAiCount: documentAnnotations.filter(ann => ann.source === 'main.py' && !ann.isPreAnnotation).length
+                        userCreatedCount: documentAnnotations.filter(ann => !ann.isPreAnnotation).length
                     }
                 };
                 
@@ -2289,7 +2869,7 @@
             
             try {
                 // Get Azure config
-                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('azureConfig');
+                const adminConfigData = localStorage.getItem('azureConfigPublic') || localStorage.getItem('globalAzureConfig') || localStorage.getItem('azureConfig');
                 if (!adminConfigData) return;
                 
                 const azureConfig = JSON.parse(adminConfigData);
@@ -2354,6 +2934,33 @@
         if (typeof updateAnnotationCount !== 'undefined') {
                 updateAnnotationCount();
             }
+            
+        // Global helper functions for testing/debugging (accessible from browser console)
+        window.checkNotes = function() {
+            return showNotesInfo();
+        };
+        
+        window.getAnnotationsWithNotes = function() {
+            return documentAnnotations.filter(ann => ann.notes && ann.notes.trim() !== '');
+        };
+        
+        window.exportAnnotationsWithNotes = function() {
+            const annotationsWithNotes = getAnnotationsWithNotes();
+            const exportData = {
+                documentName: currentDocument ? currentDocument.name : 'Unknown',
+                timestamp: new Date().toISOString(),
+                annotations: annotationsWithNotes.map(ann => ({
+                    text: ann.text,
+                    status: ann.status,
+                    notes: ann.notes,
+                    source: ann.source,
+                    isPreAnnotation: ann.isPreAnnotation,
+                    timestamp: ann.timestamp
+                }))
+            };
+            console.log('📝 Exporting annotations with notes:', exportData);
+            return exportData;
+        };
     </script>
 
     
