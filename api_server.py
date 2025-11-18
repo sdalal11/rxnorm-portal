@@ -29,7 +29,8 @@ def home():
             'azure_config': '/config/azure',
             'user_register': '/users/register',
             'user_login': '/users/login',
-            'user_list': '/users/list'
+            'user_list': '/users/list',
+            'folder_assignments': '/users/folder-assignments'
         }
     })
 
@@ -643,6 +644,52 @@ def list_users():
             'success': True,
             'users': user_list,
             'total': len(user_list)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/users/folder-assignments', methods=['GET'])
+def get_folder_assignments():
+    """Debug endpoint to check user folder assignments"""
+    try:
+        results = execute_query('''
+            SELECT username, email, name, assigned_folder, assignment_order, last_login
+            FROM users 
+            ORDER BY assignment_order ASC
+        ''', fetch_all=True)
+        
+        if not results:
+            return jsonify({
+                'success': True,
+                'assignments': [],
+                'message': 'No users found'
+            })
+        
+        assignments = []
+        for result in results:
+            assignments.append({
+                'username': result[0],
+                'email': result[1], 
+                'name': result[2],
+                'assigned_folder': result[3],
+                'assignment_order': result[4],
+                'last_login': result[5]
+            })
+        
+        # Also provide folder distribution stats
+        folder_counts = {}
+        for assignment in assignments:
+            folder = assignment['assigned_folder']
+            if folder:
+                folder_counts[folder] = folder_counts.get(folder, 0) + 1
+        
+        return jsonify({
+            'success': True,
+            'assignments': assignments,
+            'total_users': len(assignments),
+            'folder_distribution': folder_counts,
+            'expected_folders': list(range(1, 91))  # Should be 1-90
         })
         
     except Exception as e:
