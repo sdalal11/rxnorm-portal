@@ -43,20 +43,11 @@ INSERT INTO user_folder_assignments (user_id, folder_number) VALUES
 ((SELECT id FROM users WHERE email = 'nihir.shah5@gmail.com'), 84)
 ON CONFLICT (user_id, folder_number) DO NOTHING; -- Prevents duplicates if some already exist
 
--- Method 2A: If you want to keep using the existing 'assigned_folder' column (singular)
--- First, modify the existing column type to handle larger data
-ALTER TABLE users ALTER COLUMN assigned_folder TYPE JSONB USING assigned_folder::text::jsonb;
-
--- If the above fails because of existing data format, use this alternative:
--- ALTER TABLE users ALTER COLUMN assigned_folder TYPE TEXT;
--- Then update the specific user:
-UPDATE users 
-SET assigned_folder = '[1,9,17,21,23,33,37,40,45,46,47,48,49,50,55,57,60,63,65,66,68,69,71,73,74,75,78,79,81,83,84]'::jsonb
-WHERE email = 'nihir.shah5@gmail.com';
-
--- Method 2B: If you want to create a NEW 'assigned_folders' column (plural) and keep the old one
+-- Method 2: If using JSON array in users table
+-- First, add the assigned_folders column if it doesn't exist
 ALTER TABLE users ADD COLUMN IF NOT EXISTS assigned_folders JSONB DEFAULT '[]'::jsonb;
 
+-- Then update the user's assigned_folders column with JSON array
 UPDATE users 
 SET assigned_folders = '[1,9,17,21,23,33,37,40,45,46,47,48,49,50,55,57,60,63,65,66,68,69,71,73,74,75,78,79,81,83,84]'::jsonb
 WHERE email = 'nihir.shah5@gmail.com';
@@ -79,12 +70,7 @@ JOIN user_folder_assignments uf ON u.id = uf.user_id
 WHERE u.email = 'nihir.shah5@gmail.com'
 ORDER BY uf.folder_number;
 
--- If using JSON array approach with existing 'assigned_folder' column:
-SELECT email, assigned_folder
-FROM users
-WHERE email = 'nihir.shah5@gmail.com';
-
--- If using JSON array approach with new 'assigned_folders' column:
+-- If using JSON array approach:
 SELECT email, assigned_folders
 FROM users
 WHERE email = 'nihir.shah5@gmail.com';
