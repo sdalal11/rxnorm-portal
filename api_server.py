@@ -19,13 +19,6 @@ def after_request(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
-@app.after_request
-def after_request(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
-
 @app.route('/', methods=['GET'])
 def home():
     """Root endpoint"""
@@ -288,27 +281,55 @@ DATABASE_FILE = os.environ.get('DATABASE_FILE', '/tmp/users.db') if not DATABASE
 
 def init_database():
     """Initialize database for user storage - supports both SQLite and PostgreSQL"""
+    global DATABASE_URL, DATABASE_FILE
+    
     try:
         if DATABASE_URL:
-            # Using external PostgreSQL database (persistent)
-            import psycopg2
-            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-            cursor = conn.cursor()
-            
-            # Create users table if it doesn't exist
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS users (
-                    id SERIAL PRIMARY KEY,
-                    username VARCHAR(255) UNIQUE NOT NULL,
-                    email VARCHAR(255) UNIQUE NOT NULL,
-                    password VARCHAR(255) NOT NULL,
-                    name VARCHAR(255) NOT NULL,
-                    registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    last_login TIMESTAMP
-                )
-            ''')
-            print("✅ Connected to external PostgreSQL database")
-        else:
+            # Try to use external PostgreSQL database (persistent)
+            try:
+                import psycopg2
+                conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+                cursor = conn.cursor()
+                
+                # Create users table if it doesn't exist
+                cursor.execute('''
+                    CREATE TABLE IF NOT EXISTS users (
+                        id SERIAL PRIMARY KEY,
+                        username VARCHAR(255) UNIQUE NOT NULL,
+                        email VARCHAR(255) UNIQUE NOT NULL,
+                        password VARCHAR(255) NOT NULL,
+                        name VARCHAR(255) NOT NULL,
+                        registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        last_login TIMESTAMP,
+                        assigned_folder VARCHAR(10),
+                        assignment_order INTEGER
+                    )
+                ''')
+                print("✅ Connected to external PostgreSQL database")
+                
+                # Check if assigned_folder column exists
+                cursor.execute('''
+                    SELECT column_name FROM information_schema.columns 
+                    WHERE table_name='users' AND column_name='assigned_folder'
+                ''')
+                if not cursor.fetchone():
+                    try:
+                        cursor.execute('ALTER TABLE users ADD COLUMN assigned_folder VARCHAR(10)')
+                        print("✅ Added assigned_folder column")
+                    except Exception as e:
+                        print(f"⚠️ Error adding assigned_folder column: {e}")
+                        
+                conn.commit()
+                conn.close()
+                
+            except Exception as pg_error:
+                print(f"❌ PostgreSQL connection failed: {pg_error}")
+                print("🔄 Falling back to SQLite database...")
+                DATABASE_URL = None
+                DATABASE_FILE = '/tmp/users.db'
+                # Continue to SQLite initialization below
+        
+        if not DATABASE_URL:
             # Using local SQLite database (ephemeral on free hosting)
             conn = sqlite3.connect(DATABASE_FILE)
             cursor = conn.cursor()
@@ -437,8 +458,8 @@ def update_last_login(username):
         print(f"⚠️ Error updating last login: {e}")
         return False
 
-def list_users():
-    """List all users (admin function)"""
+def get_all_users():
+    """List all users (helper function)"""
     try:
         results = execute_query('SELECT id, username, email, name, registered_at, last_login FROM users', 
                                fetch_all=True)
@@ -644,7 +665,7 @@ def get_users_list():
         return response
     
     try:
-        user_list = list_users()
+        user_list = get_all_users()
         
         return jsonify({
             'success': True,
@@ -667,7 +688,7 @@ def backup_users():
     
     try:
         # Get all users from database
-        all_users = list_users()
+        all_users = get_all_users()
         users_json = json.dumps(all_users, separators=(',', ':'))
         return jsonify({
             'success': True,
@@ -679,7 +700,7 @@ def backup_users():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/admin/folder-assignments', methods=['GET', 'OPTIONS'])
-def get_folder_assignments():
+def get_admin_folder_assignments():
     """Get folder assignments for admin dashboard"""
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight'})
@@ -690,7 +711,7 @@ def get_folder_assignments():
     
     try:
         # Get all users from database
-        users = list_users()
+        users = get_all_users()
         
         # Available folders (9 folders as mentioned in admin.html)
         available_folders = ['100-200', '200-300', '300-400', '400-500', '500-600', '600-700', '700-800', '800-900', '900-1000']
@@ -740,7 +761,7 @@ def get_all_emails():
     
     try:
         # Get all users from database
-        users = list_users()
+        users = get_all_users()
         
         # Extract just the email addresses
         emails = [user.get('email') for user in users if user.get('email')]
