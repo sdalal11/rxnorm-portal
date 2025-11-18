@@ -6,8 +6,16 @@ import subprocess
 import json
 import sqlite3
 from datetime import datetime
-import sqlite3
-from datetime import datetime
+
+# Database imports - psycopg2 for PostgreSQL/Supabase
+try:
+    import psycopg2
+    import psycopg2.extras
+    PSYCOPG2_AVAILABLE = True
+    print("✅ psycopg2 imported successfully")
+except ImportError:
+    PSYCOPG2_AVAILABLE = False
+    print("⚠️ psycopg2 not available - PostgreSQL connections will fail")
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend access
@@ -27,6 +35,7 @@ def home():
         'version': '1.3',
         'endpoints': {
             'health': '/health',
+            'database_debug': '/debug/database',
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',
@@ -46,6 +55,69 @@ def health_check():
         'message': 'API server is running',
         'service': 'RxNorm Document Processor'
     })
+
+@app.route('/debug/database', methods=['GET'])
+def debug_database():
+    """Database connection diagnostic endpoint"""
+    try:
+        db_info = {
+            'database_url_set': bool(DATABASE_URL),
+            'database_file': DATABASE_FILE,
+            'connection_test': 'pending'
+        }
+        
+        if DATABASE_URL:
+            db_info['database_url_prefix'] = DATABASE_URL[:50] + "..." if len(DATABASE_URL) > 50 else DATABASE_URL
+            db_info['is_supabase'] = 'supabase.co' in DATABASE_URL
+            
+            try:
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                cursor.execute('SELECT version();')
+                version = cursor.fetchone()[0]
+                cursor.execute('SELECT COUNT(*) FROM users;')
+                user_count = cursor.fetchone()[0]
+                conn.close()
+                
+                db_info.update({
+                    'connection_test': 'success',
+                    'database_version': version[:100],
+                    'user_count': user_count,
+                    'database_type': 'PostgreSQL'
+                })
+            except Exception as e:
+                db_info.update({
+                    'connection_test': 'failed',
+                    'error': str(e)[:200],
+                    'database_type': 'PostgreSQL (failed, may fallback to SQLite)'
+                })
+        else:
+            try:
+                conn = get_db_connection()
+                cursor = conn.cursor()
+                cursor.execute('SELECT COUNT(*) FROM users;')
+                user_count = cursor.fetchone()[0]
+                conn.close()
+                
+                db_info.update({
+                    'connection_test': 'success',
+                    'user_count': user_count,
+                    'database_type': 'SQLite'
+                })
+            except Exception as e:
+                db_info.update({
+                    'connection_test': 'failed',
+                    'error': str(e)[:200],
+                    'database_type': 'SQLite (failed)'
+                })
+        
+        return jsonify(db_info)
+        
+    except Exception as e:
+        return jsonify({
+            'error': 'Database diagnostic failed',
+            'details': str(e)[:200]
+        }), 500
 
 # Replace the process_document function with this updated version:
 
@@ -287,9 +359,43 @@ def init_database():
         if DATABASE_URL:
             # Try to use external PostgreSQL database (persistent)
             try:
-                import psycopg2
-                conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+                if not PSYCOPG2_AVAILABLE:
+                    raise ImportError("psycopg2 not available")
+                
+                # Enhanced connection with better error handling for Supabase
+                print(f"🔗 Attempting to connect to database: {DATABASE_URL[:50]}...")
+                
+                # Parse connection parameters for better debugging
+                if 'supabase.co' in DATABASE_URL:
+                    print("🟡 Detected Supabase database - using optimized connection settings")
+                    # Supabase-specific connection with shorter timeout and better error handling
+                    try:
+                        conn = psycopg2.connect(
+                            DATABASE_URL, 
+                            sslmode='require',
+                            connect_timeout=15,
+                            application_name='rxnorm-portal',
+                            target_session_attrs='read-write'
+                        )
+                        print("✅ Supabase connection established successfully")
+                    except psycopg2.OperationalError as op_error:
+                        print(f"❌ Supabase connection failed (Operational): {op_error}")
+                        # Try alternative connection parameters
+                        print("🔄 Trying alternative connection method...")
+                        conn = psycopg2.connect(
+                            DATABASE_URL, 
+                            sslmode='prefer',
+                            connect_timeout=30
+                        )
+                else:
+                    # Standard PostgreSQL connection
+                    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+                
+                # Test the connection
                 cursor = conn.cursor()
+                cursor.execute('SELECT version();')
+                db_version = cursor.fetchone()[0]
+                print(f"✅ Database connected successfully: {db_version[:50]}...")
                 
                 # Create users table if it doesn't exist
                 cursor.execute('''
@@ -374,10 +480,31 @@ def init_database():
         print(f"⚠️ Error initializing database: {e}")
 
 def get_db_connection():
-    """Get database connection (PostgreSQL or SQLite)"""
+    """Get database connection (PostgreSQL or SQLite) with improved error handling"""
+    global DATABASE_URL, DATABASE_FILE
+    
     if DATABASE_URL:
-        import psycopg2
-        return psycopg2.connect(DATABASE_URL, sslmode='require')
+        try:
+            if not PSYCOPG2_AVAILABLE:
+                raise ImportError("psycopg2 not available")
+            
+            # Use same connection settings as initialization
+            if 'supabase.co' in DATABASE_URL:
+                return psycopg2.connect(
+                    DATABASE_URL, 
+                    sslmode='require',
+                    connect_timeout=10,
+                    application_name='rxnorm-portal'
+                )
+            else:
+                return psycopg2.connect(DATABASE_URL, sslmode='require')
+                
+        except Exception as e:
+            print(f"❌ PostgreSQL connection failed in get_db_connection: {e}")
+            print("🔄 Falling back to SQLite for this operation...")
+            DATABASE_URL = None
+            DATABASE_FILE = '/tmp/users.db'
+            return sqlite3.connect(DATABASE_FILE)
     else:
         return sqlite3.connect(DATABASE_FILE)
 
