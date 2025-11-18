@@ -36,6 +36,7 @@ def home():
         'endpoints': {
             'health': '/health',
             'database_debug': '/debug/database',
+            'supabase_debug': '/debug/supabase',
             'process': '/process-document',
             'azure_config': '/config/azure',
             'user_register': '/users/register',
@@ -63,7 +64,8 @@ def debug_database():
         db_info = {
             'database_url_set': bool(DATABASE_URL),
             'database_file': DATABASE_FILE,
-            'connection_test': 'pending'
+            'connection_test': 'pending',
+            'psycopg2_available': PSYCOPG2_AVAILABLE
         }
         
         if DATABASE_URL:
@@ -118,6 +120,81 @@ def debug_database():
             'error': 'Database diagnostic failed',
             'details': str(e)[:200]
         }), 500
+
+@app.route('/debug/supabase', methods=['GET'])
+def debug_supabase():
+    """Test Supabase connection specifically"""
+    original_database_url = os.environ.get('DATABASE_URL')
+    
+    if not original_database_url:
+        return jsonify({
+            'error': 'DATABASE_URL not set',
+            'message': 'No DATABASE_URL environment variable found'
+        }), 400
+    
+    result = {
+        'database_url_prefix': original_database_url[:50] + "...",
+        'is_supabase': 'supabase.co' in original_database_url,
+        'psycopg2_available': PSYCOPG2_AVAILABLE,
+        'connection_attempts': []
+    }
+    
+    if not PSYCOPG2_AVAILABLE:
+        return jsonify({
+            **result,
+            'error': 'psycopg2 not available',
+            'message': 'Cannot test PostgreSQL connection without psycopg2'
+        }), 500
+    
+    # Test different connection methods
+    connection_configs = [
+        {'name': 'Standard', 'params': {'sslmode': 'require'}},
+        {'name': 'With timeout', 'params': {'sslmode': 'require', 'connect_timeout': 10}},
+        {'name': 'Prefer SSL', 'params': {'sslmode': 'prefer', 'connect_timeout': 15}},
+        {'name': 'Disable SSL', 'params': {'sslmode': 'disable', 'connect_timeout': 20}}
+    ]
+    
+    for config in connection_configs:
+        attempt = {'method': config['name'], 'success': False, 'error': None}
+        
+        try:
+            conn = psycopg2.connect(original_database_url, **config['params'])
+            cursor = conn.cursor()
+            cursor.execute('SELECT version();')
+            version = cursor.fetchone()[0]
+            cursor.execute('SELECT COUNT(*) FROM information_schema.tables WHERE table_name = %s', ('users',))
+            table_exists = cursor.fetchone()[0] > 0
+            
+            attempt.update({
+                'success': True,
+                'database_version': version[:100],
+                'users_table_exists': table_exists
+            })
+            
+            if table_exists:
+                cursor.execute('SELECT COUNT(*) FROM users')
+                user_count = cursor.fetchone()[0]
+                attempt['user_count'] = user_count
+            
+            conn.close()
+            result['connection_attempts'].append(attempt)
+            break  # Stop at first successful connection
+            
+        except Exception as e:
+            attempt['error'] = str(e)[:200]
+            attempt['error_type'] = type(e).__name__
+            result['connection_attempts'].append(attempt)
+    
+    # Determine overall result
+    successful_attempts = [a for a in result['connection_attempts'] if a['success']]
+    if successful_attempts:
+        result['overall_status'] = 'success'
+        result['recommended_config'] = successful_attempts[0]['method']
+    else:
+        result['overall_status'] = 'failed'
+        result['message'] = 'All connection attempts failed'
+    
+    return jsonify(result)
 
 # Replace the process_document function with this updated version:
 
@@ -425,11 +502,37 @@ def init_database():
                     except Exception as e:
                         print(f"⚠️ Error adding assigned_folder column: {e}")
                         
+                # Create default admin user if no users exist
+                cursor.execute('SELECT COUNT(*) FROM users')
+                user_count = cursor.fetchone()[0]
+                
+                if user_count == 0:
+                    cursor.execute('''
+                        INSERT INTO users (username, email, password, name, registered_at)
+                        VALUES (%s, %s, %s, %s, %s)
+                    ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
+                    print("✅ Created default admin user")
+                
                 conn.commit()
                 conn.close()
+                print(f"✅ Database initialized with {user_count + (1 if user_count == 0 else 0)} users")
+                return  # Exit early after successful PostgreSQL initialization
                 
             except Exception as pg_error:
                 print(f"❌ PostgreSQL connection failed: {pg_error}")
+                print(f"🔍 Error type: {type(pg_error).__name__}")
+                print(f"🔍 Full error details: {str(pg_error)}")
+                
+                # Check for specific error types
+                if "Network is unreachable" in str(pg_error):
+                    print("🌐 Network connectivity issue - Supabase may be unreachable")
+                elif "authentication failed" in str(pg_error).lower():
+                    print("🔑 Authentication issue - check username/password")
+                elif "timeout" in str(pg_error).lower():
+                    print("⏰ Connection timeout - try increasing timeout or check network")
+                elif "connection refused" in str(pg_error).lower():
+                    print("🚫 Connection refused - check if database server is running")
+                
                 print("🔄 Falling back to SQLite database...")
                 DATABASE_URL = None
                 DATABASE_FILE = '/tmp/users.db'
@@ -454,27 +557,20 @@ def init_database():
             ''')
             print(f"⚠️  Using local SQLite database: {DATABASE_FILE}")
             print("⚠️  Warning: User data will be lost on container restart!")
-        
-        # Create default admin user if no users exist
-        cursor.execute('SELECT COUNT(*) FROM users')
-        user_count = cursor.fetchone()[0]
-        
-        if user_count == 0:
-            if DATABASE_URL:
-                cursor.execute('''
-                    INSERT INTO users (username, email, password, name, registered_at)
-                    VALUES (%s, %s, %s, %s, %s)
-                ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
-            else:
+            # Create default admin user if no users exist
+            cursor.execute('SELECT COUNT(*) FROM users')
+            user_count = cursor.fetchone()[0]
+            
+            if user_count == 0:
                 cursor.execute('''
                     INSERT INTO users (username, email, password, name, registered_at)
                     VALUES (?, ?, ?, ?, ?)
                 ''', ('admin', 'admin@rxnorm.com', 'admin123', 'System Administrator', datetime.now()))
-            print("✅ Created default admin user")
-        
-        conn.commit()
-        conn.close()
-        print(f"✅ Database initialized with {user_count + (1 if user_count == 0 else 0)} users")
+                print("✅ Created default admin user")
+            
+            conn.commit()
+            conn.close()
+            print(f"✅ Database initialized with {user_count + (1 if user_count == 0 else 0)} users")
         
     except Exception as e:
         print(f"⚠️ Error initializing database: {e}")

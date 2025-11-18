@@ -14,4 +14,4 @@ services:
           name: rxnorm-api
           property: port
       - key: DATABASE_URL
-        value: postgresql://postgres:Sanjana123!@aws-1-us-east-1.pooler.supabase.com:6543/rxnorm-users?sslmode=require
+        value: postgresql://postgres.ynbsbpmyzubwkmfgdzes:Sanjanadalal11@aws-1-us-east-1.pooler.supabase.com:6543/postgres
