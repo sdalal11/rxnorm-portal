@@ -1944,11 +1944,29 @@
             
             const mappedCategories = getMappedCategories(userAssignedFolder);
             
-            const matches = mappedCategories.includes(doc.category) ||
-                           mappedCategories.some(cat => doc.blobName?.includes(`/${cat}/`)) ||
-                           mappedCategories.includes(doc.folderPath);
+            // Stricter matching: only check category first, then blob path as exact match
+            let matches = false;
             
-            console.log(`🔍 Filtering: ${doc.name} | UserFolder: ${userAssignedFolder} | DocCategory: ${doc.category} | Matches: ${matches}`);
+            // Primary check: document category matches user's assigned folder
+            if (mappedCategories.includes(doc.category)) {
+                matches = true;
+            }
+            // Secondary check: for Azure blobs, check if blob path exactly matches expected pattern
+            else if (doc.blobName) {
+                for (const cat of mappedCategories) {
+                    if (doc.blobName === `general/${cat}/${doc.name}` || 
+                        doc.blobName.startsWith(`general/${cat}/`) && doc.blobName.endsWith(doc.name)) {
+                        matches = true;
+                        break;
+                    }
+                }
+            }
+            // Tertiary check: folder path (for uploaded folders)
+            else if (doc.folderPath && mappedCategories.includes(doc.folderPath)) {
+                matches = true;
+            }
+            
+            console.log(`🔍 STRICT Filtering: ${doc.name} | UserFolder: ${userAssignedFolder} | DocCategory: ${doc.category} | BlobName: ${doc.blobName} | Matches: ${matches}`);
             
             return matches;
         }
