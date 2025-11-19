@@ -636,14 +636,42 @@ def execute_query(query, params=None, fetch_one=False, fetch_all=False):
         print(f"⚠️ Database error: {e}")
         return None
 
-def get_user(username):
-    """Get user from database"""
+# def get_user(username):
+#     """Get user from database"""
+#     try:
+#         # Use explicit column selection to avoid index issues with schema changes
+#         result = execute_query('''
+#             SELECT id, username, email, password, name, registered_at, last_login, assigned_folder, assignment_order
+#             FROM users WHERE username = ?
+#         ''', (username,), fetch_one=True)
+        
+#         if result:
+#             return {
+#                 'id': result[0],
+#                 'username': result[1],
+#                 'email': result[2],
+#                 'password': result[3],
+#                 'name': result[4],
+#                 'registered_at': result[5],
+#                 'last_login': result[6],
+#                 'assigned_folder': result[7] if len(result) > 7 else None,
+#                 'assignment_order': result[8] if len(result) > 8 else None
+#             }
+#         return None
+#     except Exception as e:
+#         print(f"⚠️ Error getting user: {e}")
+#         print(f"🔍 Debug - username: {username}")
+#         print(f"🔍 Debug - timestamp: {datetime.now()}")
+#         return None
+
+
+def get_user(username_or_email):
+    """Get user from database by username or email"""
     try:
-        # Use explicit column selection to avoid index issues with schema changes
         result = execute_query('''
             SELECT id, username, email, password, name, registered_at, last_login, assigned_folder, assignment_order
-            FROM users WHERE username = ?
-        ''', (username,), fetch_one=True)
+            FROM users WHERE username = ? OR email = ?
+        ''', (username_or_email, username_or_email), fetch_one=True)
         
         if result:
             return {
@@ -660,8 +688,6 @@ def get_user(username):
         return None
     except Exception as e:
         print(f"⚠️ Error getting user: {e}")
-        print(f"🔍 Debug - username: {username}")
-        print(f"🔍 Debug - timestamp: {datetime.now()}")
         return None
 
 def create_user(username, email, password, name):
@@ -743,9 +769,16 @@ def register_user():
             return jsonify({'error': 'All fields are required'}), 400
         
         # Check if user already exists in database
-        existing_user = get_user(username)
-        if existing_user:
-            return jsonify({'error': 'Username already exists'}), 409
+        # existing_user = get_user(username)
+        # if existing_user:
+        #     return jsonify({'error': 'Username already exists'}), 409
+
+        existing_user = get_user(username)  # This will now check BOTH username and email
+        # OR even better, add explicit email check:
+        existing_user_by_username = get_user(username)
+        existing_user_by_email = get_user(email)
+        if existing_user_by_username or existing_user_by_email:
+            return jsonify({'error': 'Username or email already exists'}), 409
         
         # Create user in database
         if create_user(username, email, password, name):
