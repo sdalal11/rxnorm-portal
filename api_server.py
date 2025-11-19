@@ -661,6 +661,7 @@ def get_user(username):
     except Exception as e:
         print(f"⚠️ Error getting user: {e}")
         print(f"🔍 Debug - username: {username}")
+        print(f"🔍 Debug - timestamp: {datetime.now()}")
         return None
 
 def create_user(username, email, password, name):
