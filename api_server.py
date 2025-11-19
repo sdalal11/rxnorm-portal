@@ -3,6 +3,7 @@ from flask_cors import CORS
 import tempfile
 import os
 import subprocess
+# Force redeploy - fixed get_user function with explicit column selection
 import json
 import sqlite3
 from datetime import datetime
